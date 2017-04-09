@@ -24,6 +24,7 @@ class DefaultController extends Controller {
     public function loginAction(Request $request)
     {
         $authenticationUtils = $this->get('security.authentication_utils');
+		//test dla gita
 
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
