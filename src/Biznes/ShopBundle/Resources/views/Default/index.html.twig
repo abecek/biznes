@@ -1,0 +1,15 @@
+{% extends "BiznesShopBundle::base.html.twig" %}
+
+    {% set title = 'Strona główna' %}
+    
+    {% block test %}
+        Test <hr>
+        {{ products }}
+        
+        <hr>
+        
+        {% for product in products %}
+        <li>{{ product.name|e }}</li>
+        {% endfor %}
+        
+    {% endblock %}

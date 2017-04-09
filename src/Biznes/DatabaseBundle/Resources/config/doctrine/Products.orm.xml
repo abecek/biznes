@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Biznes\DatabaseBundle\Entity\Products" table="products">
+    <indexes>
+      <index name="products_id_category_fk1" columns="id_category"/>
+      <index name="products_id_program_fk1" columns="id_program"/>
+    </indexes>
+    <id name="idProduct" type="smallint" column="id_product">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="name" type="string" column="name" length="50" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="description" type="string" column="description" length="300" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="price" type="decimal" column="price" precision="10" scale="2" nullable="true"/>
+    <field name="version" type="string" column="version" length="3" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="rating" type="decimal" column="rating" precision="2" scale="1" nullable="true"/>
+    <many-to-one field="idCategory" target-entity="Categories" fetch="LAZY">
+      <join-columns>
+        <join-column name="id_category" referenced-column-name="id_category"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="idProgram" target-entity="Programs" fetch="LAZY">
+      <join-columns>
+        <join-column name="id_program" referenced-column-name="id_program"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

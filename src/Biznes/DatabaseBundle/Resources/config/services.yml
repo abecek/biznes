@@ -1,0 +1,4 @@
+services:
+#    biznes_database.example:
+#        class: Biznes\DatabaseBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]
