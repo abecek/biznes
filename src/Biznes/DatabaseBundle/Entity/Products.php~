@@ -1,12 +1,13 @@
 <?php
 
 namespace Biznes\DatabaseBundle\Entity;
-
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Products
- * @ORM\Entity(repositoryClass="DatabaseBundle\Repository\ProductsRepository")
+ * @ORM\Entity(repositoryClass="Biznes\DatabaseBundle\Products\ProductsRepository")
+ * @ORM\Table(name="products")
+
  */
 class Products
 {

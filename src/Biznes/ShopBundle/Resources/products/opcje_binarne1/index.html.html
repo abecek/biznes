@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta name="description" content="Wypłaty do 90% dla opcji binarnych - spróbuj na bezpłatnym koncie demo lub zacznij handlować na koncie realnym z zaufanym brokerem">
+    <title>Handel Opcje Binarne | Dukascopy Europe</title>
+    <link rel="stylesheet" href="css/style.css@v=12">
+	
+	
+	<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+</head>
+
+<body >
+	
+    <header>
+        <div class="header-inner">
+            <div class="container">
+                <div class="header-front">
+                    <div class="row">
+                        <div class="col-md-7 col-sm-5 logo-block">
+                            <a href="#" class="logo"><img src="images/logo.png" alt="logo"></a>
+                            <div class="slogan">
+                                Szwajcarska tradycja,<br>europejskie regulacje                            </div>
+                        </div>
+                        <div class="col-md-5 col-sm-7 chat-language">
+							<div class="top-buttons-block">
+                                <div id="start-chat">
+                                    <span id="chat-loader" style="display:none;font-size:38px;line-height:19px;"><span class="loading-point-1">.</span><span class="loading-point-2">.</span></span>
+                                    <span id="wait-for-click-chat">
+                                        <img src="images/icon-chat.png" alt="">
+                                        Live chat                                    </span>                     
+                                </div>
+                                <!--div>
+                                    <img src="images/icon-phone.png" alt="">
+                                    Call back
+                                </div-->
+                            </div>
+                            <div class="dropdown language">
+                                <div id="language-id" style="display: none;">pl</div>
+                                <button class="btn btn-red dropdown-toggle" type="button" id="language-menu" data-toggle="dropdown">
+                                    English<span class="caret"></span>
+                                </button>
+                                    <ul class="dropdown-menu" role="menu" aria-labelledby="language-menu">
+									<li><a href="index.html@lang=pl">Polski</a></li>
+                                  </ul>
+                                                            </div>
+                        </div>
+                    </div>
+					<div class="row">
+						<div class="col-md-6 left-col clearfix">
+							<h1>
+                                Opcje Binarne                            </h1>
+							<h2>Handluj z regulowanym brokerem!</h2>
+							<ul class="styled-one-list">
+								<li>Wypłaty do <span class="red">90%</span></li>
+								<li>Łatwe w obsłudze</li>
+								<li>Wiele rynków</li>
+								<li>Transparentne ceny</li>
+							</ul>
+							<div>
+								<a href="#" class="btn btn-red btn-arrow lang-link">
+									Otwórz konto Live									<span></span>
+									<i><b>100%</b> Bonus powitalny do $ 5 000</i>
+								</a>
+								<p>Szybkie otwarcie konta online</p>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<form id="registration-form" class="registration-form">
+								<div class="col-md-12">
+									<div class="form-group">
+										<input type="hidden" name="language" id="language" value="pl">
+										<input type="hidden" name="code_number" id="code-number">
+										<input type="hidden" name="bank_id" id="bank-id" value="">
+									</div>
+								</div>
+								<div id="form-field">
+									<h2>Sprawdź na demo, bez ryzyka</h2>
+									<div>
+										<div class="form-group">
+											<input
+													type="text"
+													class="form-control"
+													id="firstname"
+													name="firstname"
+													tabindex="1"
+													placeholder="Imię..."
+													data-required="true"
+													data-error="Pole wymagane"
+											>
+										</div>
+									</div>
+									<div>
+										<div class="form-group">
+											<input
+													type="text"
+													class="form-control"
+													name="lastname"
+													id="lastname"
+													tabindex="2"
+													placeholder="Nazwisko..."
+													data-required="true"
+													data-error="Pole wymagane"
+											>
+										</div>
+									</div>
+									<div>
+										<div class="form-group">
+											<input
+													type="text"
+													class="form-control"
+													name="email"
+													id="email"
+													tabindex="3"
+													placeholder="E-mail..."
+													data-required="true"
+													data-error="Pole wymagane"
+											>
+										</div>
+									</div>
+									<div>
+										<div class="form-group">
+											<div id="form-phone-block">
+												<select
+														name="code"
+														id="code"
+														data-search="true"
+												>
+													<option disabled>Phone code</option>
+												</select>
+												<div class="input-wrapper">
+													<input
+													
+															type="tel"
+															class="form-control"
+															name="phone"
+															id="phone"
+															tabindex="4"
+															placeholder="Telefon..."
+															data-required="true"
+															data-error="Wymagane pole"
+													>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div>
+										<div class="form-group">
+											<select
+													class="form-control"
+													name="country"
+													id="country"
+													data-search="true"
+													data-required="true"
+													data-error="Wybierz kraj"
+											>
+												<option value="" disabled>Select country</option>
+											</select>
+										</div>
+									</div>
+									<div>
+										<div class="form-group">
+											<select
+													class="form-control"
+													name="currency"
+													id="currency"
+													data-required="true"
+													data-error="Wybierz walutę!"
+											>
+												<option value="" disabled>Select currency</option>
+											</select>
+										</div>
+									</div>
+									<div ></div>
+									<div id='recaptcha' class="g-recaptcha" data-sitekey="6Le7UxYUAAAAAPJEYmCXlgbK-YTZMFV2VRuDmjDw" data-size="invisible" data-callback="myOnSubmit"></div>
+									<div class="form-group">
+										<button type="submit" class="btn btn-arrow btn-success" id="submit" tabindex="5">Otwórz Demo*<span></span></button>
+									</div>
+								</div>
+								
+								<div class="form-description">
+									<p>* By clicking on "Get Demo Account" you agree to be contacted by representatives of Dukascopy Europe regarding services of Dukascopy Europe and news connected with them. You acknowledge that any personal information and/or other data you provide Dukascopy Europe may be transferred to and stored and processed by Dukascopy Bank SA for the purpose of rendering technical support and ensuring the functionality of the platform, and consent hereto. Dukascopy Bank S.A. will treat your data in compliance with all confidentiality requirements.</p>
+								</div>
+							</form>
+						</div>
+					</div>
+                </div>
+            </div>
+        </div>     
+    </header>
+
+    <section class="what-is">
+        <div class="header">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 col-md-5 col-xs-9 logo-block">
+                        <div class="logo">
+                            <img src="images/binary-logo.png">
+                            <span class="logo-text"><strong>Binary</strong> Trader</span>
+                        </div>
+                        <div class="slogan">
+                            Profesjonalne platformy do handlu opcjami binarnymi w<br>Dukascopy Europe IBS AS.                        </div>                        
+                    </div>
+                    <div class="col-lg-6 col-md-7 col-xs-3">
+						<div id="menu-butt">
+							<span></span>
+							<span></span>
+							<span></span>
+						</div>
+                        <nav>
+                            <ul id="navigation-list">
+                                <li><a href="index.html@lang=pl#what-is" class="inner-link">Co to są opcje binarne?</a></li>
+                                <li><a href="index.html@lang=pl#features" class="inner-link">Cechy</a></li>
+                                <li><a href="index.html@lang=pl#trade-from-pc" class="inner-link">Platformy</a></li>
+                                <li><a href="index.html@lang=pl#open-live-account" class="inner-link become-button">Otwórz konto Live<span></span></a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div> 
+        <div class="container">
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="text-fader">
+                        <h3 class="header-underlined">Co to są opcje binarne?</h3>
+                        <div id="text-fader-1" style="display: block;position:relative">
+                            <p>Opcje binarne to prosty sposób handlu na zmiennościach ceny, korzystając z wielu rynków finansowych. Obecnie, Dukascopy oferuje trzy typy opcji binarnych: Opcje Góra/Dół przy użyciu notowań z SWFX Swiss Marketplaces, Opcje Dzienne na Akcje i Opcje Binarne na Pary bazujące na cenach otwarcia/zamknięcia na poszczególnych giełdach. </p><p>Dla Opcji Góra/Dół oraz Opcji Dziennych na Akcje trader zakłada czy cena instrumentu bazowego w momencie zakończenia kontraktu będzie wyższa lub niższa, niż w momencie otwarcia kontraktu. Jedyną rzeczą, która decyduje o możliwych zyskach w przypadku tych opcji binarnych, jest cena zakończenia kontaktu. W przypadku Opcji na Pary, trader zakłada czy indywidualne akcje osiągną lepszy lub gorszy wynik od indeksu, którego są częścią. Dla Opcji Góra/Dół istnieje możliwość wyboru czasu trwania opcji od 1 minuty do 23:59 godzin, podczas gdy dla Opcji Dziennych na Akcje i Opcji na Pary czas trwania jest równy czasowi trwania sesji handlowej giełdy, na której instrument bazowy jest notowany.</p><p>W przypadku poprawnej prognozy, trader otrzyma z powrotem zapłacone premium plus odpowiedni procent zapłaconego premium - od 70% do 90% dla Opcji Góra/Dół i od 50% do 70% dla Opcji Dziennych na Akcje i Opcji na Pary. W przypadku, gdy prognoza tradera nie była poprawna, trader traci tylko zapłacone premium. Trader może precyzyjnie ustawić kwotę kontraktu (premium), zaczynając od 1 USD (lub nawet 1 PLN), aż do 10'000 USD (lub ekwiwalentu w PLN).</p>                            
+                        </div>
+                    </div>                                    
+                </div>
+                <div class="col-md-7">
+                    <h4>
+                        Spróbuj 
+                    </h4>
+                    <div class="binary-options-demo">
+                        <div class="demo-inner">
+						<!--
+                            <div id="chart-container">
+                            </div>
+						-->
+                            <div class="demo-buttons">
+                                <div class="row">
+                                    <div class="col-md-8 call-timer">
+                                    </div>
+                                    <div class="col-md-4 put-block">
+                                        <button class="btn btn-danger btn-lg" id="put">Put</button>
+                                    </div>
+                                    <div class="col-md-4 amount-block">
+                                        <label>Kwota</label>
+                                        <select class="form-control" id="amount">
+                                            <option selected value="100">$100</option>
+                                            <option value="200">$200</option>
+                                            <option value="300">$300</option>
+                                            <option value="500">$500</option>
+                                            <option value="1000">$1000</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-4 call-block">
+                                        <button class="btn btn-success btn-lg" id="call">Call</button>  
+                                    </div>
+                                    <div class="col-md-8 put-timer">
+                                    </div>                                                              
+                                </div>                                
+                            </div>
+                        </div>
+                        <div class="demo-footer">
+                            <a href="index.html@lang=pl#" class="demo-restart">Restart</a>                           
+                        </div>
+                    </div>
+                    <div class="demo-disclaimer">
+                        <p>*Ograniczona wersja handlu opcjami binarnymi. Dla celów demonstracyjnych</p>
+                        <p><a href="index.html@lang=pl#registration-form" class="inner-link">Otwórz darmowe konto DEMO</a> aby otrzymać dostęp do pełnej wersji platformy</p>
+                    </div>       
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="even-more">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-5 col-md-offset-1 open-acc">
+                    <a href="index.html@lang=pl#registration-form" class="btn btn-black btn-arrow inner-link">Otwórz konto Demo<span></span></a>
+                    <p>Trenuj bez ryzyka</p>
+                </div>
+                <div class="col-md-5 open-acc">
+                    <a href="#" class="btn btn-red btn-arrow lang-link">Otwórz konto Live<span></span></a>
+                    <p>Szybkie otwarcie konta online</p>
+                </div>
+				<table id="demo"></table>
+            </div>
+        </div>
+    </section>
+
+    <section class="features">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 centered">
+                    <h2>Cechy</h2>
+                    <h4 class="header-underlined">Łatwy, lecz zaawansowany sposób handlu</h4>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 col-sm-6 features-left">
+                    <div class="features-single">
+                        <img src="images/features/icon-1.png" alt="">
+                        <div class="features-desc">
+                            <h5>Wypłata do 90%!</h5>
+                            <p>Jedna z najlepszych ofert <br>na rynku</p>
+                        </div>
+                    </div>
+                    <div class="features-single">
+                        <img src="images/features/icon-2.png" alt="">
+                        <div class="features-desc">
+                            <h5>Bogaty wybór instrumentów</h5>
+                            <p>Forex, Akcje, Indeksy i<br>Towary</p>
+                        </div>
+                    </div>
+                    <div class="features-single">
+                        <img src="images/features/icon-3.png" alt="">
+                        <div class="features-desc">
+                            <h5>1 - 10'000 USD</h5>
+                            <p>Elastyczny rozmiar kontraktu</p>
+                        </div>
+                    </div>
+                    <div class="features-single">
+                        <img src="images/features/icon-4.png" alt="">
+                        <div class="features-desc">
+                            <h5>1 min - 23:59 hours</h5>
+                            <p>Elastyczna długość kontraktów</p>
+                        </div>
+                    </div>
+                    <div class="features-single">
+                        <img src="images/features/icon-5.png" alt="">
+                        <div class="features-desc">
+                            <h5>Zlecenia oczekujące</h5>
+                            <p>Zaplanuj swoje zlecenia<br>i dodaj warunki</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 hidden-sm hidden-xs centered">
+                    <img src="images/iphones.png" id="features-image">
+                </div>
+                <div class="col-md-4 col-sm-6 features-right">
+                    <div class="features-single">
+                        <img src="images/features/icon-6.png" alt="">
+                        <div class="features-desc">
+                            <h5>Ochrona klienta</h5>
+                            <p>Depozyty są chronione przez regulacje szwajcarskie oraz<br> regulacje EU</p>
+                        </div>
+                    </div>
+                    <div class="features-single">
+                        <img src="images/features/icon-7.png" alt="">
+                        <div class="features-desc">
+                            <h5>Transparentne ceny</h5>
+                            <p>Używaj prawdziwych cen akcji z SWFX Swiss Marketplace</p>
+                        </div>
+                    </div>
+                    <div class="features-single">
+                        <img src="images/features/icon-8.png" alt="">
+                        <div class="features-desc">
+                            <h5>Handluj wszędzie</h5>
+                            <p>Wygodne platformy mobilne i<br> stacjonarne</p>
+                        </div>
+                    </div>
+                    <div class="features-single">
+                        <img src="images/features/icon-9.png" alt="">
+                        <div class="features-desc">
+                            <h5>24/7 wsparcie klienta</h5>
+                            <p>Wsparcie poprzez telefon, czat oraz e-mail w wielu językach.</p>
+                        </div>
+                    </div>
+                    <div class="features-single">
+                        <img src="images/features/icon-10.png" alt="">
+                        <div class="features-desc">
+                            <h5>Konta rzeczywiste od 100$</h5>
+                            <p>Łatwe otwarcie konta online</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="trade-from-pc">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 centered">
+                    <h2>Jedno oprogramowanie dla wszystkich</h2>
+                    <h4 class="header-underlined">Handluj z komórki lub komputera</h4>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <a target="_blank" href="#"><img src="images/soft-1.jpg" alt=""></a>
+                    <h3><a target="_blank" href="#">Web Binary Trader</a></h3>
+                    <p>Web Binary Trader jest bogato wyposażoną platformą stacjonarną do handlu opcjami binarnymi w Dukascopy. Wydajna prostota platformy zapewnia wygodę handlu, co jest motywem przewodnim w Web Binary Trader.</p>
+                </div>
+                <div class="col-md-4">
+                    <a target="_blank" href="#"><img src="images/soft-2.jpg" alt=""></a>
+                    <h3><a target="_blank" href="#">Binary Trader na iOS</a></h3>
+                    <p>Korzystaj z oryginalnej aplikacji na iPhone iOS, która zawiera wszystkie główne funkcje platform Dukascopy. Funkcjonalny interfejs zapewnia wyśmienite doświadczenia podczas handlu.</p>
+                </div>
+                <div class="col-md-4">
+                    <a target="_blank" href="#"><img src="images/soft-3.jpg" alt=""></a>
+                    <h3><a target="_blank" href="#">Binary Trader na Androida</a></h3>
+                    <p>SWFX Trader na Androida - platforma na najpopularniejszy system pośród użytkowników urządzeń mobilnych. Platforma oferuje odpowiednie narzędzia, szczegółowe logi i raporty.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="open-live-account">
+        <div class="container">
+            <div class="row">
+				<div class="col-md-4">
+					<h3 class="header-underlined">
+						Otwórz konto Live						<span>otwórz konto w pełni online i zacznij handlować już dzisiaj</span>
+					</h3>
+					<p>Pracownicy Dukascopy pracują 24 godziny na dobę, aby zapewnić jak najszybszy proces weryfikacji i otwarcia konta.</p>
+					<p>Po podpisaniu umowy online, zasil swoje konto przelewem (mamy konto do wpłat w polskim banku) lub kartą.</p>
+				</div>
+				<div class="col-md-4 col-xs-6">
+					<div>
+						<div class="welcome-bonus">
+							<h4>Bonus powitalny do</h4>
+							<span>$ 5 000</span>
+						</div>
+						<a href="#" target="_blank" class="btn btn-red btn-arrow lang-link">Otwórz konto Live<span></span></a>
+					</div>
+				</div>
+				<div class="col-md-4 col-xs-6">
+					<h3 class="header-underlined upp">Tylko cztery proste kroki:</h3>
+					<ul class="styled-one-list">
+						<li>Wypełnij formularz online</li>
+						<li>Prześlij dokumenty elektronicznie</li>
+						<li>Podpisz kontrakt online</li>
+						<li>Zasil swoje konto</li>
+					</ul>
+				</div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-5">
+                    <h5>Kontakt</h5>
+                    <p>
+                        <strong>Dukascopy Europe IBS AS</strong><br>
+                        Lacplesa iela 20a-1, Riga,<br>
+                        LV-1011, Latvia<br>
+                        Tel: +371 67 399 000
+                    </p>
+                    <!--ul class="social-icons">
+                        <li><a href="#" class="social-icon-fb"></a></li>
+                        <li><a href="#" class="social-icon-tw"></a></li>
+                        <li><a href="#" class="social-icon-vk"></a></li>
+                    </ul-->
+                </div>
+                <div class="col-md-7">
+                    <h5>© 2017 Dukascopy Europe IBS AS</h5>
+                    <p>On-line Currency forex trading with EU licensed Investment Broker - ECN Forex Brokerage, Managed Forex Accounts, introducing forex brokers, Currency Forex Data Feed and News Access to Currency Forex Trading Platform provided on-line by Dukascopy.eu</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+	<div class="loader">
+        <div class="loader-dots">
+        	<div class="loader-dot pulse animated"></div>
+        	<div class="loader-dot loader-dot-2 pulse animated"></div>
+        	<div class="loader-dot loader-dot-3 pulse animated"></div>
+        </div>
+    </div>
+
+	<div id="dialog">
+        <div>
+        	<div class="dialog-close" data-redirect="#"></div>
+        	<div id="msg-success" class="dialog-text clearfix">
+				<div class="check-mark"></div>
+				<h2>Sukces!</h2>
+				<div class="success-text"></div>
+				<div class="more-info">
+					<h4>Poczytaj więcej na naszej stronie internetowej:</h4>
+					<div class="more-info-items">
+						<div class="more-info-item">
+							<i class="icon our-plat"></i>
+							<a href="#" class="text" target="_blank">Nasze <br> Platformy</a>
+						</div>
+						<div class="more-info-item">
+							<i class="icon protect"></i>
+							<a href="#" class="text" target="_blank">Ochrona <br> Klienta</a>
+						</div>
+					</div>
+				</div>
+			</div>
+        	<div id="msg-fail" class="dialog-text">
+				<div class="check-mark"></div>
+				<h2>Błąd!</h2>
+				Coś poszło nie tak. Odśwież stronę i spróbuj jeszcze raz.			</div>
+        </div>
+    </div>
+	
+
+
+</body>
+</html>
