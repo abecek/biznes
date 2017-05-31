@@ -7,6 +7,14 @@
 
 {% block container %}
     <hr>
-    {{ product }}
+    {{ product.name }}
+    <br>
+    {{ product.price }}
     <hr>
+    <form method="POST" action="{{ url('cart') }}">
+        <input type="hidden" name="idProduct" value="{{ product.idProduct }}"/>
+        <input type="text" name="desc" placeholder="Opis"/>
+        <input type="submit" value="Dodaj do koszyka"/>
+    </form>
+    <a href="{{ url('cart') }}">Koszyk!</a>
 {% endblock %}

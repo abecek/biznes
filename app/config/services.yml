@@ -3,7 +3,14 @@
 parameters:
     #parameter_name: value
 
-services:
     #service_name:
     #    class: AppBundle\Directory\ClassName
     #    arguments: ['@another_service_name', 'plain_value', '%parameter_name%']
+services:
+    cartManager:
+         class: Biznes\Utils\CartManager
+         public: true
+    userManager:
+         class: Biznes\Utils\UserManager
+         arguments: [ '@doctrine.orm.entity_manager' ]
+         public: true

@@ -6,24 +6,33 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
-use Biznes\DatabaseBundle\Entity\Users;
-
+use Symfony\Component\HttpFoundation\Session\Session;
 
 class DefaultController extends Controller
 {
     /**
      * @Route("/", name="homepage")
      */
-    public function indexAction()
-    {
-        return $this->render('BiznesServiceBundle:Default:index.html.twig');
+    public function indexAction(){
+        $user = $this->getUser();
+        $um = $this->get('userManager');
+        $um->loadDataFromUser($user);
+        return $this->render('BiznesServiceBundle:Default:index.html.twig',
+                array('um' => $um,));
     }
 
     /**
-     * @Route("/created", name="account_created")
+     * @Route("/created", name="account_created_service")
      */
     public function createdAction(){   
-        return $this->render('BiznesServiceBundle:Default:register_create.html.twig');
+        return $this->render('BiznesServiceBundle:Default:register_created.html.twig');
+    }
+    
+    /**
+     * @Route("/personalinfo", name="personalDataInfo")
+     */
+    public function personalInfoAction(){   
+        return $this->render('BiznesServiceBundle:Default:personalDataInfo.html.twig');
     }
     
     /**

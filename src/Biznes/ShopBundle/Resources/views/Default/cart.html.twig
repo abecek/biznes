@@ -1,0 +1,15 @@
+{% extends "BiznesShopBundle::base.html.twig" %}
+{% set title = 'Koszyk' %}
+{% block carousel %}
+
+{% endblock %}
+
+
+{% block container %}
+    <hr>
+    {{ dump(cart) }}
+    <hr>
+
+    <a href="{{ url('checkout') }}">Realizacja zamowienia!</a></br>
+
+{% endblock %}

@@ -7,7 +7,7 @@
     <id name="idUserAddress" type="integer" column="id_user_address">
       <generator strategy="IDENTITY"/>
     </id>
-    <field name="street" type="string" column="street" length="35" nullable="false">
+    <field name="ulica" type="string" column="ulica" length="35" nullable="false">
       <options>
         <option name="fixed"/>
       </options>

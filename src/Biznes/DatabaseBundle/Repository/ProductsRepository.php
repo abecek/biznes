@@ -9,7 +9,7 @@ class ProductsRepository extends EntityRepository
     {
         return $this->getEntityManager()
                         ->createQuery(
-                                'SELECT * FROM DatabaseBundle:Product ORDER BY name ASC'
+                                'SELECT * FROM DatabaseBundle:Products ORDER BY name ASC'
                         )
                         ->getResult();
     }
@@ -17,7 +17,7 @@ class ProductsRepository extends EntityRepository
     public function findOneById($id) {
         return $this->getEntityManager()
                         ->createQuery(
-                                'SELECT p FROM DatabaseBundle:Product p WHERE p.idProduct = :id'
+                                'SELECT p FROM DatabaseBundle:Products p WHERE p.idProduct = :id'
                         )->setParameter('id', $id)
                         ->getResult();
     }

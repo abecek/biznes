@@ -2,13 +2,16 @@
 
 namespace Biznes\DatabaseBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-
 /**
  * Carts
  */
 class Carts
 {
+    /**
+     * @var integer
+     */
+    private $idOrder;
+
     /**
      * @var integer
      */
@@ -24,16 +27,35 @@ class Carts
      */
     private $idProduct;
 
-    /**
-     * @var \Biznes\DatabaseBundle\Entity\Orders
-     */
-    private $idOrder;
 
+    /**
+     * Set idOrder
+     *
+     * @param integer $idOrder
+     *
+     * @return Carts
+     */
+    public function setIdOrder($idOrder)
+    {
+        $this->idOrder = $idOrder;
+
+        return $this;
+    }
+
+    /**
+     * Get idOrder
+     *
+     * @return integer
+     */
+    public function getIdOrder()
+    {
+        return $this->idOrder;
+    }
 
     /**
      * Get idCart
      *
-     * @return integer 
+     * @return integer
      */
     public function getIdCart()
     {
@@ -44,6 +66,7 @@ class Carts
      * Set idRealizationMethod
      *
      * @param \Biznes\DatabaseBundle\Entity\RealizationMethods $idRealizationMethod
+     *
      * @return Carts
      */
     public function setIdRealizationMethod(\Biznes\DatabaseBundle\Entity\RealizationMethods $idRealizationMethod = null)
@@ -56,7 +79,7 @@ class Carts
     /**
      * Get idRealizationMethod
      *
-     * @return \Biznes\DatabaseBundle\Entity\RealizationMethods 
+     * @return \Biznes\DatabaseBundle\Entity\RealizationMethods
      */
     public function getIdRealizationMethod()
     {
@@ -67,6 +90,7 @@ class Carts
      * Set idProduct
      *
      * @param \Biznes\DatabaseBundle\Entity\Products $idProduct
+     *
      * @return Carts
      */
     public function setIdProduct(\Biznes\DatabaseBundle\Entity\Products $idProduct = null)
@@ -79,33 +103,11 @@ class Carts
     /**
      * Get idProduct
      *
-     * @return \Biznes\DatabaseBundle\Entity\Products 
+     * @return \Biznes\DatabaseBundle\Entity\Products
      */
     public function getIdProduct()
     {
         return $this->idProduct;
     }
-
-    /**
-     * Set idOrder
-     *
-     * @param \Biznes\DatabaseBundle\Entity\Orders $idOrder
-     * @return Carts
-     */
-    public function setIdOrder(\Biznes\DatabaseBundle\Entity\Orders $idOrder = null)
-    {
-        $this->idOrder = $idOrder;
-
-        return $this;
-    }
-
-    /**
-     * Get idOrder
-     *
-     * @return \Biznes\DatabaseBundle\Entity\Orders 
-     */
-    public function getIdOrder()
-    {
-        return $this->idOrder;
-    }
 }
+

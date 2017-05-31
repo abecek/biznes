@@ -3,46 +3,86 @@
 namespace Biznes\DatabaseBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\EntityRepository;
+
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * UsersData
+ * @ORM\Entity
+ * @ORM\Table(name="users_data")
+ * @ORM\Entity(repositoryClass="Biznes\DatabaseBundle\Repository\UsersAddressesRepository")
+ * @UniqueEntity(fields="identityNumber", message="Identity number already taken")
  */
-class UsersData
+class UsersData implements \Serializable
 {
     /**
-     * @var string
+     * @ORM\Id
+     * @ORM\Column(type="integer", name="id_user")
+     */
+    private $idUserData;
+    
+    /**
+     * @ORM\Column(name="name1")
+     * @Assert\NotBlank()
+     * @Assert\Length(
+     *      min = 3,
+     *      max = 25,
+     *      minMessage = "Name is to short.",
+     *      maxMessage = "Name is to long."
+     *      )
      */
     private $name1;
 
     /**
-     * @var string
+     * @ORM\Column(name="name2")
+     * @Assert\Length(
+     *      min = 3,
+     *      max = 25,
+     *      minMessage = "Second name is to short.",
+     *      maxMessage = "Second name is to long."
+     *      )
      */
-    private $name2;
+    private $name2 = null;
 
     /**
-     * @var string
+     * @ORM\Column(name="surname")
+     * @Assert\NotBlank()
+     * @Assert\Length(
+     *      min = 3,
+     *      max = 35,
+     *      minMessage = "Surname is to short.",
+     *      maxMessage = "Surname is to long."
+     *      )
      */
     private $surname;
 
     /**
-     * @var string
+     * @ORM\Column(name="identity_number", type="string", length=11)
+     * @Assert\NotBlank()
+     * @Assert\Length(
+     *      min = 11,
+     *      max = 11
+     *      )
      */
     private $identityNumber;
 
     /**
-     * @var string
+     * @ORM\Column(name="telephone", type="string", length=9)
+     * @Assert\NotBlank()
+     * @Assert\Length(
+     *      min = 9,
+     *      max = 9
+     *      )
      */
     private $telephone;
 
     /**
-     * @var string
+     * @ORM\Column(name="gender", type="string")
+     * @Assert\NotBlank()
      */
     private $language;
-
-    /**
-     * @var integer
-     */
-    private $idUserData;
 
     /**
      * @var \Biznes\DatabaseBundle\Entity\Users
@@ -220,4 +260,38 @@ class UsersData
     {
         return $this->idUser;
     }
+
+    /** @see \Serializable::serialize() */
+    public function serialize()
+    {
+        return serialize(array(
+            $this->idUser,
+            $this->idUserData,
+            $this->identityNumber,
+            $this->language,
+            $this->name1,
+            $this->name2,
+            $this->surname,
+            $this->telephone,
+            // see section on salt below
+            // $this->salt,
+        ));
+    }
+
+    /** @see \Serializable::unserialize() */
+    public function unserialize($serialized)
+    {
+        list (
+            $this->idUserData,
+            $this->identityNumber,
+            $this->language,
+            $this->name1,
+            $this->name2,
+            $this->surname,
+            $this->telephone,
+            // see section on salt below
+            // $this->salt
+        ) = unserialize($serialized);
+    }
+
 }

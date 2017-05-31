@@ -1,0 +1,35 @@
+{% extends "BiznesShopBundle::base.html.twig" %}
+{% set title = 'Zamowienie' %}
+{% block carousel %}
+
+{% endblock %}
+
+
+{% block container %}
+    
+    {% if is_granted('ROLE_USER') %}
+            Zalogowany
+    {% else %}
+        Logowanie: <br>
+        <form action="{{ path('login') }}" method="post">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="_username" value="" />
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="_password" />
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+            <input type="hidden" name="_target_path" value="checkout" />
+            <input type="hidden" name="_failure_path" value="checkout" />
+
+            <button type="submit">login</button>
+        </form>
+            <hr>
+        <a href="{{ url('register') }}">Dalej!</a>
+    {% endif %}
+        
+    <hr>
+    {{ dump(cart) }}
+    <hr>
+    <!-- 
+    <a href="{{ url('confirm') }}">Dalej!</a></br>
+    -->
+{% endblock %}

@@ -8,16 +8,16 @@ use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
-use Doctrine\ORM\EntityRepository;
 
 /**
  * User
  * @ORM\Entity
  * @ORM\Table(name="users")
+ * @ORM\Entity(repositoryClass="Biznes\DatabaseBundle\Repository\UsersRepository")
  * @UniqueEntity(fields="username", message="Login already taken")
  * @UniqueEntity(fields="email", message="Email already taken")
  */
-class Users extends EntityRepository implements AdvancedUserInterface, \Serializable
+class Users implements AdvancedUserInterface, \Serializable
 {
     /**
      * @ORM\Id
@@ -87,7 +87,7 @@ class Users extends EntityRepository implements AdvancedUserInterface, \Serializ
     /**
      * @ORM\Column(name="is_active", type="integer")
      */
-    protected $isActive;
+    protected $isActive = 0;
 
     
     public function __construct()
@@ -147,6 +147,7 @@ class Users extends EntityRepository implements AdvancedUserInterface, \Serializ
     public function setPlainPassword($password)
     {
         $this->plainPassword = $password;
+        return $this;
     }
     
     public function getPlainPassword()
@@ -158,6 +159,7 @@ class Users extends EntityRepository implements AdvancedUserInterface, \Serializ
     public function setPassword($password)
     {
         $this->password = $password;
+        return $this;
     }
     
     public function getPassword()
@@ -205,7 +207,7 @@ class Users extends EntityRepository implements AdvancedUserInterface, \Serializ
      */
     public function setGender($gender)
     {
-        $this->gender = $gender;
+        $this->gender = strtoupper($gender);
 
         return $this;
     }
@@ -261,9 +263,9 @@ class Users extends EntityRepository implements AdvancedUserInterface, \Serializ
      *
      * @return Users
      */
-    public function setIdSponsor($id)
+    public function setIdSponsor(Users $user)
     {
-        $this->idSponsor = $id;
+        $this->idSponsor = $user;
 
         return $this;
     }

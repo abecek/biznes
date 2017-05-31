@@ -3,46 +3,57 @@
 namespace Biznes\DatabaseBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\EntityRepository;
+
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * UsersAddresses
+ * @ORM\Entity
+ * @ORM\Table(name="users_addresses")
+ * @ORM\Entity(repositoryClass="Biznes\DatabaseBundle\Repository\UsersAddressesRepository")
  */
-class UsersAddresses
+class UsersAddresses implements \Serializable
 {
-    /**
-     * @var string
-     */
-    private $ulica;
-
-    /**
-     * @var string
-     */
-    private $nrHouse;
-
-    /**
-     * @var string
-     */
-    private $nrFlat;
-
-    /**
-     * @var string
-     */
-    private $city;
-
-    /**
-     * @var string
-     */
-    private $postCode;
-
-    /**
-     * @var string
-     */
-    private $country;
-
     /**
      * @var integer
      */
     private $idUserAddress;
+    
+    /**
+     * @ORM\Column(name="ulica")
+     * @Assert\NotBlank()
+     */
+    private $ulica;
+
+    /**
+     * @ORM\Column(name="nr_house")
+     * @Assert\NotBlank()
+     */
+    private $nrHouse;
+
+    /**
+     * @ORM\Column(name="nr_flat")
+     */
+    private $nrFlat;
+
+    /**
+     * @ORM\Column(name="city")
+     * @Assert\NotBlank()
+     */
+    private $city;
+
+    /**
+     * @ORM\Column(name="post_code")
+     */
+    private $postCode;
+
+    /**
+     * @ORM\Column(name="country")
+     * @Assert\NotBlank()
+     */
+    private $country;
+
 
     /**
      * @var \Biznes\DatabaseBundle\Entity\Users
@@ -64,7 +75,7 @@ class UsersAddresses
     }
 
     /**
-     * Get ulica
+     * Get steet
      *
      * @return string 
      */
@@ -219,5 +230,39 @@ class UsersAddresses
     public function getIdUser()
     {
         return $this->idUser;
+    }
+    
+    /** @see \Serializable::serialize() */
+    public function serialize()
+    {
+        return serialize(array(
+            $this->idUser,
+            $this->idUserAddress,
+            $this->city,
+            $this->country,
+            $this->ulica,
+            $this->nrFlat,
+            $this->nrHouse,
+            $this->postCode,
+            // see section on salt below
+            // $this->salt,
+        ));
+    }
+
+    /** @see \Serializable::unserialize() */
+    public function unserialize($serialized)
+    {
+        list (
+            $this->idUser,
+            $this->idUserAddress,
+            $this->city,
+            $this->country,
+            $this->ulica,
+            $this->nrFlat,
+            $this->nrHouse,
+            $this->postCode,
+            // see section on salt below
+            // $this->salt
+        ) = unserialize($serialized);
     }
 }
