@@ -4,6 +4,7 @@
     <indexes>
       <index name="products_id_category_fk1" columns="id_category"/>
       <index name="products_id_program_fk1" columns="id_program"/>
+      <index name="id_realization_method" columns="id_realization_method"/>
     </indexes>
     <id name="idProduct" type="smallint" column="id_product">
       <generator strategy="IDENTITY"/>
@@ -25,6 +26,11 @@
       </options>
     </field>
     <field name="rating" type="decimal" column="rating" precision="2" scale="1" nullable="true"/>
+    <many-to-one field="idRealizationMethod" target-entity="RealizationMethods" fetch="LAZY">
+      <join-columns>
+        <join-column name="id_realization_method" referenced-column-name="id_realization_method"/>
+      </join-columns>
+    </many-to-one>
     <many-to-one field="idCategory" target-entity="Categories" fetch="LAZY">
       <join-columns>
         <join-column name="id_category" referenced-column-name="id_category"/>

@@ -223,33 +223,4 @@ class Products
     }
     
 
-    /**
-     * @var \Biznes\DatabaseBundle\Entity\RealizationMethods
-     */
-    private $idRealizationMethod;
-
-
-    /**
-     * Set idRealizationMethod
-     *
-     * @param \Biznes\DatabaseBundle\Entity\RealizationMethods $idRealizationMethod
-     *
-     * @return Products
-     */
-    public function setIdRealizationMethod(\Biznes\DatabaseBundle\Entity\RealizationMethods $idRealizationMethod = null)
-    {
-        $this->idRealizationMethod = $idRealizationMethod;
-
-        return $this;
-    }
-
-    /**
-     * Get idRealizationMethod
-     *
-     * @return \Biznes\DatabaseBundle\Entity\RealizationMethods
-     */
-    public function getIdRealizationMethod()
-    {
-        return $this->idRealizationMethod;
-    }
 }

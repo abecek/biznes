@@ -10,11 +10,6 @@ use Doctrine\ORM\Mapping as ORM;
 class Orders
 {
     /**
-     * @var integer
-     */
-    private $idOrder;
-    
-    /**
      * @var \DateTime
      */
     private $dateOrder;
@@ -28,6 +23,11 @@ class Orders
      * @var integer
      */
     private $idSponsor;
+
+    /**
+     * @var integer
+     */
+    private $idOrder;
 
     /**
      * @var \Biznes\DatabaseBundle\Entity\PaymentMethods

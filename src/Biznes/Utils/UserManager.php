@@ -24,23 +24,34 @@ use Biznes\DatabaseBundle\Entity\UsersAddresses;
 
 class UserManager extends Controller{
     protected $user = null;
-    protected $userData = null;
-    protected $userAddress = null;
+    protected $userData;
+    protected $userAddress;
     protected $em;
 
 
     public function __construct(EntityManager $em){
+        $this->user = new Users();
+        $this->userData = new UsersData();
+        $this->userAddress = new UsersAddresses();
         $this->em = $em;
     }
     
+    
+    //USED AFTER LOGIN IN, AFTER REDIRECT ROUTES{homepage, shop}
     public function loadDataFromUser(Users $user = null){
         if($user != null){
             $em = $this->em->getRepository('BiznesDatabaseBundle:UsersData');
 
             $this->user = $user;
             $this->userData = $em->findOneByIdUser($user);
+            if($this->userData == null){
+                $this->userData = new UsersData();
+            }
             $em = $this->em->getRepository('BiznesDatabaseBundle:UsersAddresses');
             $this->userAddress = $em->findOneByIdUser($user);
+            if($this->userAddress == null){
+                $this->userAddress = new UsersAddresses();
+            }
         }
     }
     
@@ -49,15 +60,18 @@ class UserManager extends Controller{
     }
     
     public function userExists(){
-        return $this->user != null ? true : false;
+        if($this->user->getIdUser() != null) return true;
+        return false;
     }
     
     public function userDataExists(){
-        return $this->userData != null ? true : false;
+        if($this->userData->getIdUserData() != null) return true;
+        return false;
     }
     
     public function userAddressExists(){
-        return $this->userAddress != null ? true : false;
+        if($this->userAddress->getIdUserAddress() != null) return true;
+        return false;
     }
     
     public function createUser($data){
@@ -98,4 +112,13 @@ class UserManager extends Controller{
                 break;
         }
     }
+    
+    public function getUserData(){
+        return $this->userData;
+    }
+    
+    public function getUserAddress(){
+        return $this->userAddress;
+    }
+    
 }

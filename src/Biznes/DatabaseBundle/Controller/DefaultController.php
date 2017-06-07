@@ -15,6 +15,8 @@ use Biznes\DatabaseBundle\Form\UsersDataType;
 use Biznes\DatabaseBundle\Entity\UsersAddresses;
 use Biznes\DatabaseBundle\Form\UsersAddressType;
 
+use Biznes\Utils\UserManager;
+
 class DefaultController extends Controller {
 
     /**
@@ -115,9 +117,9 @@ class DefaultController extends Controller {
     }
 
     /**
-     * @Route("/register/{referer}", name="register")
+     * @Route("/register/{referer}/{source}", name="register", requirements={"referer": "\d+"})
      */
-    public function registerAction(Request $request, $referer = null)
+    public function registerAction(Request $request, $referer = null, $source = null)
     {   
         // 1) build the form
         $user = new Users();
@@ -126,7 +128,9 @@ class DefaultController extends Controller {
         $form->handleRequest($request);
         
         if($this->register($user, $form, $referer)){
-            return $this->redirectToRoute('account_created_service');
+            if($source == null){
+                return $this->redirectToRoute('account_created_service');
+            }
         }
         
         return $this->render('BiznesServiceBundle:Default:register.html.twig', array(
@@ -135,9 +139,9 @@ class DefaultController extends Controller {
     }
     
     /**
-     * @Route("/shop/register/{referer}", name="register_shop")
+     * @Route("/shop/register/{referer}/{source}", name="register_shop", requirements={"referer": "\d+"})
      */
-    public function shopRegisterAction(Request $request, $referer = null)
+    public function shopRegisterAction(Request $request, $referer = null, $source = null)
     {   
         $cart = $this->get('cartManager');
         $cart->loadFromSession();
@@ -151,7 +155,12 @@ class DefaultController extends Controller {
         //$this->register($user, $form, $referer, 'shop');
         
         if($this->register($user, $form, $referer)){
-            return $this->redirectToRoute('account_created_shop');
+            if($source == null){
+                return $this->redirectToRoute('account_created_shop');
+            }
+            elseif($source == "checkout"){
+                return $this->redirectToRoute('checkout');
+            } 
         }
         
         return $this->render('BiznesShopBundle:Default:register.html.twig', array(
@@ -162,6 +171,7 @@ class DefaultController extends Controller {
     
     private function addPersonalData(UsersData $userData, $form){
         if ($form->isSubmitted() && $form->isValid()) {
+            /*
             $userData->setName1($form['name1']->getData());
             
             if(!empty($form['name2'])){
@@ -172,7 +182,10 @@ class DefaultController extends Controller {
                     ->setIdentityNumber($form['identityNumber']->getData())
                     ->setTelephone($form['telephone']->getData())
                     ->setLanguage($form['language']->getData());
-            
+            */
+            //HOW THIS IS WORKING WITHOUT SETTING PROPERTIES?
+            // THESE ONE WAS WORKING BEFORE BUT 
+            // CODE SIMILAR IN FUNCTION BELOW WASNT
             $userData->setIdUser($this->getUser());
             
             $em = $this->getDoctrine()->getManager(); 
@@ -187,14 +200,22 @@ class DefaultController extends Controller {
     
     private function addPersonalAddress(UsersAddresses $userAddress, $form){
         if ($form->isSubmitted() && $form->isValid()) {  
+            /*
             $userAddress->setCountry($form['country'])
                         ->setCity($form['city'])
                         ->setPostCode($form['postCode'])
-                        ->setUlica($form['ulica'])
+                        ->setStreet($form['street'])
                         ->setNrHouse($form['nrHouse']);
-            //if(!empty($form['nrFlat'])){
+            if(!empty($form['nrFlat'])){
                 $userAddress->setNrFlat($form['nrFlat']);
-            //}
+            }
+            */
+            //HOW THIS IS WORKING WITHOUT SETTING PROPERTIES?
+            //WHEN WAS IN THE FORM LIKE AS ABOVE, WASNT WORKING I DONT KNOW WHY
+            /*
+             * ERROR BEFORE:
+             * Catchable Fatal Error: Object of class Symfony\Component\Form\Form could not be converted to string
+             */
             $userAddress->setIdUser($this->getUser());
             
             $em = $this->getDoctrine()->getManager(); 
@@ -209,11 +230,20 @@ class DefaultController extends Controller {
     
     /**
      * @Route("/personalData", name="personalData")
+     * Adding and Editing PersonalData and PersonalAddress
      */
     public function personalDataAction(Request $request){
         // 1) build the form
-        $userData = new UsersData();
-        $form1 = $this->createForm(UsersDataType::class, $userData);
+        $user = $this->getUser();
+        $um = $this->get('userManager');
+        $um->loadDataFromUser($user);
+
+        $userData = $um->get('userData');
+        $userAddress = $um->get('userAddress');
+        
+        $form1 = $this->createForm(UsersDataType::class, $userData, array(
+            'userData' => $userData,
+        ));
         // 2) handle the submit (will only happen on POST)
         $form1->handleRequest($request);
         
@@ -221,8 +251,9 @@ class DefaultController extends Controller {
             return $this->redirectToRoute('personalDataInfo');
         }
         
-        $userAddress = new UsersAddresses();
-        $form2 = $this->createForm(UsersAddressType::class, $userAddress);
+        $form2 = $this->createForm(UsersAddressType::class, $userAddress, array(
+            'userAddress' => $userAddress,
+        ));
         $form2->handleRequest($request);
         
         if($this->addPersonalAddress($userAddress, $form2)){
@@ -234,5 +265,56 @@ class DefaultController extends Controller {
                 'address_form' => $form2->createView(),
         ));
     }
+    
+    /**
+     * @Route("/shop/personalData/{source}", name="personalData_shop")
+     * Adding and Editing PersonalData and PersonalAddress
+     */
+    public function shopPersonalDataAction(Request $request, $source = null){
+        $cart = $this->get('cartManager');
+        $cart->loadFromSession();
+        // 1) build the form
+        $user = $this->getUser();
+        $um = $this->get('userManager');
+        $um->loadDataFromUser($user);
+
+        $userData = $um->get('userData');
+        $userAddress = $um->get('userAddress');
+        
+        $form1 = $this->createForm(UsersDataType::class, $userData, array(
+            'userData' => $userData,
+        ));
+        // 2) handle the submit (will only happen on POST)
+        $form1->handleRequest($request);
+        
+        if($this->addPersonalData($userData, $form1)){
+            if($source == null){
+                return $this->redirectToRoute('shopPersonalDataInfo');
+            }
+            elseif($source == "checkout"){
+                return $this->redirectToRoute('checkout');
+            } 
+        }
+        
+        $form2 = $this->createForm(UsersAddressType::class, $userAddress, array(
+            'userAddress' => $userAddress,
+        ));
+        $form2->handleRequest($request);
+        
+        if($this->addPersonalAddress($userAddress, $form2)){
+            if($source == null){
+                return $this->redirectToRoute('shopPersonalDataInfo');
+            }
+            elseif($source == "checkout"){
+                return $this->redirectToRoute('checkout');
+            }
+        }
+        
+        return $this->render('BiznesShopBundle:Default:personalData.html.twig', array(
+                'cart' => $cart,
+                'data_form' => $form1->createView(),
+                'address_form' => $form2->createView(),
+        ));
+    }    
 
 }

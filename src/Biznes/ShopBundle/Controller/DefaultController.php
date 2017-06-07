@@ -23,24 +23,25 @@ class DefaultController extends Controller
         if ($referer != null) {
             $session->set('referer', $referer);
         }
+        
+        $user = $this->getUser();
+        $um = $this->get('userManager');
+        $um->loadDataFromUser($user);
 
         $em = $this->getDoctrine()->getManager();
         $products = $em->getRepository('BiznesDatabaseBundle:Products')
                 ->findAll();
         
-        $serializer = $this->get('serializer');
-        $response = $serializer->serialize($products,'json');
-        /*
-        $cart = Cart::getInstance();
-        $cart->loadFromSession();
-        */
+        $categories = $em->getRepository('BiznesDatabaseBundle:Categories')
+                ->findAll();
+                
         $cart = $this->get('cartManager');
         $cart->loadFromSession();
         return $this->render('BiznesShopBundle:Default:index.html.twig',
                 array(
                     'products' => $products,
-                    'cart' => $cart
-                
+                    'cart' => $cart,
+                    'categories' => $categories,
                 ));
     }
     
@@ -65,8 +66,6 @@ class DefaultController extends Controller
             $cart->loadFromSession();
             
             if(!empty($product)){
-                $serializer = $this->get('serializer');
-                $response = $serializer->serialize($product,'json');
                 
                 return $this->render('BiznesShopBundle:Default:product.html.twig',
                         array(
@@ -88,24 +87,21 @@ class DefaultController extends Controller
     
     /**
      * @Route("/cart", name="cart")
-     * @Method({"GET","HEAD"})
+     * @Method("GET")
      */
     public function showCartAction(){
         $cart = $this->get('cartManager');
         $cart->loadFromSession();
-        /*
-        $cart = Cart::getInstance();
-        $cart->loadFromSession();
-        */
+        
         return $this->render('BiznesShopBundle:Default:cart.html.twig',
                 array(
-                    'cart' => $cart
+                    'cart' => $cart,
                 )); 
 
     }
     
     /**
-     * @Route("/cart")
+     * @Route("/cart/add", name="cartAdd")
      * @Method("POST")
      */
     public function addToCartAction(Request $request){
@@ -115,91 +111,88 @@ class DefaultController extends Controller
         $em = $this->getDoctrine()->getManager();
         $product = $em->getRepository('BiznesDatabaseBundle:Products')
             ->findOneByIdProduct($data['idProduct']);
-        //$product2 = $em->getRepository('BiznesDatabaseBundle:Products')
-        //    ->findOneByIdProduct($data['idProduct']+1);
         
         $cart = $this->get('cartManager');
         $cart->loadFromSession();
-        /*
-        $cart = Cart::getInstance();
-        $cart->loadFromSession();
-         */
+
         $cart->addProduct($product, $data['desc']);
         
-        //$cart->addProduct($product2, $data['desc']);
-        //$cart->addProductByIdProduct($data['idProduct'], $data['desc']);
-        //$cart->saveToSession();
-        
-        //$serializer = $this->get('serializer');
-        //$response = $serializer->serialize($cart,'json');
-        
-        return $this->render('BiznesShopBundle:Default:cart.html.twig',
-                array(
-                    'cart' => $cart
-                ));   
+        return $this->redirectToRoute('cart'); 
         
     }
     
     /**
-     * @Route("/cart")
-     * @Method("DELETE")
+     * @Route("/cart/delete", name="cartDelete")
+     * @Method("POST")
      */
     public function removeFromCartAction(Request $request){
-        $data['idProduct'] = $request->get('idProduct');
-        /*
-        $cart = Cart::getInstance();
-        $cart->loadFromSession();
-        */
+        $idProduct = $request->get('idProduct');
         $cart = $this->get('cartManager');
         $cart->loadFromSession();
-        $cart->removeProductById($data['idProduct']);
+        $all = $request->get('all');
+        if($all == 'true'){
+            $cart->clearCart();
+            return $this->redirectToRoute('cart');
+        }
+        $cart->removeProductById($idProduct);
         
-        return $this->render('BiznesShopBundle:Default:cart.html.twig',
-                array(
-                    'cart' => $cart
-                )); 
+        return $this->redirectToRoute('cart');
     }
     
     /**
      * @Route("/shop/checkout", name="checkout")
+     * @Method({"GET"})
      */
     public function checkoutAction(){
-        /*
-        $cart = Cart::getInstance();
-        $cart->loadFromSession();
-        */
         $cart = $this->get('cartManager');
         $cart->loadFromSession();
         
-        $user = $this->getUser();
+        $um = $this->get('userManager');
+        $user = $um->loadDataFromUser($this->getUser());
+        
+        $userData = null;
+        if($um->userDataExists()){
+            $userData = $um->get('userData');
+        }
+        $userAddresss = null;
+        if($um->userAddressExists()){
+            $userAddresss = $um->get('userAddress');
+        }
         
         if ($user == null) $roles = array('Brak');
-        else $roles = $user->getRoles();
+        else $roles = $user->getRoles();        
         
-        //if(in_array('ROLE_USER', $roles)){
-            $response = '';
-        //}
+        $em = $this->getDoctrine()->getManager();
+        $realizationMethods = $em->getRepository('BiznesDatabaseBundle:RealizationMethods')
+                ->findAll();
+        
+        $paymentMethods = $em->getRepository('BiznesDatabaseBundle:PaymentMethods')
+                ->findAll();
         
         return $this->render('BiznesShopBundle:Default:checkout.html.twig',
                 array(
                     'roles' => $roles,
-                    'response' => $response,
                     'cart' => $cart,
+                    'userData' => $userData,
+                    'userAddress' => $userAddresss,
+                    'realizationMethods' => $realizationMethods,
+                    'paymentMethods' => $paymentMethods,
                 ));   
     }
+   
     
     /**
      * @Route("/confirm", name="confirm")
+     * @Method({"POST"})
      */
-    public function confirmAction(){
-        /*
-        $cart = Cart::getInstance();
+    public function confirmAction(Request $request){
+        $cart = $this->get('cartManager');
         $cart->loadFromSession();
-         */
         
         return $this->render('BiznesShopBundle:Default:confirm.html.twig',
                 array(
-
+                    'cart' => $cart,
+                    'req'   => $request,
                 ));   
     }
     
@@ -209,14 +202,23 @@ class DefaultController extends Controller
     public function createdAction(){ 
         $cart = $this->get('cartManager');
         $cart->loadFromSession();
-        /*
-        $cart = Cart::getInstance();
-        $cart->loadFromSession();
-         */
+
         return $this->render('BiznesShopBundle:Default:register_created.html.twig',
                 array(
                     'cart' => $cart,
                 ));  
+    }
+    
+    /**
+     * @Route("/shop/personalinfo", name="shopPersonalDataInfo")
+     */
+    public function personalInfoAction(){ 
+        $cart = $this->get('cartManager');
+        $cart->loadFromSession();
+        
+        return $this->render('BiznesShopBundle:Default:personalDataInfo.html.twig', array(
+            'cart' => $cart,
+        ));
     }
     
     

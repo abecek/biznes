@@ -6,15 +6,17 @@
 
 
 {% block container %}
+    <div class="row">
     <hr>
     {{ product.name }}
     <br>
     {{ product.price }}
     <hr>
-    <form method="POST" action="{{ url('cart') }}">
+    <form method="POST" action="{{ url('cartAdd') }}">
         <input type="hidden" name="idProduct" value="{{ product.idProduct }}"/>
         <input type="text" name="desc" placeholder="Opis"/>
         <input type="submit" value="Dodaj do koszyka"/>
     </form>
     <a href="{{ url('cart') }}">Koszyk!</a>
+    </div>
 {% endblock %}

@@ -19,17 +19,10 @@ use Symfony\Component\Serializer\Encoder\JsonEncoder;
 
 
 class CartManager {
-    private static $instance = null;
     private $priceOverall = 0;
     private $products = array();
     private $count = 0;
     
-    
-    public static function getInstance() {         
-        if (self::$instance === null)
-            self::$instance = new self(); 
-        return self::$instance;  
-    }
     
     public function countPriceOverall(){
         $this->priceOverall = 0;
@@ -56,12 +49,13 @@ class CartManager {
         return $this;
     }
     
-    public function removeProductById($id){        
-        if(in_array($id, $this->products)){
+    public function removeProductById($id){
+        if(is_numeric($id)){
             unset($this->products[$id]);
             $this->countPriceOverall();
             $this->count -= 1;
-
+            $this->saveToSession();
+            
             return true;
         }
         else{

@@ -77,11 +77,13 @@ CREATE TABLE products(
 	version varchar(3) not null,
 	rating numeric(2,1),
 	id_category tinyint unsigned not null,
-	id_program	tinyint unsigned not null
+	id_program	tinyint unsigned not null,
+	id_realization_method tinyint unsigned DEFAULT 0,
 );
 
 ALTER TABLE `products`
-MODIFY `id_product` smallint unsigned AUTO_INCREMENT PRIMARY KEY;
+MODIFY `id_product` smallint unsigned AUTO_INCREMENT PRIMARY KEY,
+ADD CONSTRAINT `products_id_realization_fk1` FOREIGN KEY (`id_realization_method`) REFERENCES `realization_methods` (`id_realization_method`);
 
 
 
@@ -159,8 +161,7 @@ MODIFY `id_realization_method` tinyint unsigned AUTO_INCREMENT PRIMARY KEY;
 CREATE TABLE carts(
 	id_cart int(11) unsigned NOT NULL,
     id_order int(11) unsigned not null,
-	id_product smallint unsigned not null,
-	id_realization_method tinyint unsigned NOT NULL
+	id_product smallint unsigned not null
 );
 
 ALTER TABLE `carts`
@@ -168,8 +169,7 @@ MODIFY `id_cart` int(11) unsigned AUTO_INCREMENT PRIMARY KEY;
 
 ALTER TABLE `carts`
 ADD CONSTRAINT `carts_id_user_fk1` FOREIGN KEY (`id_order`) REFERENCES `orders` (`id_order`) ON DELETE CASCADE,
-ADD CONSTRAINT `carts_id_state_fk1` FOREIGN KEY (`id_product`) REFERENCES `products` (`id_product`),
-ADD CONSTRAINT `carts_id_payment_fk1` FOREIGN KEY (`id_realization_method`) REFERENCES `realization_methods` (`id_realization_method`);
+ADD CONSTRAINT `carts_id_state_fk1` FOREIGN KEY (`id_product`) REFERENCES `products` (`id_product`);
 
 
 

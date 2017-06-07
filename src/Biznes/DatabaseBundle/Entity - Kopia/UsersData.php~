@@ -44,7 +44,7 @@ class UsersData implements \Serializable
      *      maxMessage = "Second name is to long."
      *      )
      */
-    private $name2;
+    private $name2 = null;
 
     /**
      * @ORM\Column(name="surname")
@@ -60,6 +60,7 @@ class UsersData implements \Serializable
 
     /**
      * @ORM\Column(name="identity_number", type="string", length=11)
+     * @Assert\NotBlank()
      * @Assert\Length(
      *      min = 11,
      *      max = 11

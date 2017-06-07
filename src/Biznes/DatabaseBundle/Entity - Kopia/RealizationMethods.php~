@@ -10,14 +10,15 @@ use Doctrine\ORM\Mapping as ORM;
 class RealizationMethods
 {
     /**
-     * @var boolean
-     */
-    private $idRealizationMethod;
-    
-    /**
      * @var string
      */
     private $name;
+
+    /**
+     * @var boolean
+     */
+    private $idRealizationMethod;
+
 
     /**
      * Set name

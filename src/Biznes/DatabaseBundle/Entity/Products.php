@@ -1,14 +1,14 @@
 <?php
 
 namespace Biznes\DatabaseBundle\Entity;
-use Doctrine\ORM\Mapping as ORM;
 
+use Doctrine\ORM\Mapping as ORM;
 /**
  * Products
  * @ORM\Table(name="products")
  * @ORM\Entity(repositoryClass="Biznes\DatabaseBundle\Repository\ProductsRepository")
  */
-class Products
+class Products implements \Serializable
 {
     /**
      * @var string
@@ -41,6 +41,11 @@ class Products
     private $idProduct;
 
     /**
+     * @var \Biznes\DatabaseBundle\Entity\RealizationMethods
+     */
+    private $idRealizationMethod;
+
+    /**
      * @var \Biznes\DatabaseBundle\Entity\Categories
      */
     private $idCategory;
@@ -55,6 +60,7 @@ class Products
      * Set name
      *
      * @param string $name
+     *
      * @return Products
      */
     public function setName($name)
@@ -67,7 +73,7 @@ class Products
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -78,6 +84,7 @@ class Products
      * Set description
      *
      * @param string $description
+     *
      * @return Products
      */
     public function setDescription($description)
@@ -90,7 +97,7 @@ class Products
     /**
      * Get description
      *
-     * @return string 
+     * @return string
      */
     public function getDescription()
     {
@@ -101,6 +108,7 @@ class Products
      * Set price
      *
      * @param string $price
+     *
      * @return Products
      */
     public function setPrice($price)
@@ -113,7 +121,7 @@ class Products
     /**
      * Get price
      *
-     * @return string 
+     * @return string
      */
     public function getPrice()
     {
@@ -124,6 +132,7 @@ class Products
      * Set version
      *
      * @param string $version
+     *
      * @return Products
      */
     public function setVersion($version)
@@ -136,7 +145,7 @@ class Products
     /**
      * Get version
      *
-     * @return string 
+     * @return string
      */
     public function getVersion()
     {
@@ -147,6 +156,7 @@ class Products
      * Set rating
      *
      * @param string $rating
+     *
      * @return Products
      */
     public function setRating($rating)
@@ -159,7 +169,7 @@ class Products
     /**
      * Get rating
      *
-     * @return string 
+     * @return string
      */
     public function getRating()
     {
@@ -169,7 +179,7 @@ class Products
     /**
      * Get idProduct
      *
-     * @return integer 
+     * @return integer
      */
     public function getIdProduct()
     {
@@ -177,9 +187,34 @@ class Products
     }
 
     /**
+     * Set idRealizationMethod
+     *
+     * @param \Biznes\DatabaseBundle\Entity\RealizationMethods $idRealizationMethod
+     *
+     * @return Products
+     */
+    public function setIdRealizationMethod(\Biznes\DatabaseBundle\Entity\RealizationMethods $idRealizationMethod = null)
+    {
+        $this->idRealizationMethod = $idRealizationMethod;
+
+        return $this;
+    }
+
+    /**
+     * Get idRealizationMethod
+     *
+     * @return \Biznes\DatabaseBundle\Entity\RealizationMethods
+     */
+    public function getIdRealizationMethod()
+    {
+        return $this->idRealizationMethod;
+    }
+
+    /**
      * Set idCategory
      *
      * @param \Biznes\DatabaseBundle\Entity\Categories $idCategory
+     *
      * @return Products
      */
     public function setIdCategory(\Biznes\DatabaseBundle\Entity\Categories $idCategory = null)
@@ -192,7 +227,7 @@ class Products
     /**
      * Get idCategory
      *
-     * @return \Biznes\DatabaseBundle\Entity\Categories 
+     * @return \Biznes\DatabaseBundle\Entity\Categories
      */
     public function getIdCategory()
     {
@@ -203,6 +238,7 @@ class Products
      * Set idProgram
      *
      * @param \Biznes\DatabaseBundle\Entity\Programs $idProgram
+     *
      * @return Products
      */
     public function setIdProgram(\Biznes\DatabaseBundle\Entity\Programs $idProgram = null)
@@ -215,12 +251,47 @@ class Products
     /**
      * Get idProgram
      *
-     * @return \Biznes\DatabaseBundle\Entity\Programs 
+     * @return \Biznes\DatabaseBundle\Entity\Programs
      */
     public function getIdProgram()
     {
         return $this->idProgram;
     }
     
+    /** @see \Serializable::serialize() */
+    public function serialize()
+    {
+        return serialize(array(
+            $this->idProduct,
+            $this->name,
+            $this->description,
+            $this->price,
+            $this->version,
+            $this->rating,
+            $this->idCategory,
+            $this->idProduct,
+            $this->idRealizationMethod,
+            // see section on salt below
+            // $this->salt,
+        ));
+    }
 
+    /** @see \Serializable::unserialize() */
+    public function unserialize($serialized)
+    {
+        list (
+            $this->idProduct,
+            $this->name,
+            $this->description,
+            $this->price,
+            $this->version,
+            $this->rating,
+            $this->idCategory,
+            $this->idProduct,
+            $this->idRealizationMethod,
+            // see section on salt below
+            // $this->salt
+        ) = unserialize($serialized);
+    }
 }
+

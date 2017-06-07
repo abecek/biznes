@@ -10,17 +10,12 @@ class Carts
     /**
      * @var integer
      */
-    private $idOrder;
-
+    private $idCart;
+    
     /**
      * @var integer
      */
-    private $idCart;
-
-    /**
-     * @var \Biznes\DatabaseBundle\Entity\RealizationMethods
-     */
-    private $idRealizationMethod;
+    private $idOrder;
 
     /**
      * @var \Biznes\DatabaseBundle\Entity\Products
@@ -60,30 +55,6 @@ class Carts
     public function getIdCart()
     {
         return $this->idCart;
-    }
-
-    /**
-     * Set idRealizationMethod
-     *
-     * @param \Biznes\DatabaseBundle\Entity\RealizationMethods $idRealizationMethod
-     *
-     * @return Carts
-     */
-    public function setIdRealizationMethod(\Biznes\DatabaseBundle\Entity\RealizationMethods $idRealizationMethod = null)
-    {
-        $this->idRealizationMethod = $idRealizationMethod;
-
-        return $this;
-    }
-
-    /**
-     * Get idRealizationMethod
-     *
-     * @return \Biznes\DatabaseBundle\Entity\RealizationMethods
-     */
-    public function getIdRealizationMethod()
-    {
-        return $this->idRealizationMethod;
     }
 
     /**

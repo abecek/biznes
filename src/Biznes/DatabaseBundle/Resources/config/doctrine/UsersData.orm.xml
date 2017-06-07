@@ -23,7 +23,7 @@
         <option name="fixed"/>
       </options>
     </field>
-    <field name="identityNumber" type="string" column="identity_number" length="11" nullable="false">
+    <field name="identityNumber" type="string" column="identity_number" length="11" nullable="true">
       <options>
         <option name="fixed">1</option>
       </options>

@@ -52,6 +52,9 @@
                             <li>
                                 <a href="{{ url('cart') }}">Cart : {{ cart.count }}</a>
                             </li>
+                            <li>
+                                <a href="{{ url('checkout') }}">Checkout </a>
+                            </li>
                         {% if is_granted('ROLE_USER') %}
                             <li>
                                 <a href="{{ url('logout') }}"> Logout</a>
@@ -78,9 +81,11 @@
                 <div class="col-md-3">
                     <p class="lead">Shop Name</p>
                     <div class="list-group">
-                        <a href="#" class="list-group-item">Category 1</a>
-                        <a href="#" class="list-group-item">Category 2</a>
-                        <a href="#" class="list-group-item">Category 3</a>
+                        {% if categories is defined %}
+                            {% for category in categories %}
+                                <a href="#" class="list-group-item">{{ category.name }}</a>
+                            {% endfor %}
+                        {% endif %}
                     </div>
                 </div>
 
@@ -89,11 +94,10 @@
 
                     {% endblock %}
 
-                    <div class="row">
-                        {% block container %}
+ 
+                    {% block container %}
 
-                        {% endblock %}
-                    </div>
+                    {% endblock %}
 
                 </div>
 

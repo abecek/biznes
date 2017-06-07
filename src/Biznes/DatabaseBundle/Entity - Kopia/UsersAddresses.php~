@@ -2,6 +2,8 @@
 
 namespace Biznes\DatabaseBundle\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
+
 /**
  * UsersAddresses
  */
@@ -10,7 +12,7 @@ class UsersAddresses
     /**
      * @var string
      */
-    private $street;
+    private $ulica;
 
     /**
      * @var string
@@ -49,34 +51,32 @@ class UsersAddresses
 
 
     /**
-     * Set street
+     * Set ulica
      *
-     * @param string $street
-     *
+     * @param string $ulica
      * @return UsersAddresses
      */
-    public function setStreet($street)
+    public function setUlica($ulica)
     {
-        $this->street = $street;
+        $this->ulica = $ulica;
 
         return $this;
     }
 
     /**
-     * Get street
+     * Get ulica
      *
-     * @return string
+     * @return string 
      */
-    public function getStreet()
+    public function getUlica()
     {
-        return $this->street;
+        return $this->ulica;
     }
 
     /**
      * Set nrHouse
      *
      * @param string $nrHouse
-     *
      * @return UsersAddresses
      */
     public function setNrHouse($nrHouse)
@@ -89,7 +89,7 @@ class UsersAddresses
     /**
      * Get nrHouse
      *
-     * @return string
+     * @return string 
      */
     public function getNrHouse()
     {
@@ -100,7 +100,6 @@ class UsersAddresses
      * Set nrFlat
      *
      * @param string $nrFlat
-     *
      * @return UsersAddresses
      */
     public function setNrFlat($nrFlat)
@@ -113,7 +112,7 @@ class UsersAddresses
     /**
      * Get nrFlat
      *
-     * @return string
+     * @return string 
      */
     public function getNrFlat()
     {
@@ -124,7 +123,6 @@ class UsersAddresses
      * Set city
      *
      * @param string $city
-     *
      * @return UsersAddresses
      */
     public function setCity($city)
@@ -137,7 +135,7 @@ class UsersAddresses
     /**
      * Get city
      *
-     * @return string
+     * @return string 
      */
     public function getCity()
     {
@@ -148,7 +146,6 @@ class UsersAddresses
      * Set postCode
      *
      * @param string $postCode
-     *
      * @return UsersAddresses
      */
     public function setPostCode($postCode)
@@ -161,7 +158,7 @@ class UsersAddresses
     /**
      * Get postCode
      *
-     * @return string
+     * @return string 
      */
     public function getPostCode()
     {
@@ -172,7 +169,6 @@ class UsersAddresses
      * Set country
      *
      * @param string $country
-     *
      * @return UsersAddresses
      */
     public function setCountry($country)
@@ -185,7 +181,7 @@ class UsersAddresses
     /**
      * Get country
      *
-     * @return string
+     * @return string 
      */
     public function getCountry()
     {
@@ -195,7 +191,7 @@ class UsersAddresses
     /**
      * Get idUserAddress
      *
-     * @return integer
+     * @return integer 
      */
     public function getIdUserAddress()
     {
@@ -206,7 +202,6 @@ class UsersAddresses
      * Set idUser
      *
      * @param \Biznes\DatabaseBundle\Entity\Users $idUser
-     *
      * @return UsersAddresses
      */
     public function setIdUser(\Biznes\DatabaseBundle\Entity\Users $idUser = null)
@@ -219,7 +214,7 @@ class UsersAddresses
     /**
      * Get idUser
      *
-     * @return \Biznes\DatabaseBundle\Entity\Users
+     * @return \Biznes\DatabaseBundle\Entity\Users 
      */
     public function getIdUser()
     {

@@ -28,13 +28,11 @@ class UsersAddressType extends AbstractType{
         $builder->add('country', TextType::class)
                 ->add('city', TextType::class)
                 ->add('postCode', TextType::class)
-                ->add('ulica', TextType::class)
+                ->add('street', TextType::class)
                 ->add('nrHouse', TextType::class)
-                
                 ->add('nrFlat', TextType::class, array(
                     'required'   => false,
                 ))  
-                
                 ->add('save', SubmitType::class);
     }
     
@@ -42,6 +40,7 @@ class UsersAddressType extends AbstractType{
         $resolver->setDefaults(array(
             'data_class' => UsersAddresses::class,
         ));
+        $resolver->setRequired('userAddress');
     }
     
 }

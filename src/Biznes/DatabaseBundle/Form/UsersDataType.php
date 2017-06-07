@@ -23,9 +23,11 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
  */
 class UsersDataType extends AbstractType{
 
-    public function buildForm(FormBuilderInterface $builder, array $options) {
+    public function buildForm(FormBuilderInterface $builder, array $options) {      
         $builder->add('name1', TextType::class)
-                ->add('name2', TextType::class)
+                ->add('name2', TextType::class, array(
+                    'required'   => false,
+                ))
                 ->add('surname', TextType::class)
                 ->add('identityNumber', TextType::class, array(
                     'required'   => false,
@@ -35,7 +37,7 @@ class UsersDataType extends AbstractType{
                 ->add('language', ChoiceType::class, array(
                     'choices' => array(
                         'Polish' => 'pl',
-                        'English' => 'em'
+                        'English' => 'en'
                     ),
                     'placeholder' => 'Choice your language',
                 ))
@@ -47,6 +49,7 @@ class UsersDataType extends AbstractType{
         $resolver->setDefaults(array(
             'data_class' => UsersData::class,
         ));
+        $resolver->setRequired('userData');
     }
     
 }

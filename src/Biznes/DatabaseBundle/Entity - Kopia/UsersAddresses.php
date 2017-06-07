@@ -2,58 +2,45 @@
 
 namespace Biznes\DatabaseBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-use Doctrine\ORM\EntityRepository;
-
-use Symfony\Component\Validator\Constraints as Assert;
-
 /**
  * UsersAddresses
- * @ORM\Entity
- * @ORM\Table(name="users_addresses")
- * @ORM\Entity(repositoryClass="Biznes\DatabaseBundle\Repository\UsersAddressesRepository")
  */
-class UsersAddresses implements \Serializable
+class UsersAddresses
 {
     /**
-     * @var integer
+     * @var string
      */
-    private $idUserAddress;
-    
-    /**
-     * @ORM\Column(name="ulica")
-     * @Assert\NotBlank()
-     */
-    private $ulica;
+    private $street;
 
     /**
-     * @ORM\Column(name="nr_house")
-     * @Assert\NotBlank()
+     * @var string
      */
     private $nrHouse;
 
     /**
-     * @ORM\Column(name="nr_flat")
+     * @var string
      */
     private $nrFlat;
 
     /**
-     * @ORM\Column(name="city")
-     * @Assert\NotBlank()
+     * @var string
      */
     private $city;
 
     /**
-     * @ORM\Column(name="post_code")
+     * @var string
      */
     private $postCode;
 
     /**
-     * @ORM\Column(name="country")
-     * @Assert\NotBlank()
+     * @var string
      */
     private $country;
 
+    /**
+     * @var integer
+     */
+    private $idUserAddress;
 
     /**
      * @var \Biznes\DatabaseBundle\Entity\Users
@@ -62,32 +49,34 @@ class UsersAddresses implements \Serializable
 
 
     /**
-     * Set ulica
+     * Set street
      *
-     * @param string $ulica
+     * @param string $street
+     *
      * @return UsersAddresses
      */
-    public function setUlica($ulica)
+    public function setStreet($street)
     {
-        $this->ulica = $ulica;
+        $this->street = $street;
 
         return $this;
     }
 
     /**
-     * Get steet
+     * Get street
      *
-     * @return string 
+     * @return string
      */
-    public function getUlica()
+    public function getStreet()
     {
-        return $this->ulica;
+        return $this->street;
     }
 
     /**
      * Set nrHouse
      *
      * @param string $nrHouse
+     *
      * @return UsersAddresses
      */
     public function setNrHouse($nrHouse)
@@ -100,7 +89,7 @@ class UsersAddresses implements \Serializable
     /**
      * Get nrHouse
      *
-     * @return string 
+     * @return string
      */
     public function getNrHouse()
     {
@@ -111,6 +100,7 @@ class UsersAddresses implements \Serializable
      * Set nrFlat
      *
      * @param string $nrFlat
+     *
      * @return UsersAddresses
      */
     public function setNrFlat($nrFlat)
@@ -123,7 +113,7 @@ class UsersAddresses implements \Serializable
     /**
      * Get nrFlat
      *
-     * @return string 
+     * @return string
      */
     public function getNrFlat()
     {
@@ -134,6 +124,7 @@ class UsersAddresses implements \Serializable
      * Set city
      *
      * @param string $city
+     *
      * @return UsersAddresses
      */
     public function setCity($city)
@@ -146,7 +137,7 @@ class UsersAddresses implements \Serializable
     /**
      * Get city
      *
-     * @return string 
+     * @return string
      */
     public function getCity()
     {
@@ -157,6 +148,7 @@ class UsersAddresses implements \Serializable
      * Set postCode
      *
      * @param string $postCode
+     *
      * @return UsersAddresses
      */
     public function setPostCode($postCode)
@@ -169,7 +161,7 @@ class UsersAddresses implements \Serializable
     /**
      * Get postCode
      *
-     * @return string 
+     * @return string
      */
     public function getPostCode()
     {
@@ -180,6 +172,7 @@ class UsersAddresses implements \Serializable
      * Set country
      *
      * @param string $country
+     *
      * @return UsersAddresses
      */
     public function setCountry($country)
@@ -192,7 +185,7 @@ class UsersAddresses implements \Serializable
     /**
      * Get country
      *
-     * @return string 
+     * @return string
      */
     public function getCountry()
     {
@@ -202,7 +195,7 @@ class UsersAddresses implements \Serializable
     /**
      * Get idUserAddress
      *
-     * @return integer 
+     * @return integer
      */
     public function getIdUserAddress()
     {
@@ -213,6 +206,7 @@ class UsersAddresses implements \Serializable
      * Set idUser
      *
      * @param \Biznes\DatabaseBundle\Entity\Users $idUser
+     *
      * @return UsersAddresses
      */
     public function setIdUser(\Biznes\DatabaseBundle\Entity\Users $idUser = null)
@@ -225,44 +219,11 @@ class UsersAddresses implements \Serializable
     /**
      * Get idUser
      *
-     * @return \Biznes\DatabaseBundle\Entity\Users 
+     * @return \Biznes\DatabaseBundle\Entity\Users
      */
     public function getIdUser()
     {
         return $this->idUser;
     }
-    
-    /** @see \Serializable::serialize() */
-    public function serialize()
-    {
-        return serialize(array(
-            $this->idUser,
-            $this->idUserAddress,
-            $this->city,
-            $this->country,
-            $this->ulica,
-            $this->nrFlat,
-            $this->nrHouse,
-            $this->postCode,
-            // see section on salt below
-            // $this->salt,
-        ));
-    }
-
-    /** @see \Serializable::unserialize() */
-    public function unserialize($serialized)
-    {
-        list (
-            $this->idUser,
-            $this->idUserAddress,
-            $this->city,
-            $this->country,
-            $this->ulica,
-            $this->nrFlat,
-            $this->nrHouse,
-            $this->postCode,
-            // see section on salt below
-            // $this->salt
-        ) = unserialize($serialized);
-    }
 }
+

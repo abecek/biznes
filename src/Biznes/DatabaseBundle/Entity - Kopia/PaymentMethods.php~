@@ -5,25 +5,26 @@ namespace Biznes\DatabaseBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * RealizationMethods
+ * PaymentMethods
  */
-class RealizationMethods
+class PaymentMethods
 {
-    /**
-     * @var boolean
-     */
-    private $idRealizationMethod;
-    
     /**
      * @var string
      */
     private $name;
 
     /**
+     * @var boolean
+     */
+    private $idPaymentMethod;
+
+
+    /**
      * Set name
      *
      * @param string $name
-     * @return RealizationMethods
+     * @return PaymentMethods
      */
     public function setName($name)
     {
@@ -43,12 +44,12 @@ class RealizationMethods
     }
 
     /**
-     * Get idRealizationMethod
+     * Get idPaymentMethod
      *
      * @return boolean 
      */
-    public function getIdRealizationMethod()
+    public function getIdPaymentMethod()
     {
-        return $this->idRealizationMethod;
+        return $this->idPaymentMethod;
     }
 }
