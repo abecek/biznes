@@ -263,4 +263,3 @@ class Products implements \Serializable
         ) = unserialize($serialized);
     }
 }
-

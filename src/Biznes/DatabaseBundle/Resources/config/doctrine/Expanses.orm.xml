@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Biznes\DatabaseBundle\Entity\Expanses" table="expanses">
+    <indexes>
+      <index name="expanse_id_user_fk1" columns="id_user"/>
+    </indexes>
+    <id name="idExpanse" type="integer" column="id_expanse">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="dateExpanse" type="datetime" column="date_expanse" nullable="false"/>
+    <field name="value" type="decimal" column="value" precision="6" scale="2" nullable="false"/>
+    <field name="state" type="string" column="state" length="20" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <many-to-one field="idUser" target-entity="Users" fetch="LAZY">
+      <join-columns>
+        <join-column name="id_user" referenced-column-name="id_user"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

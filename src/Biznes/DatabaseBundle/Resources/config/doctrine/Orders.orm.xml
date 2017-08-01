@@ -12,7 +12,7 @@
     </id>
     <field name="dateOrder" type="datetime" column="date_order" nullable="false"/>
     <field name="priceOverall" type="decimal" column="price_overall" precision="6" scale="2" nullable="false"/>
-    <field name="idSponsor" type="integer" column="id_sponsor" nullable="false">
+    <field name="idSponsor" type="integer" column="id_sponsor" nullable="true">
       <options>
         <option name="unsigned">1</option>
       </options>

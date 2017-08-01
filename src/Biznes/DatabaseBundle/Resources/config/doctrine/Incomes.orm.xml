@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Biznes\DatabaseBundle\Entity\Incomes" table="incomes">
+    <indexes>
+      <index name="incomes_id_user_fk1" columns="id_user"/>
+      <index name="incomes_id_userFrom_fk1" columns="id_userFrom"/>
+      <index name="incomes_id_product_fk1" columns="id_product"/>
+      <index name="incomes_id_orders_fk1" columns="id_order"/>
+    </indexes>
+    <id name="idIncome" type="integer" column="id_income">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="dateIncome" type="datetime" column="date_income" nullable="false"/>
+    <field name="value" type="decimal" column="value" precision="6" scale="2" nullable="false"/>
+    <field name="state" type="string" column="state" length="20" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <many-to-one field="idOrder" target-entity="Orders" fetch="LAZY">
+      <join-columns>
+        <join-column name="id_order" referenced-column-name="id_order"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="idProduct" target-entity="Products" fetch="LAZY">
+      <join-columns>
+        <join-column name="id_product" referenced-column-name="id_product"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="idUserfrom" target-entity="Users" fetch="LAZY">
+      <join-columns>
+        <join-column name="id_userFrom" referenced-column-name="id_user"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="idUser" target-entity="Users" fetch="LAZY">
+      <join-columns>
+        <join-column name="id_user" referenced-column-name="id_user"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

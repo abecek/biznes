@@ -5,12 +5,12 @@ namespace Biznes\DatabaseBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * RealizationMethods
+ * @ORM\Entity(repositoryClass="Biznes\DatabaseBundle\Repository\RMRepository")
  */
 class RealizationMethods
 {
     /**
-     * @var boolean
+     * @var integer
      */
     private $idRealizationMethod;
     
@@ -45,7 +45,7 @@ class RealizationMethods
     /**
      * Get idRealizationMethod
      *
-     * @return boolean 
+     * @return integer 
      */
     public function getIdRealizationMethod()
     {

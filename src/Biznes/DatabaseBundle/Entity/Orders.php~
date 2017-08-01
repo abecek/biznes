@@ -6,14 +6,11 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Orders
+ * @ORM\Table(name="orders")
+ * @ORM\Entity(repositoryClass="Biznes\DatabaseBundle\Repository\OrdersRepository")
  */
 class Orders
 {
-    /**
-     * @var integer
-     */
-    private $idOrder;
-    
     /**
      * @var \DateTime
      */
@@ -28,6 +25,16 @@ class Orders
      * @var integer
      */
     private $idSponsor;
+
+    /**
+     * @var integer
+     */
+    private $idOrder;
+
+    /**
+     * @var \Biznes\DatabaseBundle\Entity\RealizationMethods
+     */
+    private $idRealizationMethod;
 
     /**
      * @var \Biznes\DatabaseBundle\Entity\PaymentMethods
@@ -49,6 +56,7 @@ class Orders
      * Set dateOrder
      *
      * @param \DateTime $dateOrder
+     *
      * @return Orders
      */
     public function setDateOrder($dateOrder)
@@ -61,7 +69,7 @@ class Orders
     /**
      * Get dateOrder
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getDateOrder()
     {
@@ -72,6 +80,7 @@ class Orders
      * Set priceOverall
      *
      * @param string $priceOverall
+     *
      * @return Orders
      */
     public function setPriceOverall($priceOverall)
@@ -84,7 +93,7 @@ class Orders
     /**
      * Get priceOverall
      *
-     * @return string 
+     * @return string
      */
     public function getPriceOverall()
     {
@@ -95,6 +104,7 @@ class Orders
      * Set idSponsor
      *
      * @param integer $idSponsor
+     *
      * @return Orders
      */
     public function setIdSponsor($idSponsor)
@@ -107,7 +117,7 @@ class Orders
     /**
      * Get idSponsor
      *
-     * @return integer 
+     * @return integer
      */
     public function getIdSponsor()
     {
@@ -117,7 +127,7 @@ class Orders
     /**
      * Get idOrder
      *
-     * @return integer 
+     * @return integer
      */
     public function getIdOrder()
     {
@@ -125,9 +135,34 @@ class Orders
     }
 
     /**
+     * Set idRealizationMethod
+     *
+     * @param \Biznes\DatabaseBundle\Entity\RealizationMethods $idRealizationMethod
+     *
+     * @return Orders
+     */
+    public function setIdRealizationMethod(\Biznes\DatabaseBundle\Entity\RealizationMethods $idRealizationMethod = null)
+    {
+        $this->idRealizationMethod = $idRealizationMethod;
+
+        return $this;
+    }
+
+    /**
+     * Get idRealizationMethod
+     *
+     * @return \Biznes\DatabaseBundle\Entity\RealizationMethods
+     */
+    public function getIdRealizationMethod()
+    {
+        return $this->idRealizationMethod;
+    }
+
+    /**
      * Set idPaymentMethod
      *
      * @param \Biznes\DatabaseBundle\Entity\PaymentMethods $idPaymentMethod
+     *
      * @return Orders
      */
     public function setIdPaymentMethod(\Biznes\DatabaseBundle\Entity\PaymentMethods $idPaymentMethod = null)
@@ -140,7 +175,7 @@ class Orders
     /**
      * Get idPaymentMethod
      *
-     * @return \Biznes\DatabaseBundle\Entity\PaymentMethods 
+     * @return \Biznes\DatabaseBundle\Entity\PaymentMethods
      */
     public function getIdPaymentMethod()
     {
@@ -151,6 +186,7 @@ class Orders
      * Set idState
      *
      * @param \Biznes\DatabaseBundle\Entity\States $idState
+     *
      * @return Orders
      */
     public function setIdState(\Biznes\DatabaseBundle\Entity\States $idState = null)
@@ -163,7 +199,7 @@ class Orders
     /**
      * Get idState
      *
-     * @return \Biznes\DatabaseBundle\Entity\States 
+     * @return \Biznes\DatabaseBundle\Entity\States
      */
     public function getIdState()
     {
@@ -174,6 +210,7 @@ class Orders
      * Set idUser
      *
      * @param \Biznes\DatabaseBundle\Entity\Users $idUser
+     *
      * @return Orders
      */
     public function setIdUser(\Biznes\DatabaseBundle\Entity\Users $idUser = null)
@@ -186,10 +223,11 @@ class Orders
     /**
      * Get idUser
      *
-     * @return \Biznes\DatabaseBundle\Entity\Users 
+     * @return \Biznes\DatabaseBundle\Entity\Users
      */
     public function getIdUser()
     {
         return $this->idUser;
     }
 }
+

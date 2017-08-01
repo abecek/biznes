@@ -230,4 +230,3 @@ class Orders
         return $this->idUser;
     }
 }
-

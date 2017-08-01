@@ -15,7 +15,7 @@ class PaymentMethods
     private $name;
 
     /**
-     * @var boolean
+     * @var integer
      */
     private $idPaymentMethod;
 
@@ -46,7 +46,7 @@ class PaymentMethods
     /**
      * Get idPaymentMethod
      *
-     * @return boolean 
+     * @return integer 
      */
     public function getIdPaymentMethod()
     {

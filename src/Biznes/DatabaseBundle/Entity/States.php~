@@ -15,7 +15,7 @@ class States
     private $name;
 
     /**
-     * @var boolean
+     * @var integer
      */
     private $idState;
 
@@ -46,7 +46,7 @@ class States
     /**
      * Get idState
      *
-     * @return boolean 
+     * @return integer 
      */
     public function getIdState()
     {
