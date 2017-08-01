@@ -8,14 +8,14 @@
     <id name="idCart" type="integer" column="id_cart">
       <generator strategy="IDENTITY"/>
     </id>
-    <field name="idOrder" type="integer" column="id_order" nullable="false">
-      <options>
-        <option name="unsigned">1</option>
-      </options>
-    </field>
     <many-to-one field="idProduct" target-entity="Products" fetch="LAZY">
       <join-columns>
         <join-column name="id_product" referenced-column-name="id_product"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="idOrder" target-entity="Orders" fetch="LAZY">
+      <join-columns>
+        <join-column name="id_order" referenced-column-name="id_order"/>
       </join-columns>
     </many-to-one>
   </entity>

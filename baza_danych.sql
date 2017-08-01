@@ -6,7 +6,8 @@ CREATE TABLE users(
     date_register datetime not null,
     gender char(1) not null,
     id_sponsor int(11) unsigned DEFAULT 0,
-    rank tinyint(1) default 0
+    rank tinyint(1) default 0,
+	is_active tinyint(1) default 0
 );
 
 ALTER TABLE `users`
@@ -21,7 +22,6 @@ ADD UNIQUE KEY `email_UNIQUE` (`email`);
   
 ALTER TABLE `users`
 ADD CONSTRAINT `users_id_sponsor_fk1` FOREIGN KEY (`id_sponsor`) REFERENCES `users` (`id_user`);
-
 
 
 CREATE TABLE users_data(
@@ -44,7 +44,6 @@ ADD UNIQUE KEY `identity_number_UNIQUE` (`identity_number`);
   
 ALTER TABLE `users_data`
 ADD CONSTRAINT `users_data_id_user_fk1` FOREIGN KEY (`id_user`) REFERENCES `users` (`id_user`) ON DELETE CASCADE;
-
 
 
 CREATE TABLE users_addresses(
@@ -78,12 +77,10 @@ CREATE TABLE products(
 	rating numeric(2,1),
 	id_category tinyint unsigned not null,
 	id_program	tinyint unsigned not null,
-	id_realization_method tinyint unsigned DEFAULT 0,
 );
 
 ALTER TABLE `products`
-MODIFY `id_product` smallint unsigned AUTO_INCREMENT PRIMARY KEY,
-ADD CONSTRAINT `products_id_realization_fk1` FOREIGN KEY (`id_realization_method`) REFERENCES `realization_methods` (`id_realization_method`);
+MODIFY `id_product` smallint unsigned AUTO_INCREMENT PRIMARY KEY;
 
 
 
@@ -118,8 +115,9 @@ CREATE TABLE orders(
 	price_overall numeric(6,2) not null,
 	id_user int(11) unsigned not null,
 	id_state tinyint unsigned not null,
-	id_payment_method tinyint unsigned not null,
-	id_sponsor int(11) unsigned not null
+	id_payment_method tinyint(3) unsigned not null,
+	id_sponsor int(11) unsigned not null,
+	id_realization_method tinyint(3) unsigned not null,
 );
 
 ALTER TABLE `orders`
@@ -144,7 +142,8 @@ MODIFY `id_payment_method` tinyint unsigned AUTO_INCREMENT PRIMARY KEY;
 ALTER TABLE `orders`
 ADD CONSTRAINT `orders_id_user_fk1` FOREIGN KEY (`id_user`) REFERENCES `users` (`id_user`),
 ADD CONSTRAINT `orders_id_state_fk1` FOREIGN KEY (`id_state`) REFERENCES `states` (`id_state`),
-ADD CONSTRAINT `orders_id_payment_fk1` FOREIGN KEY (`id_payment_method`) REFERENCES `payment_methods` (`id_payment_method`);
+ADD CONSTRAINT `orders_id_payment_fk1` FOREIGN KEY (`id_payment_method`) REFERENCES `payment_methods` (`id_payment_method`),
+ADD CONSTRAINT `orders_id_realization_fk1` FOREIGN KEY (`id_realization_method`) REFERENCES `realization_methods` (`id_realization_method`);
 
 
 

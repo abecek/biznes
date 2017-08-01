@@ -5,6 +5,7 @@
       <index name="orders_id_user_fk1" columns="id_user"/>
       <index name="orders_id_state_fk1" columns="id_state"/>
       <index name="orders_id_payment_fk1" columns="id_payment_method"/>
+      <index name="id_realization_method_fk1" columns="id_realization_method"/>
     </indexes>
     <id name="idOrder" type="integer" column="id_order">
       <generator strategy="IDENTITY"/>
@@ -16,6 +17,11 @@
         <option name="unsigned">1</option>
       </options>
     </field>
+    <many-to-one field="idRealizationMethod" target-entity="RealizationMethods" fetch="LAZY">
+      <join-columns>
+        <join-column name="id_realization_method" referenced-column-name="id_realization_method"/>
+      </join-columns>
+    </many-to-one>
     <many-to-one field="idPaymentMethod" target-entity="PaymentMethods" fetch="LAZY">
       <join-columns>
         <join-column name="id_payment_method" referenced-column-name="id_payment_method"/>

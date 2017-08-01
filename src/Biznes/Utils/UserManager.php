@@ -10,17 +10,12 @@
 namespace Biznes\Utils;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Doctrine\ORM\EntityRepository;
-use Biznes\DatabaseBundle\Repository\UsersRepository;
-use Symfony\Component\HttpFoundation\Session\Session;
 
 use Doctrine\ORM\EntityManager;
 
 use Biznes\DatabaseBundle\Entity\Users;
 use Biznes\DatabaseBundle\Entity\UsersData;
 use Biznes\DatabaseBundle\Entity\UsersAddresses;
-
-
 
 class UserManager extends Controller{
     protected $user = null;

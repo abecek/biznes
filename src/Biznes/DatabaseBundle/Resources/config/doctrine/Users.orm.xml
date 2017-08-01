@@ -32,12 +32,12 @@
         <option name="fixed">1</option>
       </options>
     </field>
-    <field name="rank" type="boolean" column="rank" nullable="true">
+    <field name="rank" type="integer" column="rank" nullable="true">
       <options>
         <option name="default">0</option>
       </options>
     </field>
-    <field name="isActive" type="boolean" column="is_active" nullable="true">
+    <field name="isActive" type="integer" column="is_active" nullable="false">
       <options>
         <option name="default">0</option>
       </options>

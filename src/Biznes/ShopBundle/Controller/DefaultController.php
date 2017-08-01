@@ -8,22 +8,18 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Request;
 
-use Biznes\ShopBundle\Utils\Cart;
+class DefaultController extends Controller {
 
-
-class DefaultController extends Controller
-{
     /**
      * @Route("/shop/{referer}", name="shop", requirements={"referer": "\d+"})
      */
-    public function indexAction($referer = null)
-    {
+    public function indexAction($referer = null) {
         $session = new Session();
 
         if ($referer != null) {
             $session->set('referer', $referer);
         }
-        
+
         $user = $this->getUser();
         $um = $this->get('userManager');
         $um->loadDataFromUser($user);
@@ -31,195 +27,223 @@ class DefaultController extends Controller
         $em = $this->getDoctrine()->getManager();
         $products = $em->getRepository('BiznesDatabaseBundle:Products')
                 ->findAll();
-        
+
         $categories = $em->getRepository('BiznesDatabaseBundle:Categories')
                 ->findAll();
-                
+
         $cart = $this->get('cartManager');
         $cart->loadFromSession();
-        return $this->render('BiznesShopBundle:Default:index.html.twig',
-                array(
+        return $this->render('BiznesShopBundle:Default:index.html.twig', array(
                     'products' => $products,
                     'cart' => $cart,
                     'categories' => $categories,
-                ));
+        ));
     }
-    
+
     /**
      * @Route("/product/{id}/{referer}", name="product", requirements={"id": "\d+", "referer": "\d+"})
      */
-    public function productAction($id, $referer = null){
+    public function productAction($id, $referer = null) {
         $session = new Session();
         if ($referer != null) {
             $session->set('referer', $referer);
         }
-        
-        if(is_numeric($id)){
+
+        if (is_numeric($id)) {
             $em = $this->getDoctrine()->getManager();
             $product = $em->getRepository('BiznesDatabaseBundle:Products')
-                ->findOneByIdProduct($id);
+                    ->findOneByIdProduct($id);
             /*
-            $cart = Cart::getInstance();
-            $cart->loadFromSession();
-            */
+              $cart = Cart::getInstance();
+              $cart->loadFromSession();
+             */
             $cart = $this->get('cartManager');
             $cart->loadFromSession();
-            
-            if(!empty($product)){
-                
-                return $this->render('BiznesShopBundle:Default:product.html.twig',
-                        array(
+
+            if (!empty($product)) {
+
+                return $this->render('BiznesShopBundle:Default:product.html.twig', array(
                             'product' => $product,
                             'cart' => $cart,
-                        ));
-            }
-            else{
+                ));
+            } else {
                 //TO DO
-                return $this->render('BiznesShopBundle:Default:index.html.twig',
-                array(
-                    'products' => array(),
-                    'cart' => $cart,
+                return $this->render('BiznesShopBundle:Default:index.html.twig', array(
+                            'products' => array(),
+                            'cart' => $cart,
                 ));
             }
-            
         }
     }
-    
+
     /**
      * @Route("/cart", name="cart")
      * @Method("GET")
      */
-    public function showCartAction(){
+    public function showCartAction() {
         $cart = $this->get('cartManager');
         $cart->loadFromSession();
-        
-        return $this->render('BiznesShopBundle:Default:cart.html.twig',
-                array(
-                    'cart' => $cart,
-                )); 
 
+        return $this->render('BiznesShopBundle:Default:cart.html.twig', array(
+                    'cart' => $cart,
+        ));
     }
-    
+
     /**
      * @Route("/cart/add", name="cartAdd")
      * @Method("POST")
      */
-    public function addToCartAction(Request $request){
+    public function addToCartAction(Request $request) {
         $data['idProduct'] = $request->get('idProduct');
         $data['desc'] = $request->get('desc');
-        
+
         $em = $this->getDoctrine()->getManager();
         $product = $em->getRepository('BiznesDatabaseBundle:Products')
-            ->findOneByIdProduct($data['idProduct']);
-        
+                ->findOneByIdProduct($data['idProduct']);
+
         $cart = $this->get('cartManager');
         $cart->loadFromSession();
 
         $cart->addProduct($product, $data['desc']);
-        
-        return $this->redirectToRoute('cart'); 
-        
+
+        return $this->redirectToRoute('cart');
     }
-    
+
     /**
      * @Route("/cart/delete", name="cartDelete")
      * @Method("POST")
      */
-    public function removeFromCartAction(Request $request){
+    public function removeFromCartAction(Request $request) {
         $idProduct = $request->get('idProduct');
         $cart = $this->get('cartManager');
         $cart->loadFromSession();
         $all = $request->get('all');
-        if($all == 'true'){
+        if ($all == 'true') {
             $cart->clearCart();
             return $this->redirectToRoute('cart');
         }
         $cart->removeProductById($idProduct);
-        
+
         return $this->redirectToRoute('cart');
     }
-    
+
     /**
      * @Route("/shop/checkout", name="checkout")
      * @Method({"GET"})
      */
-    public function checkoutAction(){
+    public function checkoutAction() {
         $cart = $this->get('cartManager');
         $cart->loadFromSession();
-        
+
         $um = $this->get('userManager');
         $user = $um->loadDataFromUser($this->getUser());
-        
+
         $userData = null;
-        if($um->userDataExists()){
+        if ($um->userDataExists()) {
             $userData = $um->get('userData');
         }
         $userAddresss = null;
-        if($um->userAddressExists()){
+        if ($um->userAddressExists()) {
             $userAddresss = $um->get('userAddress');
         }
-        
-        if ($user == null) $roles = array('Brak');
-        else $roles = $user->getRoles();        
-        
+
         $em = $this->getDoctrine()->getManager();
         $realizationMethods = $em->getRepository('BiznesDatabaseBundle:RealizationMethods')
                 ->findAll();
-        
+
         $paymentMethods = $em->getRepository('BiznesDatabaseBundle:PaymentMethods')
                 ->findAll();
-        
-        return $this->render('BiznesShopBundle:Default:checkout.html.twig',
-                array(
-                    'roles' => $roles,
+
+        return $this->render('BiznesShopBundle:Default:checkout.html.twig', array(
                     'cart' => $cart,
                     'userData' => $userData,
                     'userAddress' => $userAddresss,
                     'realizationMethods' => $realizationMethods,
                     'paymentMethods' => $paymentMethods,
-                ));   
+        ));
     }
-   
-    
+
     /**
-     * @Route("/confirm", name="confirm")
+     * @Route("/shop/confirm", name="order_confirm")
      * @Method({"POST"})
      */
-    public function confirmAction(Request $request){
-        $cart = $this->get('cartManager');
-        $cart->loadFromSession();
+    public function confirmAction(Request $request) {
+        $cartManager = $this->get('cartManager');
+        $cartManager->loadFromSession();
         
-        return $this->render('BiznesShopBundle:Default:confirm.html.twig',
-                array(
-                    'cart' => $cart,
-                    'req'   => $request,
-                ));   
+        //TO DO
+        //Put code below to other file -> OrderManager
+        $em = $this->getDoctrine()->getManager();
+        
+        $paymentMethod = $em->getRepository('BiznesDatabaseBundle:PaymentMethods')
+                ->find($request->get('paymentMethod'));
+        $realizationMethod = $em->getRepository('BiznesDatabaseBundle:RealizationMethods')
+                ->find($request->get('realizationMethod'));
+        $state = $em->getRepository('BiznesDatabaseBundle:States')
+                ->find(1);
+        
+        $user = $this->getUser();
+        $sponsor = $user->getIdSponsor();
+        $idSponsor = $sponsor->getIdUser();
+        
+        $productsInCart = $cartManager->getProducts();
+        
+        $order = new \Biznes\DatabaseBundle\Entity\Orders();
+        $order->setDateOrder(new \DateTime)
+                ->setIdPaymentMethod($paymentMethod)
+                ->setIdRealizationMethod($realizationMethod)
+                ->setIdState($state)
+                ->setIdUser($user)
+                ->setIdSponsor($idSponsor)
+                ->setPriceOverall($cartManager->getPriceOverall());
+        
+        $em->persist($order);
+        $em->flush();
+
+        foreach($productsInCart as $product){
+           $cart = new \Biznes\DatabaseBundle\Entity\Carts();
+
+           $cart->setIdProduct($product); 
+           $cart->setIdOrder($order);
+           
+           $em->merge($cart);
+           $em->flush();
+           $em->clear();
+        }
+        
+        $cartManager->clearCart();
+        //end
+
+        return $this->render('BiznesShopBundle:Default:confirm.html.twig', array(
+                    'cart' => $cartManager,
+                    'products' => $productsInCart,
+                    'order' => $order,
+                    'req' => $request,
+        ));
     }
-    
+
     /**
      * @Route("/created", name="account_created_shop")
      */
-    public function createdAction(){ 
+    public function createdAction() {
         $cart = $this->get('cartManager');
         $cart->loadFromSession();
 
-        return $this->render('BiznesShopBundle:Default:register_created.html.twig',
-                array(
+        return $this->render('BiznesShopBundle:Default:register_created.html.twig', array(
                     'cart' => $cart,
-                ));  
+        ));
     }
-    
+
     /**
      * @Route("/shop/personalinfo", name="shopPersonalDataInfo")
      */
-    public function personalInfoAction(){ 
+    public function personalInfoAction() {
         $cart = $this->get('cartManager');
         $cart->loadFromSession();
-        
+
         return $this->render('BiznesShopBundle:Default:personalDataInfo.html.twig', array(
-            'cart' => $cart,
+                    'cart' => $cart,
         ));
     }
-    
-    
+
 }

@@ -239,7 +239,7 @@ class Users implements AdvancedUserInterface, \Serializable
     /**
      * Get rank
      *
-     * @return boolean
+     * @return integer
      */
     public function getRank()
     {
@@ -283,7 +283,7 @@ class Users implements AdvancedUserInterface, \Serializable
     /**
      * Set isActive
      *
-     * @param boolean $isActive
+     * @param integer $isActive
      *
      * @return Users
      */
@@ -297,7 +297,7 @@ class Users implements AdvancedUserInterface, \Serializable
     /**
      * Get isActive
      *
-     * @return boolean
+     * @return integer
      */
     public function getIsActive()
     {

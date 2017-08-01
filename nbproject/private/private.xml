@@ -3,10 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/xampp/htdocs/biznes/src/Biznes/ShopBundle/Resources/views/Default/checkout.html.twig</file>
+            <file>file:/C:/xampp/htdocs/biznes/src/Biznes/Utils/OrderManager.php</file>
             <file>file:/C:/xampp/htdocs/biznes/src/Biznes/ShopBundle/Controller/DefaultController.php</file>
-            <file>file:/C:/xampp/htdocs/biznes/src/Biznes/DatabaseBundle/Controller/DefaultController.php</file>
+            <file>file:/C:/xampp/htdocs/biznes/src/Biznes/DatabaseBundle/Entity/Carts.php</file>
+            <file>file:/C:/xampp/htdocs/biznes/src/Biznes/DatabaseBundle/Resources/config/doctrine/Products.orm.xml</file>
+            <file>file:/C:/xampp/htdocs/biznes/src/Biznes/ServiceBundle/Controller/DefaultController.php</file>
+            <file>file:/C:/xampp/htdocs/biznes/src/Biznes/ShopBundle/Resources/views/Default/confirm.html.twig</file>
             <file>file:/C:/xampp/htdocs/biznes/src/Biznes/Utils/CartManager.php</file>
+            <file>file:/C:/xampp/htdocs/biznes/src/Biznes/DatabaseBundle/Resources/config/doctrine/Carts.orm.xml</file>
+            <file>file:/C:/xampp/htdocs/biznes/src/Biznes/DatabaseBundle/Entity/Products.php</file>
         </group>
     </open-files>
 </project-private>

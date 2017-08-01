@@ -2,8 +2,12 @@
 
 namespace Biznes\DatabaseBundle\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
+
 /**
  * Carts
+ * @ORM\Table(name="carts")
+ * @ORM\Entity(repositoryClass="Biznes\DatabaseBundle\Repository\CartsRepository")
  */
 class Carts
 {
@@ -11,41 +15,18 @@ class Carts
      * @var integer
      */
     private $idCart;
-    
-    /**
-     * @var integer
-     */
-    private $idOrder;
 
     /**
      * @var \Biznes\DatabaseBundle\Entity\Products
+     * @ManyToOne(targetEntity="Products")
      */
-    private $idProduct;
-
+    private $idProduct = null;
 
     /**
-     * Set idOrder
-     *
-     * @param integer $idOrder
-     *
-     * @return Carts
+     * @var \Biznes\DatabaseBundle\Entity\Orders
      */
-    public function setIdOrder($idOrder)
-    {
-        $this->idOrder = $idOrder;
+    private $idOrder;
 
-        return $this;
-    }
-
-    /**
-     * Get idOrder
-     *
-     * @return integer
-     */
-    public function getIdOrder()
-    {
-        return $this->idOrder;
-    }
 
     /**
      * Get idCart
@@ -79,6 +60,30 @@ class Carts
     public function getIdProduct()
     {
         return $this->idProduct;
+    }
+
+    /**
+     * Set idOrder
+     *
+     * @param \Biznes\DatabaseBundle\Entity\Orders $idOrder
+     *
+     * @return Carts
+     */
+    public function setIdOrder(\Biznes\DatabaseBundle\Entity\Orders $idOrder = null)
+    {
+        $this->idOrder = $idOrder;
+
+        return $this;
+    }
+
+    /**
+     * Get idOrder
+     *
+     * @return \Biznes\DatabaseBundle\Entity\Orders
+     */
+    public function getIdOrder()
+    {
+        return $this->idOrder;
     }
 }
 

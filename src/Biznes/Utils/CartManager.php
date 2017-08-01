@@ -9,18 +9,12 @@
 namespace Biznes\Utils;
 
 use Biznes\DatabaseBundle\Entity\Products;
-use Biznes\DatabaseBundle\Repository\ProductsRepository;
 
 use Symfony\Component\HttpFoundation\Session\Session;
-use Symfony\Component\Serializer\Serializer;
-use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
-use Symfony\Component\Serializer\Encoder\JsonEncoder;
-
-
 
 class CartManager {
-    private $priceOverall = 0;
     private $products = array();
+    private $priceOverall = 0;
     private $count = 0;
     
     
@@ -41,6 +35,7 @@ class CartManager {
         );
         
         $this->products[$id] = $product;
+        
         $this->countPriceOverall();
         $this->count = count($this->products);
         
@@ -51,7 +46,12 @@ class CartManager {
     
     public function removeProductById($id){
         if(is_numeric($id)){
-            unset($this->products[$id]);
+            //($this->products as $product){
+               // if($product->getIdProduct() == $id){
+                    unset($this->products[$id]);
+              //  }
+            //}
+
             $this->countPriceOverall();
             $this->count -= 1;
             $this->saveToSession();
@@ -97,6 +97,14 @@ class CartManager {
             return false;
         }
         
+    }
+    
+    public function loadFromDatabase($id){
+        if(is_numeric($id) && $id != null){
+            $em = $this->getDoctrine()->getManager();
+            $cart = $em->getRepository('BiznesDatabaseBundle:Carts')
+                ->findOneByIdProduct($id);
+        }
     }
     
     public function clearCart(){

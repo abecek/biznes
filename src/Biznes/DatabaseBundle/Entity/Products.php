@@ -41,11 +41,6 @@ class Products implements \Serializable
     private $idProduct;
 
     /**
-     * @var \Biznes\DatabaseBundle\Entity\RealizationMethods
-     */
-    private $idRealizationMethod;
-
-    /**
      * @var \Biznes\DatabaseBundle\Entity\Categories
      */
     private $idCategory;
@@ -187,30 +182,6 @@ class Products implements \Serializable
     }
 
     /**
-     * Set idRealizationMethod
-     *
-     * @param \Biznes\DatabaseBundle\Entity\RealizationMethods $idRealizationMethod
-     *
-     * @return Products
-     */
-    public function setIdRealizationMethod(\Biznes\DatabaseBundle\Entity\RealizationMethods $idRealizationMethod = null)
-    {
-        $this->idRealizationMethod = $idRealizationMethod;
-
-        return $this;
-    }
-
-    /**
-     * Get idRealizationMethod
-     *
-     * @return \Biznes\DatabaseBundle\Entity\RealizationMethods
-     */
-    public function getIdRealizationMethod()
-    {
-        return $this->idRealizationMethod;
-    }
-
-    /**
      * Set idCategory
      *
      * @param \Biznes\DatabaseBundle\Entity\Categories $idCategory
@@ -270,7 +241,6 @@ class Products implements \Serializable
             $this->rating,
             $this->idCategory,
             $this->idProduct,
-            $this->idRealizationMethod,
             // see section on salt below
             // $this->salt,
         ));
@@ -288,10 +258,8 @@ class Products implements \Serializable
             $this->rating,
             $this->idCategory,
             $this->idProduct,
-            $this->idRealizationMethod,
             // see section on salt below
             // $this->salt
         ) = unserialize($serialized);
     }
 }
-
