@@ -171,8 +171,6 @@ class DefaultController extends Controller {
         $cartManager = $this->get('cartManager');
         $cartManager->loadFromSession();
         
-        //TO DO
-        //Put code below to other file -> OrderManager
         $em = $this->getDoctrine()->getManager();
         
         $paymentMethod = $em->getRepository('BiznesDatabaseBundle:PaymentMethods')
@@ -182,37 +180,13 @@ class DefaultController extends Controller {
         $state = $em->getRepository('BiznesDatabaseBundle:States')
                 ->find(1);
         
-        $user = $this->getUser();
-        $sponsor = $user->getIdSponsor();
-        $idSponsor = $sponsor->getIdUser();
-        
         $productsInCart = $cartManager->getProducts();
+        $user = $this->getUser();
         
-        $order = new \Biznes\DatabaseBundle\Entity\Orders();
-        $order->setDateOrder(new \DateTime)
-                ->setIdPaymentMethod($paymentMethod)
-                ->setIdRealizationMethod($realizationMethod)
-                ->setIdState($state)
-                ->setIdUser($user)
-                ->setIdSponsor($idSponsor)
-                ->setPriceOverall($cartManager->getPriceOverall());
-        
-        $em->persist($order);
-        $em->flush();
-
-        foreach($productsInCart as $product){
-           $cart = new \Biznes\DatabaseBundle\Entity\Carts();
-
-           $cart->setIdProduct($product); 
-           $cart->setIdOrder($order);
-           
-           $em->merge($cart);
-           $em->flush();
-           $em->clear();
-        }
+        $orderManager = new \Biznes\Utils\OrderManager($em);
+        $order = $orderManager->createOrder($user, $paymentMethod, $realizationMethod, $state, $productsInCart);
         
         $cartManager->clearCart();
-        //end
 
         return $this->render('BiznesShopBundle:Default:confirm.html.twig', array(
                     'cart' => $cartManager,

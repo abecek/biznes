@@ -205,6 +205,41 @@ ADD CONSTRAINT `messages_id_ticket_fk1` FOREIGN KEY (`id_ticket`) REFERENCES `ti
 ADD CONSTRAINT `messages_id_user_fk1` FOREIGN KEY (`id_user`) REFERENCES `users` (`id_user`) ON DELETE CASCADE;
 
 
+CREATE TABLE incomes(
+	id_income int(11) unsigned NOT NULL,
+    id_user int(11) unsigned not null,
+	date_income datetime not null,
+    value numeric(6,2) not null,  
+    id_userFrom int(11) unsigned not null,
+    id_order int(11) unsigned NOT NULL,
+    id_product smallint unsigned NOT NULL
+
+);
+
+ALTER TABLE `incomes`
+MODIFY `id_income` int(11) unsigned AUTO_INCREMENT PRIMARY KEY;
+
+ALTER TABLE `incomes`
+ADD CONSTRAINT `incomes_id_user_fk1` FOREIGN KEY (`id_user`) REFERENCES `users` (`id_user`),
+ADD CONSTRAINT `incomes_id_userFrom_fk1` FOREIGN KEY (`id_userFrom`) REFERENCES `users` (`id_user`),
+ADD CONSTRAINT `incomes_id_product_fk1` FOREIGN KEY (`id_product`) REFERENCES `products` (`id_product`),
+ADD CONSTRAINT `incomes_id_orders_fk1` FOREIGN KEY (`id_order`) REFERENCES `orders` (`id_order`);
+
+
+create table expanses(
+	id_expanse int(11) unsigned not null,
+    id_user int(11) unsigned not null,
+    date_expanse datetime not null,
+    value numeric(6,2) not null,  
+    state varchar(20) not null
+);
+
+ALTER TABLE `expanses`
+MODIFY `id_expanse` int(11) unsigned AUTO_INCREMENT PRIMARY KEY;
+
+ALTER TABLE `expanses`
+ADD CONSTRAINT `expanse_id_user_fk1` FOREIGN KEY (`id_user`) REFERENCES `users` (`id_user`);
+
 
 
 
