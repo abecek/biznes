@@ -1,9 +1,11 @@
 <?php
 
 namespace Biznes\DatabaseBundle\Entity;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Expanses
+ * @ORM\Entity(repositoryClass="Biznes\DatabaseBundle\Repository\ExpansesRepository")
  */
 class Expanses
 {

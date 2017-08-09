@@ -183,6 +183,7 @@ class DefaultController extends Controller {
         $productsInCart = $cartManager->getProducts();
         $user = $this->getUser();
         
+        //Push some code outside controller
         $orderManager = new \Biznes\Utils\OrderManager($em);
         $order = $orderManager->createOrder($user, $paymentMethod, $realizationMethod, $state, $productsInCart);
         

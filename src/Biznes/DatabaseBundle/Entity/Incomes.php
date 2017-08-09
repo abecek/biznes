@@ -2,8 +2,11 @@
 
 namespace Biznes\DatabaseBundle\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
+
 /**
  * Incomes
+ * @ORM\Entity(repositoryClass="Biznes\DatabaseBundle\Repository\IncomesRepository")
  */
 class Incomes
 {

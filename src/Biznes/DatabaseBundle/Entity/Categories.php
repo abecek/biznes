@@ -15,7 +15,7 @@ class Categories
     private $name;
 
     /**
-     * @var boolean
+     * @var integer
      */
     private $idCategory;
 
@@ -46,7 +46,7 @@ class Categories
     /**
      * Get idCategory
      *
-     * @return boolean 
+     * @return integer 
      */
     public function getIdCategory()
     {

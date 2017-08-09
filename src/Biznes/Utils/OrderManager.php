@@ -30,6 +30,12 @@ class OrderManager extends Controller{
         $this->em = $em;
     }
     
+    /*
+     * param $productsInCart
+     * Associative array with the objects of Products class
+     * 
+     * return object of Orders class
+     */
     public function createOrder(Users $user, PaymentMethods $paymentMethod, RealizationMethods $realizationMethod, States $state, $productsInCart){
         $sponsor = $user->getIdSponsor();
         $idSponsor = $sponsor->getIdUser();

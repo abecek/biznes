@@ -10,7 +10,6 @@
 namespace Biznes\Utils;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-
 use Doctrine\ORM\EntityManager;
 
 use Biznes\DatabaseBundle\Entity\Users;
