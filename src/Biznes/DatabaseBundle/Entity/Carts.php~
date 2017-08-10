@@ -86,4 +86,3 @@ class Carts
         return $this->idOrder;
     }
 }
-

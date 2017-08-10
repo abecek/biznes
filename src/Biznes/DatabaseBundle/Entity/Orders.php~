@@ -229,5 +229,8 @@ class Orders
     {
         return $this->idUser;
     }
+    
+    public function __toString() {
+        return "idOrder: " . $this->idOrder . " idUser: " . $this->idUser->getIdUser() . " idSponsor: " . $this->idSponsor;
+    }
 }
-

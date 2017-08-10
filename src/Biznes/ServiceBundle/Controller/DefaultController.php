@@ -6,6 +6,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Session\Session;
 
+use Biznes\Utils\WalletManager;
+
 class DefaultController extends Controller {
 
     /**
@@ -55,6 +57,22 @@ class DefaultController extends Controller {
         $user = $this->getUser();
         return $this->render('BiznesServiceBundle:Default:logged.html.twig', array(
                     'role' => $user->getRoles()
+        ));
+    }
+    
+    /**
+     * @Route("/dashboard", name="dashboard")
+     */
+    public function dashboardAction(){
+        $user = $this->getUser();
+        $em = $this->getDoctrine()->getManager();
+        $wm = new WalletManager($em);
+     
+        $wm->countMoneyInWallet($user);
+        $moneyInWallet = $wm->getMoneyInWallet();
+        
+        return $this->render('BiznesServiceBundle:Default:dashboard.html.twig', array(
+                'moneyInWallet' => $moneyInWallet,
         ));
     }
 

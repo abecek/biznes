@@ -279,6 +279,17 @@ class Users implements AdvancedUserInterface, \Serializable
     {
         return $this->idSponsor;
     }
+    
+    /**
+     * Get idSponsorAsInt
+     *
+     * @return integer
+     */
+    public function getIdSponsorAsInt()
+    {
+        if($this->idSponsor != null) return $this->idSponsor->getIdUser();
+        else return null;
+    }
 
     /**
      * Set isActive

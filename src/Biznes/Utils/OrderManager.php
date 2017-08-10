@@ -9,7 +9,6 @@
 namespace Biznes\Utils;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-
 use Doctrine\ORM\EntityManager;
 
 use Biznes\DatabaseBundle\Entity\Users;
@@ -43,8 +42,9 @@ class OrderManager extends Controller{
         $cartManager = new CartManager();
         $cartManager->loadFromSession();
         
+        $date = new \DateTime;
         $order = new \Biznes\DatabaseBundle\Entity\Orders();
-        $order->setDateOrder(new \DateTime)
+        $order->setDateOrder($date)
                 ->setIdPaymentMethod($paymentMethod)
                 ->setIdRealizationMethod($realizationMethod)
                 ->setIdState($state)
@@ -64,6 +64,11 @@ class OrderManager extends Controller{
            $this->em->merge($cart);
            $this->em->flush();
            $this->em->clear();
+           
+           if($sponsor != null){
+               $wm = new WalletManager($this->em);
+               $wm->addIncome($idSponsor, $user, $order, $date, $product);
+           }
         }
         
         return $order;

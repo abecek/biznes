@@ -141,3 +141,4 @@ class Expanses
         return $this->idUser;
     }
 }
+

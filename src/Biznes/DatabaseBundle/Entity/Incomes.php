@@ -2,11 +2,8 @@
 
 namespace Biznes\DatabaseBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-
 /**
  * Incomes
- * @ORM\Entity(repositoryClass="Biznes\DatabaseBundle\Repository\IncomesRepository")
  */
 class Incomes
 {
@@ -46,9 +43,9 @@ class Incomes
     private $idUserfrom;
 
     /**
-     * @var \Biznes\DatabaseBundle\Entity\Users
+     * @var integer
      */
-    private $idUser;
+    private $idSponsor;
 
 
     /**
@@ -206,27 +203,27 @@ class Incomes
     }
 
     /**
-     * Set idUser
+     * Set idSponsor
      *
-     * @param \Biznes\DatabaseBundle\Entity\Users $idUser
+     * @param integer
      *
      * @return Incomes
      */
-    public function setIdUser(\Biznes\DatabaseBundle\Entity\Users $idUser = null)
+    public function setIdSponsor($idSponsor = null)
     {
-        $this->idUser = $idUser;
+        $this->idSponsor = $idSponsor;
 
         return $this;
     }
 
     /**
-     * Get idUser
+     * Get idSponsor
      *
-     * @return \Biznes\DatabaseBundle\Entity\Users
+     * @return integer
      */
-    public function getIdUser()
+    public function getIdSponsor()
     {
-        return $this->idUser;
+        return $this->idSponsor;
     }
 }
 
