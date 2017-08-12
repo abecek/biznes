@@ -78,21 +78,29 @@ class DefaultController extends Controller {
             }
 
             // 4) save the User!
-            //try{
             $em->persist($user);
             $em->flush();
 
             // ... do any other work - like sending them an email, etc
             // maybe set a "flash" success message for the user
 
+            $uniqueHashForUser = $user->getEmail() . 'activation';
+            $uniqueHashForUser = sha1($uniqueHashForUser);
+            //$uniqueHashForUser = substr($uniqueHashForUser, 0, 13);
+            $userId = $user->getIdUser();
+            
             $message = \Swift_Message::newInstance()
-                    ->setSubject('Hello Email')
+                    ->setSubject('Activate your new account in WebTools')
                     ->setFrom('michal.blaszcz@gmail.com')
                     ->setTo($form['email']->getData())
                     ->setBody(
                     $this->renderView(
                             //app/Resources/views/Emails/registration.html.twig
-                            'Emails/registration.html.twig', array('name' => $form['username']->getData())
+                            'Emails/registration.html.twig', array(
+                                'name' => $form['username']->getData(),
+                                'userId' => $userId,
+                                'uniqueHashForUser' => $uniqueHashForUser,
+                            )
                     ), 'text/html'
             );
             $this->get('mailer')->send($message);
@@ -323,6 +331,31 @@ class DefaultController extends Controller {
                     'data_form' => $form1->createView(),
                     'address_form' => $form2->createView(),
         ));
+    }
+    
+    /**
+     * @Route("/activate/{userId}/{hash}", name="activationLink")
+     */
+    public function activateAction($userId = null, $hash = null){
+        if($hash != null && is_numeric($userId)){
+            $em = $this->getDoctrine()->getManager();
+            $user = $em->getRepository('BiznesDatabaseBundle:Users')
+                    ->findOneByIdUser($userId);
+            
+            if($user->getIsActive() == 1){
+                throw $this->createNotFoundException('Your account has been already activated.');
+            }
+            else{
+                $user->setIsActive(1);
+                $em->persist($user);
+                $em->flush();
+                return $this->render('BiznesDatabaseBundle:Default:activate.html.twig');
+            }
+            
+        }
+        else{
+            throw $this->createNotFoundException('Your activation link is not correct.');
+        }
     }
 
 }

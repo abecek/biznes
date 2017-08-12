@@ -4,6 +4,11 @@
 Hi {{ name }}! You're successfully registered.
 
 {# example, assuming you have a route named "login" #}
-To login, go to: <a href="{{ url('login') }}">...</a>.
+<hr>
+Before you will try login, please activate your account, by clicking link below:
+<br>
+<a href="{{ url('activationLink', {'userId' : userId, 'hash' : uniqueHashForUser }) }}">{{ url('activationLink', {'userId' : userId, 'hash' : uniqueHashForUser }) }}</a>
+<br><br>
+To login, go to: <a href="{{ url('login') }}">{{ url('login') }}</a>.
 
 Thanks!

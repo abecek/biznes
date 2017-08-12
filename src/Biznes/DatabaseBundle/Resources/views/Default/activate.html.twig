@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Shop Homepage - Start Bootstrap Template</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="{{ asset('bundles/biznesshop/css/bootstrap.min.css') }}" rel="stylesheet">
+	
+    <!-- Custom CSS -->
+    <link href="{{ asset('bundles/biznesshop/css/simple-sidebar.css') }}" rel="stylesheet">
+
+
+</head>
+
+<body>
+    <div class="row">
+        <div class="col-md-12">
+            <h3>Well done!</h3><br>
+            Your user account is active, you can try now to login.<br><br>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <a href="{{ url('shop') }}">Go to the Shop!</a>
+        </div>
+        <div class="col-md-6">
+            <a href="{{ url('homepage') }}">Go to the Partnership Service!</a>
+        </div>
+    </div>
+    
+    
+    <!-- jQuery -->
+    <script src="{{ asset('bundles/biznesshop/js/jquery.js') }}"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="{{ asset('bundles/biznesshop/js/bootstrap.min.js') }}"></script>
+
+</body>
+
+</html>
