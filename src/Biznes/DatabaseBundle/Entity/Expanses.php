@@ -21,6 +21,9 @@ class Expanses
 
     /**
      * @var string
+     * 1 - waiting
+     * 2 - realised
+     * 3 - completed
      */
     private $state;
 

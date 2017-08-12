@@ -78,15 +78,13 @@ class DefaultController extends Controller {
             }
 
             // 4) save the User!
+            //try{
             $em->persist($user);
             $em->flush();
 
-            // ... do any other work - like sending them an email, etc
-            // maybe set a "flash" success message for the user
-
             $uniqueHashForUser = $user->getEmail() . 'activation';
             $uniqueHashForUser = sha1($uniqueHashForUser);
-            //$uniqueHashForUser = substr($uniqueHashForUser, 0, 13);
+            
             $userId = $user->getIdUser();
             
             $message = \Swift_Message::newInstance()
@@ -220,7 +218,7 @@ class DefaultController extends Controller {
               }
              */
             //HOW THIS IS WORKING WITHOUT SETTING PROPERTIES?
-            //WHEN WAS IN THE FORM LIKE AS ABOVE, WASNT WORKING I DONT KNOW WHY
+            //WHEN IN WAS IN THE FORM LIKE AS ABOVE, WASNT WORKING I DONT KNOW WHY
             /*
              * ERROR BEFORE:
              * Catchable Fatal Error: Object of class Symfony\Component\Form\Form could not be converted to string
@@ -342,14 +340,23 @@ class DefaultController extends Controller {
             $user = $em->getRepository('BiznesDatabaseBundle:Users')
                     ->findOneByIdUser($userId);
             
+            $uniqueHashForUser = $user->getEmail() . 'activation';
+            $uniqueHashForUser = sha1($uniqueHashForUser);
+            
             if($user->getIsActive() == 1){
                 throw $this->createNotFoundException('Your account has been already activated.');
             }
             else{
-                $user->setIsActive(1);
-                $em->persist($user);
-                $em->flush();
-                return $this->render('BiznesDatabaseBundle:Default:activate.html.twig');
+                if($hash == $uniqueHashForUser){
+                    $user->setIsActive(1);
+                    $em->persist($user);
+                    $em->flush();
+                    return $this->render('BiznesDatabaseBundle:Default:activate.html.twig');
+                }
+                else{
+                    throw $this->createNotFoundException('Your activation link is not valid.');
+                }
+                    
             }
             
         }

@@ -19,6 +19,8 @@ class Incomes
 
     /**
      * @var string
+     * 1 - to accept
+     * 2 - accepted
      */
     private $state;
 

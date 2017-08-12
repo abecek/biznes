@@ -65,15 +65,21 @@ class DefaultController extends Controller {
      */
     public function dashboardAction(){
         $user = $this->getUser();
-        $em = $this->getDoctrine()->getManager();
-        $wm = new WalletManager($em);
-     
-        $wm->countMoneyInWallet($user);
-        $moneyInWallet = $wm->getMoneyInWallet();
+        if($user != null){
+            $em = $this->getDoctrine()->getManager();
+            $wm = new WalletManager($em);
+
+            $wm->countMoneyInWallet($user);
+            $moneyInWallet = $wm->getMoneyInWallet();
+
+            return $this->render('BiznesServiceBundle:Default:dashboard.html.twig', array(
+                    'moneyInWallet' => $moneyInWallet,
+            ));
+        }
+        else{
+            throw $this->createAccessDeniedException('You must be logged in to see this page.');
+        }
         
-        return $this->render('BiznesServiceBundle:Default:dashboard.html.twig', array(
-                'moneyInWallet' => $moneyInWallet,
-        ));
     }
 
 }
