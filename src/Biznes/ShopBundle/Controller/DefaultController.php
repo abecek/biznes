@@ -60,16 +60,18 @@ class DefaultController extends Controller {
             $cart = $this->get('cartManager');
             $cart->loadFromSession();
 
-            if (!empty($product)) {
-
+            if (!empty($product)){
                 return $this->render('BiznesShopBundle:Default:product.html.twig', array(
                             'product' => $product,
                             'cart' => $cart,
                 ));
-            } else {
+            } 
+            else{
                 //TO DO
+                $products = $em->getRepository('BiznesDatabaseBundle:Products')
+                ->findAll();
                 return $this->render('BiznesShopBundle:Default:index.html.twig', array(
-                            'products' => array(),
+                            'products' => $products,
                             'cart' => $cart,
                 ));
             }

@@ -33,19 +33,16 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="{{ url('shop') }}">Shop</a>
+                    <a class="navbar-brand" href="{{ url('shop') }}">Sklep</a>
                 </div>
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
                         <li>
-                            <a href="#">About</a>
+                            <a href="{{ path('homepage') }}">Serwis partnerski</a>                        
                         </li>
                         <li>
-                            <a href="#">Services</a>
-                        </li>
-                        <li>
-                            <a href="#">Contact</a>                        
+                            <a href="#">Kontakt</a>                        
                         </li>
                     </ul>
                     <ul class="nav navbar-nav pull-right">
@@ -56,6 +53,9 @@
                                 <a href="{{ url('checkout') }}">Zamówienie </a>
                             </li>
                         {% if is_granted('ROLE_USER') %}
+                            <li>
+                                <a href="{{ url('personalData_shop') }}"> Twoje Konto</a>
+                            </li>
                             <li>
                                 <a href="{{ url('logout') }}"> Wyloguj</a>
                             </li>
@@ -79,7 +79,7 @@
             <div class="row">
 
                 <div class="col-md-3">
-                    <p class="lead">Shop Name</p>
+                    <p class="lead">Nazwa<br> Sklepu</p>
                     <div class="list-group">
                         {% if categories is defined %}
                             {% for category in categories %}

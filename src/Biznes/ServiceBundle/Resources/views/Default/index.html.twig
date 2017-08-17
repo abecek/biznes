@@ -23,21 +23,19 @@
                         </li>
                     #}
                     <li>
-                        <div style="color:red;">Jeśli nie dołączył do programu</div>
-                        <a href="#">Join Partnership Now!</a>
-                    </li>
-                        <hr>
-                    <li>
                         <a href="{{ path('dashboard') }}">Panel główny</a>
                     </li>
                     <li>
                         <a href="{{ path('personalData') }}">Twoje konto</a>
                     </li>
                     <li>
-                        <a href="#">Commissions</a>
+                        <a href="#">Naliczenia</a>
                     </li>
                     <li>
-                        <a href="#">Support</a>
+                        <a href="#">Pomoc supportu</a>
+                    </li>
+                    <li>
+                        <a href="#menu-toggle2" id="menu-toggle2">Zwiń menu boczne</a>
                     </li>
                 </ul>
             </div>
@@ -54,11 +52,24 @@
                                 #}
                                 {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                                     <h3>Panel główny</h3>
-                                    <p>Twój link referencyjny prowadzący do rejestracji w serwisie:</p>
-                                    <input name="refService" type="text" placeholder="{{ path('register') }}" class="form-control"></input>
-                                    <p>Twój link referencyjny prowadzący do rejestracji w sklepie:</p>
-                                    <input name="refShop" type="text" placeholder="{{ path('register_shop') }}" class="form-control"></input>
-                                    
+                                    <div class="well">Twój link referencyjny prowadzący do rejestracji w serwisie:
+                                        <input name="refService" type="text" placeholder="{{ url('register') }}" value="{{ url('register', {'referer' : userId }) }}" class="form-control"></input>
+                                    </div>
+                                    <div class="well">Twój link referencyjny prowadzący do rejestracji w sklepie:
+                                        <input name="refShop" type="text" placeholder="{{ url('register_shop') }}" value="{{ url('register_shop', {'referer' : userId }) }}" class="form-control"></input>
+                                    </div>
+                                    <div class="well">Utwórz własny link prowadzący bezpośrednio do promwanego przez Ciebie produktu.
+                                        <input name="refShop" type="text" placeholder="{{ url('product', {'id' : '0000', 'referer': userId}) }}" value="{{ url('product', {'id' : '0000', 'referer': userId}) }}" class="form-control"></input>
+                                        Przykładowo podmień w linku powyżej <font color="red"><strong>0000</strong></font>, na numer produktu, który chcesz promować. <br>
+                                        Bądź w łatwiejszy sposób... do adresu URL produktu, dodaj na konću(po slashu) swój numer identyfikacyjny w serwisie tj. <strong>{{ userId }}</strong>.<br>
+                                        Następnie podaj taki link bezpośrednio osobie, której chcesz polecić nasz produkt.
+                                        Ów osoba stanie się twoją osobą poleconą, tak jak gdyby rejestrowała się tradycyjnie przez twój link.
+                                        <div class="alert alert-warning">
+                                            <strong>Uwaga!</strong> 
+                                            Powyższe działanie bedzię jedynie możliwe, podczas jednej sesji. <br> 
+                                            Po czasie 15 sesja minut wygaśnie. Również po wejściu na nowo na stronę sklepu, z innego źrodła(np. telefonu komórkowego).
+                                        </div>
+                                    </div>
                                 {% else %}
                                     <h1>Witaj na stronie serwisu partnerskiego!</h1>
                                     <p>Zarabiaj polecając nasze produkty! Zarejestruj się już teraz, by uzyskać swój link referencyjny.</p>
@@ -89,7 +100,11 @@
 
         <!-- Menu Toggle Script -->
         <script>
-            $("#menu-toggle").click(function(e) {
+            $("#menu-toggle1").click(function(e) {
+                e.preventDefault();
+                $("#wrapper").toggleClass("toggled");
+            });
+            $("#menu-toggle2").click(function(e) {
                 e.preventDefault();
                 $("#wrapper").toggleClass("toggled");
             });

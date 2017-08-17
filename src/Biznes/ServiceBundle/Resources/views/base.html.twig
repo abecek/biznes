@@ -23,11 +23,14 @@
                 <div class="container">
                     <!-- Brand and toggle get grouped for better mobile display -->
                     <div class="navbar-header">
-                        <a href="#menu-toggle" class="navbar-brand" id="menu-toggle">Menu Boczne</a>
+                        <a href="{{ path('homepage') }}" class="navbar-brand">Serwis</a>
                     </div>
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav">
+                            <li>
+                                <a href="{{ path('shop') }}">Sklep</a>                        
+                            </li>
                             <li>
                                 <a href="{{ url('logged') }}">Test logowania</a>
                             </li>
@@ -49,6 +52,11 @@
                                         <a href="{{ url('register') }}">Rejestracja</a>
                                     </li>
                                 {% endif %}
+                        </ul>
+                        <ul class="nav navbar-nav">
+                            <li>
+                                <a href="#menu-toggle1" id="menu-toggle1">Przesuń menu</a>
+                            </li>
                         </ul>
                     </div>
                     <!-- /.navbar-collapse -->

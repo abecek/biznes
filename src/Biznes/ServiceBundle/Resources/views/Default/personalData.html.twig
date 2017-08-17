@@ -1,16 +1,19 @@
 {% extends "BiznesServiceBundle:Default:index.html.twig" %}
 
 {% block content %}
-    <div style="float:left;">
-        Wypelnij swoje dane personalne!
-        {{ form_start(data_form) }}
-        {{ form_widget(data_form) }}
-        {{ form_end(data_form) }}
-    </div>
-    <div style="float:left;">
-        Wypelnij swoje dane adresowe!
-        {{ form_start(address_form) }}
-        {{ form_widget(address_form) }}
-        {{ form_end(address_form) }}
-    </div>
+    <div class="row">
+        <div class="well">
+            <h4>W formularzu poniżej możesz dodac, edytować swoje dane personalne.</h4>
+            {{ form_start(data_form) }}
+            {{ form_widget(data_form) }}
+            {{ form_end(data_form) }}
+        </div>
+
+        <div class="well">
+            <h4>W formularzu poniżej możesz dodac, edytować swoje dane adresowe.</h4>
+            {{ form_start(address_form) }}
+            {{ form_widget(address_form) }}
+            {{ form_end(address_form) }}
+        </div>
+    </div>     
 {% endblock %}

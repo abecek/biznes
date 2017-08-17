@@ -37,7 +37,14 @@ class OrderManager extends Controller{
      */
     public function createOrder(Users $user, PaymentMethods $paymentMethod, RealizationMethods $realizationMethod, States $state, $productsInCart){
         $sponsor = $user->getIdSponsor();
-        $idSponsor = $sponsor->getIdUser();
+        $idSponsor = null;
+        if($sponsor != null){
+            $idSponsor = $sponsor->getIdUser();
+        }
+        if(empty($productsInCart)){
+           throw new \Exception("Something gone very wrong");
+        }
+        
         
         $cartManager = new CartManager();
         $cartManager->loadFromSession();

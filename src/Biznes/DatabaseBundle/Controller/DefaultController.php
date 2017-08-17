@@ -70,12 +70,21 @@ class DefaultController extends Controller {
             $em = $this->getDoctrine()->getManager();
 
             //SETTING REFERER
-            if (is_numeric($referer)) {
-                $sponsor = $em->getRepository('BiznesDatabaseBundle:Users')->findOneByIdUser($referer);
-                if (!empty($sponsor)) {
-                    $user->setIdSponsor($sponsor);
-                }
+            $session = new \Symfony\Component\HttpFoundation\Session\Session();
+            $refererFromSession = $session->get('referer');
+            $sponsor = null;
+            
+            if(is_numeric($refererFromSession)){
+                $sponsor = $em->getRepository('BiznesDatabaseBundle:Users')->findOneByIdUser($refererFromSession);
             }
+            elseif (is_numeric($referer)) {
+                $sponsor = $em->getRepository('BiznesDatabaseBundle:Users')->findOneByIdUser($referer);
+            }
+            
+            if (!empty($sponsor)) {
+                $user->setIdSponsor($sponsor);
+            }
+            
 
             // 4) save the User!
             //try{
@@ -134,9 +143,9 @@ class DefaultController extends Controller {
         $form->handleRequest($request);
 
         if ($this->register($user, $form, $referer)) {
-            if ($source == null) {
+            //if ($source == null) {
                 return $this->redirectToRoute('account_created_service');
-            }
+            //}
         }
 
 

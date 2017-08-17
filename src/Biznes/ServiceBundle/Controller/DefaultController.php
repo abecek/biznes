@@ -15,9 +15,15 @@ class DefaultController extends Controller {
      */
     public function indexAction() {
         $user = $this->getUser();
+        $userId = null;
+        if ($user != null) $userId = $user->getIdUser();
+        
         $um = $this->get('userManager');
         $um->loadDataFromUser($user);
-        return $this->render('BiznesServiceBundle:Default:index.html.twig', array('um' => $um,));
+        return $this->render('BiznesServiceBundle:Default:index.html.twig', array(
+                'um' => $um,
+                'userId' => $userId,
+            ));
     }
 
     /**
