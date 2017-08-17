@@ -25,15 +25,35 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 class UsersAddressType extends AbstractType{
 
     public function buildForm(FormBuilderInterface $builder, array $options) {
-        $builder->add('country', TextType::class)
-                ->add('city', TextType::class)
-                ->add('postCode', TextType::class)
-                ->add('street', TextType::class)
-                ->add('nrHouse', TextType::class)
+        $builder->add('country', TextType::class, array(
+                    'attr' => array('class' => 'form-control'),
+                    'label' => 'Kraj'
+                ))
+                ->add('city', TextType::class, array(
+                    'attr' => array('class' => 'form-control'),
+                    'label' => 'Miasto'
+                ))
+                ->add('postCode', TextType::class, array(
+                    'attr' => array('class' => 'form-control'),
+                    'label' => 'Kod pocztowy'
+                ))
+                ->add('street', TextType::class, array(
+                    'attr' => array('class' => 'form-control'),
+                    'label' => 'Ulica'
+                ))
+                ->add('nrHouse', TextType::class, array(
+                    'attr' => array('class' => 'form-control'),
+                    'label' => 'Numer budynku'
+                ))
                 ->add('nrFlat', TextType::class, array(
                     'required'   => false,
+                    'attr' => array('class' => 'form-control'),
+                    'label' => 'Numer mieszkania(opcjonalne)'
                 ))  
-                ->add('save', SubmitType::class);
+                ->add('save', SubmitType::class, array(
+                    'attr' => array('class' => 'btn btn-default btn-lg'),
+                    'label' => 'Zapisz dane adresowe'
+                ));
     }
     
     public function configureOptions(OptionsResolver $resolver){

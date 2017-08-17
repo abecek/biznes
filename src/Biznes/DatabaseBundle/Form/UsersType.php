@@ -27,28 +27,45 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 class UsersType extends AbstractType{
 
     public function buildForm(FormBuilderInterface $builder, array $options) {
-        $builder->add('username', TextType::class)
-                ->add('email', EmailType::class)
+        $builder->add('username', TextType::class, array(
+                    'attr' => array('class' => 'form-control'),
+                    'label' => 'Username',
+                ))
+                ->add('email', EmailType::class, array(
+                    'attr' => array('class' => 'form-control'),
+                    'label' => 'Email',
+                ))
                 
                 //->add('password', PasswordType::class)
                 
                 ->add('plainPassword', RepeatedType::class, array(
                     'type' => PasswordType::class,
-                    'first_options'  => array('label' => 'Password'),
-                    'second_options' => array('label' => 'Repeat Password'),
-                ))
+                    'first_options'  => array(
+                        'label' => 'Password', 
+                        'attr' => array('class' => 'form-control')
+                    ),
+                    'second_options' => array(
+                        'label' => 'Repeat Password', 
+                        'attr' => array('class' => 'form-control')
+                    ),
+                )) 
                         
                 ->add('gender', ChoiceType::class, array(
                     'choices' => array(
-                        'male' => 'M',
-                        'female' => 'K'
+                        'mężczyzna' => 'M',
+                        'kobieta' => 'K'
                     ),
-                    'placeholder' => 'Choice your gender',
+                    'placeholder' => 'Wybierz płeć',
+                    'attr' => array('class' => 'form-control'),
                 ))
                 
                 //->add('agree_checkbox', CheckboxType::class, array('mapped' => false))
                 
-                ->add('save', SubmitType::class);
+                ->add('Dodaj konto!', SubmitType::class, array(
+                    'attr' => array(
+                        'class' => 'btn btn-default btn-lg',
+                    ),
+                ));
     }
     
     public function configureOptions(OptionsResolver $resolver){

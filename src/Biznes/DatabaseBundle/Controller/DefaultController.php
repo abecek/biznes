@@ -127,7 +127,9 @@ class DefaultController extends Controller {
 
         // 1) build the form
         $user = new Users();
-        $form = $this->createForm(UsersType::class, $user);
+        $form = $this->createForm(UsersType::class, $user, array(
+            'attr' => array('class' => 'form'),
+        ));
         // 2) handle the submit (will only happen on POST)
         $form->handleRequest($request);
 
@@ -254,6 +256,7 @@ class DefaultController extends Controller {
 
         $form1 = $this->createForm(UsersDataType::class, $userData, array(
             'userData' => $userData,
+            'attr' => array('class' => 'form'),
         ));
         // 2) handle the submit (will only happen on POST)
         $form1->handleRequest($request);
@@ -299,6 +302,7 @@ class DefaultController extends Controller {
 
         $form1 = $this->createForm(UsersDataType::class, $userData, array(
             'userData' => $userData,
+            'attr' => array('class' => 'form'),
         ));
         // 2) handle the submit (will only happen on POST)
         $form1->handleRequest($request);

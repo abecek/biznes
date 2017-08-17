@@ -29,7 +29,7 @@
                     <div class="navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav">
                             <li>
-                                <a href="{{ url('logged') }}">Logged</a>
+                                <a href="{{ url('logged') }}">Test logowania</a>
                             </li>
                             <li>
                                 <a href="{{ url('admin') }}">Admin</a>
@@ -39,7 +39,7 @@
                         <ul class="nav navbar-nav navbar-right">
                                 {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
                                     <li>
-                                        <a href="{{ url('logout') }}">Logout</a>
+                                        <a href="{{ url('logout') }}">Wyloguj</a>
                                     </li>
                                 {% else %}
                                     <li>

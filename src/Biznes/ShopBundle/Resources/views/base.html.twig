@@ -50,14 +50,14 @@
                     </ul>
                     <ul class="nav navbar-nav pull-right">
                             <li>
-                                <a href="{{ url('cart') }}">Cart : {{ cart.count }}</a>
+                                <a href="{{ url('cart') }}">W koszyku : {{ cart.count }}</a>
                             </li>
                             <li>
-                                <a href="{{ url('checkout') }}">Checkout </a>
+                                <a href="{{ url('checkout') }}">Zamówienie </a>
                             </li>
                         {% if is_granted('ROLE_USER') %}
                             <li>
-                                <a href="{{ url('logout') }}"> Logout</a>
+                                <a href="{{ url('logout') }}"> Wyloguj</a>
                             </li>
                         {% else %}
                             <li>

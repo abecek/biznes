@@ -24,25 +24,42 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 class UsersDataType extends AbstractType{
 
     public function buildForm(FormBuilderInterface $builder, array $options) {      
-        $builder->add('name1', TextType::class)
+        $builder->add('name1', TextType::class, array(
+                    'attr' => array('class' => 'form-control'),
+                    'label' => 'Imię',
+                ))
                 ->add('name2', TextType::class, array(
                     'required'   => false,
+                    'attr' => array('class' => 'form-control'),
+                    'label' => 'Drugie imię',
                 ))
-                ->add('surname', TextType::class)
+                ->add('surname', TextType::class, array(
+                    'attr' => array('class' => 'form-control'),
+                    'label' => 'Nazwisko',
+                ))
                 ->add('identityNumber', TextType::class, array(
                     'required'   => false,
+                    'attr' => array('class' => 'form-control'),
+                    'label' => 'Pesel',
                 ))
-                ->add('telephone', TextType::class)
-                        
+                ->add('telephone', TextType::class, array(
+                    'attr' => array('class' => 'form-control'),
+                    'label' => 'Numer telefonu',
+                ))                   
                 ->add('language', ChoiceType::class, array(
                     'choices' => array(
                         'Polish' => 'pl',
                         'English' => 'en'
                     ),
-                    'placeholder' => 'Choice your language',
+                    'placeholder' => 'Wybierz język',
+                    'attr' => array('class' => 'form-control'),
+                    'label' => 'Język',
                 ))
                 
-                ->add('save', SubmitType::class);
+                ->add('save', SubmitType::class, array(
+                    'attr' => array('class' => 'btn btn-default btn-lg'),
+                    'label' => 'Zapisz dane personalne',
+                ));
     }
     
     public function configureOptions(OptionsResolver $resolver){
