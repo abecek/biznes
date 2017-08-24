@@ -23,7 +23,7 @@ class DefaultController extends Controller {
 
     /**
      * @Route("/login", name="login")
-     * @Route("/shop/login", name="login_shop")
+     * @Route("/shop/login", name="loginShop")
      */
     public function loginAction(Request $request) {
         //Check if user is already logged
@@ -144,7 +144,7 @@ class DefaultController extends Controller {
 
         if ($this->register($user, $form, $referer)) {
             //if ($source == null) {
-                return $this->redirectToRoute('account_created_service');
+                return $this->redirectToRoute('accountCreatedService');
             //}
         }
 
@@ -155,7 +155,7 @@ class DefaultController extends Controller {
     }
 
     /**
-     * @Route("/shop/register/{referer}/{source}", name="register_shop", requirements={"referer": "\d+"})
+     * @Route("/shop/register/{referer}/{source}", name="registerShop", requirements={"referer": "\d+"})
      */
     public function shopRegisterAction(Request $request, $referer = null, $source = null) {
         //Check if user is already logged
@@ -176,7 +176,7 @@ class DefaultController extends Controller {
 
         if ($this->register($user, $form, $referer)) {
             if ($source == null) {
-                return $this->redirectToRoute('account_created_shop');
+                return $this->redirectToRoute('accountCreatedShop');
             } elseif ($source == "checkout") {
                 return $this->redirectToRoute('checkout');
             }
@@ -290,7 +290,7 @@ class DefaultController extends Controller {
     }
 
     /**
-     * @Route("/shop/personalData/{source}", name="personalData_shop")
+     * @Route("/shop/personalData/{source}", name="personalDataShop")
      * Adding and Editing PersonalData and PersonalAddress
      */
     public function shopPersonalDataAction(Request $request, $source = null) {

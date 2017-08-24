@@ -14,3 +14,11 @@ services:
          class: Biznes\Utils\UserManager
          arguments: [ '@doctrine.orm.entity_manager' ]
          public: true
+    walletManager:
+         class: Biznes\Utils\WalletManager
+         arguments: [ '@doctrine.orm.entity_manager' ]
+         public: true
+    orderManager:
+         class: Biznes\Utils\OrderManager
+         arguments: [ '@doctrine.orm.entity_manager' ]
+         public: true

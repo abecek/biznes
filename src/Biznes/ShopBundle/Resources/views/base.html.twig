@@ -54,17 +54,17 @@
                             </li>
                         {% if is_granted('ROLE_USER') %}
                             <li>
-                                <a href="{{ url('personalData_shop') }}"> Twoje Konto</a>
+                                <a href="{{ url('personalDataShop') }}"> Twoje Konto</a>
                             </li>
                             <li>
                                 <a href="{{ url('logout') }}"> Wyloguj</a>
                             </li>
                         {% else %}
                             <li>
-                                <a href="{{ url('login_shop') }}"> Logowanie</a>
+                                <a href="{{ url('loginShop') }}"> Logowanie</a>
                             </li>
                             <li>
-                                <a href="{{ url('register_shop') }}"> Rejestracja</a>
+                                <a href="{{ url('registerShop') }}"> Rejestracja</a>
                             </li>
                         {% endif %}
                     </ul>

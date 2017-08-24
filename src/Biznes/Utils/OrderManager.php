@@ -44,8 +44,7 @@ class OrderManager extends Controller{
         if(empty($productsInCart)){
            throw new \Exception("Something gone very wrong");
         }
-        
-        
+              
         $cartManager = new CartManager();
         $cartManager->loadFromSession();
         

@@ -27,14 +27,14 @@ class DefaultController extends Controller {
     }
 
     /**
-     * @Route("/created", name="account_created_service")
+     * @Route("/created", name="accountCreatedService")
      */
     public function createdAction() {
-        return $this->render('BiznesServiceBundle:Default:register_created.html.twig');
+        return $this->render('BiznesServiceBundle:Default:registerCreated.html.twig');
     }
 
     /**
-     * @Route("/personalinfo", name="personalDataInfo")
+     * @Route("/personalInfo", name="personalDataInfo")
      */
     public function personalInfoAction() {
         return $this->render('BiznesServiceBundle:Default:personalDataInfo.html.twig');
@@ -73,19 +73,28 @@ class DefaultController extends Controller {
         $user = $this->getUser();
         if($user != null){
             $em = $this->getDoctrine()->getManager();
-            $wm = new WalletManager($em);
+            $wm = $this->get('walletManager');
 
             $wm->countMoneyInWallet($user);
             $moneyInWallet = $wm->getMoneyInWallet();
 
             return $this->render('BiznesServiceBundle:Default:dashboard.html.twig', array(
                     'moneyInWallet' => $moneyInWallet,
+                    'wm' => $wm,
             ));
         }
         else{
             throw $this->createAccessDeniedException('You must be logged in to see this page.');
-        }
-        
+        }    
+    }
+    
+    /**
+     * @Route("/incomes", name="incomes")
+     */
+    public function incomesAction(){
+        return $this->render('BiznesServiceBundle:Default:incomes.html.twig', array(
+            
+        ));
     }
 
 }

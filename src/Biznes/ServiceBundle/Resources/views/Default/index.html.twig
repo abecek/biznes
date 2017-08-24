@@ -29,7 +29,7 @@
                         <a href="{{ path('personalData') }}">Twoje konto</a>
                     </li>
                     <li>
-                        <a href="#">Naliczenia</a>
+                        <a href="{{ path('incomes') }}">Naliczenia</a>
                     </li>
                     <li>
                         <a href="#">Pomoc supportu</a>
@@ -56,7 +56,7 @@
                                         <input name="refService" type="text" placeholder="{{ url('register') }}" value="{{ url('register', {'referer' : userId }) }}" class="form-control"></input>
                                     </div>
                                     <div class="well">Twój link referencyjny prowadzący do rejestracji w sklepie:
-                                        <input name="refShop" type="text" placeholder="{{ url('register_shop') }}" value="{{ url('register_shop', {'referer' : userId }) }}" class="form-control"></input>
+                                        <input name="refShop" type="text" placeholder="{{ url('registerShop') }}" value="{{ url('registerShop', {'referer' : userId }) }}" class="form-control"></input>
                                     </div>
                                     <div class="well">Utwórz własny link prowadzący bezpośrednio do promwanego przez Ciebie produktu.
                                         <input name="refShop" type="text" placeholder="{{ url('product', {'id' : '0000', 'referer': userId}) }}" value="{{ url('product', {'id' : '0000', 'referer': userId}) }}" class="form-control"></input>

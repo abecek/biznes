@@ -8,15 +8,17 @@
 
 namespace Biznes\Utils;
 
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Doctrine\ORM\EntityManager;
 use Biznes\DatabaseBundle\Entity\Products;
 
 use Symfony\Component\HttpFoundation\Session\Session;
 
-class CartManager {
+class CartManager extends Controller{
+    protected $em = null;
     private $products = array();
     private $priceOverall = 0;
     private $count = 0;
-    
     
     public function countPriceOverall(){
         $this->priceOverall = 0;
