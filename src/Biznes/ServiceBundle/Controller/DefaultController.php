@@ -92,8 +92,25 @@ class DefaultController extends Controller {
      * @Route("/incomes", name="incomes")
      */
     public function incomesAction(){
+        $wm = $this->get('walletManager');
+        $user = $this->getUser();
+        $incomes = $wm->loadWalletManagerFromDB($user)->getIncomes();
+        
         return $this->render('BiznesServiceBundle:Default:incomes.html.twig', array(
-            
+            'incomes' => $incomes,
+        ));
+    }
+    
+    /**
+     * @Route("/expanses", name="expanses")
+     */
+    public function expansesAction(){
+        $wm = $this->get('walletManager');
+        $user = $this->getUser();
+        $expanses = $wm->loadWalletManagerFromDB($user)->getExpanses();
+        
+        return $this->render('BiznesServiceBundle:Default:expanses.html.twig', array(
+            'expanses' => $expanses,
         ));
     }
 

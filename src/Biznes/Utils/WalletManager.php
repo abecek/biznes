@@ -15,6 +15,7 @@ use Biznes\DatabaseBundle\Entity\Users;
 use Biznes\DatabaseBundle\Entity\Products;
 use Biznes\DatabaseBundle\Entity\Orders;
 use Biznes\DatabaseBundle\Entity\Incomes;
+use Biznes\DatabaseBundle\Entity\Expanses;
 
 /**
  * Description of WalletManager
@@ -48,6 +49,7 @@ class WalletManager extends Controller{
      */
     public function addIncome($sponsorId, Users $user, Orders $order, \DateTime $date, Products $product){
         if($this->em != null){
+            if($user === null) throw new Exception('User could not be null.');
             $income = new Incomes();       
         
             $income->setIdSponsor($sponsorId);
@@ -76,7 +78,25 @@ class WalletManager extends Controller{
     }
     
     public function addExpanse(Users $user, $value, \DateTime $date = null){
-        if($date === null) $date = new \DateTime;
+        if($this->em != null){
+            if($date === null) $date = new \DateTime;
+            if($user === null) throw new Exception('User could not be null.');
+                
+            $expanse = new Expanses();
+            $expanse->setDateExpanse($date);
+            $expanse->setIdUser($user);
+            $expanse->setState('waiting');
+            $value = floatval($value);
+            $value = round($value, 2);
+            $expanse->setValue($value);
+            
+            $this->em->persist($expanse);
+            $this->em->flush();
+            $this->em->clear();
+        }
+        else{
+            throw new Exception('Wallet Manager: EntityManager cant be null.');
+        }
         
     }
     
@@ -86,11 +106,14 @@ class WalletManager extends Controller{
             $this->incomes = $this->em->getRepository('BiznesDatabaseBundle:Incomes')
                     ->findBy(array(
                         'idSponsor' => $userId
+                    ), array(
+                        'dateIncome' => 'DESC',
                     ));
         }
         else{
             throw new Exception('Wallet Manager: EntityManager cant be null.');
         }
+        return $this;
     }
     
     protected function loadExpansesFromDB(Users $user){
@@ -98,11 +121,14 @@ class WalletManager extends Controller{
             $this->expanses = $this->em->getRepository('BiznesDatabaseBundle:Expanses')
                     ->findBy(array(
                         'idUser' => $user
+                    ), array(
+                        'dateExpanse' => 'DESC',
                     ));
         }
         else{
             throw new Exception('Wallet Manager: EntityManager cant be null.');
         }
+        return $this;
     }
     
     protected function loadPartnersFromDB(Users $user){
@@ -115,6 +141,7 @@ class WalletManager extends Controller{
         else{
             throw new Exception('Wallet Manager: EntityManager cant be null.');
         }
+        return $this;
     }
     
     public function loadWalletManagerFromDB(Users $user){
@@ -126,6 +153,7 @@ class WalletManager extends Controller{
         else{
             throw new Exception('Wallet Manager: EntityManager cant be null.');
         }
+        return $this;
     }
     
     
@@ -151,6 +179,8 @@ class WalletManager extends Controller{
         }
         
         $this->moneyInWallet = round(($incomesOverall - $expansesOverall), 2);
+        
+        return $this;
     }
     
     public function getMoneyInWallet(){
@@ -179,6 +209,7 @@ class WalletManager extends Controller{
             'count' => $count,
             'value' => $value,
         );
+        
     }
     
     /*
