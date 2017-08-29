@@ -5,10 +5,13 @@ namespace Biznes\DatabaseBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
+
 use Biznes\DatabaseBundle\Entity\Users;
 use Biznes\DatabaseBundle\Form\UsersType;
+
 use Biznes\DatabaseBundle\Entity\UsersData;
 use Biznes\DatabaseBundle\Form\UsersDataType;
+
 use Biznes\DatabaseBundle\Entity\UsersAddresses;
 use Biznes\DatabaseBundle\Form\UsersAddressType;
 
@@ -85,7 +88,6 @@ class DefaultController extends Controller {
                 $user->setIdSponsor($sponsor);
             }
             
-
             // 4) save the User!
             //try{
             $em->persist($user);
@@ -148,9 +150,8 @@ class DefaultController extends Controller {
             //}
         }
 
-
         return $this->render('BiznesServiceBundle:Default:register.html.twig', array(
-                    'register_form' => $form->createView(),
+                    'registerForm' => $form->createView(),
         ));
     }
 
@@ -168,7 +169,10 @@ class DefaultController extends Controller {
 
         // 1) build the form
         $user = new Users();
-        $form = $this->createForm(UsersType::class, $user);
+        $form = $this->createForm(UsersType::class, $user, array(
+            'attr' => array('class' => 'form'),
+        ));
+        
         // 2) handle the submit (will only happen on POST)
         $form->handleRequest($request);
 
@@ -183,7 +187,7 @@ class DefaultController extends Controller {
         }
 
         return $this->render('BiznesShopBundle:Default:register.html.twig', array(
-                    'register_form' => $form->createView(),
+                    'registerForm' => $form->createView(),
                     'cart' => $cart,
         ));
     }

@@ -5,11 +5,11 @@
  */
 namespace Biznes\DatabaseBundle\Form;
 
-use Biznes\DatabaseBundle\Entity\Users;
-
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+
+use Biznes\DatabaseBundle\Entity\Users;
 
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
@@ -61,7 +61,8 @@ class UsersType extends AbstractType{
                 
                 //->add('agree_checkbox', CheckboxType::class, array('mapped' => false))
                 
-                ->add('Dodaj konto!', SubmitType::class, array(
+                ->add('createAccount', SubmitType::class, array(
+                    'label' => 'Załóż konto!',
                     'attr' => array(
                         'class' => 'btn btn-default btn-lg',
                     ),

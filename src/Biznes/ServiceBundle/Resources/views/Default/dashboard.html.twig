@@ -1,13 +1,16 @@
 {% extends "BiznesServiceBundle:Default:index.html.twig" %}
 
 {% block content %}
-    Panel główny
-    
+    <div class="row">
+        <div class="col-md-12">
+            <h3>Panel główny</h3>
 
-    <h3>Wallet </h3>
-    Money: {{ moneyInWallet }}
-    
-    <hr>
+            <h4>Portfel </h4>
+            Dostępne pieniądze: {{ moneyInWallet }}
+
+            <hr>
+        </div>
+    </div>
     
     {{ dump(wm) }}
     

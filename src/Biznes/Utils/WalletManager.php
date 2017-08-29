@@ -77,6 +77,37 @@ class WalletManager extends Controller{
         }
     }
     
+    public function addWithdraw(Users $user, $form, \DateTime $date = null){
+        if($this->em != null){
+            if($date === null) $date = new \DateTime;
+            if($user === null) throw new Exception('User could not be null.');
+
+            if($form->isValid() && $form->isSubmitted()){
+                $val = $form['value']->getData();
+                $this->countMoneyInWallet($user);
+                
+                $moneyAfterWithdraw = ($this->getMoneyInWallet() - floatval($val));
+                
+                if($val != null && $moneyAfterWithdraw >= 0){ 
+                    $expanse = new Expanses();
+                    $expanse->setValue($val);
+                    $expanse->setIdUser($user);
+                    $expanse->setDateExpanse(new \DateTime);
+                    $expanse->setState('oczekuje');
+
+                    $this->em->persist($expanse);
+                    $this->em->flush();
+                    return true;
+                }
+            }
+        }
+        else{
+            throw new Exception('Wallet Manager: EntityManager cant be null.');
+        }
+        
+        return false;
+    }
+    
     public function addExpanse(Users $user, $value, \DateTime $date = null){
         if($this->em != null){
             if($date === null) $date = new \DateTime;
@@ -175,7 +206,7 @@ class WalletManager extends Controller{
         $expansesOverall = 0;
         foreach($this->expanses as $expanse){
             $value = $expanse->getValue();
-            $expansesOverall += floatval($expanse);
+            $expansesOverall += floatval($value);
         }
         
         $this->moneyInWallet = round(($incomesOverall - $expansesOverall), 2);

@@ -35,7 +35,7 @@
                         <a href="{{ path('expanses') }}">Wypłaty</a>
                     </li>
                     <li>
-                        <a href="{{ path('newIncome') }}">Nowa wypłata</a>
+                        <a href="{{ path('newWithdraw') }}">Nowa wypłata</a>
                     </li>
                     <li>
                         <a href="#">Pomoc supportu</a>
@@ -103,7 +103,18 @@
         <script src="{{ asset('bundles/biznesservice/js/jquery.js') }}"></script>
         <!-- Bootstrap Core JavaScript -->
         <script src="{{ asset('bundles/biznesservice/js/bootstrap.min.js') }}"></script>
+        <!-- Own -->
+        <script>
 
+
+               $('#submit').click(function(){
+                   //alert('submitting');
+                   $('#withdrawForm').submit();
+                   
+               });
+        </script>
+
+        
         <!-- Menu Toggle Script -->
         <script>
             $("#menu-toggle1").click(function(e) {
