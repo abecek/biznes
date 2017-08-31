@@ -1,0 +1,129 @@
+{% extends "BiznesServiceBundle::base.html.twig" %}
+
+    {% set title = 'Strona główna' %}
+    
+    {% block assets %}
+        <!-- Bootstrap Core CSS -->
+        <link href="{{ asset('bundles/biznesservice/css/bootstrap.min.css') }}" rel="stylesheet">
+        <!-- Custom CSS -->
+        <link href="{{ asset('bundles/biznesservice/css/simple-sidebar.css') }}" rel="stylesheet">
+    {% endblock %}
+
+
+    {% block body %}
+        <div id="wrapper">
+            <!-- Sidebar -->
+            <div id="sidebar-wrapper">
+                <ul class="sidebar-nav">
+                    {#
+                        <li class="sidebar-brand">
+                            <a href="#">
+                                Start Bootstrap
+                            </a>
+                        </li>
+                    #}
+                    <li>
+                        <a href="{{ path('dashboard') }}">Panel główny</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('personalData') }}">Twoje konto</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('incomes') }}">Naliczenia</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('expanses') }}">Wypłaty</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('newWithdraw') }}">Nowa wypłata</a>
+                    </li>
+                    <li>
+                        <a href="#">Pomoc supportu</a>
+                    </li>
+                    <li>
+                        <a href="#menu-toggle2" id="menu-toggle2">Zwiń menu boczne</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /#sidebar-wrapper -->
+
+            <!-- Page Content -->
+            <div id="page-content-wrapper">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            {% block content %}
+                                {#
+                                <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>
+                                #}
+                                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                                    <h3>Panel główny</h3>
+                                    <div class="well">Twój link referencyjny prowadzący do rejestracji w serwisie:
+                                        <input name="refService" type="text" placeholder="{{ url('register') }}" value="{{ url('register', {'referer' : userId }) }}" class="form-control"></input>
+                                    </div>
+                                    <div class="well">Twój link referencyjny prowadzący do rejestracji w sklepie:
+                                        <input name="refShop" type="text" placeholder="{{ url('registerShop') }}" value="{{ url('registerShop', {'referer' : userId }) }}" class="form-control"></input>
+                                    </div>
+                                    <div class="well">Utwórz własny link prowadzący bezpośrednio do promwanego przez Ciebie produktu.
+                                        <input name="refShop" type="text" placeholder="{{ url('product', {'id' : '0000', 'referer': userId}) }}" value="{{ url('product', {'id' : '0000', 'referer': userId}) }}" class="form-control"></input>
+                                        Przykładowo podmień w linku powyżej <font color="red"><strong>0000</strong></font>, na numer produktu, który chcesz promować. <br>
+                                        Bądź w łatwiejszy sposób... do adresu URL produktu, dodaj na konću(po slashu) swój numer identyfikacyjny w serwisie tj. <strong>{{ userId }}</strong>.<br>
+                                        Następnie podaj taki link bezpośrednio osobie, której chcesz polecić nasz produkt.
+                                        Ów osoba stanie się twoją osobą poleconą, tak jak gdyby rejestrowała się tradycyjnie przez twój link.
+                                        <div class="alert alert-warning">
+                                            <strong>Uwaga!</strong> 
+                                            Powyższe działanie bedzię jedynie możliwe, podczas jednej sesji. <br> 
+                                            Po czasie 15 sesja minut wygaśnie. Również po wejściu na nowo na stronę sklepu, z innego źrodła(np. telefonu komórkowego).
+                                        </div>
+                                    </div>
+                                {% else %}
+                                    <h1>Witaj na stronie serwisu partnerskiego!</h1>
+                                    <p>Zarabiaj polecając nasze produkty! Zarejestruj się już teraz, by uzyskać swój link referencyjny.</p>
+                                    <p>Dołącz już teraz, to nic nie kosztuje. <a href="{{ path('register') }}"> Rejestracja!</a></p>
+
+                                {% endif %}
+                            {% endblock %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /#page-content-wrapper -->
+            <hr>
+            {% if um is defined %}
+                {{ dump(um) }}
+            {% endif %}
+        </div>
+        <!-- /#wrapper -->
+        
+    {% endblock %}
+
+    
+    {% block javascripts %}
+        <!-- jQuery -->
+        <script src="{{ asset('bundles/biznesservice/js/jquery.js') }}"></script>
+        <!-- Bootstrap Core JavaScript -->
+        <script src="{{ asset('bundles/biznesservice/js/bootstrap.min.js') }}"></script>
+        <!-- Own -->
+        <script>
+
+
+               $('#submit').click(function(){
+                   //alert('submitting');
+                   $('#withdrawForm').submit();
+                   
+               });
+        </script>
+
+        
+        <!-- Menu Toggle Script -->
+        <script>
+            $("#menu-toggle1").click(function(e) {
+                e.preventDefault();
+                $("#wrapper").toggleClass("toggled");
+            });
+            $("#menu-toggle2").click(function(e) {
+                e.preventDefault();
+                $("#wrapper").toggleClass("toggled");
+            });
+        </script>
+    {% endblock %}

@@ -1,0 +1,15 @@
+{% extends "BiznesShopBundle::base.html.twig" %}
+{% set title = 'Rejestracja' %}
+{% block carousel %}
+
+{% endblock %}
+
+
+{% block container %}
+    <div class="row">
+        Strona rejestracji
+        {{ form_start(registerForm) }}
+        {{ form_widget(registerForm) }}
+        {{ form_end(registerForm) }}
+    </div>
+{% endblock %}

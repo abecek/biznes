@@ -1,0 +1,61 @@
+{% extends "BiznesShopBundle::base.html.twig" %}
+{% set title = 'Koszyk' %}
+{% block carousel %}
+
+{% endblock %}
+
+
+{% block container %}
+    <div class="row">
+        {% if cart is defined %}
+            <h4>Zawartość koszyka</h4>
+            <table class="table">
+                <tr>
+                    <th>
+                        Nazwa produktu
+                    </th>
+                    <th>
+                        Opis
+                    </th>
+                    <th>
+                        Cena
+                    </th>
+                    <th>
+                    </th>
+                </tr>
+                {% for product in cart.products %}
+                    <tr>
+                        <td>
+                            {{ product.name }}
+                        </td>
+                        <td>
+                            {{ product.description }}
+                        </td>
+                        <td>
+                            {{ product.price }}
+                        </td>
+                        <td>
+                            <form class="form" action="{{ path('cartDelete') }}" method="POST">
+                                <input type="hidden" name="idProduct" value="{{ product.idProduct }}"/>
+                                <button class="btn btn-default" type="submit">Remove from cart</button>
+                            </form>
+                            {#
+                               <a href="{{ path('cartDelete', {'id': product.idProduct}) }}"/> Usun</a>
+                               #}   
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        {% endif %}
+        {% if cart.products %}
+            <form class="form" action="{{ path('cartDelete') }}" method="POST">
+                <input type="hidden" name="all" value="true"/>
+                <button class="btn btn-default" type="submit">Clear cart</button
+            </form>
+            <a class="btn btn-default" href="{{ path('checkout') }}">Realizacja zamowienia!</a></br>
+        {% endif %}
+        <hr>
+        {# dump(cart) #}
+        <hr>
+    </div>
+{% endblock %}

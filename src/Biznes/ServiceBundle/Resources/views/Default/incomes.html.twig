@@ -1,0 +1,68 @@
+{% extends "BiznesServiceBundle:Default:index.html.twig" %}
+
+{% block content %}
+    
+    
+
+    <div class="row">
+        <div class="col-md-12">
+            <h3>Lista twoich prowizji</h3>
+            
+            <table class="table table-hover table-striped">
+                <tr>
+                    <th>
+                        Data:
+                    </th>
+                    <th>
+                        Nr naliczenia:
+                    </th>
+                    <th>
+                        Od użytkownika o id:
+                    </th>
+                    <th>
+                        Produkt:
+                    </th>
+                    <th>
+                        Wartość:
+                    </th>
+                    <th>
+                        Status:
+                    </th>
+                </tr>
+                {% if incomes is empty %}
+                    <tr>
+                        <td colspan="6">
+                            <h4>Brak naliczeń</h4>
+                        </td>
+                    </tr>
+                {% else %}
+                    {% for income in incomes %}
+                        <tr>
+                            <td>
+                                {{ income.dateIncome|date('Y-m-d H:m:s') }}
+                            </td>
+                            <td>
+                                {{ income.idIncome }}
+                            </td>
+                            <td>
+                                {{ income.idUserfrom.idUser }}
+                            </td>
+                            <td>
+                                {{ income.idProduct.name }}
+                            </td>
+                            <td>
+                                {{ income.value }}
+                            </td>
+                            <td>
+                                {{ income.state }}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                {% endif %}
+            </table>
+        </div>
+    </div>
+    
+    <hr>
+    {{ dump(incomes) }}
+{% endblock %}

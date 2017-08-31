@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<!--
+ Michał Błaszczyk
+-->
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, shrink-to-fit=no, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        
+        <title>{{ title | default('Service') }}</title>
+        
+        {% block assets %}
+        {% endblock %}
+        
+    </head>
+    <body>
+        {% block header %}
+            <!-- Navigation -->
+            <nav id="nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+                <div class="container">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                        <a href="{{ path('homepage') }}" class="navbar-brand">Serwis</a>
+                    </div>
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav">
+                            <li>
+                                <a href="{{ path('shop') }}">Sklep</a>                        
+                            </li>
+                            <li>
+                                <a href="{{ url('logged') }}">Test logowania</a>
+                            </li>
+                            <li>
+                                <a href="{{ url('admin') }}">Admin</a>
+                            </li>
+                        </ul>
+
+                        <ul class="nav navbar-nav navbar-right">
+                                {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                                    <li>
+                                        <a href="{{ url('logout') }}">Wyloguj</a>
+                                    </li>
+                                {% else %}
+                                    <li>
+                                        <a href="{{ url('login') }}">Logowanie</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ url('register') }}">Rejestracja</a>
+                                    </li>
+                                {% endif %}
+                        </ul>
+                        <ul class="nav navbar-nav">
+                            <li>
+                                <a href="#menu-toggle1" id="menu-toggle1">Przesuń menu</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- /.navbar-collapse -->
+                </div>
+                <!-- /.container -->
+            </nav>
+        {% endblock %}
+        
+        {% block body %}
+        {% endblock %}
+        
+        {% block javascripts %}
+        {% endblock %}
+        
+    </body>
+</html>

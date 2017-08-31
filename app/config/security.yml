@@ -14,17 +14,20 @@ security:
                 property: username
 
     firewalls:
-        main:
+        service:
             anonymous: ~
+            pattern:  ^/
             form_login:
                 login_path: login
                 check_path: login
+                use_referer: true
                 csrf_token_generator: security.csrf.token_manager
-                
             logout:
                 path:   /logout
-                target: /
+                target: /shop
                 invalidate_session: false
+
+                
                 
     access_control:
         - { path: ^/admin, roles: ROLE_ADMIN }

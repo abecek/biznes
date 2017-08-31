@@ -1,0 +1,10 @@
+{% extends "BiznesServiceBundle:Default:index.html.twig" %}
+
+{% block content %}
+    <div class="row">
+        Strona rejestracji
+        {{ form_start(registerForm) }}
+        {{ form_widget(registerForm) }}
+        {{ form_end(registerForm) }}
+    </div>
+{% endblock %}

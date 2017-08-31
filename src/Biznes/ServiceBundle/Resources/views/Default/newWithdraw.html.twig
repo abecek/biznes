@@ -1,0 +1,45 @@
+{% extends "BiznesServiceBundle:Default:index.html.twig" %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-12">
+            <h3>Zleć nową wypłatę</h3>
+            Posiadane dostępne pieniądze: {{ moneyInWallet }} zł.
+            {% if (msg is not null) %}
+                <div class="well">
+                    {{ msg }}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+
+            {{ form_start(newWithdrawForm) }}
+            {{ form_widget(newWithdrawForm) }}
+            {{ form_end(newWithdrawForm) }}
+            
+            <div class="modal fade" id="confirmNewWithdraw" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3>Potwierdzenie</h3>
+                        </div>
+                        <div class="modal-body">
+                            <div>Czy na pewno chcesz wypłacić podaną kwotę? </div> 
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cofnij</button>
+                            <a href="#" id="submit" class="btn btn-success success">Akceptuj</a>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>  
+                    
+        </div>
+    </div>
+    
+    <hr>
+    {{ dump(msg) }}
+{% endblock %}

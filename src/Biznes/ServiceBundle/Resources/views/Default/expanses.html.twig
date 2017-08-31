@@ -1,0 +1,56 @@
+{% extends "BiznesServiceBundle:Default:index.html.twig" %}
+
+{% block content %}
+    
+    
+
+    <div class="row">
+        <div class="col-md-12">
+            <h3>Lista twoich wypłat</h3>
+            
+            <table class="table table-hover table-striped">
+                <tr>
+                    <th>
+                        Data:
+                    </th>
+                    <th>
+                        Nr wypłaty:
+                    </th>
+                    <th>
+                        Wartość:
+                    </th>
+                    <th>
+                        Status:
+                    </th>
+                </tr>
+                {% if expanses is empty %}
+                    <tr>
+                        <td colspan="4">
+                            <h4>Brak wypłat</h4>
+                        </td>
+                    </tr>
+                {% else %}
+                    {% for expanse in expanses %}
+                        <tr>
+                            <td>
+                                {{ expanse.dateExpanse|date('Y-m-d H:m:s') }}
+                            </td>
+                            <td>
+                                {{ expanse.idExpanse }}
+                            </td>
+                            <td>
+                                {{ expanse.value }}
+                            </td>
+                            <td>
+                                {{ expanse.state }}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                {% endif %}
+            </table>
+        </div>
+    </div>
+    
+    <hr>
+    {{ dump(expanses) }}
+{% endblock %}

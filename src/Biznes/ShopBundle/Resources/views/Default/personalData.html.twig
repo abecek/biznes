@@ -1,0 +1,22 @@
+{% extends "BiznesShopBundle::base.html.twig" %}
+{% set title = 'Data info' %}
+{% block carousel %}
+
+{% endblock %}
+{% block container %}
+    <div class="row">
+        <div class="well">
+            <h4>W formularzu poniżej możesz dodac, edytować swoje dane personalne.</h4>
+            {{ form_start(data_form) }}
+            {{ form_widget(data_form) }}
+            {{ form_end(data_form) }}
+        </div>
+
+        <div class="well">
+            <h4>W formularzu poniżej możesz dodac, edytować swoje dane adresowe.</h4>
+            {{ form_start(address_form) }}
+            {{ form_widget(address_form) }}
+            {{ form_end(address_form) }}
+        </div>
+    </div>   
+{% endblock %}

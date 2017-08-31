@@ -1,0 +1,21 @@
+{% extends "BiznesShopBundle::base.html.twig" %}
+{% set title = 'Koszyk' %}
+{% block carousel %}
+
+{% endblock %}
+
+
+{% block container %}
+    <div class="row">
+        <hr>
+        {{ dump(order) }}
+        <hr>
+        {{ dump(cart) }}
+        <hr>
+        {{ dump(products) }}
+        <hr>
+        $products
+        {{ dump(req) }}
+        <hr>
+    </div>
+{% endblock %}

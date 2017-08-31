@@ -6,7 +6,8 @@ CREATE TABLE users(
     date_register datetime not null,
     gender char(1) not null,
     id_sponsor int(11) unsigned DEFAULT 0,
-    rank tinyint(1) default 0
+    rank tinyint(1) default 0,
+	is_active tinyint(1) default 0
 );
 
 ALTER TABLE `users`
@@ -21,7 +22,6 @@ ADD UNIQUE KEY `email_UNIQUE` (`email`);
   
 ALTER TABLE `users`
 ADD CONSTRAINT `users_id_sponsor_fk1` FOREIGN KEY (`id_sponsor`) REFERENCES `users` (`id_user`);
-
 
 
 CREATE TABLE users_data(
@@ -44,7 +44,6 @@ ADD UNIQUE KEY `identity_number_UNIQUE` (`identity_number`);
   
 ALTER TABLE `users_data`
 ADD CONSTRAINT `users_data_id_user_fk1` FOREIGN KEY (`id_user`) REFERENCES `users` (`id_user`) ON DELETE CASCADE;
-
 
 
 CREATE TABLE users_addresses(
@@ -77,7 +76,7 @@ CREATE TABLE products(
 	version varchar(3) not null,
 	rating numeric(2,1),
 	id_category tinyint unsigned not null,
-	id_program	tinyint unsigned not null
+	id_program	tinyint unsigned not null,
 );
 
 ALTER TABLE `products`
@@ -116,8 +115,9 @@ CREATE TABLE orders(
 	price_overall numeric(6,2) not null,
 	id_user int(11) unsigned not null,
 	id_state tinyint unsigned not null,
-	id_payment_method tinyint unsigned not null,
-	id_sponsor int(11) unsigned not null
+	id_payment_method tinyint(3) unsigned not null,
+	id_sponsor int(11) unsigned not null,
+	id_realization_method tinyint(3) unsigned not null,
 );
 
 ALTER TABLE `orders`
@@ -142,7 +142,8 @@ MODIFY `id_payment_method` tinyint unsigned AUTO_INCREMENT PRIMARY KEY;
 ALTER TABLE `orders`
 ADD CONSTRAINT `orders_id_user_fk1` FOREIGN KEY (`id_user`) REFERENCES `users` (`id_user`),
 ADD CONSTRAINT `orders_id_state_fk1` FOREIGN KEY (`id_state`) REFERENCES `states` (`id_state`),
-ADD CONSTRAINT `orders_id_payment_fk1` FOREIGN KEY (`id_payment_method`) REFERENCES `payment_methods` (`id_payment_method`);
+ADD CONSTRAINT `orders_id_payment_fk1` FOREIGN KEY (`id_payment_method`) REFERENCES `payment_methods` (`id_payment_method`),
+ADD CONSTRAINT `orders_id_realization_fk1` FOREIGN KEY (`id_realization_method`) REFERENCES `realization_methods` (`id_realization_method`);
 
 
 
@@ -159,8 +160,7 @@ MODIFY `id_realization_method` tinyint unsigned AUTO_INCREMENT PRIMARY KEY;
 CREATE TABLE carts(
 	id_cart int(11) unsigned NOT NULL,
     id_order int(11) unsigned not null,
-	id_product smallint unsigned not null,
-	id_realization_method tinyint unsigned NOT NULL
+	id_product smallint unsigned not null
 );
 
 ALTER TABLE `carts`
@@ -168,8 +168,7 @@ MODIFY `id_cart` int(11) unsigned AUTO_INCREMENT PRIMARY KEY;
 
 ALTER TABLE `carts`
 ADD CONSTRAINT `carts_id_user_fk1` FOREIGN KEY (`id_order`) REFERENCES `orders` (`id_order`) ON DELETE CASCADE,
-ADD CONSTRAINT `carts_id_state_fk1` FOREIGN KEY (`id_product`) REFERENCES `products` (`id_product`),
-ADD CONSTRAINT `carts_id_payment_fk1` FOREIGN KEY (`id_realization_method`) REFERENCES `realization_methods` (`id_realization_method`);
+ADD CONSTRAINT `carts_id_state_fk1` FOREIGN KEY (`id_product`) REFERENCES `products` (`id_product`);
 
 
 
@@ -205,6 +204,41 @@ ALTER TABLE `messages`
 ADD CONSTRAINT `messages_id_ticket_fk1` FOREIGN KEY (`id_ticket`) REFERENCES `tickets` (`id_ticket`) ON DELETE CASCADE,
 ADD CONSTRAINT `messages_id_user_fk1` FOREIGN KEY (`id_user`) REFERENCES `users` (`id_user`) ON DELETE CASCADE;
 
+
+CREATE TABLE incomes(
+	id_income int(11) unsigned NOT NULL,
+    id_user int(11) unsigned not null,
+	date_income datetime not null,
+    value numeric(6,2) not null,  
+    id_userFrom int(11) unsigned not null,
+    id_order int(11) unsigned NOT NULL,
+    id_product smallint unsigned NOT NULL
+
+);
+
+ALTER TABLE `incomes`
+MODIFY `id_income` int(11) unsigned AUTO_INCREMENT PRIMARY KEY;
+
+ALTER TABLE `incomes`
+ADD CONSTRAINT `incomes_id_user_fk1` FOREIGN KEY (`id_user`) REFERENCES `users` (`id_user`),
+ADD CONSTRAINT `incomes_id_userFrom_fk1` FOREIGN KEY (`id_userFrom`) REFERENCES `users` (`id_user`),
+ADD CONSTRAINT `incomes_id_product_fk1` FOREIGN KEY (`id_product`) REFERENCES `products` (`id_product`),
+ADD CONSTRAINT `incomes_id_orders_fk1` FOREIGN KEY (`id_order`) REFERENCES `orders` (`id_order`);
+
+
+create table expanses(
+	id_expanse int(11) unsigned not null,
+    id_user int(11) unsigned not null,
+    date_expanse datetime not null,
+    value numeric(6,2) not null,  
+    state varchar(20) not null
+);
+
+ALTER TABLE `expanses`
+MODIFY `id_expanse` int(11) unsigned AUTO_INCREMENT PRIMARY KEY;
+
+ALTER TABLE `expanses`
+ADD CONSTRAINT `expanse_id_user_fk1` FOREIGN KEY (`id_user`) REFERENCES `users` (`id_user`);
 
 
 

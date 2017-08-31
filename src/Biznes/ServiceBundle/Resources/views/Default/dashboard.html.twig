@@ -1,0 +1,17 @@
+{% extends "BiznesServiceBundle:Default:index.html.twig" %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-12">
+            <h3>Panel główny</h3>
+
+            <h4>Portfel </h4>
+            Dostępne pieniądze: {{ moneyInWallet }}
+
+            <hr>
+        </div>
+    </div>
+    
+    {{ dump(wm) }}
+    
+{% endblock %}
