@@ -1,36 +1,53 @@
 {% extends "BiznesShopBundle::base.html.twig" %}
 {% set title = 'Logowanie' %}
-{% block carousel %}
 
+{% block header %}
+    <header class="business-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="display-3 text-center text-white mt-4 text-bordered">Logowanie</h1>
+                    <img src="images/"/>
+                </div>
+            </div>
+        </div>
+    </header>
 {% endblock %}
 
 
 {% block container %}
-    <div class="row">
-        Strona logowania
+    <div class="content">
+        <div class="row">
+            <div class="col">
 
-        {% if error %}
-            <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-        {% endif %}
 
-        <form action="{{ path('login') }}" method="post" class="form">
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="_username" value="{{ last_username }}" class="form-control"/>
+                <form action="{{ path('login') }}" method="post" class="form">
+                    {% if error %}
+                        <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                    {% endif %}
 
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="_password" class="form-control"/>
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" name="_username" value="{{ last_username }}" class="form-control"/>
 
-            <input type="hidden" name="_target_path" value="shop" />
-            <input type="hidden" name="_failure_path" value="loginShop" />
-            {#
-                If you want to control the URL the user
-                is redirected to on success (more details below)
-                <input type="hidden" name="_target_path" value="/account" />
-            #}
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="_password" class="form-control"/>
 
-            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                    <input type="hidden" name="_target_path" value="shop" />
+                    <input type="hidden" name="_failure_path" value="loginShop" />
 
-            <button type="submit" class="btn btn-default btn-lg">Zaloguj</button>
-        </form>
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+                    <button type="submit" class="btn btn-primary btn-lg">Zaloguj</button>
+                </form>
+            </div>
+        </div>
     </div>
+{% endblock %}
+
+{% block footer %}
+    <footer class="py-3 bg-dark fixed-bottom">
+        <div class="container">
+            <p class="m-0 text-center text-white">Copyright &copy; Your Website 2017</p>
+        </div>
+    </footer>
 {% endblock %}

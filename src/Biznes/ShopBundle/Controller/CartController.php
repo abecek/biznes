@@ -97,6 +97,7 @@ class CartController extends Controller{
                 ->findAll();
 
         return $this->render('BiznesShopBundle:Default:checkout.html.twig', array(
+                    'error' => null,
                     'cart' => $cart,
                     'userData' => $userData,
                     'userAddress' => $userAddresss,
@@ -136,6 +137,25 @@ class CartController extends Controller{
                     'products' => $productsInCart,
                     'order' => $order,
                     'req' => $request,
+        ));
+    }
+    
+    /**
+     * @Route("/test", name="test")
+     */
+    public function testAction(){
+        $cart = $this->get('cartManager');
+        $cart->loadFromSession();
+        
+        $boughtProducts = null;
+        $um = $this->get('userManager');
+        
+        $boughtProducts = $um->getBoughtIdProducts($this->getUser());
+        
+        
+        return $this->render('BiznesShopBundle:Default:test.html.twig', array(
+            'cart' => $cart,
+            'boughtProducts' => $boughtProducts,
         ));
     }
     

@@ -1,22 +1,48 @@
 {% extends "BiznesShopBundle::base.html.twig" %}
 {% set title = 'Data info' %}
-{% block carousel %}
 
+{% block header %}
+    <header class="business-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="display-3 text-center text-white mt-4 text-bordered">Twoje dane</h1>
+                    <img src="images/"/>
+                </div>
+            </div>
+        </div>
+    </header>
 {% endblock %}
-{% block container %}
-    <div class="row">
-        <div class="well">
-            <h4>W formularzu poniżej możesz dodac, edytować swoje dane personalne.</h4>
-            {{ form_start(data_form) }}
-            {{ form_widget(data_form) }}
-            {{ form_end(data_form) }}
-        </div>
 
-        <div class="well">
-            <h4>W formularzu poniżej możesz dodac, edytować swoje dane adresowe.</h4>
-            {{ form_start(address_form) }}
-            {{ form_widget(address_form) }}
-            {{ form_end(address_form) }}
-        </div>
-    </div>   
+{% block container %}
+    <div class="content">
+        <div class="row">
+            {% if data_form is not null %}
+                <div class="col-md-6">
+                    <h4>W formularzu poniżej możesz dodac, edytować swoje dane personalne.</h4>
+                    {{ form_start(data_form) }}
+                    {{ form_widget(data_form) }}
+                    {{ form_end(data_form) }}
+                </div>
+            {% endif %}
+
+            {% if address_form is not null %}
+                <div class="col-md-6">
+                    <h4>W formularzu poniżej możesz dodac, edytować swoje dane adresowe.</h4>
+                    {{ form_start(address_form) }}
+                    {{ form_widget(address_form) }}
+                    {{ form_end(address_form) }}
+                </div>
+            {% endif %}
+            
+        </div>   
+    </div>
+{% endblock %}
+
+{% block footer %}
+<footer class="py-3 bg-dark fixed-bottom">
+    <div class="container">
+        <p class="m-0 text-center text-white">Copyright &copy; Your Website 2017</p>
+    </div>
+</footer>
 {% endblock %}

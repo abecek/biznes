@@ -5,13 +5,10 @@ namespace Biznes\DatabaseBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
-
 use Biznes\DatabaseBundle\Entity\Users;
 use Biznes\DatabaseBundle\Form\UsersType;
-
 use Biznes\DatabaseBundle\Entity\UsersData;
 use Biznes\DatabaseBundle\Form\UsersDataType;
-
 use Biznes\DatabaseBundle\Entity\UsersAddresses;
 use Biznes\DatabaseBundle\Form\UsersAddressType;
 
@@ -76,18 +73,17 @@ class DefaultController extends Controller {
             $session = new \Symfony\Component\HttpFoundation\Session\Session();
             $refererFromSession = $session->get('referer');
             $sponsor = null;
-            
-            if(is_numeric($refererFromSession)){
+
+            if (is_numeric($refererFromSession)) {
                 $sponsor = $em->getRepository('BiznesDatabaseBundle:Users')->findOneByIdUser($refererFromSession);
-            }
-            elseif (is_numeric($referer)) {
+            } elseif (is_numeric($referer)) {
                 $sponsor = $em->getRepository('BiznesDatabaseBundle:Users')->findOneByIdUser($referer);
             }
-            
+
             if (!empty($sponsor)) {
                 $user->setIdSponsor($sponsor);
             }
-            
+
             // 4) save the User!
             //try{
             $em->persist($user);
@@ -95,9 +91,9 @@ class DefaultController extends Controller {
 
             $uniqueHashForUser = $user->getEmail() . 'activation';
             $uniqueHashForUser = sha1($uniqueHashForUser);
-            
+
             $userId = $user->getIdUser();
-            
+
             $message = \Swift_Message::newInstance()
                     ->setSubject('Activate your new account in WebTools')
                     ->setFrom('michal.blaszcz@gmail.com')
@@ -106,9 +102,9 @@ class DefaultController extends Controller {
                     $this->renderView(
                             //app/Resources/views/Emails/registration.html.twig
                             'Emails/registration.html.twig', array(
-                                'name' => $form['username']->getData(),
-                                'userId' => $userId,
-                                'uniqueHashForUser' => $uniqueHashForUser,
+                        'name' => $form['username']->getData(),
+                        'userId' => $userId,
+                        'uniqueHashForUser' => $uniqueHashForUser,
                             )
                     ), 'text/html'
             );
@@ -146,7 +142,7 @@ class DefaultController extends Controller {
 
         if ($this->register($user, $form, $referer)) {
             //if ($source == null) {
-                return $this->redirectToRoute('accountCreatedService');
+            return $this->redirectToRoute('accountCreatedService');
             //}
         }
 
@@ -172,7 +168,7 @@ class DefaultController extends Controller {
         $form = $this->createForm(UsersType::class, $user, array(
             'attr' => array('class' => 'form'),
         ));
-        
+
         // 2) handle the submit (will only happen on POST)
         $form->handleRequest($request);
 
@@ -294,10 +290,10 @@ class DefaultController extends Controller {
     }
 
     /**
-     * @Route("/shop/personalData/{source}", name="personalDataShop")
+     * @Route("/shop/personalData/{source}/{dataToEdit}", name="personalDataShop")
      * Adding and Editing PersonalData and PersonalAddress
      */
-    public function shopPersonalDataAction(Request $request, $source = null) {
+    public function shopPersonalDataAction(Request $request, $source = null, $dataToEdit = null) {
         //Check if user is fully authenticated
         if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
             throw $this->createAccessDeniedException('You have to be fully authenticated user.');
@@ -313,71 +309,78 @@ class DefaultController extends Controller {
         $userData = $um->get('userData');
         $userAddress = $um->get('userAddress');
 
-        $form1 = $this->createForm(UsersDataType::class, $userData, array(
-            'userData' => $userData,
-            'attr' => array('class' => 'form'),
-        ));
-        // 2) handle the submit (will only happen on POST)
-        $form1->handleRequest($request);
+        $form1 = null;
+        
+        //if ($dataToEdit == 'personal') {
+            $form1 = $this->createForm(UsersDataType::class, $userData, array(
+                'userData' => $userData,
+                'attr' => array('class' => 'form'),
+            ));
+            // 2) handle the submit (will only happen on POST)
+            $form1->handleRequest($request);
 
-        if ($this->addPersonalData($userData, $form1)) {
-            if ($source == null) {
-                return $this->redirectToRoute('shopPersonalDataInfo');
-            } elseif ($source == "checkout") {
-                return $this->redirectToRoute('checkout');
+            if ($this->addPersonalData($userData, $form1)) {
+                if ($source == null) {
+                    return $this->redirectToRoute('shopPersonalDataInfo');
+                } elseif ($source == "checkout") {
+                    return $this->redirectToRoute('checkout');
+                }
             }
-        }
+        //}
 
-        $form2 = $this->createForm(UsersAddressType::class, $userAddress, array(
-            'userAddress' => $userAddress,
-        ));
-        $form2->handleRequest($request);
+        $form2 = null;
+        
+        //if ($dataToEdit == 'address') {
+            $form2 = $this->createForm(UsersAddressType::class, $userAddress, array(
+                'userAddress' => $userAddress,
+            ));
+            $form2->handleRequest($request);
 
-        if ($this->addPersonalAddress($userAddress, $form2)) {
-            if ($source == null) {
-                return $this->redirectToRoute('shopPersonalDataInfo');
-            } elseif ($source == "checkout") {
-                return $this->redirectToRoute('checkout');
+            if ($this->addPersonalAddress($userAddress, $form2)) {
+                if ($source == null) {
+                    return $this->redirectToRoute('shopPersonalDataInfo');
+                } elseif ($source == "checkout") {
+                    return $this->redirectToRoute('checkout');
+                }
             }
-        }
-
+        //}
+        
+        $form1 !== null ? $dataFormView = $form1->createView() : $dataFormView = null;
+        $form2 !== null ? $addressFormView = $form2->createView() : $addressFormView = null;
+        
+ 
         return $this->render('BiznesShopBundle:Default:personalData.html.twig', array(
                     'cart' => $cart,
-                    'data_form' => $form1->createView(),
-                    'address_form' => $form2->createView(),
+                    'data_form' => $dataFormView,
+                    'address_form' => $addressFormView,
         ));
     }
-    
+
     /**
      * @Route("/activate/{userId}/{hash}", name="activationLink")
      */
-    public function activateAction($userId = null, $hash = null){
-        if($hash != null && is_numeric($userId)){
+    public function activateAction($userId = null, $hash = null) {
+        if ($hash != null && is_numeric($userId)) {
             $em = $this->getDoctrine()->getManager();
             $user = $em->getRepository('BiznesDatabaseBundle:Users')
                     ->findOneByIdUser($userId);
-            
+
             $uniqueHashForUser = $user->getEmail() . 'activation';
             $uniqueHashForUser = sha1($uniqueHashForUser);
-            
-            if($user->getIsActive() == 1){
+
+            if ($user->getIsActive() == 1) {
                 throw $this->createNotFoundException('Your account has been already activated.');
-            }
-            else{
-                if($hash == $uniqueHashForUser){
+            } else {
+                if ($hash == $uniqueHashForUser) {
                     $user->setIsActive(1);
                     $em->persist($user);
                     $em->flush();
                     return $this->render('BiznesDatabaseBundle:Default:activate.html.twig');
-                }
-                else{
+                } else {
                     throw $this->createNotFoundException('Your activation link is not valid.');
                 }
-                    
             }
-            
-        }
-        else{
+        } else {
             throw $this->createNotFoundException('Your activation link is not correct.');
         }
     }

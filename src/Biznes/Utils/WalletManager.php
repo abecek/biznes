@@ -5,7 +5,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 namespace Biznes\Utils;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -59,7 +58,7 @@ class WalletManager extends Controller{
             $income->setIdProduct($product);
 
             $income->setDateIncome($date);
-            $income->setState("to accept");
+            $income->setState("do zaakceptowania");
 
             $value = (intval($product->getPrice()) * 0.1);
             $value = round($value, 2);
@@ -116,7 +115,7 @@ class WalletManager extends Controller{
             $expanse = new Expanses();
             $expanse->setDateExpanse($date);
             $expanse->setIdUser($user);
-            $expanse->setState('waiting');
+            $expanse->setState('oczekuje');
             $value = floatval($value);
             $value = round($value, 2);
             $expanse->setValue($value);
@@ -197,7 +196,7 @@ class WalletManager extends Controller{
         
         $incomesOverall = 0;
         foreach($this->incomes as $income){
-            if($income->getState() == 'accepted'){
+            if($income->getState() == 'zaakceptowane'){
                 $value = $income->getValue();
                 $incomesOverall += floatval($value);
             }
@@ -253,7 +252,7 @@ class WalletManager extends Controller{
         $count = 0;
         $value = 0;
         foreach($this->incomes as $income){
-            if($income->getState() == 'accepted'){
+            if($income->getState() == 'zaakceptowane'){
                 $count += 1;
                 $value += floatval($income->getValue());
             }
@@ -295,7 +294,7 @@ class WalletManager extends Controller{
         $count = 0;
         $value = 0;
         foreach($this->expanses as $expanse){
-            if($expanse->getState() == 'completed'){
+            if($expanse->getState() == 'zrealizowano'){
                 $count += 1;
                 $value += floatval($expanse->getValue());
             }

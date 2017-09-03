@@ -1,21 +1,98 @@
 {% extends "BiznesShopBundle::base.html.twig" %}
+
 {% set title = 'Produkt' %}
-{% block carousel %}
-
-{% endblock %}
-
 
 {% block container %}
     <div class="row">
-    <hr>
-    {{ product.name }}
-    <br>
-    {{ product.price }}
-    <hr>
-        <form class="form" method="POST" action="{{ url('cartAdd') }}">
-            <input type="hidden" name="idProduct" value="{{ product.idProduct }}"/>
-            {# <input type="text" name="desc" placeholder="Opis"/> #}
-            <input class="btn btn-default" type="submit" value="Dodaj do koszyka"/>
-        </form>
-    </div>
+
+        <div class="col-lg-3">
+            <a href="{{ path('shop') }}" class="list-group-item active back-link">
+                Powrót do produktów
+            </a>
+
+            {% if not isInCart %}
+                <form id="addItemToCart" class="form" method="POST" action="{{ path('cartAdd') }}">
+                    <input type="hidden" name="idProduct" value="{{ product.idProduct }}"/>
+                    <a href="javascript:{}" class="list-group-item active back-link"
+                       onclick="document.getElementById('addItemToCart').submit();
+                               return false;">Dodaj do koszyka
+                    </a>                
+                </form>
+            {% else %}
+                <form id="deleteItemToCart" class="form" method="POST" action="{{ path('cartDelete') }}">
+                    <input type="hidden" name="idProduct" value="{{ product.idProduct }}"/>
+                    <a href="javascript:{}" class="list-group-item active back-link"
+                       onclick="document.getElementById('deleteItemToCart').submit();
+                               return false;">Usuń z koszyka
+                    </a>                
+                </form>
+            {% endif %}
+            
+            <a href="{{ path('cart') }}" class="list-group-item active back-link">
+                Przejdź do koszyka
+            </a>
+
+        </div>
+        <!-- /.col-lg-3 -->
+
+        <div class="col-lg-9">
+            <div class="card mt-4">
+                <div class="card-header">
+                    <div class="float-left">
+                        <h3 class="card-title">{{ product.name }}</h3>
+                    </div>
+                    <div class="float-right">
+                        <h4>Cena: {{ product.price }} zł</h4>
+                    </div>
+                </div>
+                <img class="card-img-top img-fluid" src="http://placehold.it/900x600" alt="">
+                <div class="card-body">
+                    <h4 class="card-title">Opis:</h4>
+
+                    <p class="card-text">{{ product.description }}
+                    </p>
+
+                    <span class="text-warning">&#9733; &#9733; &#9733; &#9733; &#9734;</span>
+                    4.0 stars
+                </div>
+            </div>
+            <!-- /.card -->
+
+            <div class="card card-outline-secondary my-4">
+                <div class="card-header">
+                    Product Reviews
+                </div>
+                <div class="card-body">
+
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis et enim aperiam inventore, similique necessitatibus neque non! Doloribus, modi sapiente laboriosam aperiam fugiat laborum. Sequi mollitia, necessitatibus quae sint natus.</p>
+                    <small class="text-muted">Opublikowano przez Anonymous on 3/1/17</small>
+                    <hr>
+
+                    {% if userCanGiveRating %}
+                        <form class="form" method="POST">
+                            <div class="form-group">
+                                <label for="selectRating">Ocena:</label>
+                                <select class="form-control" id="selectRating">
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                </select>
+                                <label for="comment">Komentarz:</label>
+                                <textarea class="form-control" rows="5" id="comment"></textarea>
+                            </div>
+                        </form>
+                        <a href="#" class="btn btn-primary">Zostaw ocenę</a>
+                    {% endif %}
+                    </div>
+                </div>
+                <!-- /.card -->
+
+            </div>
+            <!-- /.col-lg-10 -->
+
+        </div>
+        <!-- /.row -->
+
 {% endblock %}

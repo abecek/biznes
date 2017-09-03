@@ -29,28 +29,27 @@ class UsersType extends AbstractType{
     public function buildForm(FormBuilderInterface $builder, array $options) {
         $builder->add('username', TextType::class, array(
                     'attr' => array('class' => 'form-control'),
-                    'label' => 'Username',
+                    'label' => 'Login:',
                 ))
                 ->add('email', EmailType::class, array(
                     'attr' => array('class' => 'form-control'),
-                    'label' => 'Email',
+                    'label' => 'Email:',
                 ))
-                
-                //->add('password', PasswordType::class)
                 
                 ->add('plainPassword', RepeatedType::class, array(
                     'type' => PasswordType::class,
                     'first_options'  => array(
-                        'label' => 'Password', 
+                        'label' => 'Hasło:', 
                         'attr' => array('class' => 'form-control')
                     ),
                     'second_options' => array(
-                        'label' => 'Repeat Password', 
+                        'label' => 'Powtórz hasło:', 
                         'attr' => array('class' => 'form-control')
                     ),
                 )) 
                         
                 ->add('gender', ChoiceType::class, array(
+                    'label' => 'Płeć:',
                     'choices' => array(
                         'mężczyzna' => 'M',
                         'kobieta' => 'K'
@@ -64,7 +63,7 @@ class UsersType extends AbstractType{
                 ->add('createAccount', SubmitType::class, array(
                     'label' => 'Załóż konto!',
                     'attr' => array(
-                        'class' => 'btn btn-default btn-lg',
+                        'class' => 'btn btn-primary btn-block',
                     ),
                 ));
     }

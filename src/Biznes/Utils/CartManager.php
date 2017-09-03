@@ -65,6 +65,17 @@ class CartManager extends Controller{
         }
     }
     
+    public function isInCart($id){
+        $temp = array();
+        foreach($this->products as $prod){
+            $temp[] = $prod->getIdProduct();
+        }
+        if(in_array($id, $temp)){
+            return true;
+        }
+        return false;
+    }
+    
     public function setProducts($products){
         $this->products = $products;
         return $this;
@@ -101,6 +112,7 @@ class CartManager extends Controller{
         
     }
     
+    /*
     public function loadFromDatabase($id){
         if(is_numeric($id) && $id != null){
             $em = $this->getDoctrine()->getManager();
@@ -108,6 +120,7 @@ class CartManager extends Controller{
                 ->findOneByIdProduct($id);
         }
     }
+     */
     
     public function clearCart(){
         $this->count = 0;

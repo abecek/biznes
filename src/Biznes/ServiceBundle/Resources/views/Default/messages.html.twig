@@ -1,0 +1,42 @@
+{% extends "BiznesServiceBundle::base.html.twig" %}
+
+{% set title = 'Twoje wątki' %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-lg-12">
+            <h1>Twoje wątki</h1>
+
+            {% for ticket in tickets %}
+                <div class="card card-outline-secondary my-4">
+                    <div class="card-header">
+                        <h3 class="ticket-title float-left">
+                            <a class="message-link" href="{{ path('message', { 'id' : ticket.idTicket }) }}">
+                                Tytuł: {{ ticket.title }} 
+                            </a>
+                        </h3>
+
+                        {% if ticket.dateClose is null %}
+                            <span class="badge badge-success float-right" style="margin:10px;">Otwarty</span>
+                        {% else %}
+                            <span class="badge badge-dark float-right" style="margin:10px;">Zamknięty</span>
+                        {% endif %}
+                    </div>
+                    <div class="card-body">
+                        <p class="ticket">
+                            {{ ticket.text }} 
+                        </p>
+                        <hr>
+                        <small class="text-muted">
+                            Temat otwarty: {{ ticket.dateOpen|date('Y-m-d H:m:s') }}
+                        </small> 
+
+                    </div>
+                </div>
+
+            {% endfor %}
+
+            {{dump(tickets)}}
+        </div>
+    </div> 
+{% endblock %}

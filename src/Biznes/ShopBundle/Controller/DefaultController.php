@@ -37,6 +37,7 @@ class DefaultController extends Controller {
 
         $cart = $this->get('cartManager');
         $cart->loadFromSession();
+
         return $this->render('BiznesShopBundle:Default:index.html.twig', array(
                     'products' => $products,
                     'cart' => $cart,
@@ -57,16 +58,35 @@ class DefaultController extends Controller {
             $em = $this->getDoctrine()->getManager();
             $product = $em->getRepository('BiznesDatabaseBundle:Products')
                     ->findOneByIdProduct($id);
-            /*
-              $cart = Cart::getInstance();
-              $cart->loadFromSession();
-             */
+
             $cart = $this->get('cartManager');
             $cart->loadFromSession();
 
             if (!empty($product)){
+                $userCanGiveRating = false;
+                $isInCart = false;
+                
+                if($cart->isInCart($id)){
+                   $isInCart = true; 
+                }
+                
+                //ADDING COMMENTS AND RATINGS TO DO
+                $um = $this->get('userManager');
+                $user = $this->getUser();
+                if($user !== null){
+                    $productsBoughtByUser = $um->getBoughtIdProducts($user);
+                    if(!empty($productsBoughtByUser)){
+                        if(in_array($id, $productsBoughtByUser)){
+                            $userCanGiveRating = true;
+                        }
+                    }
+                }
+                
+                
                 return $this->render('BiznesShopBundle:Default:product.html.twig', array(
                             'product' => $product,
+                            'userCanGiveRating' => $userCanGiveRating,
+                            'isInCart' => $isInCart,
                             'cart' => $cart,
                 ));
             } 

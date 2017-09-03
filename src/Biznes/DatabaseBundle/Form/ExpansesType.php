@@ -40,7 +40,7 @@ class ExpansesType extends AbstractType{
         ->add('makeWithdraw', ButtonType::class, array(
             'label' => 'Zleć wypłate',
             'attr' => array(
-                'class' => 'btn btn-default btn-lg',
+                'class' => 'btn btn-primary btn-lg btn-block',
                 'data-toggle' => 'modal',
                 'data-target' => '#confirmNewWithdraw',
                 ),
