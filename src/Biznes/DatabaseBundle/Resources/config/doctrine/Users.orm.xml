@@ -42,6 +42,12 @@
         <option name="default">0</option>
       </options>
     </field>
+    <field name="canChangePassword" type="boolean" column="can_change_password" nullable="true">
+      <options>
+        <option name="default">0</option>
+      </options>
+    </field>
+    <field name="dateLastPassRequest" type="datetime" column="date_last_pass_request" nullable="true"/>
     <many-to-one field="idSponsor" target-entity="Users" fetch="LAZY">
       <join-columns>
         <join-column name="id_sponsor" referenced-column-name="id_user"/>

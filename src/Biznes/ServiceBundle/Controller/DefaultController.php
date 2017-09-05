@@ -21,13 +21,26 @@ class DefaultController extends Controller {
     public function indexAction() {
         $user = $this->getUser();
         $userId = null;
-        $ticketsCount = null;
-        $notificationCount = null;
+        $ticketsCount = 0;
+        $notificationCount = 0;
+        
+        $tickets = null;
+        $notes = null;
+        
+        $em = $this->getDoctrine()->getManager();
         
         if ($user != null) {
             $userId = $user->getIdUser();
             $tm = $this->get('ticketsManager');
-            $ticketsCount = $tm->getMessagesCount($user);
+            $tm->loadAllTicketsByIdUser($user);
+            $tickets = $tm->getAllOpenTickets();
+            $ticketsCount = $tm->getOpenTicketsCount($user);
+            
+            $notes = $em->getRepository('BiznesDatabaseBundle:Notifications')
+                ->findBy(array(), array(
+                    'dateNotification' => 'DESC',
+                ));
+            $notificationCount = count($notes);
         }
 
         $um = $this->get('userManager');
@@ -35,6 +48,8 @@ class DefaultController extends Controller {
         return $this->render('BiznesServiceBundle:Default:index.html.twig', array(
                     'ticketsCount' => $ticketsCount,
                     'notificationCount' => $notificationCount,
+                    'notes' => $notes,
+                    'tickets' => $tickets,
         ));
     }
 
@@ -43,13 +58,6 @@ class DefaultController extends Controller {
      */
     public function createdAction() {
         return $this->render('BiznesServiceBundle:Default:registerCreated.html.twig');
-    }
-
-    /**
-     * @Route("/personalInfo", name="personalDataInfo")
-     */
-    public function personalInfoAction() {
-        return $this->render('BiznesServiceBundle:Default:personalDataInfo.html.twig');
     }
 
     /**
@@ -331,5 +339,27 @@ class DefaultController extends Controller {
                     'messageForm' => $form->createView(),
         ));
     }
-
+    
+    /**
+     * @Route("/notatifications", name="notatifications")
+     */
+    public function notatificationsAction(){
+        $notes = array();
+        $em = $this->getDoctrine()->getManager();
+        $notes = $em->getRepository('BiznesDatabaseBundle:Notifications')
+                ->findBy(array(), array(
+                    'dateNotification' => 'DESC',
+                ));
+        
+        return $this->render('BiznesServiceBundle:Default:notifications.html.twig', array(
+            'notes' => $notes,
+        ));
+    }
+    
+    /**
+     * @Route("/personalInfo", name="personalDataInfo")
+     */
+    public function personalInfoAction() {
+        return $this->render('BiznesServiceBundle:Default:personalDataInfo.html.twig');
+    }
 }

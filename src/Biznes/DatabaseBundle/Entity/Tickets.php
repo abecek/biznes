@@ -2,8 +2,6 @@
 
 namespace Biznes\DatabaseBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-
 /**
  * Tickets
  */
@@ -44,6 +42,7 @@ class Tickets
      * Set title
      *
      * @param string $title
+     *
      * @return Tickets
      */
     public function setTitle($title)
@@ -56,7 +55,7 @@ class Tickets
     /**
      * Get title
      *
-     * @return string 
+     * @return string
      */
     public function getTitle()
     {
@@ -67,6 +66,7 @@ class Tickets
      * Set text
      *
      * @param string $text
+     *
      * @return Tickets
      */
     public function setText($text)
@@ -79,7 +79,7 @@ class Tickets
     /**
      * Get text
      *
-     * @return string 
+     * @return string
      */
     public function getText()
     {
@@ -90,6 +90,7 @@ class Tickets
      * Set dateOpen
      *
      * @param \DateTime $dateOpen
+     *
      * @return Tickets
      */
     public function setDateOpen($dateOpen)
@@ -102,7 +103,7 @@ class Tickets
     /**
      * Get dateOpen
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getDateOpen()
     {
@@ -113,6 +114,7 @@ class Tickets
      * Set dateClose
      *
      * @param \DateTime $dateClose
+     *
      * @return Tickets
      */
     public function setDateClose($dateClose)
@@ -125,7 +127,7 @@ class Tickets
     /**
      * Get dateClose
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getDateClose()
     {
@@ -135,7 +137,7 @@ class Tickets
     /**
      * Get idTicket
      *
-     * @return integer 
+     * @return integer
      */
     public function getIdTicket()
     {
@@ -146,6 +148,7 @@ class Tickets
      * Set idUser
      *
      * @param \Biznes\DatabaseBundle\Entity\Users $idUser
+     *
      * @return Tickets
      */
     public function setIdUser(\Biznes\DatabaseBundle\Entity\Users $idUser = null)
@@ -158,7 +161,7 @@ class Tickets
     /**
      * Get idUser
      *
-     * @return \Biznes\DatabaseBundle\Entity\Users 
+     * @return \Biznes\DatabaseBundle\Entity\Users
      */
     public function getIdUser()
     {

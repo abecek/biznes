@@ -88,6 +88,16 @@ class Users implements AdvancedUserInterface, \Serializable
      * @ORM\Column(name="is_active", type="integer")
      */
     protected $isActive = 0;
+    
+    /**
+     * @var integer
+     */
+    private $canChangePassword = '0';
+    
+    /**
+     * @var \DateTime
+     */
+    private $dateLastPassRequest;
 
     
     public function __construct()
@@ -341,6 +351,11 @@ class Users implements AdvancedUserInterface, \Serializable
             $this->username,
             $this->password,
             $this->isActive,
+            $this->rank,
+            $this->gender,
+            $this->dateRegister,
+            $this->canChangePassword,
+            $this->dateLastPassRequest,
             // see section on salt below
             // $this->salt,
         ));
@@ -354,6 +369,11 @@ class Users implements AdvancedUserInterface, \Serializable
             $this->username,
             $this->password,
             $this->isActive,
+            $this->rank,
+            $this->gender,
+            $this->dateRegister,
+            $this->canChangePassword,
+            $this->dateLastPassRequest,
             // see section on salt below
             // $this->salt
         ) = unserialize($serialized);
@@ -381,4 +401,63 @@ class Users implements AdvancedUserInterface, \Serializable
         return true;
     }
     
+    
+    public function isAbleToChangePassword(){
+        if($this->canChangePassword == '0'){
+            return false;
+        }
+        else{
+            return true;
+        }
+    }
+
+    /**
+     * Set canChangePassword
+     *
+     * @param integer $canChangePassword
+     *
+     * @return Users
+     */
+    public function setCanChangePassword($canChangePassword)
+    {
+        $this->canChangePassword = $canChangePassword;
+
+        return $this;
+    }
+
+    /**
+     * Get canChangePassword
+     *
+     * @return integer
+     */
+    public function getCanChangePassword()
+    {
+        return $this->canChangePassword;
+    }
+    
+
+
+    /**
+     * Set dateLastPassRequest
+     *
+     * @param \DateTime $dateLastPassRequest
+     *
+     * @return Users
+     */
+    public function setDateLastPassRequest($dateLastPassRequest)
+    {
+        $this->dateLastPassRequest = $dateLastPassRequest;
+
+        return $this;
+    }
+
+    /**
+     * Get dateLastPassRequest
+     *
+     * @return \DateTime
+     */
+    public function getDateLastPassRequest()
+    {
+        return $this->dateLastPassRequest;
+    }
 }

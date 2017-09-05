@@ -2,8 +2,6 @@
 
 namespace Biznes\DatabaseBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-
 /**
  * States
  */
@@ -24,6 +22,7 @@ class States
      * Set name
      *
      * @param string $name
+     *
      * @return States
      */
     public function setName($name)
@@ -36,7 +35,7 @@ class States
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -46,7 +45,7 @@ class States
     /**
      * Get idState
      *
-     * @return integer 
+     * @return integer
      */
     public function getIdState()
     {

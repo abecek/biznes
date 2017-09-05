@@ -2,8 +2,6 @@
 
 namespace Biznes\DatabaseBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-
 /**
  * Programs
  */
@@ -24,6 +22,7 @@ class Programs
      * Set name
      *
      * @param string $name
+     *
      * @return Programs
      */
     public function setName($name)
@@ -36,7 +35,7 @@ class Programs
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -46,7 +45,7 @@ class Programs
     /**
      * Get idProgram
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getIdProgram()
     {

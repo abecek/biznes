@@ -25,334 +25,302 @@
         {% endblock %}
 
     </head>
-    
+
     {% block body %}
-    <body class="fixed-nav sticky-footer bg-dark" id="page-top">
-        {% block nav %}
-            <!-- Navigation -->
-            <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
-                <a class="navbar-brand" href="{{ path('homepage') }}">Affiliations TOOLS</a>
-                <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarResponsive">
-                    <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
-                        <li class="nav-item active" data-toggle="tooltip" data-placement="right" title="Dashboard">
-                            <a class="nav-link" href="{{ path('dashboard') }}">
-                                <i class="fa fa-fw fa-dashboard"></i>
-                                <span class="nav-link-text">
-                                    Pulpit</span>
-                            </a>
-                        </li>
+        <body class="fixed-nav sticky-footer bg-dark" id="page-top">
+            {% block nav %}
+                <!-- Navigation -->
+                <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+                    <a class="navbar-brand" href="{{ path('homepage') }}">Affiliations TOOLS</a>
+                    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarResponsive">
+                        <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
+                            <li class="nav-item active" data-toggle="tooltip" data-placement="right" title="Dashboard">
+                                <a class="nav-link" href="{{ path('dashboard') }}">
+                                    <i class="fa fa-fw fa-dashboard"></i>
+                                    <span class="nav-link-text">
+                                        Pulpit</span>
+                                </a>
+                            </li>
 
-                        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="yourAccount">
-                            <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#yourAccount" data-parent="#exampleAccordion">
-                                <i class="fa fa-fw fa-wrench"></i>
-                                <span class="nav-link-text">
-                                    Twoje konto</span>
-                            </a>
-                            <ul class="sidenav-second-level collapse" id="yourAccount">
-                                <li>
-                                    <a href="{{ path('personalData') }}">Dane adresowe i personalne</a>
-                                </li>
-                                <li>
-                                    <a href="#">Dane konta</a>
-                                </li>
-                            </ul>
-                        </li>
-                        
-                        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="revenue">
-                            <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#revenue" data-parent="#exampleAccordion">
-                                <i class="fa fa-fw fa-balance-scale"></i>
-                                <span class="nav-link-text">
-                                    Portfel</span>
-                            </a>
-                            <ul class="sidenav-second-level collapse" id="revenue">
-                                <li>
-                                    <a href="{{ path('incomes') }}">Naliczenia</a>
-                                </li>
-                                <li>
-                                    <a href="{{ path('withdraws') }}">Wypłaty</a>
-                                </li>
-                                <li>
-                                    <a href="{{ path('newWithdraw') }}">Nowa wypłata</a>
-                                </li>
-                            </ul>
-                        </li>
-                        
-                        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="support">
-                            <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#support" data-parent="#exampleAccordion">
-                                <i class="fa fa-fw fa-life-ring"></i>
-                                <span class="nav-link-text">
-                                    Pomoc supportu</span>
-                            </a>
-                            <ul class="sidenav-second-level collapse" id="support">
-                                <li>
-                                    <a href="{{ path('newTicket') }}">Nowy temat</a>
-                                </li>
-                                <li>
-                                    <a href="{{ path('messages') }}">Wiadomośći</a>
-                                </li>
-                                <li>
-                                    <a href="{{ path('personalData') }}">Powiadomienia</a>
-                                </li>
-                                <li>
-                                    <a href="{{ path('personalData') }}">FAQ</a>
-                                </li>
-                            </ul>
-                        </li>
-                        
-                        
+                            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="yourAccount">
+                                <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#yourAccount" data-parent="#exampleAccordion">
+                                    <i class="fa fa-fw fa-wrench"></i>
+                                    <span class="nav-link-text">
+                                        Twoje konto</span>
+                                </a>
+                                <ul class="sidenav-second-level collapse" id="yourAccount">
+                                    <li>
+                                        <a href="{{ path('personalData') }}">Dane adresowe i personalne</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ path('accountData') }}">Dane konta</a>
+                                    </li>
+                                </ul>
+                            </li>
+
+                            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="revenue">
+                                <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#revenue" data-parent="#exampleAccordion">
+                                    <i class="fa fa-fw fa-balance-scale"></i>
+                                    <span class="nav-link-text">
+                                        Portfel</span>
+                                </a>
+                                <ul class="sidenav-second-level collapse" id="revenue">
+                                    <li>
+                                        <a href="{{ path('incomes') }}">Naliczenia</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ path('withdraws') }}">Wypłaty</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ path('newWithdraw') }}">Nowa wypłata</a>
+                                    </li>
+                                </ul>
+                            </li>
+
+                            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="support">
+                                <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#support" data-parent="#exampleAccordion">
+                                    <i class="fa fa-fw fa-life-ring"></i>
+                                    <span class="nav-link-text">
+                                        Pomoc supportu</span>
+                                </a>
+                                <ul class="sidenav-second-level collapse" id="support">
+                                    <li>
+                                        <a href="{{ path('newTicket') }}">Nowy temat</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ path('messages') }}">Wiadomośći</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ path('notatifications') }}">Powiadomienia</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ path('personalData') }}">FAQ</a>
+                                    </li>
+                                </ul>
+                            </li>
 
 
-
-
-                        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-                            <a class="nav-link" href="#">
-                                <i class="fa fa-fw fa-area-chart"></i>
-                                <span class="nav-link-text">
-                                    Charts</span>
-                            </a>
-                        </li>
-
-
-
-                        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
-                            <a class="nav-link" href="#">
-                                <i class="fa fa-fw fa-table"></i>
-                                <span class="nav-link-text">
-                                    Tables</span>
-                            </a>
-                        </li>
-
-
-
-
-
-                        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Example Pages">
-                            <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseExamplePages" data-parent="#exampleAccordion">
-                                <i class="fa fa-fw fa-file"></i>
-                                <span class="nav-link-text">
-                                    Example Pages</span>
-                            </a>
-                            <ul class="sidenav-second-level collapse" id="collapseExamplePages">
-                                <li>
-                                    <a href="login.html">Login Page</a>
-                                </li>
-                                <li>
-                                    <a href="register.html">Registration Page</a>
-                                </li>
-                                <li>
-                                    <a href="forgot-password.html">Forgot Password Page</a>
-                                </li>
-                                <li>
-                                    <a href="blank.html">Blank Page</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Menu Levels">
-                            <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseMulti" data-parent="#exampleAccordion">
-                                <i class="fa fa-fw fa-sitemap"></i>
-                                <span class="nav-link-text">
-                                    Menu Levels</span>
-                            </a>
-                            <ul class="sidenav-second-level collapse" id="collapseMulti">
-                                <li>
-                                    <a href="#">Second Level Item</a>
-                                </li>
-                                <li>
-                                    <a href="#">Second Level Item</a>
-                                </li>
-                                <li>
-                                    <a class="nav-link-collapse collapsed" data-toggle="collapse" href="#collapseMulti2">Third Level</a>
-                                    <ul class="sidenav-third-level collapse" id="collapseMulti2">
-                                        <li>
-                                            <a href="#">Third Level Item</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Third Level Item</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Link">
-                            <a class="nav-link" href="#">
-                                <i class="fa fa-fw fa-link"></i>
-                                <span class="nav-link-text">
-                                    Link</span>
-                            </a>
-                        </li>
-                    </ul>
-                    <ul class="navbar-nav sidenav-toggler">
-                        <li class="nav-item">
-                            <a class="nav-link text-center" id="sidenavToggler">
-                                <i class="fa fa-fw fa-angle-left"></i>
-                            </a>
-                        </li>
-                    </ul>
-                    <ul class="navbar-nav ml-auto" style="margin-right: 200px;">
-                        <li class="nav-item active">
+                            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Example Pages">
+                                <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseExamplePages" data-parent="#exampleAccordion">
+                                    <i class="fa fa-fw fa-file"></i>
+                                    <span class="nav-link-text">
+                                        Example Pages</span>
+                                </a>
+                                <ul class="sidenav-second-level collapse" id="collapseExamplePages">
+                                    <li>
+                                        <a href="login.html">Login Page</a>
+                                    </li>
+                                    <li>
+                                        <a href="register.html">Registration Page</a>
+                                    </li>
+                                    <li>
+                                        <a href="forgot-password.html">Forgot Password Page</a>
+                                    </li>
+                                    <li>
+                                        <a href="blank.html">Blank Page</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            
+                            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Link">
+                                <a class="nav-link" href="#">
+                                    <i class="fa fa-fw fa-link"></i>
+                                    <span class="nav-link-text">
+                                        Link</span>
+                                </a>
+                            </li>
+                        </ul>
+                        <ul class="navbar-nav sidenav-toggler">
+                            <li class="nav-item">
+                                <a class="nav-link text-center" id="sidenavToggler">
+                                    <i class="fa fa-fw fa-angle-left"></i>
+                                </a>
+                            </li>
+                        </ul>
+                        <ul class="navbar-nav ml-auto" style="margin-right: 200px;">
+                            <li class="nav-item active">
                                 <a class="nav-link" href="{{ url('shop') }}"> Sklep</a>
                             </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle mr-lg-2" href="#" id="messagesDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fa fa-fw fa-envelope"></i>
-                                <span class="d-lg-none">Wiadomości
-                                    <span class="badge badge-pill badge-primary">12 Nowych</span>
-                                </span>
-                                <span class="new-indicator text-primary d-none d-lg-block">
-                                    <i class="fa fa-fw fa-circle"></i>
-                                    <span class="number">
-                                        {% if ticketsCount is defined %}
-                                            {{ ticketsCount }}
-                                        {% endif %}
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle mr-lg-2" href="#" id="messagesDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fa fa-fw fa-envelope"></i>
+                                    <span class="d-lg-none">Wiadomości
+                                        <span class="badge badge-pill badge-primary">
+                                            {% if ticketsCount is defined %}
+                                                {{ ticketsCount }}
+                                            {% endif %}
+                                        </span>
                                     </span>
-                                </span>
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="messagesDropdown">
-                                <h6 class="dropdown-header">Nowe wiadomości:</h6>
-                                <div class="dropdown-divider"></div>
-
-                                <a class="dropdown-item" href="#">
-                                    <strong>David Miller</strong>
-                                    <span class="small float-right text-muted">11:21 AM</span>
-                                    <div class="dropdown-message small">Hey there! This new version of SB Admin is pretty awesome! These messages clip off when they reach the end of the box so they don't overflow over to the sides!</div>
-                                </a>
-                                <div class="dropdown-divider"></div>
-
-
-                                <a class="dropdown-item small" href="{{ path('messages') }}">
-                                    Zobacz wszystkie wiadomości
-                                </a>
-                            </div>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle mr-lg-2" href="#" id="alertsDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fa fa-fw fa-bell"></i>
-                                <span class="d-lg-none">Powiadomienia
-                                    <span class="badge badge-pill badge-warning">6 New</span>
-                                </span>
-                                <span class="new-indicator text-warning d-none d-lg-block">
-                                    <i class="fa fa-fw fa-circle"></i>
-                                    <span class="number">6</span>
-                                </span>
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="alertsDropdown">
-                                <h6 class="dropdown-header">Nowe powiadomienia:</h6>
-                                <div class="dropdown-divider"></div>
-
-
-
-                                <a class="dropdown-item" href="#">
-                                    <span class="text-success">
-                                        <strong>
-                                            <i class="fa fa-long-arrow-up"></i>
-                                            Status Update</strong>
+                                    <span class="new-indicator text-primary d-none d-lg-block">
+                                        <i class="fa fa-fw fa-circle"></i>
+                                        <span class="number">
+                                            {% if ticketsCount is defined %}
+                                                {{ ticketsCount }}
+                                            {% endif %}
+                                        </span>
                                     </span>
-                                    <span class="small float-right text-muted">11:21 AM</span>
-                                    <div class="dropdown-message small">This is an automated server response message. All systems are online.</div>
                                 </a>
-                                <div class="dropdown-divider"></div>
+                                <div class="dropdown-menu" aria-labelledby="messagesDropdown">
+                                    <h6 class="dropdown-header">Otwarte wątki:</h6>
+                                    <div class="dropdown-divider"></div>
+
+                                    {% if tickets is defined %}
+                                        {% for ticket in tickets%}
+                                            <a class="dropdown-item" href="#">
+                                                <strong>{{ ticket.title }} </strong>
+                                                <span class="small float-right text-muted">{{ ticket.dateOpen|date('Y-m-d H:m:s') }}</span>
+                                                <div class="dropdown-message small">{{ ticket.text }} </div>
+                                            </a>
+                                            <div class="dropdown-divider"></div>
+                                        {% endfor %}
+                                    {% endif %}
 
 
+                                    <a class="dropdown-item small" href="{{ path('messages') }}">
+                                        Zobacz wszystkie wiadomości
+                                    </a>
+                                </div>
 
-
-
-                                <a class="dropdown-item small" href="#">
-                                    Zobacz wszystkie powiadomienia
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle mr-lg-2" href="#" id="alertsDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fa fa-fw fa-bell"></i>
+                                    <span class="d-lg-none">Powiadomienia
+                                        <span class="badge badge-pill badge-warning">
+                                            {% if notificationCount is defined %}
+                                                {{ notificationCount }}
+                                            {% endif %}
+                                        </span>
+                                    </span>
+                                    <span class="new-indicator text-warning d-none d-lg-block">
+                                        <i class="fa fa-fw fa-circle"></i>
+                                        <span class="number">
+                                            {% if notificationCount is defined %}
+                                                {{ notificationCount }}
+                                            {% endif %}
+                                        </span>
+                                    </span>
                                 </a>
-                            </div>
-                        </li>
+                                <div class="dropdown-menu" aria-labelledby="alertsDropdown">
+                                    <h6 class="dropdown-header">Nowe powiadomienia:</h6>
+                                    <div class="dropdown-divider"></div>
+
+                                    {% if notes is defined %}
+                                        {% for note in notes%}   
+                                            <a class="dropdown-item" href="#">
+                                                <span class="text-success">
+                                                    <strong>
+                                                        <i class="fa fa-long-arrow-up"></i>
+                                                        {{ note.title }}
+                                                    </strong>
+                                                </span>
+                                                <span class="small float-right text-muted">{{ note.dateNotification|date('Y-m-d H:m:s') }}</span>
+                                                <div class="dropdown-message small">{{ note.text }}</div>
+                                            </a>
+                                            <div class="dropdown-divider"></div>
+                                        {% endfor %}
+                                    {% endif %}
 
 
-                        {% if is_granted('ROLE_USER') %}
-                            <li class="nav-item">
-                                <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
-                                    <i class="fa fa-fw fa-sign-out"></i>
-                                    Wyloguj</a>
-                            </li>
-                        {% else %}
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ url('login') }}"> Logowanie</a>
+
+                                    <a class="dropdown-item small" href="{{ path('notatifications') }}">
+                                        Zobacz wszystkie powiadomienia
+                                    </a>
+                                </div>
                             </li>
 
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ url('register') }}"> Rejestracja</a>
-                            </li>
-                        {% endif %}
-                        
-                    </ul>
+
+                            {% if is_granted('ROLE_USER') %}
+                                <li class="nav-item">
+                                    <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
+                                        <i class="fa fa-fw fa-sign-out"></i>
+                                        Wyloguj
+                                    </a>
+                                </li>
+                            {% else %}
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ url('login') }}"> Logowanie</a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ url('register') }}"> Rejestracja</a>
+                                </li>
+                            {% endif %}
+
+                        </ul>
+                    </div>
+                </nav>
+            {% endblock %}
+
+
+
+            <div class="content-wrapper">
+                <div class="container-fluid">
+                    {% block content %}
+                    {% endblock %}
                 </div>
-            </nav>
-        {% endblock %}
-
-
-
-        <div class="content-wrapper">
-            <div class="container-fluid">
-                {% block content %}
-                {% endblock %}
+                <!-- /.container-fluid -->
             </div>
-            <!-- /.container-fluid -->
-        </div>
-        <!-- /.content-wrapper -->
+            <!-- /.content-wrapper -->
 
 
-        <!-- Footer -->
-        {% block footer %}
-            <footer class="sticky-footer">
-                <div class="container">
-                    <div class="text-center">
-                        <small>Copyright &copy; Your Website 2017</small>
+            <!-- Footer -->
+            {% block footer %}
+                <footer class="sticky-footer">
+                    <div class="container">
+                        <div class="text-center">
+                            <small>Copyright &copy; Your Website 2017</small>
+                        </div>
                     </div>
-                </div>
-            </footer>
-        {% endblock %}
+                </footer>
+            {% endblock %}
 
-        <!-- Scroll to Top Button -->
-        <a class="scroll-to-top rounded" href="#page-top">
-            <i class="fa fa-angle-up"></i>
-        </a>
+            <!-- Scroll to Top Button -->
+            <a class="scroll-to-top rounded" href="#page-top">
+                <i class="fa fa-angle-up"></i>
+            </a>
 
-        <!-- Logout Modal -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Czy na pewno chcesz się wylogować?</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        Wybierz "Wyloguj" poniżej, jeżeli chcesz zakonczyć obecną sesję.
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Anuluj</button>
-                        <a class="btn btn-primary" href="{{ url('logout') }}">Wyloguj</a>
+            <!-- Logout Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Czy na pewno chcesz się wylogować?</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            Wybierz "Wyloguj" poniżej, jeżeli chcesz zakonczyć obecną sesję.
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Anuluj</button>
+                            <a class="btn btn-primary" href="{{ url('logout') }}">Wyloguj</a>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
 
 
-        {% block javascripts %}
-            <!-- Bootstrap core JavaScript -->
-            <script src="{{ asset('bundles/biznesservice/js/jquery.min.js') }}"></script>
-            <script src="{{ asset('bundles/biznesservice/js/popper.min.js') }}"></script>
-            <script src="{{ asset('bundles/biznesservice/js/bootstrap.min.js') }}"></script>
+            {% block javascripts %}
+                <!-- Bootstrap core JavaScript -->
+                <script src="{{ asset('bundles/biznesservice/js/jquery.min.js') }}"></script>
+                <script src="{{ asset('bundles/biznesservice/js/popper.min.js') }}"></script>
+                <script src="{{ asset('bundles/biznesservice/js/bootstrap.min.js') }}"></script>
 
-            <!-- Plugin JavaScript -->
-            <script src="{{ asset('bundles/biznesservice/js/jquery.easing.min.js') }}"></script>
-            <script src="{{ asset('bundles/biznesservice/js/Chart.min.js') }}"></script>
-            <script src="{{ asset('bundles/biznesservice/js/jquery.dataTables.js') }}"></script>
-            <script src="{{ asset('bundles/biznesservice/js/dataTables.bootstrap4.js') }}"></script>
+                <!-- Plugin JavaScript -->
+                <script src="{{ asset('bundles/biznesservice/js/jquery.easing.min.js') }}"></script>
+                <script src="{{ asset('bundles/biznesservice/js/Chart.min.js') }}"></script>
+                <script src="{{ asset('bundles/biznesservice/js/jquery.dataTables.js') }}"></script>
+                <script src="{{ asset('bundles/biznesservice/js/dataTables.bootstrap4.js') }}"></script>
 
-            <!-- Custom scripts for this template -->
-            <script src="{{ asset('bundles/biznesservice/js/sb-admin.js') }}"></script>
-        {% endblock %}
+                <!-- Custom scripts for this template -->
+                <script src="{{ asset('bundles/biznesservice/js/sb-admin.js') }}"></script>
+            {% endblock %}
 
-    </body>
+        </body>
     {% endblock %}
 </html>

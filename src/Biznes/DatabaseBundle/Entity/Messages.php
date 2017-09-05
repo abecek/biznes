@@ -2,8 +2,6 @@
 
 namespace Biznes\DatabaseBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-
 /**
  * Messages
  */
@@ -39,6 +37,7 @@ class Messages
      * Set text
      *
      * @param string $text
+     *
      * @return Messages
      */
     public function setText($text)
@@ -51,7 +50,7 @@ class Messages
     /**
      * Get text
      *
-     * @return string 
+     * @return string
      */
     public function getText()
     {
@@ -62,6 +61,7 @@ class Messages
      * Set dateMessage
      *
      * @param \DateTime $dateMessage
+     *
      * @return Messages
      */
     public function setDateMessage($dateMessage)
@@ -74,7 +74,7 @@ class Messages
     /**
      * Get dateMessage
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getDateMessage()
     {
@@ -84,7 +84,7 @@ class Messages
     /**
      * Get idMessage
      *
-     * @return integer 
+     * @return integer
      */
     public function getIdMessage()
     {
@@ -95,6 +95,7 @@ class Messages
      * Set idTicket
      *
      * @param \Biznes\DatabaseBundle\Entity\Tickets $idTicket
+     *
      * @return Messages
      */
     public function setIdTicket(\Biznes\DatabaseBundle\Entity\Tickets $idTicket = null)
@@ -107,7 +108,7 @@ class Messages
     /**
      * Get idTicket
      *
-     * @return \Biznes\DatabaseBundle\Entity\Tickets 
+     * @return \Biznes\DatabaseBundle\Entity\Tickets
      */
     public function getIdTicket()
     {
@@ -118,6 +119,7 @@ class Messages
      * Set idUser
      *
      * @param \Biznes\DatabaseBundle\Entity\Users $idUser
+     *
      * @return Messages
      */
     public function setIdUser(\Biznes\DatabaseBundle\Entity\Users $idUser = null)
@@ -130,7 +132,7 @@ class Messages
     /**
      * Get idUser
      *
-     * @return \Biznes\DatabaseBundle\Entity\Users 
+     * @return \Biznes\DatabaseBundle\Entity\Users
      */
     public function getIdUser()
     {

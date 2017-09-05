@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Biznes\DatabaseBundle\Entity\Ratings" table="ratings">
+    <indexes>
+      <index name="ratings_id_user_fk2" columns="id_user"/>
+      <index name="ratings_id_product_fk2" columns="id_product"/>
+    </indexes>
+    <id name="idRating" type="integer" column="id_rating">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="dateRating" type="datetime" column="date_rating" nullable="false"/>
+    <field name="text" type="string" column="text" length="250" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="isAccepted" type="boolean" column="is_accepted" nullable="true">
+      <options>
+        <option name="default">0</option>
+      </options>
+    </field>
+    <many-to-one field="idProduct" target-entity="Products" fetch="LAZY">
+      <join-columns>
+        <join-column name="id_product" referenced-column-name="id_product"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="idUser" target-entity="Users" fetch="LAZY">
+      <join-columns>
+        <join-column name="id_user" referenced-column-name="id_user"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

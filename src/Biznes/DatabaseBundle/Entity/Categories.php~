@@ -2,8 +2,6 @@
 
 namespace Biznes\DatabaseBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-
 /**
  * Categories
  */
@@ -24,6 +22,7 @@ class Categories
      * Set name
      *
      * @param string $name
+     *
      * @return Categories
      */
     public function setName($name)
@@ -36,7 +35,7 @@ class Categories
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -46,7 +45,7 @@ class Categories
     /**
      * Get idCategory
      *
-     * @return integer 
+     * @return integer
      */
     public function getIdCategory()
     {

@@ -5,12 +5,16 @@ namespace Biznes\DatabaseBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Biznes\DatabaseBundle\Entity\Users;
 use Biznes\DatabaseBundle\Form\UsersType;
 use Biznes\DatabaseBundle\Entity\UsersData;
 use Biznes\DatabaseBundle\Form\UsersDataType;
 use Biznes\DatabaseBundle\Entity\UsersAddresses;
 use Biznes\DatabaseBundle\Form\UsersAddressType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 
 class DefaultController extends Controller {
 
@@ -57,6 +61,35 @@ class DefaultController extends Controller {
             ));
         }
         //return $this->render('BiznesServiceBundle:Default:login.html.twig');
+    }
+
+    /**
+     * @Route("/activate/{userId}/{hash}", name="activationLink")
+     */
+    public function activateAction($userId = null, $hash = null) {
+        if ($hash != null && is_numeric($userId)) {
+            $em = $this->getDoctrine()->getManager();
+            $user = $em->getRepository('BiznesDatabaseBundle:Users')
+                    ->findOneByIdUser($userId);
+
+            $uniqueHashForUser = $user->getEmail() . 'activation';
+            $uniqueHashForUser = sha1($uniqueHashForUser);
+
+            if ($user->getIsActive() == 1) {
+                throw $this->createNotFoundException('Your account has been already activated.');
+            } else {
+                if ($hash == $uniqueHashForUser) {
+                    $user->setIsActive(1);
+                    $em->persist($user);
+                    $em->flush();
+                    return $this->render('BiznesDatabaseBundle:Default:activate.html.twig');
+                } else {
+                    throw $this->createNotFoundException('Your activation link is not valid.');
+                }
+            }
+        } else {
+            throw $this->createNotFoundException('Your activation link is not correct.');
+        }
     }
 
     private function register(Users $user, $form, $referer, $source = null) {
@@ -310,45 +343,45 @@ class DefaultController extends Controller {
         $userAddress = $um->get('userAddress');
 
         $form1 = null;
-        
-        //if ($dataToEdit == 'personal') {
-            $form1 = $this->createForm(UsersDataType::class, $userData, array(
-                'userData' => $userData,
-                'attr' => array('class' => 'form'),
-            ));
-            // 2) handle the submit (will only happen on POST)
-            $form1->handleRequest($request);
 
-            if ($this->addPersonalData($userData, $form1)) {
-                if ($source == null) {
-                    return $this->redirectToRoute('shopPersonalDataInfo');
-                } elseif ($source == "checkout") {
-                    return $this->redirectToRoute('checkout');
-                }
+        //if ($dataToEdit == 'personal') {
+        $form1 = $this->createForm(UsersDataType::class, $userData, array(
+            'userData' => $userData,
+            'attr' => array('class' => 'form'),
+        ));
+        // 2) handle the submit (will only happen on POST)
+        $form1->handleRequest($request);
+
+        if ($this->addPersonalData($userData, $form1)) {
+            if ($source == null) {
+                return $this->redirectToRoute('shopPersonalDataInfo');
+            } elseif ($source == "checkout") {
+                return $this->redirectToRoute('checkout');
             }
+        }
         //}
 
         $form2 = null;
-        
-        //if ($dataToEdit == 'address') {
-            $form2 = $this->createForm(UsersAddressType::class, $userAddress, array(
-                'userAddress' => $userAddress,
-            ));
-            $form2->handleRequest($request);
 
-            if ($this->addPersonalAddress($userAddress, $form2)) {
-                if ($source == null) {
-                    return $this->redirectToRoute('shopPersonalDataInfo');
-                } elseif ($source == "checkout") {
-                    return $this->redirectToRoute('checkout');
-                }
+        //if ($dataToEdit == 'address') {
+        $form2 = $this->createForm(UsersAddressType::class, $userAddress, array(
+            'userAddress' => $userAddress,
+        ));
+        $form2->handleRequest($request);
+
+        if ($this->addPersonalAddress($userAddress, $form2)) {
+            if ($source == null) {
+                return $this->redirectToRoute('shopPersonalDataInfo');
+            } elseif ($source == "checkout") {
+                return $this->redirectToRoute('checkout');
             }
+        }
         //}
-        
+
         $form1 !== null ? $dataFormView = $form1->createView() : $dataFormView = null;
         $form2 !== null ? $addressFormView = $form2->createView() : $addressFormView = null;
-        
- 
+
+
         return $this->render('BiznesShopBundle:Default:personalData.html.twig', array(
                     'cart' => $cart,
                     'data_form' => $dataFormView,
@@ -357,32 +390,148 @@ class DefaultController extends Controller {
     }
 
     /**
-     * @Route("/activate/{userId}/{hash}", name="activationLink")
+     * @Route("/account", name="accountData")
      */
-    public function activateAction($userId = null, $hash = null) {
-        if ($hash != null && is_numeric($userId)) {
+    public function accountAction() {
+        if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+            throw $this->createAccessDeniedException('You have to be fully authenticated user.');
+        }
+
+
+        return $this->render('BiznesServiceBundle:Default:accountData.html.twig', array(
+        ));
+    }
+
+    /**
+     * @Route("/account/request", name="requestNewPassword")
+     * @Method({"POST"})
+     */
+    public function requestAction(Request $request) {
+        if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+            throw $this->createAccessDeniedException('You have to be fully authenticated user.');
+        }
+
+        $user = $this->getUser();
+        if ($request->request->get('type') == 'password') {
+
+            $uniqueHashForUser = $user->getEmail() . 'passwordChange';
+            $uniqueHashForUser = sha1($uniqueHashForUser);
+
+            $user->setDateLastPassRequest(new \DateTime);
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($user);
+            $em->flush();
+
+            $message = \Swift_Message::newInstance()
+                    ->setSubject('Verification of new password request in AffiliationsTOOLS')
+                    ->setFrom('michal.blaszcz@gmail.com')
+                    ->setTo($user->getEmail())
+                    ->setBody(
+                    $this->renderView(
+                            //app/Resources/views/Emails/newPassword.html.twig
+                            'Emails/newPassword.html.twig', array(
+                        'name' => $user->getUsername(),
+                        'userId' => $user->getIdUser(),
+                        'uniqueHashForUser' => $uniqueHashForUser,
+                            )
+                    ), 'text/html'
+            );
+            $this->get('mailer')->send($message);
+
+            return $this->redirectToRoute('homepage');
+        } else {
+            exit;
+        }
+
+        return $this->render('BiznesServiceBundle:Default:accountData.html.twig', array(
+        ));
+    }
+
+    /**
+     * @Route("/account/changepassword/{userId}/{hash}", name="changePassword")
+     */
+    public function changePasswordAction(Request $request, $userId = null, $hash = null) {
+        if (is_numeric($userId) && $hash !== null) {
             $em = $this->getDoctrine()->getManager();
             $user = $em->getRepository('BiznesDatabaseBundle:Users')
                     ->findOneByIdUser($userId);
 
-            $uniqueHashForUser = $user->getEmail() . 'activation';
+            $uniqueHashForUser = $user->getEmail() . 'passwordChange';
             $uniqueHashForUser = sha1($uniqueHashForUser);
 
-            if ($user->getIsActive() == 1) {
-                throw $this->createNotFoundException('Your account has been already activated.');
-            } else {
-                if ($hash == $uniqueHashForUser) {
-                    $user->setIsActive(1);
-                    $em->persist($user);
-                    $em->flush();
-                    return $this->render('BiznesDatabaseBundle:Default:activate.html.twig');
-                } else {
-                    throw $this->createNotFoundException('Your activation link is not valid.');
+
+            if ($hash == $uniqueHashForUser) {
+                $date = new \DateTime;
+                if ($user->getDateLastPassRequest() !== null) {
+                    $lastPassRequest = $user->getDateLastPassRequest()->modify('+1 day');
+
+//                var_dump($lastPassRequest);
+//                echo '<Br>';
+//                var_dump($date);
+//                echo '<Br>';
+
+                    if ($lastPassRequest < $date) {
+                        //1 day has passed, link is dead 
+                        return $this->redirectToRoute('homepage');
+                    } else {
+
+                        $form = $this->createFormBuilder(null, array(
+                                ))->add('oldPassword', PasswordType::class, array(
+                                    'label' => 'Stare hasło',
+                                    'attr' => array('class' => 'form-control'),
+                                ))->add('plainNewPassword', RepeatedType::class, array(
+                                    'type' => PasswordType::class,
+                                    'first_options' => array(
+                                        'label' => 'Hasło:',
+                                        'attr' => array('class' => 'form-control')
+                                    ),
+                                    'second_options' => array(
+                                        'label' => 'Powtórz hasło:',
+                                        'attr' => array('class' => 'form-control')
+                                    ),
+                                ))->add('createAccount', SubmitType::class, array(
+                                    'label' => 'Zmień hasło!',
+                                    'attr' => array(
+                                        'class' => 'btn btn-primary btn-block',
+                                    ),
+                                ))->getForm();
+
+                        $form->handleRequest($request);
+                        if ($form->isSubmitted() && $form->isValid()) {
+                            $encoderService = $this->get('security.password_encoder');
+
+                            $oldPassPlainForm = $form['oldPassword']->getData();
+                            $oldPassUser = $user->getPassword();
+
+                            $match = $encoderService->isPasswordValid($user, $oldPassPlainForm);
+
+                            if ($match) {
+                                $plainNewPass = $form['plainNewPassword']->getData();
+
+                                //$encoder = $this->get('security.password_encoder');
+                                $user->setPassword($encoderService->encodePassword($user, $plainNewPass));
+                                $user->setPlainPassword($plainNewPass);
+                                $user->setDateLastPassRequest(null);
+                                $em->persist($user);
+                                $em->flush();
+
+                                return $this->redirectToRoute('homepage');
+                            }
+                        }
+
+
+                        return $this->render('BiznesServiceBundle:Default:changePassword.html.twig', array(
+                                    'changePassForm' => $form->createView(),
+                        ));
+                    }
+                }
+                else{
+                    throw new \Exception('You have to send request for changing password before.');
                 }
             }
-        } else {
-            throw $this->createNotFoundException('Your activation link is not correct.');
         }
+        throw new \Exception('Your URL address is wrong');
     }
 
 }

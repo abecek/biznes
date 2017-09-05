@@ -22,7 +22,9 @@ use Biznes\DatabaseBundle\Entity\Users;
 class TicketsManager extends Controller{
     protected $em = null;
     protected $ticket = null;
+    
     protected $messages = array();
+    protected $tickets = array();
     
     public function __construct(EntityManager $em) {
         $this->em = $em;
@@ -37,6 +39,15 @@ class TicketsManager extends Controller{
         $this->loadMessagesByTicket();
         
         return $this;
+    }
+    
+    public function loadAllTicketsByIdUser(Users $user){
+        $this->tickets = $this->em->getRepository('BiznesDatabaseBundle:Tickets')
+                ->findBy(array(
+                    'idUser' => $user,
+                ), array(
+                        'dateOpen' => 'DESC',
+                )); 
     }
     
     public function loadMessagesByTicket(){
@@ -86,7 +97,6 @@ class TicketsManager extends Controller{
     }
     
     
-
     public function setTicket(Tickets $ticket) {
         $this->ticket = $ticket;
     }
@@ -104,5 +114,33 @@ class TicketsManager extends Controller{
         }
     }
 
-
+    public function getAllTickets(){  
+        return $this->tickets;
+    }
+    
+    public function getAllOpenTickets(){
+        $temp = array();
+        foreach($this->tickets as $ticket){
+            if($ticket->getDateClose() === null){
+                $temp[] = $ticket;
+            }
+        }
+        
+        return $temp;
+    }
+    
+    public function getTicketsCount(){
+        return count($this->tickets);
+    }
+    
+    public function getOpenTicketsCount(){
+        $temp = array();
+        foreach($this->tickets as $ticket){
+            if($ticket->getDateClose() === null){
+                $temp[] = $ticket;
+            }
+        }
+        
+        return count($temp);
+    }
 }

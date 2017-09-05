@@ -2,8 +2,6 @@
 
 namespace Biznes\DatabaseBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-
 /**
  * PaymentMethods
  */
@@ -24,6 +22,7 @@ class PaymentMethods
      * Set name
      *
      * @param string $name
+     *
      * @return PaymentMethods
      */
     public function setName($name)
@@ -36,7 +35,7 @@ class PaymentMethods
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -46,7 +45,7 @@ class PaymentMethods
     /**
      * Get idPaymentMethod
      *
-     * @return integer 
+     * @return integer
      */
     public function getIdPaymentMethod()
     {

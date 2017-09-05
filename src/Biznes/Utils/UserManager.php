@@ -119,6 +119,7 @@ class UserManager extends Controller {
             $this->em->flush();
         }
     }
+    
 
     public function get($key) {
         switch ($key) {
