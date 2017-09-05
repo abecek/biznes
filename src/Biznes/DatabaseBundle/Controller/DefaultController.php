@@ -317,8 +317,8 @@ class DefaultController extends Controller {
         }
 
         return $this->render('BiznesServiceBundle:Default:personalData.html.twig', array(
-                    'data_form' => $form1->createView(),
-                    'address_form' => $form2->createView(),
+                    'dataForm' => $form1->createView(),
+                    'addressForm' => $form2->createView(),
         ));
     }
 
@@ -384,8 +384,8 @@ class DefaultController extends Controller {
 
         return $this->render('BiznesShopBundle:Default:personalData.html.twig', array(
                     'cart' => $cart,
-                    'data_form' => $dataFormView,
-                    'address_form' => $addressFormView,
+                    'dataForm' => $dataFormView,
+                    'addressForm' => $addressFormView,
         ));
     }
 

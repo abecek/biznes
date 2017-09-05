@@ -2,18 +2,32 @@
 
 {% block content %}
     <div class="row">
-        <div class="well">
-            <h4>W formularzu poniżej możesz dodac, edytować swoje dane personalne.</h4>
-            {{ form_start(data_form) }}
-            {{ form_widget(data_form) }}
-            {{ form_end(data_form) }}
+        <div class="col">
+            <div class="card card-login mx-auto mt-5">
+                <div class="card-header">
+                    <h4>W formularzu poniżej możesz dodac, edytować swoje dane personalne.</h4>
+                </div>
+                <div class="card-body">
+
+                    {{ form_start(dataForm) }}
+                    {{ form_widget(dataForm) }}
+                    {{ form_end(dataForm) }}
+
+                </div>
+            </div>
         </div>
 
-        <div class="well">
-            <h4>W formularzu poniżej możesz dodac, edytować swoje dane adresowe.</h4>
-            {{ form_start(address_form) }}
-            {{ form_widget(address_form) }}
-            {{ form_end(address_form) }}
+        <div class="col">
+            <div class="card card-login mx-auto mt-5">
+                <div class="card-header">
+                    <h4>W formularzu poniżej możesz dodac, edytować swoje dane adresowe.</h4>
+                </div>
+                <div class="card-body">
+                    {{ form_start(addressForm) }}
+                    {{ form_widget(addressForm) }}
+                    {{ form_end(addressForm) }}
+                </div>
+            </div>
         </div>
     </div>     
 {% endblock %}

@@ -57,7 +57,7 @@ class UsersDataType extends AbstractType{
                 ))
                 
                 ->add('save', SubmitType::class, array(
-                    'attr' => array('class' => 'btn btn-primary btn-lg'),
+                    'attr' => array('class' => 'btn btn-primary btn-block'),
                     'label' => 'Zapisz dane personalne',
                 ));
     }
