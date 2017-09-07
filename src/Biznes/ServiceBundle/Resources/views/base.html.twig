@@ -31,17 +31,27 @@
             {% block nav %}
                 <!-- Navigation -->
                 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
-                    <a class="navbar-brand" href="{{ path('homepage') }}">Affiliations TOOLS</a>
+                    <a class="navbar-brand" href="{{ path('homepage') }}">
+                        <i>Affiliations TOOLS</i>
+                    </a>
+                        
+                    <a class="navbar-brand" href="{{ path('shop') }}">
+                        Sklep
+                        <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                    </a>
+                    
                     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
+                    
                     <div class="collapse navbar-collapse" id="navbarResponsive">
                         <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
                             <li class="nav-item active" data-toggle="tooltip" data-placement="right" title="Dashboard">
                                 <a class="nav-link" href="{{ path('dashboard') }}">
                                     <i class="fa fa-fw fa-dashboard"></i>
                                     <span class="nav-link-text">
-                                        Pulpit</span>
+                                        Pulpit
+                                    </span>
                                 </a>
                             </li>
 
@@ -49,7 +59,8 @@
                                 <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#yourAccount" data-parent="#exampleAccordion">
                                     <i class="fa fa-fw fa-wrench"></i>
                                     <span class="nav-link-text">
-                                        Twoje konto</span>
+                                        Twoje konto
+                                    </span>
                                 </a>
                                 <ul class="sidenav-second-level collapse" id="yourAccount">
                                     <li>
@@ -65,7 +76,8 @@
                                 <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#revenue" data-parent="#exampleAccordion">
                                     <i class="fa fa-fw fa-balance-scale"></i>
                                     <span class="nav-link-text">
-                                        Portfel</span>
+                                        Portfel
+                                    </span>
                                 </a>
                                 <ul class="sidenav-second-level collapse" id="revenue">
                                     <li>
@@ -84,7 +96,8 @@
                                 <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#support" data-parent="#exampleAccordion">
                                     <i class="fa fa-fw fa-life-ring"></i>
                                     <span class="nav-link-text">
-                                        Pomoc supportu</span>
+                                        Pomoc supportu
+                                    </span>
                                 </a>
                                 <ul class="sidenav-second-level collapse" id="support">
                                     <li>
@@ -107,7 +120,8 @@
                                 <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseExamplePages" data-parent="#exampleAccordion">
                                     <i class="fa fa-fw fa-file"></i>
                                     <span class="nav-link-text">
-                                        Example Pages</span>
+                                        Example Pages
+                                    </span>
                                 </a>
                                 <ul class="sidenav-second-level collapse" id="collapseExamplePages">
                                     <li>
@@ -124,7 +138,7 @@
                                     </li>
                                 </ul>
                             </li>
-                            
+
                             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Link">
                                 <a class="nav-link" href="#">
                                     <i class="fa fa-fw fa-link"></i>
@@ -141,9 +155,6 @@
                             </li>
                         </ul>
                         <ul class="navbar-nav ml-auto" style="margin-right: 200px;">
-                            <li class="nav-item active">
-                                <a class="nav-link" href="{{ url('shop') }}"> Sklep</a>
-                            </li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle mr-lg-2" href="#" id="messagesDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i class="fa fa-fw fa-envelope"></i>
@@ -224,8 +235,6 @@
                                         {% endfor %}
                                     {% endif %}
 
-
-
                                     <a class="dropdown-item small" href="{{ path('notatifications') }}">
                                         Zobacz wszystkie powiadomienia
                                     </a>
@@ -302,7 +311,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>        
 
 
             {% block javascripts %}

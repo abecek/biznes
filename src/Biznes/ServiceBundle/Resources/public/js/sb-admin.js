@@ -5,6 +5,12 @@
   $('.navbar-sidenav [data-toggle="tooltip"]').tooltip({
     template: '<div class="tooltip navbar-sidenav-tooltip" role="tooltip"><div class="arrow"></div><div class="tooltip-inner"></div></div>'
   })
+  
+  $(window).ready(function(e) {
+    $("body").toggleClass("sidenav-toggled");
+    $(".navbar-sidenav .nav-link-collapse").addClass("collapsed");
+    $(".navbar-sidenav .sidenav-second-level, .navbar-sidenav .sidenav-third-level").removeClass("show");
+  });
 
   // Toggle the side navigation
   $("#sidenavToggler").click(function(e) {

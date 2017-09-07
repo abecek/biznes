@@ -99,11 +99,16 @@ class Users implements AdvancedUserInterface, \Serializable
      */
     private $dateLastPassRequest;
 
+    public function isActive(){
+        if($this->isActive == 1){
+            return true;
+        }
+        return false;
+    }
     
     public function __construct()
     {
     }
-    
     
     /**
      * Set username

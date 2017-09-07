@@ -12,18 +12,14 @@ use Biznes\DatabaseBundle\Entity\UsersData;
 use Biznes\DatabaseBundle\Form\UsersDataType;
 use Biznes\DatabaseBundle\Entity\UsersAddresses;
 use Biznes\DatabaseBundle\Form\UsersAddressType;
+
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 
 class DefaultController extends Controller {
-
-    /**
-     * @Route("/database/")
-     */
-    public function indexAction(Request $req) {
-        
-    }
 
     /**
      * @Route("/login", name="login")
@@ -40,6 +36,39 @@ class DefaultController extends Controller {
         $error = $authenticationUtils->getLastAuthenticationError();
         // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
+        
+        $formResendActivLink = $this->createFormBuilder(null, array(
+                    'action' => $this->generateUrl('resendActivLink'),
+                    'method' => 'POST',
+                    'attr' => array('class' => 'form'),
+                ))->add('emailOrUsername', TextType::class, array(
+                    'label' => 'Adres Email lub Login:',
+                    'attr' => array(
+                        'class' => 'form-control'
+                        ),
+                ))->add('submit', SubmitType::class, array(
+                    'label' => 'Wyślij ponownie link aktywacyjny!',
+                    'attr' => array(
+                        'class' => 'btn btn-primary btn-block',
+                        ),
+                ))->getForm();
+        
+        $formRemindPassForm = $this->createFormBuilder(null, array(
+                    'action' => $this->generateUrl('remindPassword'),
+                    'method' => 'POST',
+                    'attr' => array('class' => 'form'),
+                ))->add('email', EmailType::class, array(
+                    'label' => 'Adres email:',
+                    'attr' => array(
+                        'class' => 'form-control'
+                        ),
+                ))->add('submit', SubmitType::class, array(
+                    'label' => 'Wyślij nowe hasło na adres email!',
+                    'attr' => array(
+                        'class' => 'btn btn-primary btn-block',
+                        ),
+                ))->getForm();
+        
 
         $uri = $request->getRequestUri();
         $from = explode('/', $uri);
@@ -53,11 +82,16 @@ class DefaultController extends Controller {
                         'last_username' => $lastUsername,
                         'error' => $error,
                         'cart' => $cart,
+                        'formResendActivLink' => $formResendActivLink->createView(),
+                        'formRemindPassForm' => $formRemindPassForm->createView(),
             ));
-        } else {
+        } 
+        else{
             return $this->render('BiznesServiceBundle:Default:login.html.twig', array(
                         'last_username' => $lastUsername,
                         'error' => $error,
+                        'formResendActivLink' => $formResendActivLink->createView(),
+                        'formRemindPassForm' => $formRemindPassForm->createView(),
             ));
         }
         //return $this->render('BiznesServiceBundle:Default:login.html.twig');
@@ -128,7 +162,7 @@ class DefaultController extends Controller {
             $userId = $user->getIdUser();
 
             $message = \Swift_Message::newInstance()
-                    ->setSubject('Activate your new account in WebTools')
+                    ->setSubject('Aktywuj swoje konto w AffiliationTOOLS!')
                     ->setFrom('michal.blaszcz@gmail.com')
                     ->setTo($form['email']->getData())
                     ->setBody(
@@ -164,13 +198,43 @@ class DefaultController extends Controller {
         if ($this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
             throw $this->createAccessDeniedException('You are already a user.');
         }
+        
+        $formResendActivLink = $this->createFormBuilder(null, array(
+                    'action' => $this->generateUrl('resendActivLink'),
+                    'method' => 'POST',
+                    'attr' => array('class' => 'form'),
+                ))->add('emailOrUsername', TextType::class, array(
+                    'label' => 'Adres Email lub Login:',
+                    'attr' => array(
+                        'class' => 'form-control'
+                        ),
+                ))->add('submit', SubmitType::class, array(
+                    'label' => 'Wyślij ponownie link aktywacyjny!',
+                    'attr' => array(
+                        'class' => 'btn btn-primary btn-block',
+                        ),
+                ))->getForm();
+        
+        $formRemindPassForm = $this->createFormBuilder(null, array(
+                    'action' => $this->generateUrl('remindPassword'),
+                    'method' => 'POST',
+                    'attr' => array('class' => 'form'),
+                ))->add('email', EmailType::class, array(
+                    'label' => 'Adres email:',
+                    'attr' => array(
+                        'class' => 'form-control'
+                        ),
+                ))->add('submit', SubmitType::class, array(
+                    'label' => 'Wyślij nowe hasło na adres email!',
+                    'attr' => array(
+                        'class' => 'btn btn-primary btn-block',
+                        ),
+                ))->getForm();
 
-        // 1) build the form
         $user = new Users();
         $form = $this->createForm(UsersType::class, $user, array(
             'attr' => array('class' => 'form'),
         ));
-        // 2) handle the submit (will only happen on POST)
         $form->handleRequest($request);
 
         if ($this->register($user, $form, $referer)) {
@@ -181,6 +245,8 @@ class DefaultController extends Controller {
 
         return $this->render('BiznesServiceBundle:Default:register.html.twig', array(
                     'registerForm' => $form->createView(),
+                    'formResendActivLink' => $formResendActivLink->createView(),
+                    'formRemindPassForm' => $formRemindPassForm->createView(),
         ));
     }
 
@@ -196,17 +262,12 @@ class DefaultController extends Controller {
         $cart = $this->get('cartManager');
         $cart->loadFromSession();
 
-        // 1) build the form
         $user = new Users();
         $form = $this->createForm(UsersType::class, $user, array(
             'attr' => array('class' => 'form'),
         ));
 
-        // 2) handle the submit (will only happen on POST)
         $form->handleRequest($request);
-
-        //$this->register($user, $form, $referer, 'shop');
-
         if ($this->register($user, $form, $referer)) {
             if ($source == null) {
                 return $this->redirectToRoute('accountCreatedShop');
@@ -214,10 +275,44 @@ class DefaultController extends Controller {
                 return $this->redirectToRoute('checkout');
             }
         }
+        
+        $formResendActivLink = $this->createFormBuilder(null, array(
+                    'action' => $this->generateUrl('resendActivLink'),
+                    'method' => 'POST',
+                    'attr' => array('class' => 'form'),
+                ))->add('emailOrUsername', TextType::class, array(
+                    'label' => 'Adres Email lub Login:',
+                    'attr' => array(
+                        'class' => 'form-control'
+                        ),
+                ))->add('submit', SubmitType::class, array(
+                    'label' => 'Wyślij ponownie link aktywacyjny!',
+                    'attr' => array(
+                        'class' => 'btn btn-primary btn-block',
+                        ),
+                ))->getForm();
+        
+        $formRemindPassForm = $this->createFormBuilder(null, array(
+                    'action' => $this->generateUrl('remindPassword'),
+                    'method' => 'POST',
+                    'attr' => array('class' => 'form'),
+                ))->add('email', EmailType::class, array(
+                    'label' => 'Adres email:',
+                    'attr' => array(
+                        'class' => 'form-control'
+                        ),
+                ))->add('submit', SubmitType::class, array(
+                    'label' => 'Wyślij nowe hasło na adres email!',
+                    'attr' => array(
+                        'class' => 'btn btn-primary btn-block',
+                        ),
+                ))->getForm();
 
         return $this->render('BiznesShopBundle:Default:register.html.twig', array(
                     'registerForm' => $form->createView(),
                     'cart' => $cart,
+                    'formResendActivLink' => $formResendActivLink->createView(),
+                    'formRemindPassForm' => $formRemindPassForm->createView(),
         ));
     }
 
@@ -397,7 +492,6 @@ class DefaultController extends Controller {
             throw $this->createAccessDeniedException('You have to be fully authenticated user.');
         }
 
-
         return $this->render('BiznesServiceBundle:Default:accountData.html.twig', array(
         ));
     }
@@ -413,7 +507,6 @@ class DefaultController extends Controller {
 
         $user = $this->getUser();
         if ($request->request->get('type') == 'password') {
-
             $uniqueHashForUser = $user->getEmail() . 'passwordChange';
             $uniqueHashForUser = sha1($uniqueHashForUser);
 
@@ -424,7 +517,7 @@ class DefaultController extends Controller {
             $em->flush();
 
             $message = \Swift_Message::newInstance()
-                    ->setSubject('Verification of new password request in AffiliationsTOOLS')
+                    ->setSubject('Potwierdzenie prośby o nowe hasło w AffiliationsTOOLS')
                     ->setFrom('michal.blaszcz@gmail.com')
                     ->setTo($user->getEmail())
                     ->setBody(
@@ -460,26 +553,17 @@ class DefaultController extends Controller {
             $uniqueHashForUser = $user->getEmail() . 'passwordChange';
             $uniqueHashForUser = sha1($uniqueHashForUser);
 
-
             if ($hash == $uniqueHashForUser) {
                 $date = new \DateTime;
                 if ($user->getDateLastPassRequest() !== null) {
                     $lastPassRequest = $user->getDateLastPassRequest()->modify('+1 day');
 
-//                var_dump($lastPassRequest);
-//                echo '<Br>';
-//                var_dump($date);
-//                echo '<Br>';
-
                     if ($lastPassRequest < $date) {
                         //1 day has passed, link is dead 
                         return $this->redirectToRoute('homepage');
-                    } else {
-
+                    } 
+                    else{
                         $form = $this->createFormBuilder(null, array(
-                                ))->add('oldPassword', PasswordType::class, array(
-                                    'label' => 'Stare hasło',
-                                    'attr' => array('class' => 'form-control'),
                                 ))->add('plainNewPassword', RepeatedType::class, array(
                                     'type' => PasswordType::class,
                                     'first_options' => array(
@@ -501,12 +585,6 @@ class DefaultController extends Controller {
                         if ($form->isSubmitted() && $form->isValid()) {
                             $encoderService = $this->get('security.password_encoder');
 
-                            $oldPassPlainForm = $form['oldPassword']->getData();
-                            $oldPassUser = $user->getPassword();
-
-                            $match = $encoderService->isPasswordValid($user, $oldPassPlainForm);
-
-                            if ($match) {
                                 $plainNewPass = $form['plainNewPassword']->getData();
 
                                 //$encoder = $this->get('security.password_encoder');
@@ -517,9 +595,8 @@ class DefaultController extends Controller {
                                 $em->flush();
 
                                 return $this->redirectToRoute('homepage');
-                            }
+                                // TO DO VIEW WITH MSG
                         }
-
 
                         return $this->render('BiznesServiceBundle:Default:changePassword.html.twig', array(
                                     'changePassForm' => $form->createView(),
@@ -534,4 +611,104 @@ class DefaultController extends Controller {
         throw new \Exception('Your URL address is wrong');
     }
 
+    /**
+     * @Route("/remindpassword/{$hash}", name="remindPassword")
+     * @Method({"POST", "GET"})
+     */
+    public function remindPassAction(Request $request, $hash = null){
+            $form = $request->request->get('form');
+            if($form['email'] !== null){
+                $em = $this->getDoctrine()->getManager();
+                $user = $em->getRepository('BiznesDatabaseBundle:Users')
+                        ->findOneBy(array(
+                            'email' => $form['email'],
+                        ));
+                if($user !== null){
+                    $uniqueHashForUser = $user->getEmail() . 'passwordChange';
+                    $uniqueHashForUser = sha1($uniqueHashForUser);
+
+                    $user->setDateLastPassRequest(new \DateTime);
+
+                    $em = $this->getDoctrine()->getManager();
+                    $em->persist($user);
+                    $em->flush();
+
+                    $message = \Swift_Message::newInstance()
+                            ->setSubject('Potwierdzenie prośby o nowe hasło w AffiliationsTOOLS')
+                            ->setFrom('michal.blaszcz@gmail.com')
+                            ->setTo($user->getEmail())
+                            ->setBody(
+                            $this->renderView(
+                                    //app/Resources/views/Emails/newPassword.html.twig
+                                    'Emails/newPassword.html.twig', array(
+                                'name' => $user->getUsername(),
+                                'userId' => $user->getIdUser(),
+                                'uniqueHashForUser' => $uniqueHashForUser,
+                                    )
+                            ), 'text/html'
+                    );
+                    $this->get('mailer')->send($message);
+
+                    return $this->redirectToRoute('login');           
+                }
+            }
+            else{
+                throw new \Exception('Something very bad happened.');
+            }
+    }
+    
+    /**
+     * @Route("/resendactivlink", name="resendActivLink")
+     */
+    public function resendActivLinkAction(Request $request){
+        $form = $request->request->get('form');
+        if($form['emailOrUsername'] !== null){
+            $em = $this->getDoctrine()->getManager();
+            $repo = $em->getRepository('BiznesDatabaseBundle:Users');
+            $user = $repo->findOneBy(array(
+                        'email' => $form['emailOrUsername'],
+                    ));
+
+            if($user === null){
+                $user = $repo->findOneBy(array(
+                        'username' => $form['emailOrUsername'],
+                    ));
+            }
+            
+            if($user !== null){
+                if(!$user->isActive()){
+                    $uniqueHashForUser = $user->getEmail() . 'activation';
+                    $uniqueHashForUser = sha1($uniqueHashForUser);
+                    
+                    $message = \Swift_Message::newInstance()
+                            ->setSubject('Aktywuj swoje konto w AffiliationTOOLS!')
+                            ->setFrom('michal.blaszcz@gmail.com')
+                            ->setTo($user->getEmail())
+                            ->setBody(
+                            $this->renderView(
+                                    //app/Resources/views/Emails/registration.html.twig
+                                    'Emails/registration.html.twig', array(
+                                'name' => $user->getUsername(),
+                                'userId' => $user->getIdUser(),
+                                'uniqueHashForUser' => $uniqueHashForUser,
+                                    )
+                            ), 'text/html');
+                    
+                    $this->get('mailer')->send($message);
+                    
+                    return $this->redirectToRoute('login');
+                }
+                else{
+                    throw new \Exception('You account has been already activated.');
+                }
+            }
+            else{
+                throw new \Exception('User with that username or email dont exists.');
+            }
+        }
+        else{
+            throw new \Exception('Something very bad happened.');
+        }
+    }
+    
 }

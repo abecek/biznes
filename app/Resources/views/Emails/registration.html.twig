@@ -1,14 +1,13 @@
 {# app/Resources/views/Emails/registration.html.twig #}
-<h3>You did it! You registered!</h3>
+<h3>Udało Ci się zarejestrowac!</h3>
 
-Hi {{ name }}! You're successfully registered.
+Witaj {{ name }}!
 
-{# example, assuming you have a route named "login" #}
 <hr>
-Before you will try login, please activate your account, by clicking link below:
+Zanim się zalogujesz, wejdź w link poniżej, aby aktywować swoje konto!
 <br>
 <a href="{{ url('activationLink', {'userId' : userId, 'hash' : uniqueHashForUser }) }}">{{ url('activationLink', {'userId' : userId, 'hash' : uniqueHashForUser }) }}</a>
 <br><br>
-To login, go to: <a href="{{ url('login') }}">{{ url('login') }}</a>.
+By się zalogować, kliknij: <a href="{{ url('login') }}">{{ url('login') }}</a>.
 
-Thanks!
+Dziękujemy!

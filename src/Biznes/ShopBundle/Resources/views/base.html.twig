@@ -13,7 +13,8 @@
 
         <!-- Bootstrap Core CSS -->
         <link href="{{ asset('bundles/biznesshop/css/bootstrap.min.css') }}" rel="stylesheet">
-
+        <!-- Custom fonts for this template -->
+        <link href="{{ asset('bundles/biznesservice/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
         <!-- Custom CSS -->
         <link href="{{ asset('bundles/biznesshop/css/style.css') }}" rel="stylesheet">
 
@@ -25,20 +26,26 @@
         <!-- Navigation -->
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('shop') }}">Affiliations TOOLS</a>
+                <a class="navbar-brand" href="{{ url('shop') }}">
+                    <i>Affiliations TOOLS</i>
+                </a>
+                
+                <a class="navbar-brand" href="{{ path('homepage') }}">
+                    <i class="fa fa-arrow-left"></i>
+                    Serwis partnerski 
+                </a>
+                
 
-                <a class="itemsInCartLink" href="{{ url('cart') }}">W koszyku : {{ cart.count }}</a>
+                <a class="navbar-brand" href="{{ url('cart') }}">
+                    W koszyku : {{ cart.count }}
+                </a>
 
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ml-auto">
-                        <li class="nav-item active">
-                            <a class="nav-link" href="{{ path('homepage') }}">Serwis partnerski
-                                <span class="sr-only">(current)</span>
-                            </a>
-                        </li>
+
                         <li class="nav-item active">
                             <a class="nav-link" href="#">Kontakt
                                 <span class="sr-only">(current)</span>

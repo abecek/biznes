@@ -14,11 +14,18 @@
     </div>
     <div class="row">
         <div class="col-md-12">
+            <div class="card card-login mx-auto mt-5">
+                <div class="card-header">
+                    Nowa wypłata
+                </div>
+                <div class="card-body">
+                    {{ form_start(newWithdrawForm) }}
+                    {{ form_widget(newWithdrawForm) }}
+                    {{ form_end(newWithdrawForm) }}
+                </div>
+            </div>
 
-            {{ form_start(newWithdrawForm) }}
-            {{ form_widget(newWithdrawForm) }}
-            {{ form_end(newWithdrawForm) }}
-            
+
             <div class="modal fade" id="confirmNewWithdraw" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -32,14 +39,12 @@
                             <button type="button" class="btn btn-default" data-dismiss="modal">Cofnij</button>
                             <a href="#" id="submit" class="btn btn-success success">Akceptuj</a>
                         </div>
-                        
+
                     </div>
                 </div>
             </div>  
-                    
+
         </div>
     </div>
-    
-    <hr>
-    {{ dump(msg) }}
+
 {% endblock %}

@@ -196,7 +196,7 @@ class WalletManager extends Controller{
         
         $incomesOverall = 0;
         foreach($this->incomes as $income){
-            if($income->getState() == 'zaakceptowane'){
+            if($income->getState() == 'zaakceptowano'){
                 $value = $income->getValue();
                 $incomesOverall += floatval($value);
             }
@@ -252,7 +252,7 @@ class WalletManager extends Controller{
         $count = 0;
         $value = 0;
         foreach($this->incomes as $income){
-            if($income->getState() == 'zaakceptowane'){
+            if($income->getState() == 'zaakceptowano'){
                 $count += 1;
                 $value += floatval($income->getValue());
             }
