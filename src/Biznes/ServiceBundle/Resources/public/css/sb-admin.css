@@ -51,7 +51,14 @@
 .panel-body
 {
     overflow-y: scroll;
-    height: 350px;
+    height: 650px;
+}
+
+@media(max-height: 768px){
+    .panel-body {
+      overflow-y: scroll;
+      height: 350px;
+    }
 }
 
 ::-webkit-scrollbar-track
@@ -88,12 +95,10 @@ body {
 
 
 .message-link {
-    color: black;
     text-decoration: none;
 }
 
 .message-link:hover{
-    color: black;
     font-size: 1.1em;
     text-decoration: none;
 }

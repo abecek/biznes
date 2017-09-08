@@ -1,7 +1,6 @@
 {% extends "BiznesShopBundle::base.html.twig" %}
 {% set title = 'Rejestracja' %}
 
-
 {% block header %}
     <header class="business-header">
         <div class="container">
@@ -15,17 +14,22 @@
     </header>
 {% endblock %}
 
-
 {% block container %}
-    <div class="content">
-        <div class="row">
-            <div class="col">
-                {{ form_start(registerForm) }}
-                {{ form_widget(registerForm) }}
-                {{ form_end(registerForm) }}
+    <div class="content-no-bg">
+        <div class="card card-login mx-auto mt-5">
+
+                <div class="card-body">
+                    {{ form_start(registerForm) }}
+                    {{ form_row(registerForm.username) }}
+                    {{ form_row(registerForm.email) }}
+                    {{ form_row(registerForm.plainPassword.first) }}
+                    {{ form_row(registerForm.plainPassword.second) }}
+                    {{ form_row(registerForm.gender) }}
+                    {{ form_end(registerForm) }}
+                </div>
 
                 <div class="text-center">
-                    <a class="d-block small mt-3" href="{{ path('loginShop') }}">
+                    <a class="d-block small mt-3" href="{{ path('login') }}">
                         Strona logowania
                     </a>
                     <a class="d-block small" href="#" data-toggle="modal" data-target="#remindModal">
@@ -35,8 +39,8 @@
                         Wyślij ponownie link aktywacyjny
                     </a>
                 </div>
-
             </div>
+
         </div>
     </div>
 
@@ -87,7 +91,7 @@
 {% endblock %}
 
 {% block footer %}
-    <footer class="py-3 bg-dark fixed-bottom">
+    <footer class="py-3 bg-dark fixed-bottom" style="margin-top: 50px;">
         <div class="container">
             <p class="m-0 text-center text-white">Copyright &copy; Your Website 2017</p>
         </div>

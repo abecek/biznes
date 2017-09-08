@@ -63,7 +63,7 @@ class UsersType extends AbstractType{
                 ->add('createAccount', SubmitType::class, array(
                     'label' => 'Załóż konto!',
                     'attr' => array(
-                        'class' => 'btn btn-primary btn-block',
+                        'class' => 'btn btn-primary btn-lg btn-block',
                     ),
                 ));
     }

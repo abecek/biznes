@@ -16,27 +16,35 @@
 
 
 {% block container %}
-    <div class="content">
-        <div class="row">
-            <div class="col">
-                <form action="{{ path('login') }}" method="post" class="form">
+    
+    <div class="content-no-bg">
+            <div class="card card-login mx-auto mt-5">
+                <div class="card-body">
                     {% if error %}
                         <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
                     {% endif %}
 
-                    <label for="username">Username:</label>
-                    <input type="text" id="username" name="_username" value="{{ last_username }}" class="form-control"/>
+                    <form action="{{ path('login') }}" method="post" class="form">
+                        <div class="form-group">
+                            <label for="username">Login:</label>
+                            <input type="text" id="username" name="_username" value="{{ last_username }}" class="form-control"/>
+                        </div>
 
-                    <label for="password">Password:</label>
-                    <input type="password" id="password" name="_password" class="form-control"/>
+                        <div class="form-group">
+                            <label for="password">Hasło:</label>
+                            <input type="password" id="password" name="_password" class="form-control"/>
+                        </div>
 
-                    <input type="hidden" name="_target_path" value="shop" />
-                    <input type="hidden" name="_failure_path" value="loginShop" />
+                        <input type="hidden" name="_target_path" value="shop" />
+                        <input type="hidden" name="_failure_path" value="loginShop" />
 
-                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}"/>
 
-                    <button type="submit" class="btn btn-primary btn-lg">Zaloguj</button>
-                </form>
+                        <button type="submit" class="btn btn-primary btn-lg btn-block">Zaloguj</button>
+                    </form>
+
+                </div>
+
                 <div class="text-center">
                     <a class="d-block small mt-3" href="{{ path('registerShop') }}">
                         Strona rejestracji
@@ -48,9 +56,8 @@
                         Wyślij ponownie link aktywacyjny
                     </a>
                 </div>
-            </div>
-
-        </div>
+            </div>     
+                        
     </div>
 
     <!-- Remind Password Modal -->
@@ -100,8 +107,7 @@
 {% endblock %}
 
 {% block footer %}
-
-    <footer class="py-3 bg-dark fixed-bottom">
+    <footer class="py-3 bg-dark fixed-bottom" style="margin-top: 50px;">
         <div class="container">
             <p class="m-0 text-center text-white">Copyright &copy; Your Website 2017</p>
         </div>

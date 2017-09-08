@@ -57,7 +57,7 @@ class TicketsManager extends Controller{
                     ->findBy(array(
                         'idTicket' => $ticketId,
                     ), array(
-                        'dateMessage' => 'DESC',
+                        'dateMessage' => 'ASC',
                     )); 
         }
         /*

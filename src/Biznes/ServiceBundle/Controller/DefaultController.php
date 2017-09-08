@@ -305,7 +305,7 @@ class DefaultController extends Controller {
                                 'rows' => "6",
                                 'class' => 'form-control'
                             ),
-                            'label' => 'Treść:',
+                            'label' => 'Treść nowej wiadomośći:',
                         ))
                         ->add('sendMessage', SubmitType::class, array(
                             'label' => 'Wyślij wiadomość!',

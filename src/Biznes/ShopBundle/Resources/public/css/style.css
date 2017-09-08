@@ -15,6 +15,13 @@ body {
     padding-top: 54px; 
 }
 
+
+.card-login {
+  max-width: 25rem; }
+
+.card-register {
+  max-width: 40rem; }
+
 .text-bordered {
     text-shadow: -1px 0 #343a40, 0 1px #343a40, 1px 0 #343a40, 0 -1px #343a40;
 }
@@ -38,12 +45,22 @@ body {
 .content {
     width: 100%;
     float: left;
-    margin: 50px auto 150px;
+    margin: 60px auto 150px;
     
     padding: 15px;
 
     background-color: white;
-    border: 0px solid white;
+    border: 1px solid whitesmoke;
+    border-radius: 20px;
+}
+
+.content-no-bg {
+    width: 100%;
+    float: left;
+    margin: 60px auto 150px;
+    
+    padding: 15px;
+    
     border-radius: 20px;
 }
 
@@ -108,4 +125,5 @@ body {
         display: inline-block;
         margin: 5px;
     }
+    
 }

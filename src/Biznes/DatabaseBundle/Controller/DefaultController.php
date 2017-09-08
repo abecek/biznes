@@ -6,12 +6,18 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+
 use Biznes\DatabaseBundle\Entity\Users;
 use Biznes\DatabaseBundle\Form\UsersType;
+
 use Biznes\DatabaseBundle\Entity\UsersData;
 use Biznes\DatabaseBundle\Form\UsersDataType;
+
 use Biznes\DatabaseBundle\Entity\UsersAddresses;
 use Biznes\DatabaseBundle\Form\UsersAddressType;
+
+use Biznes\DatabaseBundle\Form\RemindPassType;
+use Biznes\DatabaseBundle\Form\ResendActivLinkType;
 
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -37,44 +43,23 @@ class DefaultController extends Controller {
         // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
         
-        $formResendActivLink = $this->createFormBuilder(null, array(
+        $formResendActivLink = $this->createForm(ResendActivLinkType::class, null, array(
                     'action' => $this->generateUrl('resendActivLink'),
                     'method' => 'POST',
                     'attr' => array('class' => 'form'),
-                ))->add('emailOrUsername', TextType::class, array(
-                    'label' => 'Adres Email lub Login:',
-                    'attr' => array(
-                        'class' => 'form-control'
-                        ),
-                ))->add('submit', SubmitType::class, array(
-                    'label' => 'Wyślij ponownie link aktywacyjny!',
-                    'attr' => array(
-                        'class' => 'btn btn-primary btn-block',
-                        ),
-                ))->getForm();
+                ));
         
-        $formRemindPassForm = $this->createFormBuilder(null, array(
+        $formRemindPassForm = $this->createForm(RemindPassType::class, null, array(
                     'action' => $this->generateUrl('remindPassword'),
                     'method' => 'POST',
                     'attr' => array('class' => 'form'),
-                ))->add('email', EmailType::class, array(
-                    'label' => 'Adres email:',
-                    'attr' => array(
-                        'class' => 'form-control'
-                        ),
-                ))->add('submit', SubmitType::class, array(
-                    'label' => 'Wyślij nowe hasło na adres email!',
-                    'attr' => array(
-                        'class' => 'btn btn-primary btn-block',
-                        ),
-                ))->getForm();
+                ));
         
 
         $uri = $request->getRequestUri();
         $from = explode('/', $uri);
 
         if (in_array('shop', $from)) {
-            //$cart = \Biznes\ShopBundle\Utils\Cart::getInstance();
             $cart = $this->get('cartManager');
             $cart->loadFromSession();
 
@@ -94,7 +79,6 @@ class DefaultController extends Controller {
                         'formRemindPassForm' => $formRemindPassForm->createView(),
             ));
         }
-        //return $this->render('BiznesServiceBundle:Default:login.html.twig');
     }
 
     /**
@@ -151,7 +135,7 @@ class DefaultController extends Controller {
                 $user->setIdSponsor($sponsor);
             }
 
-            // 4) save the User!
+            //save the User
             //try{
             $em->persist($user);
             $em->flush();
@@ -199,37 +183,17 @@ class DefaultController extends Controller {
             throw $this->createAccessDeniedException('You are already a user.');
         }
         
-        $formResendActivLink = $this->createFormBuilder(null, array(
+        $formResendActivLink = $this->createForm(ResendActivLinkType::class, null, array(
                     'action' => $this->generateUrl('resendActivLink'),
                     'method' => 'POST',
                     'attr' => array('class' => 'form'),
-                ))->add('emailOrUsername', TextType::class, array(
-                    'label' => 'Adres Email lub Login:',
-                    'attr' => array(
-                        'class' => 'form-control'
-                        ),
-                ))->add('submit', SubmitType::class, array(
-                    'label' => 'Wyślij ponownie link aktywacyjny!',
-                    'attr' => array(
-                        'class' => 'btn btn-primary btn-block',
-                        ),
-                ))->getForm();
+                ));
         
-        $formRemindPassForm = $this->createFormBuilder(null, array(
+        $formRemindPassForm = $this->createForm(RemindPassType::class, null, array(
                     'action' => $this->generateUrl('remindPassword'),
                     'method' => 'POST',
                     'attr' => array('class' => 'form'),
-                ))->add('email', EmailType::class, array(
-                    'label' => 'Adres email:',
-                    'attr' => array(
-                        'class' => 'form-control'
-                        ),
-                ))->add('submit', SubmitType::class, array(
-                    'label' => 'Wyślij nowe hasło na adres email!',
-                    'attr' => array(
-                        'class' => 'btn btn-primary btn-block',
-                        ),
-                ))->getForm();
+                ));
 
         $user = new Users();
         $form = $this->createForm(UsersType::class, $user, array(
@@ -276,37 +240,17 @@ class DefaultController extends Controller {
             }
         }
         
-        $formResendActivLink = $this->createFormBuilder(null, array(
+        $formResendActivLink = $this->createForm(ResendActivLinkType::class, null, array(
                     'action' => $this->generateUrl('resendActivLink'),
                     'method' => 'POST',
                     'attr' => array('class' => 'form'),
-                ))->add('emailOrUsername', TextType::class, array(
-                    'label' => 'Adres Email lub Login:',
-                    'attr' => array(
-                        'class' => 'form-control'
-                        ),
-                ))->add('submit', SubmitType::class, array(
-                    'label' => 'Wyślij ponownie link aktywacyjny!',
-                    'attr' => array(
-                        'class' => 'btn btn-primary btn-block',
-                        ),
-                ))->getForm();
+                ));
         
-        $formRemindPassForm = $this->createFormBuilder(null, array(
+        $formRemindPassForm = $this->createForm(RemindPassType::class, null, array(
                     'action' => $this->generateUrl('remindPassword'),
                     'method' => 'POST',
                     'attr' => array('class' => 'form'),
-                ))->add('email', EmailType::class, array(
-                    'label' => 'Adres email:',
-                    'attr' => array(
-                        'class' => 'form-control'
-                        ),
-                ))->add('submit', SubmitType::class, array(
-                    'label' => 'Wyślij nowe hasło na adres email!',
-                    'attr' => array(
-                        'class' => 'btn btn-primary btn-block',
-                        ),
-                ))->getForm();
+                ));
 
         return $this->render('BiznesShopBundle:Default:register.html.twig', array(
                     'registerForm' => $form->createView(),
@@ -318,21 +262,6 @@ class DefaultController extends Controller {
 
     private function addPersonalData(UsersData $userData, $form) {
         if ($form->isSubmitted() && $form->isValid()) {
-            /*
-              $userData->setName1($form['name1']->getData());
-
-              if(!empty($form['name2'])){
-              $userData->setName2($form['name2']->getData());
-              }
-
-              $userData->setSurname($form['surname']->getData())
-              ->setIdentityNumber($form['identityNumber']->getData())
-              ->setTelephone($form['telephone']->getData())
-              ->setLanguage($form['language']->getData());
-             */
-            //HOW THIS IS WORKING WITHOUT SETTING PROPERTIES?
-            // THESE ONE WAS WORKING BEFORE BUT 
-            // CODE SIMILAR IN FUNCTION BELOW WASNT
             $userData->setIdUser($this->getUser());
 
             $em = $this->getDoctrine()->getManager();
@@ -346,22 +275,6 @@ class DefaultController extends Controller {
 
     private function addPersonalAddress(UsersAddresses $userAddress, $form) {
         if ($form->isSubmitted() && $form->isValid()) {
-            /*
-              $userAddress->setCountry($form['country'])
-              ->setCity($form['city'])
-              ->setPostCode($form['postCode'])
-              ->setStreet($form['street'])
-              ->setNrHouse($form['nrHouse']);
-              if(!empty($form['nrFlat'])){
-              $userAddress->setNrFlat($form['nrFlat']);
-              }
-             */
-            //HOW THIS IS WORKING WITHOUT SETTING PROPERTIES?
-            //WHEN IN WAS IN THE FORM LIKE AS ABOVE, WASNT WORKING I DONT KNOW WHY
-            /*
-             * ERROR BEFORE:
-             * Catchable Fatal Error: Object of class Symfony\Component\Form\Form could not be converted to string
-             */
             $userAddress->setIdUser($this->getUser());
 
             $em = $this->getDoctrine()->getManager();
@@ -616,7 +529,8 @@ class DefaultController extends Controller {
      * @Method({"POST", "GET"})
      */
     public function remindPassAction(Request $request, $hash = null){
-            $form = $request->request->get('form');
+            $form = $request->request->get('remind_pass');
+
             if($form['email'] !== null){
                 $em = $this->getDoctrine()->getManager();
                 $user = $em->getRepository('BiznesDatabaseBundle:Users')
@@ -651,6 +565,9 @@ class DefaultController extends Controller {
 
                     return $this->redirectToRoute('login');           
                 }
+                else{
+                    throw new \Exception('User with that username or email does not exists.');
+                }
             }
             else{
                 throw new \Exception('Something very bad happened.');
@@ -661,7 +578,8 @@ class DefaultController extends Controller {
      * @Route("/resendactivlink", name="resendActivLink")
      */
     public function resendActivLinkAction(Request $request){
-        $form = $request->request->get('form');
+        $form = $request->request->get('resend_activ_link');
+        
         if($form['emailOrUsername'] !== null){
             $em = $this->getDoctrine()->getManager();
             $repo = $em->getRepository('BiznesDatabaseBundle:Users');
@@ -703,7 +621,7 @@ class DefaultController extends Controller {
                 }
             }
             else{
-                throw new \Exception('User with that username or email dont exists.');
+                throw new \Exception('User with that username or email does not exists.');
             }
         }
         else{

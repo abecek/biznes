@@ -61,14 +61,23 @@
                                 <a class="nav-link" href="{{ url('personalDataShop') }}"> Twoje Konto</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ url('logout') }}"> Wyloguj</a>
+                                <a class="nav-link" href="{{ url('logout') }}"> 
+                                    Wyloguj
+                                    <i class="fa fa-fw fa-sign-out"></i>
+                                </a>
                             </li>
                         {% else %}
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ url('loginShop') }}"> Logowanie</a>
+                                <a class="nav-link" href="{{ url('loginShop') }}"> 
+                                    Logowanie
+                                    <i class="fa fa-fw fa-sign-in"></i>
+                                </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ url('registerShop') }}"> Rejestracja</a>
+                                <a class="nav-link" href="{{ url('registerShop') }}"> 
+                                    Rejestracja
+                                    <i class="fa fa-fw fa-registered"></i>
+                                </a>
                             </li>
                         {% endif %}
 
@@ -83,11 +92,14 @@
             
         {% endblock %}
 
+        
         <!-- Page Content -->
         <div class="container">
+            <div class="container-fluid">
             {% block container %}
 
             {% endblock %}
+            </div>
         </div>
         <!-- /.container -->
 

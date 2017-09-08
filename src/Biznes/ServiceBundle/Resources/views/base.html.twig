@@ -74,7 +74,7 @@
 
                             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="revenue">
                                 <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#revenue" data-parent="#exampleAccordion">
-                                    <i class="fa fa-fw fa-balance-scale"></i>
+                                    <i class="fa fa-fw fa-money"></i>
                                     <span class="nav-link-text">
                                         Portfel
                                     </span>
@@ -245,17 +245,23 @@
                             {% if is_granted('ROLE_USER') %}
                                 <li class="nav-item">
                                     <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
-                                        <i class="fa fa-fw fa-sign-out"></i>
                                         Wyloguj
+                                        <i class="fa fa-fw fa-sign-out"></i>
                                     </a>
                                 </li>
                             {% else %}
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ url('login') }}"> Logowanie</a>
+                                    <a class="nav-link" href="{{ url('login') }}"> 
+                                        Logowanie
+                                        <i class="fa fa-fw fa-sign-in"></i>
+                                    </a>  
                                 </li>
 
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ url('register') }}"> Rejestracja</a>
+                                    <a class="nav-link" href="{{ url('register') }}">
+                                        Rejestracja
+                                        <i class="fa fa-fw fa-registered"></i>
+                                    </a>
                                 </li>
                             {% endif %}
 
