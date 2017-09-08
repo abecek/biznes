@@ -25,9 +25,17 @@ class TicketsManager extends Controller{
     
     protected $messages = array();
     protected $tickets = array();
+    protected $notes = array();
     
     public function __construct(EntityManager $em) {
         $this->em = $em;
+    }
+    
+    public function loadNotifications(){
+        $this->notes = $this->em->getRepository('BiznesDatabaseBundle:Notifications')
+                ->findBy(array(), array(
+                    'dateNotification' => 'DESC',
+                ));
     }
     
     public function loadByIdTicket($id){
@@ -96,7 +104,11 @@ class TicketsManager extends Controller{
         return $this->messages;
     }
     
-    
+    public function getTickets() {
+        return $this->tickets;
+    }
+
+        
     public function setTicket(Tickets $ticket) {
         $this->ticket = $ticket;
     }
@@ -142,5 +154,14 @@ class TicketsManager extends Controller{
         }
         
         return count($temp);
+    }
+    
+    public function getNotes() {
+        return $this->notes;
+    }
+
+
+    public function getNotesCount(){
+        return count($this->notes);
     }
 }

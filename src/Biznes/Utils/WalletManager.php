@@ -336,5 +336,8 @@ class WalletManager extends Controller{
         return $this->partners;
     }
 
+    public function getCountedIncomesByMonthsAsArray(){
+        
+    }
 
 }
