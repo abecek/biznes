@@ -14,9 +14,14 @@
         <option name="fixed"/>
       </options>
     </field>
-    <field name="isAccepted" type="boolean" column="is_accepted" nullable="true">
+    <field name="isAccepted" type="integer" column="is_accepted" nullable="true">
       <options>
         <option name="default">0</option>
+      </options>
+    </field>
+    <field name="value" type="integer" column="value" nullable="true">
+      <options>
+        <option name="default">5</option>
       </options>
     </field>
     <many-to-one field="idProduct" target-entity="Products" fetch="LAZY">

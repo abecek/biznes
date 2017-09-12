@@ -16,8 +16,8 @@
 
 {% block container %}
     <div class="content-no-bg">
-        <div class="card card-login mx-auto mt-5">
-
+        <div class="comunication-card">
+            <div class="card card-login mx-auto mt-5">
                 <div class="card-body">
                     {{ form_start(registerForm) }}
                     {{ form_row(registerForm.username) }}
@@ -43,51 +43,52 @@
 
         </div>
     </div>
+</div>
 
-    <!-- Remind Password Modal -->
-    <div class="modal fade" id="remindModal" tabindex="-1" role="dialog" aria-labelledby="remindModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="remindModalLabel">Przypomnij hasło</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    {{ form_start(formRemindPassForm) }}
-                    {{ form_widget(formRemindPassForm) }}
-                    {{ form_end(formRemindPassForm) }}
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Anuluj</button>
+<!-- Remind Password Modal -->
+<div class="modal fade" id="remindModal" tabindex="-1" role="dialog" aria-labelledby="remindModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="remindModalLabel">Przypomnij hasło</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                {{ form_start(formRemindPassForm) }}
+                {{ form_widget(formRemindPassForm) }}
+                {{ form_end(formRemindPassForm) }}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Anuluj</button>
 
-                </div>
             </div>
         </div>
     </div>
+</div>
 
-    <!-- Resend Activation Link Modal -->
-    <div class="modal fade" id="resendModal" tabindex="-1" role="dialog" aria-labelledby="resendModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="resendModalLabel">Prześlij ponownie link aktywacyjny</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    {{ form_start(formResendActivLink) }}
-                    {{ form_widget(formResendActivLink) }}
-                    {{ form_end(formResendActivLink) }}
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Anuluj</button>
-                </div>
+<!-- Resend Activation Link Modal -->
+<div class="modal fade" id="resendModal" tabindex="-1" role="dialog" aria-labelledby="resendModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="resendModalLabel">Prześlij ponownie link aktywacyjny</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                {{ form_start(formResendActivLink) }}
+                {{ form_widget(formResendActivLink) }}
+                {{ form_end(formResendActivLink) }}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Anuluj</button>
             </div>
         </div>
-    </div>  
+    </div>
+</div>  
 {% endblock %}
 
 {% block footer %}

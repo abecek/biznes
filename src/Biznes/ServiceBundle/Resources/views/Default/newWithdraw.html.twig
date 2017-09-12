@@ -14,14 +14,14 @@
     </div>
     <div class="row">
         <div class="col-md-12">
+            {{ form_start(newWithdrawForm) }}
+            
             <div class="card card-login mx-auto mt-5">
                 <div class="card-header">
                     Nowa wypłata
                 </div>
                 <div class="card-body">
-                    {{ form_start(newWithdrawForm) }}
                     {{ form_widget(newWithdrawForm) }}
-                    {{ form_end(newWithdrawForm) }}
                 </div>
             </div>
 
@@ -37,12 +37,14 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Cofnij</button>
-                            <a href="#" id="submit" class="btn btn-success success">Akceptuj</a>
+                            <button class="btn btn-success success" type="submit">Akceptuj</button>
                         </div>
 
                     </div>
                 </div>
             </div>  
+                
+            {{ form_end(newWithdrawForm) }}
 
         </div>
     </div>

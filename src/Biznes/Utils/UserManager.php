@@ -46,7 +46,10 @@ class UserManager extends Controller {
         }
     }
 
-    public function getBoughtIdProducts(Users $user = null) {
+    /* TO DO
+     * Dodac wlasna funkcje find do UsersRepo
+     */
+    public function getBoughtIdProducts(Users $user) {
         $boughtProductsArray = array();
 
         if ($user !== null) {
@@ -80,6 +83,43 @@ class UserManager extends Controller {
         return $boughtProductsArray;
     }
 
+    /* TO DO
+     * Zmienic/usunac ta glupia funkcje
+     * na zwykla true/false 
+     * canUserRateProduct(user, idProduct/Product)
+     * ktora bedzie sprawdzac czy jest juz taki rating
+     */
+
+    public function getProductsUserCanRate(Users $user) {
+        $productsAvailableToRate = array();
+
+        if ($user !== null) {
+            if ($this->em !== null) {
+                $rates = $this->em->getRepository('BiznesDatabaseBundle:Ratings')
+                        ->findBy(array(
+                    'idUser' => $user->getIdUser(),
+                ));
+
+                $ratedIdProducts = array();
+                $boughtIdProducts = $this->getBoughtIdProducts($user);
+                foreach ($rates as $rate) {
+                    $currentId = $rate->getIdProduct()->getIdProduct();
+                    $ratedIdProducts[] = $currentId;
+                }
+
+                $productsAvailableToRate = array_diff($boughtIdProducts, $ratedIdProducts);
+                //var_dump($productsAvailableToRate);
+                //exit;
+            } else {
+                throw new Exception("Entity manager is null.");
+            }
+        } else {
+            throw new Exception("User is null.");
+        }
+
+        return $productsAvailableToRate;
+    }
+
     public function setUser(Users $user) {
         $this->user = $user;
     }
@@ -97,8 +137,9 @@ class UserManager extends Controller {
     }
 
     public function userAddressExists() {
-        if ($this->userAddress->getIdUserAddress() != null)
+        if ($this->userAddress->getIdUserAddress() != null) {
             return true;
+        }
         return false;
     }
 
@@ -119,7 +160,6 @@ class UserManager extends Controller {
             $this->em->flush();
         }
     }
-    
 
     public function get($key) {
         switch ($key) {

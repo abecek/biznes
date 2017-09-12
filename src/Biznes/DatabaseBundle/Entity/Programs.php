@@ -13,7 +13,7 @@ class Programs
     private $name;
 
     /**
-     * @var boolean
+     * @var integer
      */
     private $idProgram;
 

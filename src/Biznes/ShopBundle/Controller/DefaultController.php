@@ -6,6 +6,14 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
+use Biznes\DatabaseBundle\Form\RatingType;
+use Biznes\DatabaseBundle\Entity\Ratings;
+
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -48,7 +56,7 @@ class DefaultController extends Controller {
     /**
      * @Route("/product/{id}/{referer}", name="product", requirements={"id": "\d+", "referer": "\d+"})
      */
-    public function productAction($id, $referer = null) {
+    public function productAction(Request $request, $id, $referer = null) {
         $session = new Session();
         if ($referer != null) {
             $session->set('referer', $referer);
@@ -62,7 +70,7 @@ class DefaultController extends Controller {
             $cart = $this->get('cartManager');
             $cart->loadFromSession();
 
-            if (!empty($product)){
+            if ($product !== null){
                 $userCanGiveRating = false;
                 $isInCart = false;
                 
@@ -70,36 +78,105 @@ class DefaultController extends Controller {
                    $isInCart = true; 
                 }
                 
-                //ADDING COMMENTS AND RATINGS TO DO
+                //ADDING RATINGS
                 $um = $this->get('userManager');
                 $user = $this->getUser();
                 if($user !== null){
-                    $productsBoughtByUser = $um->getBoughtIdProducts($user);
-                    if(!empty($productsBoughtByUser)){
-                        if(in_array($id, $productsBoughtByUser)){
+                    /* TO DO
+                     * Zmienic/usunac ta glupia funkcje
+                     * na zwykla true/false 
+                     * canUserRateProduct(user, idProduct/Product)
+                     * ktora bedzie sprawdzac czy jest juz taki rating
+                     */
+                    $productsAvailableToRate = $um->getProductsUserCanRate($user);
+
+                    if(!empty($productsAvailableToRate)){
+                        if(in_array($id, $productsAvailableToRate)){
                             $userCanGiveRating = true;
                         }
                     }
                 }
                 
+                $rating = new Ratings();
+                $form = $this->createForm(RatingType::class, null, array(
+                    'method' => 'POST',
+                    'attr' => array('class' => 'form'),
+                ));
+                        
+                $form->handleRequest($request);
+                if($form->isSubmitted() && $form->isValid()){
+                    $rating->setIdUser($user);
+                    $rating->setIdProduct($product);
+                    $rating->setDateRating(new \DateTime);
+                    $rating->setValue($form->get('value')->getData());
+                    $rating->setText($form->get('text')->getData());
+                    $em->persist($rating);
+                    $em->flush();
+                    
+                    return $this->redirectToRoute('product', array(
+                        'id' => $id,
+                        'referer' => $referer,
+                    ));
+                }
                 
+                //Displaying Ratings and stars
+                $rates = $em->getRepository('BiznesDatabaseBundle:Ratings')
+                        ->findBy(array(
+                            'idProduct' => $id,
+                            'isAccepted' => '1',
+                        ));
+                
+                if(!empty($rates)){
+                    $productRate = 0.0;
+                    $i=0;
+                    foreach($rates as $rate){
+                        $productRate += $rate->getValue();
+                        $i++;
+                    }
+                    $productRate /= $i;
+                }
+                else{
+                    $productRate = 5.0;
+                }
+               
+                $productRate = round($productRate, 1);
+                $roundedRate = round($productRate);
+                $starsOn = $roundedRate;
+                $starsOff = null;
+                if(5-$roundedRate >= 1){
+                    $starsOff = 5-$roundedRate;
+                }
+
                 return $this->render('BiznesShopBundle:Default:product.html.twig', array(
                             'product' => $product,
-                            'userCanGiveRating' => $userCanGiveRating,
                             'isInCart' => $isInCart,
                             'cart' => $cart,
-                ));
-            } 
-            else{
-                //TO DO
-                $products = $em->getRepository('BiznesDatabaseBundle:Products')
-                ->findAll();
-                return $this->render('BiznesShopBundle:Default:index.html.twig', array(
-                            'products' => $products,
-                            'cart' => $cart,
+                    
+                            'productRate' => $productRate,
+                            'starsOn' => $starsOn,
+                            'starsOff' => $starsOff,
+                            'userCanGiveRating' => $userCanGiveRating,
+                            'rates' => $rates,
+                            'ratingForm' => $form->createView(),
                 ));
             }
+            else{
+                return $this->redirectToRoute('shop');
+                //TO DO
+//                $products = $em->getRepository('BiznesDatabaseBundle:Products')
+//                ->findAll();
+//                return $this->render('BiznesShopBundle:Default:index.html.twig', array(
+//                            'products' => $products,
+//                            'cart' => $cart,
+//                ));
+            }
         }
+    }
+    /**
+     * @Route("/addcomment", name="newRating")
+     */
+    public function newRatingAction(Request $request){
+        
     }
 
     /**

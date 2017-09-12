@@ -150,8 +150,7 @@ class CartController extends Controller{
         $boughtProducts = null;
         $um = $this->get('userManager');
         
-        $boughtProducts = $um->getBoughtIdProducts($this->getUser());
-        
+        $boughtProducts = $um->getBoughtIdProducts($this->getUser()); 
         
         return $this->render('BiznesShopBundle:Default:test.html.twig', array(
             'cart' => $cart,

@@ -27,11 +27,11 @@
                     </a>                
                 </form>
             {% endif %}
-            
+
             <a href="#" class="list-group-item active back-link">
                 Wersja demo
             </a>
-            
+
             <a href="{{ path('cart') }}" class="list-group-item active back-link">
                 Przejdź do koszyka
             </a>
@@ -56,47 +56,57 @@
                     <p class="card-text">{{ product.description }}
                     </p>
 
-                    <span class="text-warning">&#9733; &#9733; &#9733; &#9733; &#9734;</span>
-                    4.0 stars
+                    Ocena: {{ productRate }}
+                    <span class="text-warning">
+                        {% for i in 1..starsOn %}
+                            &#9733;
+                        {% endfor %}
+                        {% if starsOff is not null %}
+                            {% for i in 1..starsOff %}
+                                &#9734;
+                            {% endfor %}
+                        {% endif %}
+                    </span>
+                     
                 </div>
             </div>
             <!-- /.card -->
 
             <div class="card card-outline-secondary my-4">
                 <div class="card-header">
-                    Product Reviews
+                    Opinie o produkcie:
                 </div>
                 <div class="card-body">
-
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis et enim aperiam inventore, similique necessitatibus neque non! Doloribus, modi sapiente laboriosam aperiam fugiat laborum. Sequi mollitia, necessitatibus quae sint natus.</p>
-                    <small class="text-muted">Opublikowano przez Anonymous on 3/1/17</small>
-                    <hr>
-
-                    {% if userCanGiveRating %}
-                        <form class="form" method="POST">
-                            <div class="form-group">
-                                <label for="selectRating">Ocena:</label>
-                                <select class="form-control" id="selectRating">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
-                                </select>
-                                <label for="comment">Komentarz:</label>
-                                <textarea class="form-control" rows="5" id="comment"></textarea>
-                            </div>
-                        </form>
-                        <a href="#" class="btn btn-primary">Zostaw ocenę</a>
+                    {% if rates is not empty %}
+                        {% for rate in rates %}
+                            <p>{{ rate.text }}</p>
+                            <small class="text-muted">Opublikowano przez {{ rate.idUser.username }} on {{ rate.dateRating|date('Y-m-d H:m:s') }}</small>
+                            <hr>
+                        {% endfor %}
+                    {% else %}
+                        Brak opini o produkcie
                     {% endif %}
-                    </div>
-                </div>
-                <!-- /.card -->
 
+                    {% if is_granted('ROLE_USER') %}
+                        {% if userCanGiveRating %}
+                            {{ form_start(ratingForm) }}
+                            {{ form_widget(ratingForm) }}
+                            {{ form_end(ratingForm) }}
+                        {% else %}
+                            <div class="alert alert-primary">
+                                Oceniłeś już powyższy produkt. 
+                                Jeśli twoja ocena nie wyświetla sie powyższej to oznacza, że oczekuje na zaakceptowanie przez administracje.
+                            </div>
+                        {% endif %}
+                    {% endif %}
+                </div>
             </div>
-            <!-- /.col-lg-10 -->
+            <!-- /.card -->
 
         </div>
-        <!-- /.row -->
+        <!-- /.col-lg-10 -->
+
+    </div>
+    <!-- /.row -->
 
 {% endblock %}

@@ -4,6 +4,11 @@
  * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-sb-admin/blob/master/LICENSE)
  */
 
+.comunication-card{
+    margin-top: 150px;
+    margin-bottom: 70px;
+}
+
 .img-circle{
    border-radius: 50%; 
 }

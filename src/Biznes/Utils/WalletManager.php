@@ -137,7 +137,7 @@ class WalletManager extends Controller{
                     ->findBy(array(
                         'idSponsor' => $userId
                     ), array(
-                        'dateIncome' => 'DESC',
+                        'dateIncome' => 'ASC',
                     ));
         }
         else{
@@ -152,7 +152,7 @@ class WalletManager extends Controller{
                     ->findBy(array(
                         'idUser' => $user
                     ), array(
-                        'dateExpanse' => 'DESC',
+                        'dateExpanse' => 'ASC',
                     ));
         }
         else{

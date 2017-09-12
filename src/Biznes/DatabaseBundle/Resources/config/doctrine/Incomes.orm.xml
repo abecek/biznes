@@ -17,6 +17,9 @@
         <option name="fixed"/>
       </options>
     </field>
+    
+    <field name="idSponsor" type="integer" column="id_sponsor" nullable="false"/>
+    
     <many-to-one field="idOrder" target-entity="Orders" fetch="LAZY">
       <join-columns>
         <join-column name="id_order" referenced-column-name="id_order"/>
@@ -32,10 +35,6 @@
         <join-column name="id_userFrom" referenced-column-name="id_user"/>
       </join-columns>
     </many-to-one>
-    <many-to-one field="idSponsor" target-entity="Users" fetch="LAZY">
-      <join-columns>
-        <join-column name="id_sponsor" referenced-column-name="id_user"/>
-      </join-columns>
-    </many-to-one>
+    
   </entity>
 </doctrine-mapping>
