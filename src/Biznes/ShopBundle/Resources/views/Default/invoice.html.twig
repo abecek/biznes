@@ -11,19 +11,12 @@
 
         <title>Faktura</title>
 
-        <!-- Bootstrap Core CSS -->
-        <link href="{{ asset('bundles/biznesshop/css/bootstrap.min.css') }}" rel="stylesheet">
-        <!-- Custom fonts for this template -->
-        <link href="{{ asset('bundles/biznesservice/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
-        <!-- Custom CSS -->
-        <link href="{{ asset('bundles/biznesshop/css/style.css') }}" rel="stylesheet">
-
 
     </head>
 
     <body style="
           overflow: auto; 
-          background-color: grey;
+          background-color: white;
           background-image: none;
           padding: 30px;
           ">
@@ -39,7 +32,9 @@
                         <div class="col-lg-6">
                             <h1>Affiliations<br>TOOLS</h1>
                         </div>
-                        <div class="col-lg-6" style="text-align: right;">
+                        <div class="col-lg-6" style="
+                             text-align: right;
+                             ">
                             Data wystawienia: {{ dateExposure|date('Y-m-d') }}
                             <br>
                             Data sprzedaży/data wykonania usługi: {{ dateSale|date('Y-m-d') }}
@@ -59,6 +54,7 @@
                         <div class="col-md-6" style="margin-top: 50px;">
                             <div class="card-header">
                                 <h4>Sprzedawca:</h4>
+                                Affiliations TOOLS Ltd.
                             </div>
                             <div class="card-body">
                                 <strong>Adres:</strong>
@@ -75,7 +71,8 @@
                         <div class="col-md-6" style="margin-top: 50px;">
 
                             <div class="card-header">
-                                <h4>Nabywca:</h4>
+                                <h4>Nabywca:</h4> 
+                                {{ um.userData.name1 }} {{ um.userData.surname }}
                             </div>
                             <div class="card-body">
                                 <strong>Adres:</strong>
@@ -234,16 +231,6 @@
             </div>
         </div>
         <!-- /.container -->
-
-
-
-        <!-- jQuery -->
-        <script src="{{ asset('bundles/biznesshop/js/jquery.min.js') }}"></script>
-
-        <!-- Bootstrap && Propel JavaScript -->
-        <script src="{{ asset('bundles/biznesshop/js/popper.min.js') }}"></script>
-        <script src="{{ asset('bundles/biznesshop/js/bootstrap.min.js') }}"></script>
-
 
     </body>
 

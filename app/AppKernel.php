@@ -19,8 +19,9 @@ class AppKernel extends Kernel
             new Biznes\LandingPageBundle\BiznesLandingPageBundle(),
             new Biznes\ServiceBundle\BiznesServiceBundle(),
             new Biznes\ShopBundle\BiznesShopBundle(),
-            new Biznes\DatabaseBundle\BiznesDatabaseBundle(),      
+            new Biznes\DatabaseBundle\BiznesDatabaseBundle(),  
             
+            new Knp\Bundle\SnappyBundle\KnpSnappyBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

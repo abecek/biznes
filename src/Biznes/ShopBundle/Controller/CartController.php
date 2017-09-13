@@ -12,6 +12,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 use Biznes\DatabaseBundle\Entity\Users;
 use Biznes\DatabaseBundle\Entity\RealizationMethods;
@@ -146,7 +147,9 @@ class CartController extends Controller{
             $datePayment = new \DateTime;
             $datePayment->add(date_interval_create_from_date_string('14 days'));
             
-            return $this->render('BiznesShopBundle:Default:invoice.html.twig', array(
+            $snappy = $this->get('knp_snappy.pdf');
+            
+            $html = $this->renderView('BiznesShopBundle:Default:invoice.html.twig', array(
                     'dateExposure' => $dateExposure,
                     'dateSale' => $dateSale,
                     'datePayment' => $datePayment,
@@ -158,6 +161,19 @@ class CartController extends Controller{
                     'order' => $order,
                     'um' => $um,
                 ));
+            
+            
+            $filename = 'testPDF';
+            
+            return new Response(
+                $snappy->getOutputFromHtml($html),
+                200,
+                array(
+                    'Content-Type'          => 'application/pdf',
+                    'Content-Disposition'   => 'inline; filename="'.$filename.'.pdf"'
+                )
+            );
+            
         }
 
         return $this->render('BiznesShopBundle:Default:confirm.html.twig', array(
