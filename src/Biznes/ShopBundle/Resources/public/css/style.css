@@ -111,6 +111,10 @@ body {
     bottom: 0px;
 }
 
+.business-header {
+    margin-top: 0px;
+}
+
 @media (min-width: 992px) {
     body {
         min-height: 100%;
@@ -121,6 +125,33 @@ body {
 }
 
 @media (max-width: 765px) {
+    .business-header {
+        margin-top: 100px;
+    }
+    
+    .content {
+        width: 100%;
+        float: left;
+        margin: 70px auto 150px;
+
+        padding: 15px;
+
+        background-color: white;
+        border: 1px solid whitesmoke;
+        border-radius: 20px;
+    }
+
+    .content-no-bg {
+        width: 100%;
+        float: left;
+        margin: 40px auto 150px;
+
+        padding: 15px;
+
+        border-radius: 20px;
+    }
+    
+    
     .cart-menu div{
         display: inline-block;
         margin: 5px;

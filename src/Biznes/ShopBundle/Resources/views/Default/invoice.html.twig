@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>Faktura</title>
+
+        <!-- Bootstrap Core CSS -->
+        <link href="{{ asset('bundles/biznesshop/css/bootstrap.min.css') }}" rel="stylesheet">
+        <!-- Custom fonts for this template -->
+        <link href="{{ asset('bundles/biznesservice/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
+        <!-- Custom CSS -->
+        <link href="{{ asset('bundles/biznesshop/css/style.css') }}" rel="stylesheet">
+
+
+    </head>
+
+    <body style="
+          overflow: auto; 
+          background-color: grey;
+          background-image: none;
+          padding: 30px;
+          ">
+        <!-- Page Content -->
+        <div class="container">
+            <div class="container-fluid">
+                <div class="invoice" style="
+                     overflow: auto; 
+                     background-color: white;
+                     padding: 50px;
+                     ">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <h1>Affiliations<br>TOOLS</h1>
+                        </div>
+                        <div class="col-lg-6" style="text-align: right;">
+                            Data wystawienia: {{ dateExposure|date('Y-m-d') }}
+                            <br>
+                            Data sprzedaży/data wykonania usługi: {{ dateSale|date('Y-m-d') }}
+                        </div>
+                    </div>       
+                    
+                    <div class="row">
+                        <div class="col-md-12" style="margin-top: 50px; text-align: center;">
+                            <hr>
+                            <h4>Informacja płatnicza PROFORMA nr PRO/numer</h4>
+                            <hr>
+                        </div>
+                 
+                    </div>
+              
+                    <div class="row">
+                        <div class="col-md-6" style="margin-top: 50px;">
+                            <div class="card-header">
+                                <h4>Sprzedawca:</h4>
+                            </div>
+                            <div class="card-body">
+                                <strong>Adres:</strong>
+                                <div style="clear:left;">
+                                    ul. Przykładowa 15,
+                                    <br> 99-999 Łódź
+                                </div>
+                                <br>
+                                <strong>NIP:</strong> 123-456-78-90  
+                            </div>
+
+                        </div>
+                        
+                        <div class="col-md-6" style="margin-top: 50px;">
+
+                            <div class="card-header">
+                                <h4>Nabywca:</h4>
+                            </div>
+                            <div class="card-body">
+                                <strong>Adres:</strong>
+                                <div style="clear:left;">
+                                    ul. {{ um.userAddress.street }} 
+                                    {{ um.userAddress.nrHouse }}
+                                    {% if um.userAddress.nrFlat is not null %}
+                                        /{{ um.userAddress.nrFlat }}
+                                    {% endif %}
+                                    <br> {{ um.userAddress.postCode }} {{ um.userAddress.city }}
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <div class="row">  
+                        <div class="col-md-12">    
+
+                            <div style="overflow: auto;">
+                                <table class="table table-striped table-bordered" style="
+                                       background-color: whitesmoke;
+                                       ">
+                                    <tr>
+                                        <th class="">
+                                            Lp.
+                                        </th>
+                                        <th class="">
+                                            Nazwa
+                                        </th>
+                                        <th class="">
+                                            Cena Netto
+                                        </th>
+                                        <th class="">
+                                            Stawka Vat
+                                        </th>
+                                        <th class="">
+                                            Kwota Vat
+                                        </th>
+                                        <th class="">
+                                            Wartość Netto
+                                        </th>
+                                        <th class="">
+                                            Wartość Brutto
+                                        </th>
+                                    </tr>
+                                    {% for product in cart.products %}
+                                        <tr>
+                                            <td>
+                                                1
+                                            </td>
+                                            <td>
+                                                {{ product.name }}
+                                            </td>
+                                            <td>
+                                                {{ product.price }}
+                                            </td>
+                                            <td>
+                                                23%
+                                            </td>
+                                            <td>
+                                                {{ product.vatValue }}
+                                            </td>
+                                            <td>
+                                                {{ product.price }}
+                                            </td>
+                                            <td>
+                                                {{ product.priceBrutto }}
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                    <tr>
+                                        <td colspan="3" rowspan="2" style="
+                                            color: whitesmoke;
+                                            background-color: grey;
+                                            ">
+                                            <h3>Razem do zapłaty: <br>{{ order.priceBrutto }} zł</h3>
+                                        </td>
+                                        <td>
+                                            RAZEM:
+                                        </td>
+                                        <td>
+                                            {{ order.vatValue }}
+                                        </td>
+                                        <td>
+                                            {{ order.priceNetto }}
+                                        </td>
+                                        <td>
+                                            {{ order.priceBrutto }}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            W tym:
+                                        </td>
+
+                                        <td>
+                                            {{ order.vatValue }}
+                                        </td>
+                                        <td>
+                                            {{ order.priceNetto }}
+                                        </td>
+                                        <td>
+                                            {{ order.priceBrutto }}
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-md-12" style="
+                             
+                             ">
+                            <hr>
+                            <strong>Słownie złotych:</strong> lalalalala
+                            <br>
+                            <strong>Forma płatności:</strong> {{ paymentMethod.name }}
+                            <br>
+                            bank, Bankowość Detaliczna ABC Banku SA,
+                            <br>
+                            <strong>Nr konta</strong>: 12 3456 7890 1234 5678 9012 3456
+                            <br>
+                            <h5><strong>UWAGA! - Prosimy w tytule przelewu wpisać numer PRO/numer </strong></h5>
+                            <br>
+                            <strong>Termin płatności:</strong> {{ datePayment|date('Y-m-d') }}
+                            <br>
+                            <br>
+                            Uprzejmie informujemy, że termin płatności oznacza dzień wymaganego wpływu należności na nasz rachunek bankowy.
+                            <hr>
+                        </div>
+                    </div>
+                    {#
+                    <div class="row">  
+                        <div class="col">
+                            <hr>
+                            {{ dump(order) }}
+                            <hr>
+                            {{ dump(cart) }}
+                            <hr>
+                            {{ dump(products) }}
+                            <hr>
+                            $products
+                            {{ dump(um) }}
+                            <hr>
+                        </div>
+                    </div>
+                    #}
+                </div>
+            </div>
+        </div>
+        <!-- /.container -->
+
+
+
+        <!-- jQuery -->
+        <script src="{{ asset('bundles/biznesshop/js/jquery.min.js') }}"></script>
+
+        <!-- Bootstrap && Propel JavaScript -->
+        <script src="{{ asset('bundles/biznesshop/js/popper.min.js') }}"></script>
+        <script src="{{ asset('bundles/biznesshop/js/bootstrap.min.js') }}"></script>
+
+
+    </body>
+
+</html>

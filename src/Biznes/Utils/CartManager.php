@@ -17,18 +17,32 @@ use Symfony\Component\HttpFoundation\Session\Session;
 class CartManager extends Controller{
     protected $em = null;
     private $products = array();
-    private $priceOverall = 0;
+    private $priceNettoOverall = 0;
     private $count = 0;
+    private $vatValue = 0.23;
+    
+    /*
+    public function __construct(EntityManager $em) {
+        $this->em = $em;
+    }
+     * 
+     */
     
     public function countPriceOverall(){
-        $this->priceOverall = 0;
+        $this->priceNettoOverall = 0;
         foreach($this->products as $productInCart){
-            $this->priceOverall += $productInCart->getPrice();
+            $this->priceNettoOverall += $productInCart->getPrice();
         }
-        return $this->priceOverall;
+        return $this->priceNettoOverall;
     }
     
-    public function addProduct(Products $product, $desc = null){   
+    public function addProduct(Products $product, $desc = null){ 
+        $product->setPriceBrutto(
+                round(floatval($product->getPrice()) * (1 + $this->vatValue), 2)
+                );
+        $product->setVatValue(
+                round(floatval($product->getPrice()) * $this->vatValue, 2)
+                );
         $id = $product->getIdProduct();
 
         $temp_array = array(
@@ -99,7 +113,7 @@ class CartManager extends Controller{
         if($session->get('cart') != null){
             $object = $session->get('cart');
 
-            $this->priceOverall = $object->priceOverall;
+            $this->priceNettoOverall = $object->priceNettoOverall;
             $this->count = count($object->getProducts());
 
             $this->setProducts($object->getProducts());
@@ -124,13 +138,13 @@ class CartManager extends Controller{
     
     public function clearCart(){
         $this->count = 0;
-        $this->priceOverall = 0;
+        $this->priceNettoOverall = 0;
         $this->products = array();
         $this->saveToSession();
     }
     
     function getPriceOverall() {
-        return $this->priceOverall;
+        return $this->priceNettoOverall;
     }
 
     function getCount() {

@@ -23,6 +23,7 @@ use Biznes\DatabaseBundle\Entity\States;
 class OrderManager extends Controller{
     private $realizationMethod = null;
     private $paymentMethod = null;
+    private $vatValue = 0.23;
     protected $em;
     
     public function __construct(EntityManager $em) {
@@ -56,8 +57,16 @@ class OrderManager extends Controller{
                 ->setIdState($state)
                 ->setIdUser($user)
                 ->setIdSponsor($idSponsor)
-                ->setPriceOverall($cartManager->getPriceOverall());
+                ->setPriceNetto($cartManager->getPriceOverall())
+                ->setPriceBrutto(
+                        round($cartManager->getPriceOverall() * (1 + $this->vatValue), 2)
+                        )
+                ->setVatValue(
+                        round($order->getPriceBrutto() * $this->vatValue, 2)
+                        );
+                
         
+        /*
         $this->em->persist($order);
         $this->em->flush();
         
@@ -76,6 +85,7 @@ class OrderManager extends Controller{
                $wm->addIncome($idSponsor, $user, $order, $date, $product);
            }
         }
+        */
         
         return $order;
     }
@@ -95,6 +105,15 @@ class OrderManager extends Controller{
     public function setPaymentMethod($paymentMethod) {
         $this->paymentMethod = $paymentMethod;
     }
+
+    public function getVatValue() {
+        return $this->vatValue;
+    }
+
+    public function setVatValue($vatValue) {
+        $this->vatValue = $vatValue;
+    }
+
 
 
 }

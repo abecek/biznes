@@ -17,11 +17,6 @@ class Orders
     private $dateOrder;
 
     /**
-     * @var string
-     */
-    private $priceOverall;
-
-    /**
      * @var integer
      */
     private $idSponsor;
@@ -50,7 +45,28 @@ class Orders
      * @var \Biznes\DatabaseBundle\Entity\Users
      */
     private $idUser;
+    
+    /**
+     * @var string
+     */
+    private $priceNetto;
 
+    /**
+     * @var string
+     */
+    private $priceBrutto;
+    
+    private $vatValue;
+    
+    public function getVatValue() {
+        return $this->vatValue;
+    }
+
+    public function setVatValue($vatValue) {
+        $this->vatValue = $vatValue;
+    }
+
+        
 
     /**
      * Set dateOrder
@@ -74,30 +90,6 @@ class Orders
     public function getDateOrder()
     {
         return $this->dateOrder;
-    }
-
-    /**
-     * Set priceOverall
-     *
-     * @param string $priceOverall
-     *
-     * @return Orders
-     */
-    public function setPriceOverall($priceOverall)
-    {
-        $this->priceOverall = $priceOverall;
-
-        return $this;
-    }
-
-    /**
-     * Get priceOverall
-     *
-     * @return string
-     */
-    public function getPriceOverall()
-    {
-        return $this->priceOverall;
     }
 
     /**
@@ -232,5 +224,54 @@ class Orders
     
     public function __toString() {
         return "idOrder: " . $this->idOrder . " idUser: " . $this->idUser->getIdUser() . " idSponsor: " . $this->idSponsor;
+    }
+
+
+    /**
+     * Set priceNetto
+     *
+     * @param string $priceNetto
+     *
+     * @return Orders
+     */
+    public function setPriceNetto($priceNetto)
+    {
+        $this->priceNetto = $priceNetto;
+
+        return $this;
+    }
+
+    /**
+     * Get priceNetto
+     *
+     * @return string
+     */
+    public function getPriceNetto()
+    {
+        return $this->priceNetto;
+    }
+
+    /**
+     * Set priceBrutto
+     *
+     * @param string $priceBrutto
+     *
+     * @return Orders
+     */
+    public function setPriceBrutto($priceBrutto)
+    {
+        $this->priceBrutto = $priceBrutto;
+
+        return $this;
+    }
+
+    /**
+     * Get priceBrutto
+     *
+     * @return string
+     */
+    public function getPriceBrutto()
+    {
+        return $this->priceBrutto;
     }
 }

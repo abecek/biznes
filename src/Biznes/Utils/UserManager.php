@@ -177,6 +177,10 @@ class UserManager extends Controller {
                 break;
         }
     }
+    
+    public function getUser() {
+        return $this->user;
+    }
 
     public function getUserData() {
         return $this->userData;

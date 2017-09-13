@@ -2,17 +2,16 @@
 {% set title = 'Koszyk' %}
 
 {% block header %}
-    <!-- Header -->
-    <header class="business-header">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h1 class="display-3 text-center text-white mt-4 text-bordered">Zawartość koszyka</h1>
-                    <img src="images/"/>
+        <!-- Header -->
+        <header class="business-header" style="margin-top: 120px;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="display-3 text-center text-white mt-4 text-bordered">Zawartość koszyka</h1>
+                    </div>
                 </div>
             </div>
-        </div>
-    </header>   
+        </header>   
 {% endblock %}
 
 {% block container %}
@@ -46,43 +45,43 @@
                 {% endif %}
             </div>
 
-        <div class="row">
-            {% for product in cart.products %}
-                <div class="itemInCart">
-                    <div class="col-lg-8 col-md-12 float-left">
-                        <a href="#">
-                            <img class="img-fluid rounded mb-3 mb-md-0" src="http://placehold.it/700x200" alt="">
-                        </a>
+            <div class="row">
+                {% for product in cart.products %}
+                    <div class="itemInCart">
+                        <div class="col-lg-8 col-md-12 float-left">
+                            <a href="#">
+                                <img class="img-fluid rounded mb-3 mb-md-0" src="http://placehold.it/700x200" alt="">
+                            </a>
+                        </div>
+                        <div class="col-lg-4 col-md-12 float-right" style="min-height: 250px;">
+                            <a href="{{ path('product', {'id': product.idProduct}) }}">
+                                <h3>{{ product.name }}</h3>
+                            </a>
+                            <h4>Cena netto: {{ product.price }} zł</h4>
+                            <p>
+                                {{ product.description }}
+                            </p>
+                            <form id="deletItemFromCart" class="form" action="{{ path('cartDelete') }}" method="POST">
+                                <input type="hidden" name="idProduct" value="{{ product.idProduct }}"/>
+                            </form>
+
+                            <a href="javascript:{}" class="btn btn-primary cart-item-nav"
+                               onclick="document.getElementById('deletItemFromCart').submit();
+                                       return false;">Usuń z koszyka
+                            </a>  
+                            <a class="btn btn-primary cart-item-nav" href="{{ path('product', {'id': product.idProduct}) }}">Obejrzyj produkt</a>
+
+                        </div>
                     </div>
-                    <div class="col-lg-4 col-md-12 float-right" style="min-height: 250px;">
-                        <a href="{{ path('product', {'id': product.idProduct}) }}">
-                            <h3>{{ product.name }}</h3>
-                        </a>
-                        <h4>Cena: {{ product.price }} zł</h4>
-                        <p>
-                            {{ product.description }}
-                        </p>
-                        <form id="deletItemFromCart" class="form" action="{{ path('cartDelete') }}" method="POST">
-                            <input type="hidden" name="idProduct" value="{{ product.idProduct }}"/>
-                        </form>
+                {% endfor %}
+            </div>
+            <!-- /.row -->
 
-                        <a href="javascript:{}" class="btn btn-primary cart-item-nav"
-                           onclick="document.getElementById('deletItemFromCart').submit();
-                                   return false;">Wyczyść koszyk
-                        </a>  
-                        <a class="btn btn-primary cart-item-nav" href="{{ path('product', {'id': product.idProduct}) }}">Obejrzyj produkt</a>
+        {% endif %}
 
-                    </div>
-                </div>
-            {% endfor %}
-        </div>
-        <!-- /.row -->
+        {# dump(cart) #}
 
-    {% endif %}
-
-    {# dump(cart) #}
-
-</div>
+    </div>
 
 {% endblock %}
 

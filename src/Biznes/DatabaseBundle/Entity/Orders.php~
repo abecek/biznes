@@ -17,11 +17,6 @@ class Orders
     private $dateOrder;
 
     /**
-     * @var string
-     */
-    private $priceOverall;
-
-    /**
      * @var integer
      */
     private $idSponsor;
@@ -74,30 +69,6 @@ class Orders
     public function getDateOrder()
     {
         return $this->dateOrder;
-    }
-
-    /**
-     * Set priceOverall
-     *
-     * @param string $priceOverall
-     *
-     * @return Orders
-     */
-    public function setPriceOverall($priceOverall)
-    {
-        $this->priceOverall = $priceOverall;
-
-        return $this;
-    }
-
-    /**
-     * Get priceOverall
-     *
-     * @return string
-     */
-    public function getPriceOverall()
-    {
-        return $this->priceOverall;
     }
 
     /**

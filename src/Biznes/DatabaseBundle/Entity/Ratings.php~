@@ -36,6 +36,11 @@ class Ratings
      * @var \Biznes\DatabaseBundle\Entity\Users
      */
     private $idUser;
+    
+    /**
+     * @var integer
+     */
+    private $value = '5';
 
 
     /**
@@ -166,5 +171,29 @@ class Ratings
     public function getIdUser()
     {
         return $this->idUser;
+    }
+
+    /**
+     * Set value
+     *
+     * @param integer $value
+     *
+     * @return Ratings
+     */
+    public function setValue($value)
+    {
+        $this->value = $value;
+
+        return $this;
+    }
+
+    /**
+     * Get value
+     *
+     * @return integer
+     */
+    public function getValue()
+    {
+        return $this->value;
     }
 }

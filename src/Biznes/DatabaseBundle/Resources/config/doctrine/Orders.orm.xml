@@ -11,12 +11,13 @@
       <generator strategy="IDENTITY"/>
     </id>
     <field name="dateOrder" type="datetime" column="date_order" nullable="false"/>
-    <field name="priceOverall" type="decimal" column="price_overall" precision="6" scale="2" nullable="false"/>
+    <field name="priceNetto" type="decimal" column="price_netto" precision="6" scale="2" nullable="false"/>
     <field name="idSponsor" type="integer" column="id_sponsor" nullable="true">
       <options>
         <option name="unsigned">1</option>
       </options>
     </field>
+    <field name="priceBrutto" type="decimal" column="price_brutto" precision="6" scale="2" nullable="false"/>
     <many-to-one field="idRealizationMethod" target-entity="RealizationMethods" fetch="LAZY">
       <join-columns>
         <join-column name="id_realization_method" referenced-column-name="id_realization_method"/>

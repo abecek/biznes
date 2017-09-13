@@ -3,110 +3,113 @@
 {% set title = 'Produkt' %}
 
 {% block container %}
-    <div class="row">
+    <div class="content-no-bg">
+        <div class="row">
 
-        <div class="col-lg-3">
-            <a href="{{ path('shop') }}" class="list-group-item active back-link">
-                Powrót do produktów
-            </a>
+            <div class="col-lg-3">
+                <a href="{{ path('shop') }}" class="list-group-item active back-link">
+                    Powrót do produktów
+                </a>
 
-            {% if not isInCart %}
-                <form id="addItemToCart" class="form" method="POST" action="{{ path('cartAdd') }}">
-                    <input type="hidden" name="idProduct" value="{{ product.idProduct }}"/>
-                    <a href="javascript:{}" class="list-group-item active back-link"
-                       onclick="document.getElementById('addItemToCart').submit();
+                {% if not isInCart %}
+                    <form id="addItemToCart" class="form" method="POST" action="{{ path('cartAdd') }}">
+                        <input type="hidden" name="idProduct" value="{{ product.idProduct }}"/>
+                        <a href="javascript:{}" class="list-group-item active back-link"
+                           onclick="document.getElementById('addItemToCart').submit();
                                return false;">Dodaj do koszyka
-                    </a>                
-                </form>
-            {% else %}
-                <form id="deleteItemToCart" class="form" method="POST" action="{{ path('cartDelete') }}">
-                    <input type="hidden" name="idProduct" value="{{ product.idProduct }}"/>
-                    <a href="javascript:{}" class="list-group-item active back-link"
-                       onclick="document.getElementById('deleteItemToCart').submit();
+                        </a>                
+                    </form>
+                {% else %}
+                    <form id="deleteItemToCart" class="form" method="POST" action="{{ path('cartDelete') }}">
+                        <input type="hidden" name="idProduct" value="{{ product.idProduct }}"/>
+                        <a href="javascript:{}" class="list-group-item active back-link"
+                           onclick="document.getElementById('deleteItemToCart').submit();
                                return false;">Usuń z koszyka
-                    </a>                
-                </form>
-            {% endif %}
+                        </a>                
+                    </form>
+                {% endif %}
 
-            <a href="#" class="list-group-item active back-link">
-                Wersja demo
-            </a>
+                <a href="#" class="list-group-item active back-link">
+                    Wersja demo
+                </a>
 
-            <a href="{{ path('cart') }}" class="list-group-item active back-link">
-                Przejdź do koszyka
-            </a>
+                <a href="{{ path('cart') }}" class="list-group-item active back-link">
+                    Przejdź do koszyka
+                </a>
 
-        </div>
-        <!-- /.col-lg-3 -->
+            </div>
+            <!-- /.col-lg-3 -->
 
-        <div class="col-lg-9">
-            <div class="card mt-4">
-                <div class="card-header">
-                    <div class="float-left">
-                        <h3 class="card-title">{{ product.name }}</h3>
+            <div class="col-lg-9">
+                <div class="card mt-4">
+                    <div class="card-header">
+                        <div class="float-left">
+                            <h3 class="card-title">{{ product.name }}</h3>
+                        </div>
+                        <div class="float-right">
+                            <h4>Cena: {{ product.price }} zł</h4>
+                        </div>
                     </div>
-                    <div class="float-right">
-                        <h4>Cena: {{ product.price }} zł</h4>
-                    </div>
-                </div>
-                <img class="card-img-top img-fluid" src="http://placehold.it/900x600" alt="">
-                <div class="card-body">
-                    <h4 class="card-title">Opis:</h4>
+                    <img class="card-img-top img-fluid" src="http://placehold.it/900x600" alt="">
+                    <div class="card-body">
+                        <h4 class="card-title">Opis:</h4>
 
-                    <p class="card-text">{{ product.description }}
-                    </p>
+                        <p class="card-text">{{ product.description }}
+                        </p>
 
-                    Ocena: {{ productRate }}
-                    <span class="text-warning">
-                        {% for i in 1..starsOn %}
-                            &#9733;
-                        {% endfor %}
-                        {% if starsOff is not null %}
-                            {% for i in 1..starsOff %}
-                                &#9734;
+                        Ocena: {{ productRate }}
+                        <span class="text-warning">
+                            {% for i in 1..starsOn %}
+                                &#9733;
                             {% endfor %}
-                        {% endif %}
-                    </span>
-                     
-                </div>
-            </div>
-            <!-- /.card -->
+                            {% if starsOff is not null %}
+                                {% for i in 1..starsOff %}
+                                    &#9734;
+                                {% endfor %}
+                            {% endif %}
+                        </span>
 
-            <div class="card card-outline-secondary my-4">
-                <div class="card-header">
-                    Opinie o produkcie:
+                    </div>
                 </div>
-                <div class="card-body">
-                    {% if rates is not empty %}
-                        {% for rate in rates %}
-                            <p>{{ rate.text }}</p>
-                            <small class="text-muted">Opublikowano przez {{ rate.idUser.username }} on {{ rate.dateRating|date('Y-m-d H:m:s') }}</small>
-                            <hr>
-                        {% endfor %}
-                    {% else %}
-                        Brak opini o produkcie
-                    {% endif %}
+                <!-- /.card -->
 
-                    {% if is_granted('ROLE_USER') %}
-                        {% if userCanGiveRating %}
-                            {{ form_start(ratingForm) }}
-                            {{ form_widget(ratingForm) }}
-                            {{ form_end(ratingForm) }}
+                <div class="card card-outline-secondary my-4">
+                    <div class="card-header">
+                        Opinie o produkcie:
+                    </div>
+                    <div class="card-body">
+                        {% if rates is not empty %}
+                            {% for rate in rates %}
+                                <p>{{ rate.text }}</p>
+                                <small class="text-muted">Opublikowano przez {{ rate.idUser.username }} on {{ rate.dateRating|date('Y-m-d H:m:s') }}</small>
+                                <hr>
+                            {% endfor %}
                         {% else %}
-                            <div class="alert alert-primary">
-                                Oceniłeś już powyższy produkt. 
-                                Jeśli twoja ocena nie wyświetla sie powyższej to oznacza, że oczekuje na zaakceptowanie przez administracje.
-                            </div>
+                            Brak opini o produkcie
                         {% endif %}
-                    {% endif %}
+
+                        {% if is_granted('ROLE_USER') %}
+                            {% if userCanGiveRating %}
+                                {{ form_start(ratingForm) }}
+                                {{ form_widget(ratingForm) }}
+                                {{ form_end(ratingForm) }}
+                            {% else %}
+                                <div class="alert alert-primary">
+                                    Oceniłeś już powyższy produkt. 
+                                    Jeśli twoja ocena nie wyświetla sie powyższej to oznacza, że oczekuje na zaakceptowanie przez administracje.
+                                </div>
+                            {% endif %}
+                        {% endif %}
+                    </div>
                 </div>
+                <!-- /.card -->
+
             </div>
-            <!-- /.card -->
+            <!-- /.col-lg-10 -->
 
         </div>
-        <!-- /.col-lg-10 -->
+        <!-- /.row -->
 
     </div>
-    <!-- /.row -->
 
 {% endblock %}
