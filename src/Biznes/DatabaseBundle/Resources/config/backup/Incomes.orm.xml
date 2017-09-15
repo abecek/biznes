@@ -35,6 +35,6 @@
         <join-column name="id_userFrom" referenced-column-name="id_user"/>
       </join-columns>
     </many-to-one>
-    
+
   </entity>
 </doctrine-mapping>

@@ -44,7 +44,10 @@
         {% else %}
 
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-6"
+                     style="
+                     overflow: auto;
+                     ">
                     <h4>Dane personalne</h4><br>
                     {% if userData is not null %}
                         <table class="table table-striped">
@@ -95,7 +98,9 @@
                         </div>
                     {% endif %}
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-6" style="
+                     overflow: auto;
+                     ">
                     <h4>Dane adresowe</h4><br>
                     {% if userAddress is not null %}
                         <table class="table table-striped">
@@ -173,24 +178,29 @@
                         <form action="{{ path('order_confirm') }}" method="POST">
                             <div style="overflow: auto;">
                                 <table class="table table-hover">
-                                    <tr>
-                                        <th class="">
-                                            Nazwa produktu
-                                        </th>
-                                        <th class="">
-                                            Opis
-                                        </th>
-                                        <th class="">
-                                            Cena netto
-                                        </th>
-                                        <th class="">
-                                            Cena brutto
-                                        </th>
-                                    </tr>
+                                    <thead>
+                                        <tr>
+                                            <th class="">
+                                                Nazwa produktu
+                                            </th>
+                                            <th class="">
+                                                Opis
+                                            </th>
+                                            <th class="">
+                                                Cena netto
+                                            </th>
+                                            <th class="">
+                                                Cena brutto
+                                            </th>
+                                        </tr>
+                                    <thead>
+                                    <tbody>
                                     {% for product in cart.products %}
                                         <tr>
                                             <td>
+                                                <a href="{{ path('product', {'id': product.idProduct}) }}">
                                                 {{ product.name }}
+                                                </a>
                                             </td>
                                             <td>
                                                 {{ product.description }}
@@ -203,15 +213,18 @@
                                             </td>
                                         </tr>
                                     {% endfor %}
+                                    <tbody>
                                 </table>
                             </div>
                     </div>
                 </div>
 
                 <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-md-12" style="
+                     overflow: auto;
+                     ">
                         <hr>
-                        <div style="width: 300px;">
+                        <div style="width: 245px;">
                             <label for="payment"><h4>Wybierz sposób realizacji dostarczenia produktów: </h4></label>
                             <select id="realization" name="realizationMethod" class="form-control">
                                 {% for realMethod in realizationMethods %}
@@ -219,7 +232,7 @@
                                 {% endfor %}
                             </select>
                         </div>
-                        <div style="width: 300px;">
+                        <div style="width: 245px;">
                             <label for="payment"><h4>Wybierz sposób płatności: </h4></label>
                             <select id="payment" name="paymentMethod" class="form-control">
                                 {% for payment in paymentMethods %}

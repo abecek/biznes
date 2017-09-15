@@ -414,6 +414,7 @@ class DefaultController extends Controller {
      * @Method({"POST"})
      */
     public function requestAction(Request $request) {
+        //Check if user is fully authenticated
         if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
             throw $this->createAccessDeniedException('You have to be fully authenticated user.');
         }

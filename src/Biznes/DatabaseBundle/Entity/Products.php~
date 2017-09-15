@@ -24,6 +24,11 @@ class Products implements \Serializable
      * @var string
      */
     private $price;
+    
+    
+    private $priceBrutto;
+    
+    private $vatValue;
 
     /**
      * @var string
@@ -121,6 +126,54 @@ class Products implements \Serializable
     public function getPrice()
     {
         return $this->price;
+    }
+    
+    /**
+     * Set priceBrutto
+     *
+     * @param string $price
+     *
+     * @return Products
+     */
+    public function setPriceBrutto($price)
+    {
+        $this->priceBrutto = $price;
+
+        return $this;
+    }
+
+    /**
+     * Get priceBrutto
+     *
+     * @return string
+     */
+    public function getPriceBrutto()
+    {
+        return $this->priceBrutto;
+    }
+    
+        /**
+     * Set vatValue
+     *
+     * @param string $vatValue
+     *
+     * @return Products
+     */
+    public function setVatValue($vatValue)
+    {
+        $this->vatValue = $vatValue;
+
+        return $this;
+    }
+
+    /**
+     * Get vatValue
+     *
+     * @return string
+     */
+    public function getVatValue()
+    {
+        return $this->vatValue;
     }
 
     /**
@@ -237,6 +290,8 @@ class Products implements \Serializable
             $this->name,
             $this->description,
             $this->price,
+            $this->priceBrutto,
+            $this->vatValue,
             $this->version,
             $this->rating,
             $this->idCategory,
@@ -254,6 +309,8 @@ class Products implements \Serializable
             $this->name,
             $this->description,
             $this->price,
+            $this->priceBrutto,
+            $this->vatValue,
             $this->version,
             $this->rating,
             $this->idCategory,

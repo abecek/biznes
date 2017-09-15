@@ -56,7 +56,7 @@ class Orders
      */
     private $priceBrutto;
     
-    private $vatValue;
+    private $vatValue = 0.23;
     
     public function getVatValue() {
         return $this->vatValue;

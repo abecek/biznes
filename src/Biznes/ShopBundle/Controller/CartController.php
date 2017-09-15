@@ -13,17 +13,18 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-
 use Biznes\DatabaseBundle\Entity\Users;
 use Biznes\DatabaseBundle\Entity\RealizationMethods;
 use Biznes\DatabaseBundle\Entity\PaymentMethods;
 use Biznes\DatabaseBundle\Entity\States;
+use Biznes\DatabaseBundle\Entity\Invoices;
+use Biznes\Utils\WalletManager;
 
 /**
  * @Route("/shop/cart")
  */
-class CartController extends Controller{
-    
+class CartController extends Controller {
+
     /**
      * @Route("/", name="cart")
      * @Method("GET")
@@ -74,7 +75,7 @@ class CartController extends Controller{
 
         return $this->redirectToRoute('cart');
     }
-    
+
     /**
      * @Route("/checkout", name="checkout")
      * @Method({"GET"})
@@ -118,84 +119,15 @@ class CartController extends Controller{
      * @Method({"POST"})
      */
     public function confirmAction(Request $request) {
-        $cartManager = $this->get('cartManager');
-        $cartManager->loadFromSession();
-        $productsInCart = $cartManager->getProducts();
-        
-        $em = $this->getDoctrine()->getManager();
-        $paymentMethod = $em->getRepository('BiznesDatabaseBundle:PaymentMethods')
-                ->find($request->get('paymentMethod'));
-        $realizationMethod = $em->getRepository('BiznesDatabaseBundle:RealizationMethods')
-                ->find($request->get('realizationMethod'));
-        $state = $em->getRepository('BiznesDatabaseBundle:States')
-                ->find(1);
-        
-        $user = $this->getUser();
-        
-        //Pushing some code outside controller
-        $orderManager = $this->get('orderManager');
-        $order = $orderManager->createOrder($user, $paymentMethod, $realizationMethod, $state, $productsInCart);
-        //$cartManager->clearCart();
-        
-        
-        $um = $this->get('userManager');
-        $um->loadDataFromUser($user);
-        
-        if($request->get('action') == 'payment'){
-            $dateExposure = new \DateTime;
-            $dateSale = new \DateTime;
-            $datePayment = new \DateTime;
-            $datePayment->add(date_interval_create_from_date_string('14 days'));
-            
-            $snappy = $this->get('knp_snappy.pdf');
-            
-            $html = $this->renderView('BiznesShopBundle:Default:invoice.html.twig', array(
-                    'dateExposure' => $dateExposure,
-                    'dateSale' => $dateSale,
-                    'datePayment' => $datePayment,
-                
-                    'paymentMethod' => $paymentMethod,
-                    'realizationMethod' => $realizationMethod,
-                    'cart' => $cartManager,
-                    'products' => $productsInCart,
-                    'order' => $order,
-                    'um' => $um,
-                ));
-            
-            
-            $filename = 'testPDF';
-            
-            return new Response(
-                $snappy->getOutputFromHtml($html),
-                200,
-                array(
-                    'Content-Type'          => 'application/pdf',
-                    'Content-Disposition'   => 'inline; filename="'.$filename.'.pdf"'
-                )
-            );
-            
+        //Check if user is already logged
+        if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+            throw $this->createAccessDeniedException('You have to be fully authenticated user.');
         }
 
-        return $this->render('BiznesShopBundle:Default:confirm.html.twig', array(
-                    'paymentMethod' => $paymentMethod->getIdPaymentMethod(),
-                    'realizationMethod' => $realizationMethod->getIdRealizationMethod(),
-                    'cart' => $cartManager,
-                    'products' => $productsInCart,
-                    'order' => $order,
-                    'um' => $um,
-                ));
-    }
-    
-    /**
-     * @Route("/payment", name="payment")
-     * @Method({"POST", "GET"})
-     */
-    public function paymentAction(Request $request){
-        /*
         $cartManager = $this->get('cartManager');
         $cartManager->loadFromSession();
         $productsInCart = $cartManager->getProducts();
-        
+
         $em = $this->getDoctrine()->getManager();
         $paymentMethod = $em->getRepository('BiznesDatabaseBundle:PaymentMethods')
                 ->find($request->get('paymentMethod'));
@@ -203,40 +135,240 @@ class CartController extends Controller{
                 ->find($request->get('realizationMethod'));
         $state = $em->getRepository('BiznesDatabaseBundle:States')
                 ->find(1);
-        
+
         $user = $this->getUser();
-        
-        $orderManager = $this->get('orderManager');
-        $order = $orderManager->createOrder($user, $paymentMethod, $realizationMethod, $state, $productsInCart);
-        $cartManager->clearCart();
-        
-        
         $um = $this->get('userManager');
         $um->loadDataFromUser($user);
-        */
-            
-            
-        return $this->render('BiznesShopBundle:Default:payment.html.twig', array(
 
+        //Pushing some code outside controller TO REWORK!!!!!!!
+        $orderManager = $this->get('orderManager');
+        $order = $orderManager->prepareOrder($user, $cartManager->getPriceOverall(), $paymentMethod, $realizationMethod, $state, $productsInCart);
+
+        return $this->render('BiznesShopBundle:Default:confirm.html.twig', array(
+                    'products' => $productsInCart,
+                    'order' => $order,
+                    'cart' => $cartManager,
+                    'um' => $um,
         ));
     }
-    
+
+    /**
+     * @Route("/payment", name="payment")
+     * @Method({"POST"})
+     */
+    public function paymentAction(Request $request) {
+        //Check if user is already logged
+        if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+            throw $this->createAccessDeniedException('You have to be fully authenticated user.');
+        }
+
+        $cartManager = $this->get('cartManager');
+        $cartManager->loadFromSession();
+        $productsInCart = $cartManager->getProducts();
+
+        $em = $this->getDoctrine()->getManager();
+        $paymentMethod = $em->getRepository('BiznesDatabaseBundle:PaymentMethods')
+                ->find($request->get('paymentMethod'));
+        $realizationMethod = $em->getRepository('BiznesDatabaseBundle:RealizationMethods')
+                ->find($request->get('realizationMethod'));
+        $state = $em->getRepository('BiznesDatabaseBundle:States')
+                ->find(1);
+
+        $user = $this->getUser();
+
+        $um = $this->get('userManager');
+        $um->loadDataFromUser($user);
+
+        //Pushing some code outside controller TO REWORK!!!!!!!
+        $orderManager = $this->get('orderManager');
+        $order = $orderManager->prepareOrder($user, $cartManager->getPriceOverall(), $paymentMethod, $realizationMethod, $state, $productsInCart);
+
+        if($request->get('action') == 'paid'){
+            if(!empty($productsInCart)){
+                $orderManager->prepareCarts($productsInCart);
+                $sponsor = $user->getIdSponsor();
+                if ($sponsor != null) {
+                    $orderManager->prepareIncomes($productsInCart, $sponsor, $user);
+                }
+
+                $orderManager->prepareInvoice();
+                $orderManager->pushIntoDatabase();
+
+                $date = $order->getDateOrder();
+                $invoice = $orderManager->getInvoice();
+
+                $datePayment = $invoice->getDatePayment();
+                $invoiceNumber = $invoice->getInvoiceNumber();
+                
+                $this->sendEmailAfterShopping($invoice);
+
+                $snappy = $this->get('knp_snappy.pdf');
+                $html = $this->renderView('BiznesShopBundle:Default:invoice.html.twig', array(
+                    'type' => $invoice->getType(),
+                    'invoiceNumber' => $invoiceNumber,
+                    'dateExposure' => $date,
+                    'dateSale' => $date,
+                    'datePayment' => $datePayment,
+                    'cart' => $cartManager,
+                    'order' => $order,
+                    'um' => $um,
+                ));
+
+                $cartManager->clearCart();
+                $filename = $invoiceNumber;
+
+                return new Response(
+                        $snappy->getOutputFromHtml($html), 200, array(
+                        'Content-Type' => 'application/pdf',
+                        'Content-Disposition' => 'inline; filename="' . $filename . '.pdf"'
+                        )
+                );
+            }
+            else{
+                return $this->redirectToRoute('shop');
+            }
+        }
+
+        return $this->render('BiznesShopBundle:Default:payment.html.twig', array(
+                    'order' => $order,
+                    'cart' => $cartManager,
+        ));
+    }
+
+    /**
+     * @Route("/invoice/{id}", name="invoice")
+     */
+    public function invoiceAction($id = null) {
+        //Check if user is already logged
+        if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+            throw $this->createAccessDeniedException('You have to be fully authenticated user.');
+        }
+
+        if ($id == null || !is_numeric($id)) {
+            throw new \Exception('Something goes wrong.');
+        } else {
+            $em = $this->getDoctrine()->getManager();
+            $invoice = $em->getRepository('BiznesDatabaseBundle:Invoices')
+                    ->findOneBy(array(
+                'idInvoice' => $id,
+            ));
+            $order = $invoice->getIdOrder();
+
+            if ($this->getUser() != $order->getIdUser()) {
+                throw new \Exception('You dont have permission to see not your invoice.');
+            } else {
+                $um = $this->get('userManager');
+                $um->loadDataFromUser($this->getUser());
+
+                $cartManager = new \Biznes\Utils\CartManager();
+                $cartManager->setEntityManager($em);
+                $cartManager->loadFromDatabase($order->getIdOrder());
+
+                $snappy = $this->get('knp_snappy.pdf');
+
+                $html = $this->renderView('BiznesShopBundle:Default:invoice.html.twig', array(
+                    'type' => $invoice->getType(),
+                    'invoiceNumber' => $invoice->getInvoiceNumber(),
+                    'dateExposure' => $invoice->getDateExposure(),
+                    'dateSale' => $invoice->getDateSale(),
+                    'datePayment' => $invoice->getDatePayment(),
+                    'cart' => $cartManager,
+                    'order' => $order,
+                    'um' => $um,
+                ));
+
+                $filename = $invoice->getInvoiceNumber();
+
+                return new Response(
+                        $snappy->getOutputFromHtml($html), 200, array(
+                    'Content-Type' => 'application/pdf',
+                    'Content-Disposition' => 'inline; filename="' . $filename . '.pdf"'
+                        )
+                );
+            }
+        }
+    }
+
+    /**
+     * @Route("/history", name="history")
+     */
+    public function historyAction() {
+        //Check if user is already logged
+        if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+            throw $this->createAccessDeniedException('You have to be fully authenticated user.');
+        }
+
+        $cartManager = $this->get('cartManager');
+        $cartManager->loadFromSession();
+
+        $em = $this->getDoctrine()->getManager();
+        $orders = $em->getRepository('BiznesDatabaseBundle:Orders')
+                ->findBy(array(
+                    'idUser' => $this->getUser(),
+                ), array(
+                    'dateOrder' => 'DESC',
+                ));
+
+
+        $ordersInvoices = array();
+        $ordersCarts = array();
+        $ordersProducts = array();
+        foreach ($orders as $order) {
+            $ordersInvoices[$order->getIdOrder()] = $em->getRepository('BiznesDatabaseBundle:Invoices')
+                    ->findBy(array(
+                'idOrder' => $order,
+            ));
+
+            $ordersCarts = $em->getRepository('BiznesDatabaseBundle:Carts')
+                    ->findBy(array(
+                'idOrder' => $order,
+            ));
+
+            foreach ($ordersCarts as $product) {
+                $ordersProducts[$order->getIdOrder()][] = $em->getRepository('BiznesDatabaseBundle:Products')
+                        ->findOneBy(array(
+                    'idProduct' => $product->getIdProduct(),
+                ));
+            }
+        }
+
+        return $this->render('BiznesShopBundle:Default:history.html.twig', array(
+                    'cart' => $cartManager,
+                    'orders' => $orders,
+                    'invoices' => $ordersInvoices,
+                    'ordersProducts' => $ordersProducts,
+        ));
+    }
+
     /**
      * @Route("/test", name="test")
      */
-    public function testAction(){
-        $cart = $this->get('cartManager');
-        $cart->loadFromSession();
-        
-        $boughtProducts = null;
-        $um = $this->get('userManager');
-        
-        $boughtProducts = $um->getBoughtIdProducts($this->getUser()); 
-        
+    public function textAction() {
+        $string = 'Git';
         return $this->render('BiznesShopBundle:Default:test.html.twig', array(
-            'cart' => $cart,
-            'boughtProducts' => $boughtProducts,
+                    'test' => $string,
         ));
     }
+
     
+    private function sendEmailAfterShopping(Invoices $invoice){
+        $user = $this->getUser();
+        
+        $message = \Swift_Message::newInstance()
+                    ->setSubject('Twoje udane zakupy w Affiliations TOOLS')
+                    ->setFrom('michal.blaszcz@gmail.com')
+                    ->setTo($user->getEmail())
+                    ->setBody(
+                    $this->renderView(
+                            //app/Resources/views/Emails/userBoughtProduct.html.twig
+                            'Emails/userBoughtProduct.html.twig', array(
+                            'name' => $user->getUsername(),
+                            'invoice' => $invoice,
+                            )
+                    ), 'text/html'
+            );
+            $this->get('mailer')->send($message);
+            
+        return;
+    }
 }

@@ -45,7 +45,28 @@ class Orders
      * @var \Biznes\DatabaseBundle\Entity\Users
      */
     private $idUser;
+    
+    /**
+     * @var string
+     */
+    private $priceNetto;
 
+    /**
+     * @var string
+     */
+    private $priceBrutto;
+    
+    private $vatValue;
+    
+    public function getVatValue() {
+        return $this->vatValue;
+    }
+
+    public function setVatValue($vatValue) {
+        $this->vatValue = $vatValue;
+    }
+
+        
 
     /**
      * Set dateOrder
@@ -203,5 +224,54 @@ class Orders
     
     public function __toString() {
         return "idOrder: " . $this->idOrder . " idUser: " . $this->idUser->getIdUser() . " idSponsor: " . $this->idSponsor;
+    }
+
+
+    /**
+     * Set priceNetto
+     *
+     * @param string $priceNetto
+     *
+     * @return Orders
+     */
+    public function setPriceNetto($priceNetto)
+    {
+        $this->priceNetto = $priceNetto;
+
+        return $this;
+    }
+
+    /**
+     * Get priceNetto
+     *
+     * @return string
+     */
+    public function getPriceNetto()
+    {
+        return $this->priceNetto;
+    }
+
+    /**
+     * Set priceBrutto
+     *
+     * @param string $priceBrutto
+     *
+     * @return Orders
+     */
+    public function setPriceBrutto($priceBrutto)
+    {
+        $this->priceBrutto = $priceBrutto;
+
+        return $this;
+    }
+
+    /**
+     * Get priceBrutto
+     *
+     * @return string
+     */
+    public function getPriceBrutto()
+    {
+        return $this->priceBrutto;
     }
 }

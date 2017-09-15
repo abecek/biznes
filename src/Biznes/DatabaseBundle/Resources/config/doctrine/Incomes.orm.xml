@@ -20,7 +20,6 @@
     
     <field name="idSponsor" type="integer" column="id_sponsor" nullable="false"/>
     
-    
     <many-to-one field="idOrder" target-entity="Orders" fetch="LAZY">
       <join-columns>
         <join-column name="id_order" referenced-column-name="id_order"/>

@@ -92,7 +92,7 @@ class Users implements AdvancedUserInterface, \Serializable
     /**
      * @var integer
      */
-    private $canChangePassword = '0';
+    private $canChangeEmail = 0;
     
     /**
      * @var \DateTime
@@ -359,7 +359,7 @@ class Users implements AdvancedUserInterface, \Serializable
             $this->rank,
             $this->gender,
             $this->dateRegister,
-            $this->canChangePassword,
+            $this->canChangeEmail,
             $this->dateLastPassRequest,
             // see section on salt below
             // $this->salt,
@@ -377,7 +377,7 @@ class Users implements AdvancedUserInterface, \Serializable
             $this->rank,
             $this->gender,
             $this->dateRegister,
-            $this->canChangePassword,
+            $this->canChangeEmail,
             $this->dateLastPassRequest,
             // see section on salt below
             // $this->salt
@@ -414,32 +414,7 @@ class Users implements AdvancedUserInterface, \Serializable
         else{
             return true;
         }
-    }
-
-    /**
-     * Set canChangePassword
-     *
-     * @param integer $canChangePassword
-     *
-     * @return Users
-     */
-    public function setCanChangePassword($canChangePassword)
-    {
-        $this->canChangePassword = $canChangePassword;
-
-        return $this;
-    }
-
-    /**
-     * Get canChangePassword
-     *
-     * @return integer
-     */
-    public function getCanChangePassword()
-    {
-        return $this->canChangePassword;
-    }
-    
+    }  
 
 
     /**
@@ -464,5 +439,39 @@ class Users implements AdvancedUserInterface, \Serializable
     public function getDateLastPassRequest()
     {
         return $this->dateLastPassRequest;
+    }
+
+
+    /**
+     * Set canChangeEmail
+     *
+     * @param boolean $canChangeEmail
+     *
+     * @return Users
+     */
+    public function setCanChangeEmail($canChangeEmail)
+    {
+        if($canChangeEmail == 1 || $canChangeEmail == true){
+            $this->canChangeEmail = 1;
+        }
+        else{
+            $this->canChangeEmail = 0;
+        }
+
+        return $this;
+    }
+
+    /**
+     * Get canChangeEmail
+     *
+     * @return boolean
+     */
+    public function getCanChangeEmail()
+    {
+        if($canChangeEmail == 1){
+            return true;
+        }
+
+        return false;;
     }
 }

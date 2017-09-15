@@ -19,14 +19,12 @@ class CartManager extends Controller{
     private $products = array();
     private $priceNettoOverall = 0;
     private $count = 0;
-    private $vatValue = 0.23;
+    public $vatValue = 0.23;
     
-    /*
-    public function __construct(EntityManager $em) {
+    
+    public function setEntityManager(EntityManager $em) {
         $this->em = $em;
     }
-     * 
-     */
     
     public function countPriceOverall(){
         $this->priceNettoOverall = 0;
@@ -34,6 +32,12 @@ class CartManager extends Controller{
             $this->priceNettoOverall += $productInCart->getPrice();
         }
         return $this->priceNettoOverall;
+    }
+    
+    public function countProducts(){
+        foreach($this->products as $productInCart){
+            $this->count++;
+        }
     }
     
     public function addProduct(Products $product, $desc = null){ 
@@ -126,15 +130,38 @@ class CartManager extends Controller{
         
     }
     
-    /*
-    public function loadFromDatabase($id){
-        if(is_numeric($id) && $id != null){
-            $em = $this->getDoctrine()->getManager();
-            $cart = $em->getRepository('BiznesDatabaseBundle:Carts')
-                ->findOneByIdProduct($id);
+    
+    public function loadFromDatabase($idOrder){
+        if(is_numeric($idOrder) && $idOrder != null){
+            if($this->em != null){
+                $carts = $this->em->getRepository('BiznesDatabaseBundle:Carts')
+                    ->findBy(array(
+                        'idOrder' => $idOrder,
+                    ));
+                
+                $temp = array();
+                foreach($carts as $productInCart){
+                    $product = $this->em->getRepository('BiznesDatabaseBundle:Products')
+                        ->findOneBy(array(
+                            'idProduct' => $productInCart->getIdProduct(),
+                        ));
+                    $product->setPriceBrutto(
+                            round(($product->getVatValue() + 1) * strval($product->getPrice()), 2)
+                            );
+                
+                    $temp[] = $product;
+                }
+                
+                $this->products = $temp;
+                $this->countPriceOverall();
+                $this->countProducts();
+                $this->vatValue = 0.23;
+            }
+            else{
+                throw new \Exception('EntityManager is null.');
+            }
         }
     }
-     */
     
     public function clearCart(){
         $this->count = 0;

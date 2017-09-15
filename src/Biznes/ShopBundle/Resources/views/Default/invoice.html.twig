@@ -18,7 +18,8 @@
           overflow: auto; 
           background-color: white;
           background-image: none;
-          padding: 30px;
+          padding: 10px;
+          font-size: 16px;
           ">
         <!-- Page Content -->
         <div class="container">
@@ -26,13 +27,16 @@
                 <div class="invoice" style="
                      overflow: auto; 
                      background-color: white;
-                     padding: 50px;
+                     padding: 20px;
                      ">
                     <div class="row">
-                        <div class="col-lg-6">
+                        <div class="col-lg-6" style="
+                             float:left;
+                             ">
                             <h1>Affiliations<br>TOOLS</h1>
                         </div>
                         <div class="col-lg-6" style="
+                             float:right;
                              text-align: right;
                              ">
                             Data wystawienia: {{ dateExposure|date('Y-m-d') }}
@@ -41,20 +45,35 @@
                         </div>
                     </div>       
                     
-                    <div class="row">
-                        <div class="col-md-12" style="margin-top: 50px; text-align: center;">
+                    <div class="row" style="
+                         clear:both;
+                         margin-top: 100px; 
+                         ">
+                        <div class="col-md-12" style="
+                             clear:both;
+                             padding-top: 40px; 
+                             text-align: center;
+                             ">
                             <hr>
-                            <h4>Informacja płatnicza PROFORMA nr PRO/numer</h4>
-                            <hr>
+                            {% if type == "PROFORMA" %}
+                                <h3>Informacja płatnicza PROFORMA nr {{ invoiceNumber }}</h3>
+                            {% elseif type == "FAKTURA" %}
+                                <h3>Faktura nr {{ invoiceNumber }}</h3>
+                            {% endif %}
                         </div>
                  
                     </div>
-              
+                    
+                    
+                            
                     <div class="row">
-                        <div class="col-md-6" style="margin-top: 50px;">
+                        <div class="col-md-6" style="
+                             margin-top: 40px;
+                             float:left;
+                             ">
                             <div class="card-header">
                                 <h4>Sprzedawca:</h4>
-                                Affiliations TOOLS Ltd.
+                                <strong>Affiliations TOOLS Ltd.</strong>
                             </div>
                             <div class="card-body">
                                 <strong>Adres:</strong>
@@ -68,7 +87,10 @@
 
                         </div>
                         
-                        <div class="col-md-6" style="margin-top: 50px;">
+                        <div class="col-md-6" style="
+                             margin-top: 40px;
+                             float:right;
+                             ">
 
                             <div class="card-header">
                                 <h4>Nabywca:</h4> 
@@ -92,93 +114,155 @@
 
                     <hr>
 
-                    <div class="row">  
+                    <div class="row" style="">  
                         <div class="col-md-12">    
 
-                            <div style="overflow: auto;">
-                                <table class="table table-striped table-bordered" style="
-                                       background-color: whitesmoke;
+                            <div style="
+                                 clear: both;
+                                 padding: 50px 15px 50px;
+                                 ">
+                                <table class="" style="
+                                       background-color: whitesmoke;  
+                                        width: 100%;
+                                        text-align: center;
+                                        line-height: 26px;
+                                        border: 2px solid grey;
                                        ">
-                                    <tr>
-                                        <th class="">
+                                    <tr style="
+                                        border: 1px solid grey;
+                                        ">
+                                        <th class="" style="
+                                            width: 25px;
+                                            border: 1px solid grey;
+                                            ">
                                             Lp.
                                         </th>
-                                        <th class="">
+                                        <th class="" style="
+                                            border: 1px solid grey; 
+                                            ">
                                             Nazwa
                                         </th>
-                                        <th class="">
+                                        <th class="" style="
+                                            border: 1px solid grey;
+                                            ">
                                             Cena Netto
                                         </th>
-                                        <th class="">
+                                        <th class="" style="
+                                            border: 1px solid grey;
+                                            ">
                                             Stawka Vat
                                         </th>
-                                        <th class="">
+                                        <th class="" style="
+                                            border: 1px solid grey;
+                                            ">
                                             Kwota Vat
                                         </th>
-                                        <th class="">
+                                        <th class="" style="
+                                            border: 1px solid grey;
+                                            ">
                                             Wartość Netto
                                         </th>
-                                        <th class="">
+                                        <th class="" style="
+                                            border: 1px solid grey;
+                                            ">
                                             Wartość Brutto
                                         </th>
                                     </tr>
                                     {% for product in cart.products %}
-                                        <tr>
-                                            <td>
+                                        <tr style="
+                                            border: 1px solid grey;
+                                            ">
+                                            <td style="
+                                            border: 1px solid grey;
+                                            ">
                                                 1
                                             </td>
-                                            <td>
+                                            <td style="
+                                            border: 1px solid grey;
+                                            ">
                                                 {{ product.name }}
                                             </td>
-                                            <td>
+                                            <td style="
+                                            border: 1px solid grey;
+                                            ">
                                                 {{ product.price }}
                                             </td>
-                                            <td>
+                                            <td style="
+                                            border: 1px solid grey;
+                                            ">
                                                 23%
                                             </td>
-                                            <td>
+                                            <td style="
+                                            border: 1px solid grey;
+                                            ">
                                                 {{ product.vatValue }}
                                             </td>
-                                            <td>
+                                            <td style="
+                                            border: 1px solid grey;
+                                            ">
                                                 {{ product.price }}
                                             </td>
-                                            <td>
+                                            <td style="
+                                            border: 1px solid grey;
+                                            ">
                                                 {{ product.priceBrutto }}
                                             </td>
                                         </tr>
                                     {% endfor %}
-                                    <tr>
+                                    <tr style="
+                                        height: 120px;
+                                        ">
                                         <td colspan="3" rowspan="2" style="
                                             color: whitesmoke;
                                             background-color: grey;
+                                            border: 1px solid grey;
                                             ">
-                                            <h3>Razem do zapłaty: <br>{{ order.priceBrutto }} zł</h3>
+                                            <h3 style="
+                                                line-height: 40px;
+                                                font-size: 32px;
+                                                ">Razem do zapłaty: <br>{{ order.priceBrutto }} zł</h3>
                                         </td>
-                                        <td>
+                                        <td style="
+                                            border: 1px solid grey;
+                                            ">
                                             RAZEM:
                                         </td>
-                                        <td>
+                                        <td style="
+                                            border: 1px solid grey;
+                                            ">
                                             {{ order.vatValue }}
                                         </td>
-                                        <td>
+                                        <td style="
+                                            border: 1px solid grey;
+                                            ">
                                             {{ order.priceNetto }}
                                         </td>
-                                        <td>
+                                        <td style="
+                                            border: 1px solid grey;
+                                            ">
                                             {{ order.priceBrutto }}
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>
+                                        <td style="
+                                            border: 1px solid grey;
+                                            ">
                                             W tym:
                                         </td>
 
-                                        <td>
+                                        <td style="
+                                            border: 1px solid grey;
+                                            ">
                                             {{ order.vatValue }}
                                         </td>
-                                        <td>
+                                        <td style="
+                                            border: 1px solid grey;
+                                            ">
                                             {{ order.priceNetto }}
                                         </td>
-                                        <td>
+                                        <td style="
+                                            border: 1px solid grey;
+                                            ">
                                             {{ order.priceBrutto }}
                                         </td>
                                     </tr>
@@ -194,15 +278,15 @@
                              
                              ">
                             <hr>
-                            <strong>Słownie złotych:</strong> lalalalala
+                            <strong>Słownie złotych:</strong> //TO DO
                             <br>
-                            <strong>Forma płatności:</strong> {{ paymentMethod.name }}
+                            <strong>Forma płatności:</strong> {{ order.IdPaymentMethod.name }}
                             <br>
                             bank, Bankowość Detaliczna ABC Banku SA,
                             <br>
                             <strong>Nr konta</strong>: 12 3456 7890 1234 5678 9012 3456
                             <br>
-                            <h5><strong>UWAGA! - Prosimy w tytule przelewu wpisać numer PRO/numer </strong></h5>
+                            <h3><strong>UWAGA! - Prosimy w tytule przelewu wpisać numer {{ invoiceNumber }} </strong></h3>
                             <br>
                             <strong>Termin płatności:</strong> {{ datePayment|date('Y-m-d') }}
                             <br>

@@ -31,7 +31,7 @@ class UsersDataType extends AbstractType{
                 ->add('name2', TextType::class, array(
                     'required'   => false,
                     'attr' => array('class' => 'form-control'),
-                    'label' => 'Drugie imię',
+                    'label' => 'Drugie imię(opcjonalnie)',
                 ))
                 ->add('surname', TextType::class, array(
                     'attr' => array('class' => 'form-control'),
@@ -40,7 +40,7 @@ class UsersDataType extends AbstractType{
                 ->add('identityNumber', TextType::class, array(
                     'required'   => false,
                     'attr' => array('class' => 'form-control'),
-                    'label' => 'Pesel',
+                    'label' => 'Pesel(opcjonalnie)',
                 ))
                 ->add('telephone', TextType::class, array(
                     'attr' => array('class' => 'form-control'),
@@ -48,8 +48,8 @@ class UsersDataType extends AbstractType{
                 ))                   
                 ->add('language', ChoiceType::class, array(
                     'choices' => array(
-                        'Polish' => 'pl',
-                        'English' => 'en'
+                        'Polski' => 'pl',
+                        'Angielski' => 'en'
                     ),
                     'placeholder' => 'Wybierz język',
                     'attr' => array('class' => 'form-control'),
