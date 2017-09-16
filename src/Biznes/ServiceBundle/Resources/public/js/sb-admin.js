@@ -8,6 +8,8 @@
   
   $(window).ready(function(e) {
     $("body").toggleClass("sidenav-toggled");
+    $("homepage").toggleClass("sidenav-toggled");
+  
     $(".navbar-sidenav .nav-link-collapse").addClass("collapsed");
     $(".navbar-sidenav .sidenav-second-level, .navbar-sidenav .sidenav-third-level").removeClass("show");
   });
@@ -18,6 +20,15 @@
     $("body").toggleClass("sidenav-toggled");
     $(".navbar-sidenav .nav-link-collapse").addClass("collapsed");
     $(".navbar-sidenav .sidenav-second-level, .navbar-sidenav .sidenav-third-level").removeClass("show");
+    
+    
+    if( $("#homepage").css('margin-left') == '250px') {
+        $("#homepage").css('margin-left', '55px');
+    }
+    else if( $("#homepage").css('margin-left') == '55px') {
+        $("#homepage").css('margin-left', '250px');
+    }
+    
   });
 
   // Force the toggled class to be removed when a collapsible nav link is clicked
@@ -25,6 +36,7 @@
     e.preventDefault();
     $("body").removeClass("sidenav-toggled");
   });
+  
 
   // Prevent the content wrapper from scrolling when the fixed side navigation hovered over
   $('body.fixed-nav .navbar-sidenav, body.fixed-nav .sidenav-toggler, body.fixed-nav .navbar-collapse').on('mousewheel DOMMouseScroll', function(e) {

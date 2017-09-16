@@ -15,6 +15,13 @@ body {
     padding-top: 54px; 
 }
 
+.navbar-sidenav-tooltip.show {
+  display: none; 
+}
+
+body.sidenav-toggled .navbar-sidenav-tooltip.show {
+  display: flex; 
+}
 
 .card-login {
   max-width: 25rem; }

@@ -9,40 +9,60 @@ use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Biznes\DatabaseBundle\Entity\Expanses;
 use Biznes\DatabaseBundle\Form\ExpansesType;
+use Biznes\DatabaseBundle\Entity\Users;
 use Biznes\Utils\WalletManager;
+
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class DefaultController extends Controller {
+    
+    public function getTicketsAndNotes(Users $user){
+        $data = array();
+        $data['tickets'] = null;
+        $data['notes'] = null;
+        $data['ticketsCount'] = 0;
+        $data['notificationCount'] = 0;
+        
+        $data['incomesCount'] = 0;
+        $data['withdrawsCount'] = 0;
+
+        if ($user != null) {
+            $tm = $this->get('ticketsManager');
+            $tm->loadAllTicketsByIdUser($user);
+            $tm->loadNotifications();
+            $data['tickets'] = $tm->getAllOpenTickets();
+            $data['ticketsCount'] = $tm->getOpenTicketsCount($user);
+
+            $data['notes'] = $tm->getNotes();
+            $data['notificationCount'] = $tm->getNotesCount();
+        }
+        
+        return $data;
+    }
 
     /**
      * @Route("/", name="homepage")
      */
     public function indexAction() {
         $user = $this->getUser();
-        $ticketsCount = 0;
-        $notificationCount = 0;
-        $tickets = null;
-        $notes = null;
-
-        if ($user != null) {
-            $tm = $this->get('ticketsManager');
-            $tm->loadAllTicketsByIdUser($user);
-            $tm->loadNotifications();
-            $tickets = $tm->getAllOpenTickets();
-            $ticketsCount = $tm->getOpenTicketsCount($user);
-
-            $notes = $tm->getNotes();
-            $notificationCount = $tm->getNotesCount();
+        $idUser = null;
+        $data = null;
+        if($user !== null){
+            $data = $this->getTicketsAndNotes($user);
+            $idUser = $user->getIdUser();
         }
+        
 
         return $this->render('BiznesServiceBundle:Default:index.html.twig', array(
-                    'ticketsCount' => $ticketsCount,
-                    'notificationCount' => $notificationCount,
-                    'notes' => $notes,
-                    'tickets' => $tickets,
+                    'ticketsCount' => $data['ticketsCount'],
+                    'notificationCount' => $data['notificationCount'],
+                    'notes' => $data['notes'],
+                    'tickets' => $data['tickets'],
+            
+                    'idUser' => $idUser,
         ));
     }
 
@@ -50,7 +70,11 @@ class DefaultController extends Controller {
      * @Route("/created", name="accountCreatedService")
      */
     public function createdAction() {
-        return $this->render('BiznesServiceBundle:Default:registerCreated.html.twig');
+
+        
+        return $this->render('BiznesServiceBundle:Default:registerCreated.html.twig', array(
+            
+        ));
     }
 
     /**
@@ -62,23 +86,12 @@ class DefaultController extends Controller {
         }
 
         $user = $this->getUser();
-        $ticketsCount = 0;
-        $notificationCount = 0;
-        $tickets = null;
-        $notes = null;
+        $data = $this->getTicketsAndNotes($user);
+        
         $incomesCount = 0;
         $withdrawsCount = 0;
 
         if ($user != null) {
-            $tm = $this->get('ticketsManager');
-            $tm->loadAllTicketsByIdUser($user);
-            $tm->loadNotifications();
-            $tickets = $tm->getAllOpenTickets();
-            $ticketsCount = $tm->getOpenTicketsCount($user);
-
-            $notes = $tm->getNotes();
-            $notificationCount = $tm->getNotesCount();
-
             $wm = $this->get('walletManager');
 
             $wm->countMoneyInWallet($user);
@@ -98,10 +111,12 @@ class DefaultController extends Controller {
                         'moneyInWallet' => $moneyInWallet,
                         'incomesCount' => $incomesCount,
                         'withdrawsCount' => $withdrawsCount,
-                        'ticketsCount' => $ticketsCount,
-                        'notificationCount' => $notificationCount,
-                        'notes' => $notes,
-                        'tickets' => $tickets,
+                
+                        'ticketsCount' => $data['ticketsCount'],
+                        'notificationCount' => $data['notificationCount'],
+                        'notes' => $data['notes'],
+                        'tickets' => $data['tickets'],
+                
                         'idUser' => $user->getIdUser(),
                         'chartForm' => $form->createView(),
             ));
@@ -119,34 +134,22 @@ class DefaultController extends Controller {
         }
 
         $incomes = null;
-        $ticketsCount = 0;
-        $notificationCount = 0;
-
-        $tickets = null;
-        $notes = null;
         $user = $this->getUser();
+        $data = $this->getTicketsAndNotes($user);
 
         if ($user != null) {
             $wm = $this->get('walletManager');
             $incomes = $wm->loadWalletManagerFromDB($user)->getIncomes();
-
-            $tm = $this->get('ticketsManager');
-            $tm->loadAllTicketsByIdUser($user);
-            $tm->loadNotifications();
-            $tickets = $tm->getAllOpenTickets();
-            $ticketsCount = $tm->getOpenTicketsCount($user);
-
-            $notes = $tm->getNotes();
-            $notificationCount = $tm->getNotesCount();
         }
 
 
         return $this->render('BiznesServiceBundle:Default:incomes.html.twig', array(
                     'incomes' => $incomes,
-                    'ticketsCount' => $ticketsCount,
-                    'notificationCount' => $notificationCount,
-                    'notes' => $notes,
-                    'tickets' => $tickets,
+            
+                    'ticketsCount' => $data['ticketsCount'],
+                    'notificationCount' => $data['notificationCount'],
+                    'notes' => $data['notes'],
+                    'tickets' => $data['tickets'],
         ));
     }
 
@@ -159,33 +162,22 @@ class DefaultController extends Controller {
         }
 
         $expanses = null;
-
-        $ticketsCount = 0;
-        $notificationCount = 0;
-        $tickets = null;
-        $notes = null;
-
         $user = $this->getUser();
+        $data = $this->getTicketsAndNotes($user);
+        
         if ($user != null) {
             $wm = $this->get('walletManager');
             $expanses = $wm->loadWalletManagerFromDB($user)->getExpanses();
 
-            $tm = $this->get('ticketsManager');
-            $tm->loadAllTicketsByIdUser($user);
-            $tm->loadNotifications();
-            $tickets = $tm->getAllOpenTickets();
-            $ticketsCount = $tm->getOpenTicketsCount($user);
-
-            $notes = $tm->getNotes();
-            $notificationCount = $tm->getNotesCount();
         }
 
         return $this->render('BiznesServiceBundle:Default:expanses.html.twig', array(
                     'expanses' => $expanses,
-                    'ticketsCount' => $ticketsCount,
-                    'notificationCount' => $notificationCount,
-                    'notes' => $notes,
-                    'tickets' => $tickets,
+            
+                    'ticketsCount' => $data['ticketsCount'],
+                    'notificationCount' => $data['notificationCount'],
+                    'notes' => $data['notes'],
+                    'tickets' => $data['tickets'],
         ));
     }
 
@@ -196,30 +188,19 @@ class DefaultController extends Controller {
         if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
             throw $this->createAccessDeniedException('You have to be fully authenticated user.');
         }
+
         $msg = null;
 
         $em = $this->getDoctrine()->getManager();
 
         $availableMoney = null;
-        $ticketsCount = 0;
-        $notificationCount = 0;
-        $tickets = null;
-        $notes = null;
-
         $user = $this->getUser();
+        $data = $this->getTicketsAndNotes($user);
+        
         if ($user != null) {
             $wm = new WalletManager($em);
             $wm->countMoneyInWallet($user);
             $availableMoney = $wm->getMoneyInWallet();
-
-            $tm = $this->get('ticketsManager');
-            $tm->loadAllTicketsByIdUser($user);
-            $tm->loadNotifications();
-            $tickets = $tm->getAllOpenTickets();
-            $ticketsCount = $tm->getOpenTicketsCount($user);
-
-            $notes = $tm->getNotes();
-            $notificationCount = $tm->getNotesCount();
         }
 
         $form = $this->createForm(ExpansesType::class, null, array(
@@ -249,10 +230,12 @@ class DefaultController extends Controller {
         return $this->render('BiznesServiceBundle:Default:newWithdraw.html.twig', array(
                     'newWithdrawForm' => $form->createView(),
                     'moneyInWallet' => $availableMoney,
-                    'ticketsCount' => $ticketsCount,
-                    'notificationCount' => $notificationCount,
-                    'notes' => $notes,
-                    'tickets' => $tickets,
+            
+                    'ticketsCount' => $data['ticketsCount'],
+                    'notificationCount' => $data['notificationCount'],
+                    'notes' => $data['notes'],
+                    'tickets' => $data['tickets'],
+            
                     'msg' => $msg,
         ));
     }
@@ -308,29 +291,17 @@ class DefaultController extends Controller {
             return $this->redirectToRoute('messages');
         }
 
-        $ticketsCount = 0;
-        $notificationCount = 0;
-        $tickets = null;
-        $notes = null;
 
         $user = $this->getUser();
-        if ($user != null) {
-            $tm = $this->get('ticketsManager');
-            $tm->loadAllTicketsByIdUser($user);
-            $tm->loadNotifications();
-            $tickets = $tm->getAllOpenTickets();
-            $ticketsCount = $tm->getOpenTicketsCount($user);
-
-            $notes = $tm->getNotes();
-            $notificationCount = $tm->getNotesCount();
-        }
+        $data = $this->getTicketsAndNotes($user);
 
         return $this->render('BiznesServiceBundle:Default:newTicket.html.twig', array(
                     'ticketForm' => $form->createView(),
-                    'ticketsCount' => $ticketsCount,
-                    'notificationCount' => $notificationCount,
-                    'notes' => $notes,
-                    'tickets' => $tickets,
+            
+                    'ticketsCount' => $data['ticketsCount'],
+                    'notificationCount' => $data['notificationCount'],
+                    'notes' => $data['notes'],
+                    'tickets' => $data['tickets'],
         ));
     }
 
@@ -342,29 +313,14 @@ class DefaultController extends Controller {
             throw $this->createAccessDeniedException('You have to be fully authenticated user.');
         }
 
-        $ticketsCount = 0;
-        $notificationCount = 0;
-        $tickets = null;
-        $notes = null;
-
         $user = $this->getUser();
-        if ($user != null) {
-            $tm = $this->get('ticketsManager');
-            $tm->loadAllTicketsByIdUser($user);
-            $tm->loadNotifications();
-            $tickets = $tm->getTickets();
-            $ticketsCount = $tm->getOpenTicketsCount($user);
-
-            $notes = $tm->getNotes();
-            $notificationCount = $tm->getNotesCount();
-        }
+        $data = $this->getTicketsAndNotes($user);
 
         return $this->render('BiznesServiceBundle:Default:messages.html.twig', array(
-                    'tickets' => $tickets,
-                    'ticketsCount' => $ticketsCount,
-                    'notificationCount' => $notificationCount,
-                    'notes' => $notes,
-                    'tickets' => $tickets,
+                    'ticketsCount' => $data['ticketsCount'],
+                    'notificationCount' => $data['notificationCount'],
+                    'notes' => $data['notes'],
+                    'tickets' => $data['tickets'],
         ));
     }
 
@@ -379,26 +335,14 @@ class DefaultController extends Controller {
             throw new Exception('There is no ticket with this id.');
         }
 
-        $ticketsCount = 0;
-        $notificationCount = 0;
-        $tickets = null;
         $ticket = null;
-        $notes = null;
-
+       
         $user = $this->getUser();
+        $data = $this->getTicketsAndNotes($user);
         if ($user != null) {
             $tm = $this->get('ticketsManager');
-            $tm->loadAllTicketsByIdUser($user);
-            $tm->loadNotifications();
-            $tickets = $tm->getAllOpenTickets();
-            $ticketsCount = $tm->getOpenTicketsCount($user);
-
             $ticket = $tm->loadByIdTicket($id)->getTicket();
-
-            $notes = $tm->getNotes();
-            $notificationCount = $tm->getNotesCount();
         }
-
 
         $message = new \Biznes\DatabaseBundle\Entity\Messages();
         $message->setIdUser($this->getUser());
@@ -431,13 +375,14 @@ class DefaultController extends Controller {
         $messages = $tm->loadMessagesByTicket()->getMessages();
 
         return $this->render('BiznesServiceBundle:Default:message.html.twig', array(
-                    'ticket' => $ticket,
-                    'messages' => $messages,
-                    'messageForm' => $form->createView(),
-                    'ticketsCount' => $ticketsCount,
-                    'notificationCount' => $notificationCount,
-                    'notes' => $notes,
-                    'tickets' => $tickets,
+                'ticket' => $ticket,
+                'messages' => $messages,
+                'messageForm' => $form->createView(),
+
+                'ticketsCount' => $data['ticketsCount'],
+                'notificationCount' => $data['notificationCount'],
+                'notes' => $data['notes'],
+                'tickets' => $data['tickets'],
         ));
     }
 
@@ -445,30 +390,17 @@ class DefaultController extends Controller {
      * @Route("/notatifications", name="notatifications")
      */
     public function notatificationsAction() {
-        $user = $this->getUser();
-        $ticketsCount = 0;
-        $notificationCount = 0;
-        $tickets = null;
-        $notes = null;
-
-        if ($user != null) {
-            $tm = $this->get('ticketsManager');
-            $tm->loadAllTicketsByIdUser($user);
-            $tm->loadNotifications();
-            $tickets = $tm->getAllOpenTickets();
-            $ticketsCount = $tm->getOpenTicketsCount($user);
-
-            $notes = $tm->getNotes();
-            $notificationCount = $tm->getNotesCount();
+        if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+            throw $this->createAccessDeniedException('You have to be fully authenticated user.');
         }
-
+        $user = $this->getUser();
+        $data = $this->getTicketsAndNotes($user);
 
         return $this->render('BiznesServiceBundle:Default:notifications.html.twig', array(
-                    'notes' => $notes,
-                    'ticketsCount' => $ticketsCount,
-                    'notificationCount' => $notificationCount,
-                    'notes' => $notes,
-                    'tickets' => $tickets,
+                'ticketsCount' => $data['ticketsCount'],
+                'notificationCount' => $data['notificationCount'],
+                'notes' => $data['notes'],
+                'tickets' => $data['tickets'],
         ));
     }
 
@@ -477,11 +409,6 @@ class DefaultController extends Controller {
      * @Method({"POST"})
      */
     public function chartAction(Request $request) {
-
-//        if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
-//            throw $this->createAccessDeniedException('You have to be fully authenticated user.');
-//        }
-
 
         $totalIncomesValue = null;
         $verifiedIncomesValue = null;
@@ -543,4 +470,23 @@ class DefaultController extends Controller {
         return $objJson;
     }
 
+    
+    /**
+     * @Route("/faq", name="faq")
+     */
+    public function faqAction(){
+        $user = $this->getUser();
+        $data = null;
+        if($user !== null){
+            $data = $this->getTicketsAndNotes($user);
+        }
+        
+        
+        return $this->render('BiznesServiceBundle:Default:faq.html.twig', array(
+            'ticketsCount' => $data['ticketsCount'],
+            'notificationCount' => $data['notificationCount'],
+            'notes' => $data['notes'],
+            'tickets' => $data['tickets'],
+        ));
+    }
 }

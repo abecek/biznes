@@ -4,11 +4,7 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/xampp/htdocs/biznes/src/Biznes/Utils/OrderManager.php</file>
-            <file>file:/C:/xampp/htdocs/biznes/src/Biznes/ShopBundle/Controller/DefaultController.php</file>
-            <file>file:/C:/xampp/htdocs/biznes/src/Biznes/DatabaseBundle/Entity/Messages.php</file>
             <file>file:/C:/xampp/htdocs/biznes/src/Biznes/ShopBundle/Controller/CartController.php</file>
-            <file>file:/C:/xampp/htdocs/biznes/src/Biznes/DatabaseBundle/Resources/config/doctrine/Invoices.orm.xml</file>
-            <file>file:/C:/xampp/htdocs/biznes/src/Biznes/DatabaseBundle/Entity/Invoices.php</file>
         </group>
     </open-files>
 </project-private>

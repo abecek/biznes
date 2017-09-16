@@ -408,7 +408,7 @@ class Users implements AdvancedUserInterface, \Serializable
     
     
     public function isAbleToChangePassword(){
-        if($this->canChangePassword == '0'){
+        if($this->canChangePassword == 0){
             return false;
         }
         else{

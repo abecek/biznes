@@ -24,6 +24,8 @@ use Biznes\DatabaseBundle\Entity\Expanses;
 class WalletManager extends Controller{
     protected $em = null;
     
+    protected $commissionValue = 0.2;
+    
     protected $incomes;
     protected $expanses;
     protected $partners;
@@ -60,7 +62,7 @@ class WalletManager extends Controller{
             $income->setDateIncome($date);
             $income->setState("do zaakceptowania");
 
-            $value = (intval($product->getPrice()) * 0.1);
+            $value = (intval($product->getPrice()) * $this->commissionValue);
             $value = round($value, 2);
             $value = strval($value);
 

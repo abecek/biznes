@@ -28,16 +28,17 @@ use Biznes\DatabaseBundle\Entity\Orders;
  */
 class OrderManager extends Controller {
 
-    private $order = null;
-    private $carts = array();
-    private $incomes = array();
-    private $invoice = null;
+    protected $order = null;
+    protected $carts = array();
+    protected $incomes = array();
+    protected $invoice = null;
     
-    private $realizationMethod = null;
-    private $paymentMethod = null;
-    private $state;
+    protected $realizationMethod = null;
+    protected $paymentMethod = null;
+    protected $state;
     
-    private $vatValue = 0.23;
+    protected $commissionValue = 0.2;
+    protected $vatValue = 0.23;
     protected $em;
 
     public function __construct(EntityManager $em) {
@@ -107,7 +108,7 @@ class OrderManager extends Controller {
                 $income->setDateIncome($this->order->getDateOrder());
                 $income->setState("do zaakceptowania");
 
-                $value = (intval($product->getPrice()) * 0.1);
+                $value = (intval($product->getPrice()) * $this->commissionValue);
                 $value = round($value, 2);
                 $value = strval($value);
 

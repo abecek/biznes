@@ -26,8 +26,8 @@
         <!-- Navigation -->
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('shop') }}">
-                    <i>Affiliations TOOLS</i>
+                <a class="navbar-brand" data-toggle="tooltip" data-placement="bottom" title="Strona główna" href="{{ path('shop') }}">
+                    <i><strong>Affiliations<font color="#0074f1">TOOLS</font></strong></i>
                 </a>
                 
                 <a class="navbar-brand" href="{{ path('homepage') }}">
@@ -37,7 +37,7 @@
                 
 
                 <a class="navbar-brand" href="{{ path('cart') }}">
-                    W koszyku : {{ cart.count }}
+                    W koszyku : {{ cart.count }} <i class="fa fa-shopping-cart"></i>
                 </a>
 
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -132,11 +132,13 @@
 
         <!-- jQuery -->
         <script src="{{ asset('bundles/biznesshop/js/jquery.min.js') }}"></script>
-
+        
         <!-- Bootstrap && Propel JavaScript -->
         <script src="{{ asset('bundles/biznesshop/js/popper.min.js') }}"></script>
         <script src="{{ asset('bundles/biznesshop/js/bootstrap.min.js') }}"></script>
-
+        
+        <!-- Custom scripts for this template -->
+        <script src="{{ asset('bundles/biznesservice/js/main.js') }}"></script>
 
     </body>
 

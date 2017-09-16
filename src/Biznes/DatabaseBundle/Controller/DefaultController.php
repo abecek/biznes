@@ -323,10 +323,12 @@ class DefaultController extends Controller {
         if ($this->addPersonalAddress($userAddress, $form2)) {
             return $this->redirectToRoute('personalDataInfo');
         }
-
+        
         return $this->render('BiznesServiceBundle:Default:personalData.html.twig', array(
-                    'dataForm' => $form1->createView(),
-                    'addressForm' => $form2->createView(),
+                'dataForm' => $form1->createView(),
+                'addressForm' => $form2->createView(),
+
+
         ));
     }
 
@@ -410,10 +412,10 @@ class DefaultController extends Controller {
     }
 
     /**
-     * @Route("/account/request", name="requestNewPassword")
+     * @Route("/account/requestpass", name="requestNewPassword")
      * @Method({"POST"})
      */
-    public function requestAction(Request $request) {
+    public function requestNewPasswordAction(Request $request) {
         //Check if user is fully authenticated
         if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
             throw $this->createAccessDeniedException('You have to be fully authenticated user.');
@@ -628,6 +630,55 @@ class DefaultController extends Controller {
         else{
             throw new \Exception('Something very bad happened.');
         }
+    }
+    
+    /**
+     * @Route("/account/requestemail", name="requestNewEmail")
+     * @Method({"POST"})
+     */
+    public function requestNewEmailAction(Request $request) {
+        //Check if user is fully authenticated
+        if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+            throw $this->createAccessDeniedException('You have to be fully authenticated user.');
+        }
+
+        $user = $this->getUser();
+        if ($request->request->get('type') == 'email') {
+            if($user->getCanChangeEmail()){
+                //$uniqueHashForUser = $user->getEmail() . 'emailChange';
+                //$uniqueHashForUser = sha1($uniqueHashForUser);
+
+                $user->setCanChangeEmail(1);
+
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($user);
+                $em->flush();
+
+                /*
+                $message = \Swift_Message::newInstance()
+                        ->setSubject('Potwierdzenie prośby o nowe hasło w AffiliationsTOOLS')
+                        ->setFrom('michal.blaszcz@gmail.com')
+                        ->setTo($user->getEmail())
+                        ->setBody(
+                        $this->renderView(
+                                //app/Resources/views/Emails/newEmail.html.twig
+                                'Emails/newEmail.html.twig', array(
+                            'name' => $user->getUsername(),
+                            'userId' => $user->getIdUser(),
+                            'uniqueHashForUser' => $uniqueHashForUser,
+                                )
+                        ), 'text/html'
+                );
+                $this->get('mailer')->send($message);
+                */
+            }
+            return $this->redirectToRoute('homepage');
+        } else {
+            exit;
+        }
+
+        return $this->render('BiznesServiceBundle:Default:accountData.html.twig', array(
+        ));
     }
     
 }

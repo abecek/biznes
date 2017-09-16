@@ -8,6 +8,10 @@ Zanim się zalogujesz, wejdź w link poniżej, aby aktywować swoje konto!
 <br>
 <a href="{{ url('activationLink', {'userId' : userId, 'hash' : uniqueHashForUser }) }}">{{ url('activationLink', {'userId' : userId, 'hash' : uniqueHashForUser }) }}</a>
 <br><br>
-By się zalogować, kliknij: <a href="{{ url('login') }}">{{ url('login') }}</a>.
+By się zalogować, kliknij w jeden z poniższych linków.
+<br><br>
+Sklep:  <a href="{{ url('loginShop') }}">{{ url('loginShop') }}</a>
+<br>
+Serwis:  <a href="{{ url('login') }}">{{ url('login') }}</a>.
 
 Dziękujemy!

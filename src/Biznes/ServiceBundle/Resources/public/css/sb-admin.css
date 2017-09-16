@@ -4,6 +4,36 @@
  * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-sb-admin/blob/master/LICENSE)
  */
 
+.homepage {
+    min-height: calc(100vh - 56px - 56px);
+    padding-top: 1rem; 
+    overflow-x: hidden;
+    box-sizing: inherit;
+    display: block;
+    
+    background-color: white;
+    overflow-y: hidden;
+    margin-bottom: 10px;
+} 
+
+
+
+@media (min-width: 992px) {
+    .homepage {
+        min-height: calc(100vh - 56px - 56px);
+        margin-left: 55px;
+        margin-right: 55px;
+        padding-top: 1rem; 
+        overflow-x: hidden;
+        box-sizing: inherit;
+        display: block;
+        
+        background-color: white;
+        overflow-y: hidden;
+        margin-bottom: 10px;
+    } 
+}
+
 .comunication-card{
     margin-top: 150px;
     margin-bottom: 70px;
@@ -91,11 +121,7 @@ html {
 
 body {
     min-height: 100%;
-    background: url("../images/pexels-photo-bg.jpeg") no-repeat center center fixed; 
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
+
 }
 
 
@@ -134,9 +160,11 @@ body {
       color: #0085A1; }
 
 body.sticky-footer {
-  margin-bottom: 56px; }
+  margin-bottom: 56px; 
+}
   body.sticky-footer .content-wrapper {
-    min-height: calc(100vh - 56px - 56px); }
+    min-height: calc(100vh - 56px - 56px); 
+  }
 
 body.fixed-nav {
   padding-top: 56px; }
@@ -147,7 +175,7 @@ body.fixed-nav {
 
 .scroll-to-top {
   position: fixed;
-  right: 15px;
+  right: 60px;
   bottom: 3px;
   display: none;
   width: 50px;
@@ -424,10 +452,15 @@ body.sidenav-toggled #mainNav.static-top #sidenavToggler i {
 
 .content-wrapper {
   overflow-x: hidden;
-  background: white; }
-  @media (min-width: 992px) {
+  background: white; 
+}
+ 
+@media (min-width: 992px) {
     .content-wrapper {
-      margin-left: 250px; } }
+      margin-left: 250px; 
+    } 
+  }
+  
 
 #sidenavToggler i {
   font-weight: 800; }
@@ -437,11 +470,14 @@ body.sidenav-toggled #mainNav.static-top #sidenavToggler i {
 
 @media (min-width: 992px) {
   body.sidenav-toggled .content-wrapper {
-    margin-left: 55px; } }
+    margin-left: 55px; 
+  } 
+}
 
 body.sidenav-toggled .navbar-sidenav {
   overflow-x: hidden;
-  width: 55px; }
+  width: 55px; 
+}
   body.sidenav-toggled .navbar-sidenav .nav-link-text {
     display: none; }
   body.sidenav-toggled .navbar-sidenav .nav-item,
