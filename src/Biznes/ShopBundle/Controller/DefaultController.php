@@ -172,12 +172,6 @@ class DefaultController extends Controller {
             }
         }
     }
-    /**
-     * @Route("/addcomment", name="newRating")
-     */
-    public function newRatingAction(Request $request){
-        
-    }
 
     /**
      * @Route("/created", name="accountCreatedShop")
@@ -203,4 +197,43 @@ class DefaultController extends Controller {
         ));
     }
 
+    /**
+     * @Route("/product/preview/{id}", name="preview", requirements={"id": "\d+"}))
+     */
+    public function previewAction($id = null){
+        if(!is_numeric($id) || $id == null){
+            return $this->redirectToRoute('shop');
+        }
+        else{
+            $em = $this->getDoctrine()->getManager();
+            $product = $em->getRepository('BiznesDatabaseBundle:Products')
+                    ->findOneBy(array(
+                        'idProduct' => $id,
+                    ));
+            if($product == null){
+                return $this->redirectToRoute('shop');
+            }
+            
+            
+            $path = 'BiznesShopBundle:Products:Agency:index.html.twig';
+            
+            
+            return $this->render('BiznesShopBundle:Default/Products/Agency:index.html.twig', array(
+                'id' => $id,
+                'product' => $product,
+                'path' => $path,
+            ));
+            
+            
+            /*
+            return $this->render('BiznesShopBundle:Default:productPreview.html.twig', array(
+                'id' => $id,
+                'product' => $product,
+                'path' => $path,
+            ));
+             * 
+             */
+             
+        }
+    }
 }
