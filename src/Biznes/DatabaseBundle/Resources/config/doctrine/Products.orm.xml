@@ -25,6 +25,11 @@
       </options>
     </field>
     <field name="rating" type="decimal" column="rating" precision="2" scale="1" nullable="true"/>
+    <field name="filename" type="string" column="filename" length="25" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
     <many-to-one field="idCategory" target-entity="Categories" fetch="LAZY">
       <join-columns>
         <join-column name="id_category" referenced-column-name="id_category"/>

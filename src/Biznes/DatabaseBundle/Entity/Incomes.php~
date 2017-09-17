@@ -211,7 +211,7 @@ class Incomes
      *
      * @return Incomes
      */
-    public function setIdSponsor($idSponsor = null)
+    public function setIdSponsor($idSponsor)
     {
         $this->idSponsor = $idSponsor;
 

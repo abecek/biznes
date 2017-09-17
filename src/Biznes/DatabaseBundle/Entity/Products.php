@@ -54,6 +54,11 @@ class Products implements \Serializable
      * @var \Biznes\DatabaseBundle\Entity\Programs
      */
     private $idProgram;
+    
+    /**
+     * @var string
+     */
+    private $filename;
 
 
     /**
@@ -296,6 +301,7 @@ class Products implements \Serializable
             $this->rating,
             $this->idCategory,
             $this->idProduct,
+            $this->filename,
             // see section on salt below
             // $this->salt,
         ));
@@ -315,8 +321,35 @@ class Products implements \Serializable
             $this->rating,
             $this->idCategory,
             $this->idProduct,
+            $this->filename,
             // see section on salt below
             // $this->salt
         ) = unserialize($serialized);
+    }
+    
+
+
+    /**
+     * Set filename
+     *
+     * @param string $filename
+     *
+     * @return Products
+     */
+    public function setFilename($filename)
+    {
+        $this->filename = $filename;
+
+        return $this;
+    }
+
+    /**
+     * Get filename
+     *
+     * @return string
+     */
+    public function getFilename()
+    {
+        return $this->filename;
     }
 }

@@ -34,6 +34,9 @@
   // Force the toggled class to be removed when a collapsible nav link is clicked
   $(".navbar-sidenav .nav-link-collapse").click(function(e) {
     e.preventDefault();
+    if( $("#homepage").css('margin-left') == '55px') {
+        $("#homepage").css('margin-left', '250px');
+    }
     $("body").removeClass("sidenav-toggled");
   });
   

@@ -5,6 +5,7 @@ namespace Biznes\ShopBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Symfony\Component\Filesystem\Filesystem;
 
 use Biznes\DatabaseBundle\Form\RatingType;
 use Biznes\DatabaseBundle\Entity\Ratings;
@@ -136,7 +137,7 @@ class DefaultController extends Controller {
                     $productRate /= $i;
                 }
                 else{
-                    $productRate = 5.0;
+                    $productRate = floatval($product->getRating());
                 }
                
                 $productRate = round($productRate, 1);
@@ -214,26 +215,18 @@ class DefaultController extends Controller {
                 return $this->redirectToRoute('shop');
             }
             
+            $filename = $product->getFilename();
             
-            $path = 'BiznesShopBundle:Products:Agency:index.html.twig';
+            $fs = new Filesystem();
+            if(!$fs->exists('../src/Biznes/ShopBundle/Resources/views/Default/Products/' . $filename . '/index.html.twig')){
+                throw new \Exception('There is no preview file for this product or filename is wrong');
+            }
             
-            
-            return $this->render('BiznesShopBundle:Default/Products/Agency:index.html.twig', array(
+            return $this->render('BiznesShopBundle:Default/Products/' . $filename . ':index.html.twig', array(
                 'id' => $id,
                 'product' => $product,
-                'path' => $path,
-            ));
-            
-            
-            /*
-            return $this->render('BiznesShopBundle:Default:productPreview.html.twig', array(
-                'id' => $id,
-                'product' => $product,
-                'path' => $path,
-            ));
-             * 
-             */
-             
+                'filename' => $filename,
+            ));               
         }
     }
 }

@@ -30,7 +30,7 @@ class Invoices
     /**
      * @var integer
      */
-    private $isPaid = '0';
+    private $isPaid = 0;
 
     /**
      * @var integer
@@ -38,11 +38,48 @@ class Invoices
     private $idInvoice;
 
     /**
-     * @var integer
+     * @var \Biznes\DatabaseBundle\Entity\Orders
      */
     private $idOrder;
+    
+    /**
+     * @var string
+     */
+    private $invoiceNumber;
+    
+    
 
+    /**
+     * Set invoiceNumber
+     *
+     * @param integer $idOrder
+     *
+     * @return Invoices
+     */
+    public function setInvoiceNumber($idOrder)
+    {
+        $invoiceNumber = substr($this->type, 0, 3) . '/' . $this->dateExposure->format('Y/m/d') . '/' . strval($idOrder);
+        $this->invoiceNumber = $invoiceNumber;
 
+        return $this;
+    }
+    
+    /**
+     * Get invoiceNumber
+     *
+     * @return string
+     */
+    public function getInvoiceNumber()
+    {
+        if($this->invoiceNumber === null && $this->idOrder !== null){
+            $this->setInvoiceNumber($this->idOrder->getIdOrder());
+        }
+        
+        return $this->invoiceNumber;
+    }
+
+    
+    
     /**
      * Set dateExposure
      *
@@ -197,4 +234,3 @@ class Invoices
         return $this->idOrder;
     }
 }
-
