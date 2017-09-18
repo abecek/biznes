@@ -37,6 +37,29 @@ class Expanses
      */
     private $idUser;
 
+    /**
+     * @var string
+     * Password for confirming new withdraw
+     */
+    private $password;
+
+    /**
+     * @return string
+     */
+    public function getPassword()
+    {
+        return $this->password;
+    }
+
+    /**
+     * @param string $password
+     */
+    public function setPassword($password)
+    {
+        $this->password = $password;
+    }
+
+
 
     /**
      * Set dateExpanse

@@ -28,7 +28,6 @@ class DefaultController extends Controller {
      */
     public function indexAction($referer = null) {
         $session = new Session();
-
         if ($referer != null) {
             $session->set('referer', $referer);
         }
@@ -199,9 +198,14 @@ class DefaultController extends Controller {
     }
 
     /**
-     * @Route("/product/preview/{id}", name="preview", requirements={"id": "\d+"}))
+     * @Route("/product/{id}/preview/{referer}", name="preview", requirements={"id": "\d+", "referer": "\d+"})
      */
-    public function previewAction($id = null){
+    public function previewAction($id = null, $referer = null){
+        $session = new Session();
+        if ($referer != null) {
+            $session->set('referer', $referer);
+        }
+
         if(!is_numeric($id) || $id == null){
             return $this->redirectToRoute('shop');
         }

@@ -81,7 +81,7 @@
                                 </a>
                                 <ul class="sidenav-second-level collapse" id="revenue">
                                     <li>
-                                        <a href="{{ path('incomes') }}">Naliczenia</a>
+                                        <a href="{{ path('incomes') }}">Wpływy</a>
                                     </li>
                                     <li>
                                         <a href="{{ path('withdraws') }}">Wypłaty</a>
@@ -126,9 +126,11 @@
                             </li>
                         </ul>
                         <ul class="navbar-nav ml-auto" style="margin-right: 200px;">
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle mr-lg-2" href="#" id="messagesDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="fa fa-fw fa-envelope"></i>
+
+                            {% if is_granted('ROLE_USER') %}
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle mr-lg-2" href="#" id="messagesDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="fa fa-fw fa-envelope"></i>
                                     <span class="d-lg-none">Wiadomości
                                         <span class="badge badge-pill badge-primary">
                                             {% if ticketsCount is defined %}
@@ -144,32 +146,32 @@
                                             {% endif %}
                                         </span>
                                     </span>
-                                </a>
-                                <div class="dropdown-menu" aria-labelledby="messagesDropdown">
-                                    <h6 class="dropdown-header">Otwarte wątki:</h6>
-                                    <div class="dropdown-divider"></div>
-
-                                    {% if tickets is defined %}
-                                        {% for ticket in tickets%}
-                                            <a class="dropdown-item" href="{{ path('message', {'id': ticket.idTicket}) }}">
-                                                <strong>{{ ticket.title }} </strong>
-                                                <span class="small float-right text-muted">{{ ticket.dateOpen|date('Y-m-d H:m:s') }}</span>
-                                                <div class="dropdown-message small">{{ ticket.text }} </div>
-                                            </a>
-                                            <div class="dropdown-divider"></div>
-                                        {% endfor %}
-                                    {% endif %}
-
-
-                                    <a class="dropdown-item small" href="{{ path('messages') }}">
-                                        Zobacz wszystkie wiadomości
                                     </a>
-                                </div>
+                                    <div class="dropdown-menu" aria-labelledby="messagesDropdown">
+                                        <h6 class="dropdown-header">Otwarte wątki:</h6>
+                                        <div class="dropdown-divider"></div>
 
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle mr-lg-2" href="#" id="alertsDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="fa fa-fw fa-bell"></i>
+                                        {% if tickets is defined %}
+                                            {% for ticket in tickets%}
+                                                <a class="dropdown-item" href="{{ path('message', {'id': ticket.idTicket}) }}">
+                                                    <strong>{{ ticket.title }} </strong>
+                                                    <span class="small float-right text-muted">{{ ticket.dateOpen|date('Y-m-d H:m:s') }}</span>
+                                                    <div class="dropdown-message small">{{ ticket.text }} </div>
+                                                </a>
+                                                <div class="dropdown-divider"></div>
+                                            {% endfor %}
+                                        {% endif %}
+
+
+                                        <a class="dropdown-item small" href="{{ path('messages') }}">
+                                            Zobacz wszystkie wiadomości
+                                        </a>
+                                    </div>
+
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle mr-lg-2" href="#" id="alertsDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="fa fa-fw fa-bell"></i>
                                     <span class="d-lg-none">Powiadomienia
                                         <span class="badge badge-pill badge-warning">
                                             {% if notificationCount is defined %}
@@ -185,35 +187,33 @@
                                             {% endif %}
                                         </span>
                                     </span>
-                                </a>
-                                <div class="dropdown-menu" aria-labelledby="alertsDropdown">
-                                    <h6 class="dropdown-header">Nowe powiadomienia:</h6>
-                                    <div class="dropdown-divider"></div>
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="alertsDropdown">
+                                        <h6 class="dropdown-header">Nowe powiadomienia:</h6>
+                                        <div class="dropdown-divider"></div>
 
-                                    {% if notes is defined %}
-                                        {% for note in notes%}   
-                                            <a class="dropdown-item" href="{{ path('notatifications') }}">
+                                        {% if notes is defined %}
+                                            {% for note in notes%}
+                                                <a class="dropdown-item" href="{{ path('notatifications') }}">
                                                 <span class="text-success">
                                                     <strong>
                                                         <i class="fa fa-long-arrow-up"></i>
                                                         {{ note.title }}
                                                     </strong>
                                                 </span>
-                                                <span class="small float-right text-muted">{{ note.dateNotification|date('Y-m-d H:m:s') }}</span>
-                                                <div class="dropdown-message small">{{ note.text }}</div>
-                                            </a>
-                                            <div class="dropdown-divider"></div>
-                                        {% endfor %}
-                                    {% endif %}
+                                                    <span class="small float-right text-muted">{{ note.dateNotification|date('Y-m-d H:m:s') }}</span>
+                                                    <div class="dropdown-message small">{{ note.text }}</div>
+                                                </a>
+                                                <div class="dropdown-divider"></div>
+                                            {% endfor %}
+                                        {% endif %}
 
-                                    <a class="dropdown-item small" href="{{ path('notatifications') }}">
-                                        Zobacz wszystkie powiadomienia
-                                    </a>
-                                </div>
-                            </li>
+                                        <a class="dropdown-item small" href="{{ path('notatifications') }}">
+                                            Zobacz wszystkie powiadomienia
+                                        </a>
+                                    </div>
+                                </li>
 
-
-                            {% if is_granted('ROLE_USER') %}
                                 <li class="nav-item">
                                     <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
                                         Wyloguj

@@ -98,7 +98,7 @@ class WalletManager extends Controller{
 
                     $this->em->persist($expanse);
                     $this->em->flush();
-                    return true;
+                    return $expanse;
                 }
             }
         }
@@ -106,7 +106,7 @@ class WalletManager extends Controller{
             throw new Exception('Wallet Manager: EntityManager cant be null.');
         }
         
-        return false;
+        return null;
     }
     
     public function addExpanse(Users $user, $value, \DateTime $date = null){

@@ -49,8 +49,8 @@
                 {% for product in cart.products %}
                     <div class="itemInCart">
                         <div class="col-lg-8 col-md-12 float-left">
-                            <a href="#">
-                                <img class="img-fluid rounded mb-3 mb-md-0" src="http://placehold.it/700x200" alt="">
+                            <a href="{{ path('product', {'id': product.idProduct}) }}">
+                                <img class="img-fluid rounded mb-3 mb-md-0" style="float:right; width: 650px; height: 250px;" src="{{ asset('bundles/biznesshop/products/img/' ~ product.filename ~ '/bg700x400.jpg') }}" alt="">
                             </a>
                         </div>
                         <div class="col-lg-4 col-md-12 float-right" style="min-height: 250px;">

@@ -2,49 +2,90 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f47f036c-39e9-42ce-81df-6243dca64a1f" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/php.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Biznes/ServiceBundle/Resources/public/css/simple-sidebar.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Biznes/ServiceBundle/Resources/public/fonts/glyphicons-halflings-regular.eot" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Biznes/ServiceBundle/Resources/public/fonts/glyphicons-halflings-regular.svg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Biznes/ServiceBundle/Resources/public/fonts/glyphicons-halflings-regular.ttf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Biznes/ServiceBundle/Resources/public/fonts/glyphicons-halflings-regular.woff" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Biznes/ServiceBundle/Resources/public/fonts/glyphicons-halflings-regular.woff2" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Biznes/ServiceBundle/Resources/public/js/scripts.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Biznes/ShopBundle/Resources/public/products/img/Agency/about/1.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Biznes/ShopBundle/Resources/public/products/img/Agency/about/2.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Biznes/ShopBundle/Resources/public/products/img/Agency/about/3.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Biznes/ShopBundle/Resources/public/products/img/Agency/about/4.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Biznes/ShopBundle/Resources/public/products/img/Agency/bg700x400.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Biznes/ShopBundle/Resources/public/products/img/Agency/bg900x600.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Biznes/ShopBundle/Resources/public/products/img/Agency/header-bg.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Biznes/ShopBundle/Resources/public/products/img/Agency/logos/creative-market.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Biznes/ShopBundle/Resources/public/products/img/Agency/logos/designmodo.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Biznes/ShopBundle/Resources/public/products/img/Agency/logos/envato.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Biznes/ShopBundle/Resources/public/products/img/Agency/logos/themeforest.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Biznes/ShopBundle/Resources/public/products/img/Agency/map-image.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Biznes/ShopBundle/Resources/public/products/img/Agency/portfolio/01-full.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Biznes/ShopBundle/Resources/public/products/img/Agency/portfolio/01-thumbnail.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Biznes/ShopBundle/Resources/public/products/img/Agency/portfolio/02-full.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Biznes/ShopBundle/Resources/public/products/img/Agency/portfolio/02-thumbnail.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Biznes/ShopBundle/Resources/public/products/img/Agency/portfolio/03-full.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Biznes/ShopBundle/Resources/public/products/img/Agency/portfolio/03-thumbnail.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Biznes/ShopBundle/Resources/public/products/img/Agency/portfolio/04-full.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Biznes/ShopBundle/Resources/public/products/img/Agency/portfolio/04-thumbnail.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Biznes/ShopBundle/Resources/public/products/img/Agency/portfolio/05-full.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Biznes/ShopBundle/Resources/public/products/img/Agency/portfolio/05-thumbnail.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Biznes/ShopBundle/Resources/public/products/img/Agency/portfolio/06-full.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Biznes/ShopBundle/Resources/public/products/img/Agency/portfolio/06-thumbnail.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Biznes/ShopBundle/Resources/public/products/img/Agency/team/1.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Biznes/ShopBundle/Resources/public/products/img/Agency/team/2.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Biznes/ShopBundle/Resources/public/products/img/Agency/team/3.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Biznes/ShopBundle/Resources/public/products/img/Agency/universal1.psd" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Biznes/ShopBundle/Resources/public/products/img/Creative/bg700x400.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Biznes/ShopBundle/Resources/public/products/img/Creative/bg900x600.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Biznes/ShopBundle/Resources/public/products/img/Creative/header.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Biznes/ShopBundle/Resources/public/products/img/Creative/portfolio/fullsize/1.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Biznes/ShopBundle/Resources/public/products/img/Creative/portfolio/fullsize/2.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Biznes/ShopBundle/Resources/public/products/img/Creative/portfolio/fullsize/3.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Biznes/ShopBundle/Resources/public/products/img/Creative/portfolio/fullsize/4.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Biznes/ShopBundle/Resources/public/products/img/Creative/portfolio/fullsize/5.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Biznes/ShopBundle/Resources/public/products/img/Creative/portfolio/fullsize/6.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Biznes/ShopBundle/Resources/public/products/img/Creative/portfolio/thumbnails/1.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Biznes/ShopBundle/Resources/public/products/img/Creative/portfolio/thumbnails/2.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Biznes/ShopBundle/Resources/public/products/img/Creative/portfolio/thumbnails/3.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Biznes/ShopBundle/Resources/public/products/img/Creative/portfolio/thumbnails/4.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Biznes/ShopBundle/Resources/public/products/img/Creative/portfolio/thumbnails/5.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Biznes/ShopBundle/Resources/public/products/img/Creative/portfolio/thumbnails/6.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Biznes/ShopBundle/Resources/public/products/img/Creative/universal2.psd" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Biznes/ShopBundle/Resources/public/products/img/LandingPage/Short1.psd" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Biznes/ShopBundle/Resources/public/products/img/LandingPage/banner-bg.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Biznes/ShopBundle/Resources/public/products/img/LandingPage/bg700x400.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Biznes/ShopBundle/Resources/public/products/img/LandingPage/bg900x600.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Biznes/ShopBundle/Resources/public/products/img/LandingPage/dog.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Biznes/ShopBundle/Resources/public/products/img/LandingPage/intro-bg.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Biznes/ShopBundle/Resources/public/products/img/LandingPage/ipad.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Biznes/ShopBundle/Resources/public/products/img/LandingPage/phones.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Biznes/ShopBundle/Resources/public/products/img/NewAge/app-store-badge.svg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Biznes/ShopBundle/Resources/public/products/img/NewAge/bg-cta.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Biznes/ShopBundle/Resources/public/products/img/NewAge/bg-pattern.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Biznes/ShopBundle/Resources/public/products/img/NewAge/bg700x400.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Biznes/ShopBundle/Resources/public/products/img/NewAge/bg900x600.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Biznes/ShopBundle/Resources/public/products/img/NewAge/demo-screen-1.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Biznes/ShopBundle/Resources/public/products/img/NewAge/google-play-badge.svg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Biznes/ShopBundle/Resources/public/products/img/NewAge/iphone_6_plus_white_port.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Biznes/ShopBundle/Resources/public/products/img/NewAge/universal3.psd" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nbproject/private/private.xml" afterPath="$PROJECT_DIR$/nbproject/private/private.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Biznes/DatabaseBundle/Controller/DefaultController.php" afterPath="$PROJECT_DIR$/src/Biznes/DatabaseBundle/Controller/DefaultController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Biznes/DatabaseBundle/Entity/Expanses.php" afterPath="$PROJECT_DIR$/src/Biznes/DatabaseBundle/Entity/Expanses.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Biznes/DatabaseBundle/Entity/Users.php" afterPath="$PROJECT_DIR$/src/Biznes/DatabaseBundle/Entity/Users.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Biznes/DatabaseBundle/Form/ExpansesType.php" afterPath="$PROJECT_DIR$/src/Biznes/DatabaseBundle/Form/ExpansesType.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Biznes/DatabaseBundle/Form/UsersAddressType.php" afterPath="$PROJECT_DIR$/src/Biznes/DatabaseBundle/Form/UsersAddressType.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Biznes/DatabaseBundle/Form/UsersDataType.php" afterPath="$PROJECT_DIR$/src/Biznes/DatabaseBundle/Form/UsersDataType.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Biznes/DatabaseBundle/Form/UsersType.php" afterPath="$PROJECT_DIR$/src/Biznes/DatabaseBundle/Form/UsersType.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Biznes/ServiceBundle/Controller/DefaultController.php" afterPath="$PROJECT_DIR$/src/Biznes/ServiceBundle/Controller/DefaultController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Biznes/ServiceBundle/Resources/public/css/bootstrap.css" afterPath="$PROJECT_DIR$/src/Biznes/ServiceBundle/Resources/public/css/bootstrap.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Biznes/ServiceBundle/Resources/public/css/bootstrap.min.css" afterPath="$PROJECT_DIR$/src/Biznes/ServiceBundle/Resources/public/css/bootstrap.min.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Biznes/ServiceBundle/Resources/public/js/bootstrap.js" afterPath="$PROJECT_DIR$/src/Biznes/ServiceBundle/Resources/public/js/bootstrap.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Biznes/ServiceBundle/Resources/public/js/bootstrap.min.js" afterPath="$PROJECT_DIR$/src/Biznes/ServiceBundle/Resources/public/js/bootstrap.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Biznes/ServiceBundle/Resources/public/js/jquery.js" afterPath="$PROJECT_DIR$/src/Biznes/ServiceBundle/Resources/public/js/jquery.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Biznes/ServiceBundle/Resources/views/Default/index.html.twig" afterPath="$PROJECT_DIR$/src/Biznes/ServiceBundle/Resources/views/Default/index.html.twig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Biznes/ServiceBundle/Resources/public/css/sb-admin.css" afterPath="$PROJECT_DIR$/src/Biznes/ServiceBundle/Resources/public/css/sb-admin.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Biznes/ServiceBundle/Resources/views/Default/login.html.twig" afterPath="$PROJECT_DIR$/src/Biznes/ServiceBundle/Resources/views/Default/login.html.twig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Biznes/ServiceBundle/Resources/views/Default/newWithdraw.html.twig" afterPath="$PROJECT_DIR$/src/Biznes/ServiceBundle/Resources/views/Default/newWithdraw.html.twig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Biznes/ServiceBundle/Resources/views/Default/register.html.twig" afterPath="$PROJECT_DIR$/src/Biznes/ServiceBundle/Resources/views/Default/register.html.twig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Biznes/ServiceBundle/Resources/views/Default/support.html.twig" afterPath="$PROJECT_DIR$/src/Biznes/ServiceBundle/Resources/views/Default/support.html.twig" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Biznes/ServiceBundle/Resources/views/base.html.twig" afterPath="$PROJECT_DIR$/src/Biznes/ServiceBundle/Resources/views/base.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Biznes/ShopBundle/Controller/CartController.php" afterPath="$PROJECT_DIR$/src/Biznes/ShopBundle/Controller/CartController.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Biznes/ShopBundle/Controller/DefaultController.php" afterPath="$PROJECT_DIR$/src/Biznes/ShopBundle/Controller/DefaultController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Biznes/ShopBundle/Resources/public/css/bootstrap.css" afterPath="$PROJECT_DIR$/src/Biznes/ShopBundle/Resources/public/css/bootstrap.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Biznes/ShopBundle/Resources/public/css/bootstrap.min.css" afterPath="$PROJECT_DIR$/src/Biznes/ShopBundle/Resources/public/css/bootstrap.min.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Biznes/ShopBundle/Resources/public/js/bootstrap.js" afterPath="$PROJECT_DIR$/src/Biznes/ShopBundle/Resources/public/js/bootstrap.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Biznes/ShopBundle/Resources/public/js/bootstrap.min.js" afterPath="$PROJECT_DIR$/src/Biznes/ShopBundle/Resources/public/js/bootstrap.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Biznes/ShopBundle/Resources/views/Default/Products/ShortLandingPage1/index.html.twig" afterPath="$PROJECT_DIR$/src/Biznes/ShopBundle/Resources/views/Default/Products/ShortLandingPage1/index.html.twig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Biznes/ShopBundle/Resources/views/Default/Products/UniversalLandingPage1/index.html.twig" afterPath="$PROJECT_DIR$/src/Biznes/ShopBundle/Resources/views/Default/Products/UniversalLandingPage1/index.html.twig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Biznes/ShopBundle/Resources/views/Default/Products/UniversalLandingPage2/index.html.twig" afterPath="$PROJECT_DIR$/src/Biznes/ShopBundle/Resources/views/Default/Products/UniversalLandingPage2/index.html.twig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Biznes/ShopBundle/Resources/views/Default/Products/UniversalLandingPage3/index.html.twig" afterPath="$PROJECT_DIR$/src/Biznes/ShopBundle/Resources/views/Default/Products/UniversalLandingPage3/index.html.twig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Biznes/ShopBundle/Resources/views/Default/Products/UniversalLandingPage4/index.html.twig" afterPath="$PROJECT_DIR$/src/Biznes/ShopBundle/Resources/views/Default/Products/UniversalLandingPage4/index.html.twig" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Biznes/ShopBundle/Resources/views/Default/cart.html.twig" afterPath="$PROJECT_DIR$/src/Biznes/ShopBundle/Resources/views/Default/cart.html.twig" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Biznes/ShopBundle/Resources/views/Default/checkout.html.twig" afterPath="$PROJECT_DIR$/src/Biznes/ShopBundle/Resources/views/Default/checkout.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Biznes/ShopBundle/Resources/views/Default/confirm.html.twig" afterPath="$PROJECT_DIR$/src/Biznes/ShopBundle/Resources/views/Default/confirm.html.twig" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Biznes/ShopBundle/Resources/views/Default/index.html.twig" afterPath="$PROJECT_DIR$/src/Biznes/ShopBundle/Resources/views/Default/index.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Biznes/ShopBundle/Resources/views/Default/login.html.twig" afterPath="$PROJECT_DIR$/src/Biznes/ShopBundle/Resources/views/Default/login.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Biznes/ShopBundle/Resources/views/Default/personalData.html.twig" afterPath="$PROJECT_DIR$/src/Biznes/ShopBundle/Resources/views/Default/personalData.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Biznes/ShopBundle/Resources/views/Default/personalDataInfo.html.twig" afterPath="$PROJECT_DIR$/src/Biznes/ShopBundle/Resources/views/Default/personalDataInfo.html.twig" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Biznes/ShopBundle/Resources/views/Default/product.html.twig" afterPath="$PROJECT_DIR$/src/Biznes/ShopBundle/Resources/views/Default/product.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Biznes/ShopBundle/Resources/views/Default/register.html.twig" afterPath="$PROJECT_DIR$/src/Biznes/ShopBundle/Resources/views/Default/register.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Biznes/ShopBundle/Resources/views/base.html.twig" afterPath="$PROJECT_DIR$/src/Biznes/ShopBundle/Resources/views/base.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Biznes/Utils/CartManager.php" afterPath="$PROJECT_DIR$/src/Biznes/Utils/CartManager.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Biznes/Utils/OrderManager.php" afterPath="$PROJECT_DIR$/src/Biznes/Utils/OrderManager.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Biznes/Utils/UserManager.php" afterPath="$PROJECT_DIR$/src/Biznes/Utils/UserManager.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Biznes/Utils/WalletManager.php" afterPath="$PROJECT_DIR$/src/Biznes/Utils/WalletManager.php" />
     </list>
     <ignored path="biznes.iws" />
@@ -66,44 +107,24 @@
     <favorites_list name="biznes" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="DefaultController.php" pinned="false" current-in-tab="false">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="DefaultController.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Biznes/ServiceBundle/Controller/DefaultController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-22.5">
-              <caret line="163" column="39" selection-start-line="163" selection-start-column="39" selection-end-line="163" selection-end-column="39" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="base.html.twig" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/Biznes/ServiceBundle/Resources/views/base.html.twig">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.5507075">
-              <caret line="185" column="59" selection-start-line="185" selection-start-column="52" selection-end-line="185" selection-end-column="59" />
+            <state vertical-scroll-proportion="0.40515223">
+              <caret line="272" column="20" selection-start-line="272" selection-start-column="20" selection-end-line="272" selection-end-column="20" />
               <folding>
-                <element signature="n#style#0;n#ul#2;n#div#0;n#nav#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="e#51#108#0#PHP" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.html.twig" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Biznes/ServiceBundle/Resources/views/Default/index.html.twig">
+      <file leaf-file-name="WalletManager.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Biznes/Utils/WalletManager.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-15.692307">
-              <caret line="24" column="44" selection-start-line="24" selection-start-column="44" selection-end-line="24" selection-end-column="44" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="sb-admin.css" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Biznes/ServiceBundle/Resources/public/css/sb-admin.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state vertical-scroll-proportion="-21.73077">
+              <caret line="103" column="9" selection-start-line="103" selection-start-column="9" selection-end-line="103" selection-end-column="9" />
               <folding />
             </state>
           </provider>
@@ -111,18 +132,53 @@
       </file>
     </leaf>
   </component>
+  <component name="FrameworkCommandLineHistory">
+    <commandsHistory>
+      <command text="ls " />
+      <command text="php bin/console assets:install --symlink" />
+      <command text="git init" />
+      <command text="git rm -r --cached /src/Biznes/LandingPageBundle" />
+      <command text="git rm -r --cached src/Biznes/LandingPageBundle" />
+      <command text="git rm -r src/Biznes/LandingPageBundle" />
+      <command text="git commit -m &quot;removing empty bundle&quot;" />
+      <command text="git push" />
+      <command text="php bin/console assets:install --symlink" />
+    </commandsHistory>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="mock:///Dummy.txt" root0="SKIP_INSPECTION" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/Biznes/ShopBundle/Resources/views/Default/index.html.twig" />
         <option value="$PROJECT_DIR$/src/Biznes/ShopBundle/Resources/views/base.html.twig" />
-        <option value="$PROJECT_DIR$/src/Biznes/ServiceBundle/Controller/DefaultController.php" />
-        <option value="$PROJECT_DIR$/src/Biznes/ServiceBundle/Resources/views/Default/support.html.twig" />
         <option value="$PROJECT_DIR$/src/Biznes/ServiceBundle/Resources/views/Default/index.html.twig" />
+        <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/src/Biznes/ShopBundle/Resources/views/Default/Products/UniversalLandingPage1/index.html.twig" />
+        <option value="$PROJECT_DIR$/src/Biznes/ShopBundle/Resources/views/Default/Products/UniversalLandingPage2/index.html.twig" />
+        <option value="$PROJECT_DIR$/src/Biznes/ShopBundle/Resources/views/Default/Products/UniversalLandingPage4/index.html.twig" />
+        <option value="$PROJECT_DIR$/src/Biznes/ShopBundle/Resources/views/Default/Products/ShortLandingPage1/index.html.twig" />
+        <option value="$PROJECT_DIR$/src/Biznes/ShopBundle/Resources/views/Default/product.html.twig" />
+        <option value="$PROJECT_DIR$/src/Biznes/ShopBundle/Resources/views/Default/index.html.twig" />
+        <option value="$PROJECT_DIR$/src/Biznes/ServiceBundle/Resources/public/css/sb-admin.css" />
+        <option value="$PROJECT_DIR$/src/Biznes/ServiceBundle/Resources/views/Default/login.html.twig" />
+        <option value="$PROJECT_DIR$/src/Biznes/ServiceBundle/Resources/views/Default/register.html.twig" />
         <option value="$PROJECT_DIR$/src/Biznes/ServiceBundle/Resources/views/base.html.twig" />
+        <option value="$PROJECT_DIR$/src/Biznes/DatabaseBundle/Entity/Users.php" />
+        <option value="$PROJECT_DIR$/app/AppKernel.php" />
+        <option value="$PROJECT_DIR$/src/Biznes/DatabaseBundle/Entity/Expanses.php" />
+        <option value="$PROJECT_DIR$/src/Biznes/DatabaseBundle/Form/ExpansesType.php" />
+        <option value="$PROJECT_DIR$/src/Biznes/DatabaseBundle/Controller/DefaultController.php" />
+        <option value="$PROJECT_DIR$/src/Biznes/ShopBundle/Controller/DefaultController.php" />
+        <option value="$PROJECT_DIR$/src/Biznes/ShopBundle/Resources/views/Default/cart.html.twig" />
+        <option value="$PROJECT_DIR$/src/Biznes/ShopBundle/Resources/views/Default/checkout.html.twig" />
+        <option value="$PROJECT_DIR$/src/Biznes/ServiceBundle/Resources/views/Default/newWithdraw.html.twig" />
+        <option value="$PROJECT_DIR$/src/Biznes/ServiceBundle/Resources/views/Default/support.html.twig" />
+        <option value="$PROJECT_DIR$/src/Biznes/Utils/WalletManager.php" />
+        <option value="$PROJECT_DIR$/src/Biznes/ServiceBundle/Controller/DefaultController.php" />
       </list>
     </option>
   </component>
@@ -166,6 +222,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
@@ -216,26 +273,8 @@
               <option name="myItemId" value="Biznes" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-          </PATH>
-          <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="biznes" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="biznes" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Biznes" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ShopBundle" />
+              <option name="myItemId" value="Utils" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -254,44 +293,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="Biznes" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ShopBundle" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Resources" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="biznes" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="biznes" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Biznes" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ShopBundle" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Resources" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -406,19 +407,88 @@
               <option name="myItemId" value="Resources" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+          </PATH>
+          <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="public" />
+              <option name="myItemId" value="biznes" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="biznes" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Biznes" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ServiceBundle" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Controller" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="biznes" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="biznes" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Biznes" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="DatabaseBundle" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="biznes" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="biznes" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Biznes" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="DatabaseBundle" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Entity" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+    <property name="settings.editor.selected.configurable" value="reference.webide.settings.project.settings.php" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="last_opened_file_path" value="$USER_HOME$/Desktop/startbootstrap-sb-admin-gh-pages" />
   </component>
@@ -443,6 +513,11 @@
       <method />
     </configuration>
     <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
+      <node-options />
+      <gulpfile />
+      <tasks />
+      <arguments />
+      <envs />
       <method />
     </configuration>
     <configuration default="true" type="js.build_tools.npm" factoryName="npm">
@@ -469,42 +544,46 @@
     <frame x="1358" y="-8" width="1296" height="1040" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2394822" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Command Line Tools Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32929516" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32929516" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="true" content_ui="tabs" />
+      <window_info id="Command Line Tools Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32929516" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32929516" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2394822" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout-to-restore>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -519,42 +598,21 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager />
+    <breakpoint-manager>
+      <option name="time" value="1" />
+    </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/Biznes/Utils/OrderManager.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Biznes/Utils/WalletManager.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="87.57692">
-          <caret line="24" column="25" selection-start-line="24" selection-start-column="25" selection-end-line="24" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Biznes/ShopBundle/Resources/views/Default/index.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-9.807693">
-          <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Biznes/ServiceBundle/Controller/DefaultController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-22.5">
+        <state vertical-scroll-proportion="0.0">
           <caret line="163" column="39" selection-start-line="163" selection-start-column="39" selection-end-line="163" selection-end-column="39" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Biznes/ServiceBundle/Resources/views/Default/login.html.twig">
+    <entry file="file://$PROJECT_DIR$/src/Biznes/ServiceBundle/Resources/views/base.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -562,11 +620,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Biznes/ServiceBundle/Resources/views/Default/support.html.twig">
+    <entry file="file://$PROJECT_DIR$/src/Biznes/ServiceBundle/Resources/views/Default/index.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-23.923077">
-          <caret line="50" column="28" selection-start-line="50" selection-start-column="28" selection-end-line="50" selection-end-column="28" />
-          <folding />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="24" column="2" selection-start-line="24" selection-start-column="2" selection-end-line="24" selection-end-column="2" />
+          <folding>
+            <marker date="1505528603429" expanded="true" signature="89:15739" placeholder="{#{% block body %}...#}" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -578,28 +638,317 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Biznes/Utils/OrderManager.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.59753954">
+          <caret line="20" column="31" selection-start-line="20" selection-start-column="31" selection-end-line="20" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Biznes/ShopBundle/Resources/views/Default/Products/UniversalLandingPage2/index.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6229205">
+          <caret line="280" column="66" selection-start-line="280" selection-start-column="58" selection-end-line="280" selection-end-column="66" />
+          <folding>
+            <element signature="n#style#0;n#header#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Biznes/ShopBundle/Resources/views/Default/Products/UniversalLandingPage3/index.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.8105263">
+          <caret line="35" column="78" selection-start-line="35" selection-start-column="78" selection-end-line="35" selection-end-column="78" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Biznes/ShopBundle/Resources/views/Default/Products/ShortLandingPage1/index.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33271718">
+          <caret line="109" column="98" selection-start-line="109" selection-start-column="87" selection-end-line="109" selection-end-column="98" />
+          <folding>
+            <element signature="n#style#0;n#header#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#aside#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Biznes/ShopBundle/Resources/views/Default/Products/UniversalLandingPage4/index.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-4.07193">
+          <caret line="88" column="104" selection-start-line="88" selection-start-column="104" selection-end-line="88" selection-end-column="104" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Biznes/ShopBundle/Resources/views/Default/Products/UniversalLandingPage1/index.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.15456675">
+          <caret line="675" column="152" selection-start-line="675" selection-start-column="62" selection-end-line="675" selection-end-column="152" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Biznes/ShopBundle/Resources/views/Default/product.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3153153">
+          <caret line="65" column="0" selection-start-line="65" selection-start-column="0" selection-end-line="65" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Biznes/ShopBundle/Resources/views/base.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.57696694">
-          <caret line="56" column="77" selection-start-line="56" selection-start-column="58" selection-end-line="56" selection-end-column="77" />
+        <state vertical-scroll-proportion="0.44144145">
+          <caret line="29" column="20" selection-start-line="29" selection-start-column="20" selection-end-line="29" selection-end-column="90" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Biznes/ServiceBundle/Resources/views/Default/messages.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Biznes/ServiceBundle/Resources/views/Default/accountData.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="25.346153">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Biznes/ServiceBundle/Resources/views/Default/changePassword.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Biznes/ServiceBundle/Resources/views/Default/index.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-15.692307">
-          <caret line="24" column="44" selection-start-line="24" selection-start-column="44" selection-end-line="24" selection-end-column="44" />
+        <state vertical-scroll-proportion="-28.615385">
+          <caret line="354" column="0" selection-start-line="354" selection-start-column="0" selection-end-line="354" selection-end-column="0" />
+          <folding>
+            <marker date="1505528603429" expanded="true" signature="89:15739" placeholder="{#{% block body %}...#}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Biznes/ServiceBundle/Resources/views/Default/logged.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Biznes/ServiceBundle/Resources/views/Default/forgetPassword.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Biznes/ServiceBundle/Resources/views/Default/dashboard.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="116.23077">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Biznes/ServiceBundle/Resources/views/Default/registerCreated.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Biznes/ShopBundle/Resources/public/css/style.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.23887588">
+          <caret line="12" column="4" selection-start-line="12" selection-start-column="4" selection-end-line="13" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Biznes/ServiceBundle/Resources/public/css/sb-admin.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.13627255">
+          <caret line="4" column="3" selection-start-line="4" selection-start-column="3" selection-end-line="4" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Biznes/ServiceBundle/Resources/public/images/pexels-photo-bg.jpeg">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Biznes/ServiceBundle/Resources/views/Default/register.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.17915691">
+          <caret line="9" column="33" selection-start-line="9" selection-start-column="33" selection-end-line="9" selection-end-column="33" />
+          <folding>
+            <element signature="e#8140#8161#0#HTML" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Biznes/ShopBundle/Resources/views/Default/index.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.30327868">
+          <caret line="58" column="67" selection-start-line="58" selection-start-column="67" selection-end-line="58" selection-end-column="144" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Biznes/ServiceBundle/Resources/views/base.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5507075">
-          <caret line="185" column="59" selection-start-line="185" selection-start-column="52" selection-end-line="185" selection-end-column="59" />
+        <state vertical-scroll-proportion="-14.381818">
+          <caret line="215" column="32" selection-start-line="215" selection-start-column="32" selection-end-line="215" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Biznes/DatabaseBundle/Entity/Users.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-295.34616">
+          <caret line="470" column="18" selection-start-line="470" selection-start-column="18" selection-end-line="470" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Biznes/DatabaseBundle/Form/UsersType.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/AppKernel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.2587822">
+          <caret line="16" column="75" selection-start-line="16" selection-start-column="75" selection-end-line="16" selection-end-column="75" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Biznes/ServiceBundle/Resources/views/Default/login.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-23.0">
+          <caret line="42" column="28" selection-start-line="42" selection-start-column="28" selection-end-line="43" selection-end-column="68" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Biznes/DatabaseBundle/Form/ExpansesType.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-22.346153">
+          <caret line="47" column="31" selection-start-line="47" selection-start-column="19" selection-end-line="47" selection-end-column="31" />
           <folding>
-            <element signature="n#style#0;n#ul#2;n#div#0;n#nav#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="e#232#274#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/config/security.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Biznes/DatabaseBundle/Controller/DefaultController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-27.73077">
+          <caret line="505" column="103" selection-start-line="505" selection-start-column="90" selection-end-line="505" selection-end-column="103" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Biznes/ShopBundle/Resources/views/Default/checkout.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4676806">
+          <caret line="29" column="51" selection-start-line="29" selection-start-column="51" selection-end-line="29" selection-end-column="51" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Biznes/ShopBundle/Resources/views/Default/cart.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.35495496">
+          <caret line="52" column="105" selection-start-line="52" selection-start-column="105" selection-end-line="52" selection-end-column="105" />
+          <folding>
+            <element signature="n#style#0;n#div#1;n#div#0;n#div#1;n#div#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Biznes/ShopBundle/Controller/DefaultController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-24.23077">
+          <caret line="207" column="0" selection-start-line="207" selection-start-column="0" selection-end-line="207" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Biznes/ServiceBundle/Resources/views/Default/support.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.99531615">
+          <caret line="50" column="0" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Biznes/ServiceBundle/Resources/views/Default/newWithdraw.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.11943794">
+          <caret line="6" column="74" selection-start-line="6" selection-start-column="74" selection-end-line="6" selection-end-column="74" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Biznes/Utils/WalletManager.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-21.73077">
+          <caret line="103" column="9" selection-start-line="103" selection-start-column="9" selection-end-line="103" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Biznes/DatabaseBundle/Entity/Expanses.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-1.7505854">
+          <caret line="32" column="22" selection-start-line="32" selection-start-column="12" selection-end-line="32" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Biznes/ServiceBundle/Controller/DefaultController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.40515223">
+          <caret line="272" column="20" selection-start-line="272" selection-start-column="20" selection-end-line="272" selection-end-column="20" />
+          <folding>
+            <element signature="e#51#108#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>

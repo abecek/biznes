@@ -7,6 +7,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+
 use Biznes\DatabaseBundle\Entity\Expanses;
 use Biznes\DatabaseBundle\Form\ExpansesType;
 use Biznes\DatabaseBundle\Entity\Users;
@@ -213,11 +215,29 @@ class DefaultController extends Controller {
         if ($request->getMethod() == 'POST') {
             $form->handleRequest($request);
 
-            if ($wm->addWithdraw($this->getUser(), $form, new \DateTime)) {
-                $msg = 'Wypłata została przekazana do realizacji.';
-            } else {
-                $msg = 'Wprowadzone dane były błedne lub nie posiadasz wystarczającej ilości pieniędzy.';
+            if($form->get('value')->getData() > 30){
+                $encoderService = $this->get('security.password_encoder');
+
+                $password = $form->get('password')->getData();
+                $match = $encoderService->isPasswordValid($user, $password);
+
+                if($match) {
+                    $expanse = $wm->addWithdraw($this->getUser(), $form, new \DateTime);
+                    if ($expanse != null) {
+                        return $this->redirectToRoute('withdrawRealization', array('id' => $expanse->getIdExpanse()));
+                    }
+                    else {
+                        $msg = 'Wprowadzone dane były błedne lub nie posiadasz wystarczającej ilości pieniędzy.';
+                    }
+                }
+                else{
+                    $msg = 'Podane hasło jest nie właściwe.';
+                }
             }
+            else{
+                $msg = 'Minimalna kwota jaką można wypłacić to 30 złotych.';
+            }
+
 
             $form = $this->createForm(ExpansesType::class, null, array(
                 'attr' => array(
@@ -238,6 +258,30 @@ class DefaultController extends Controller {
             
                     'msg' => $msg,
         ));
+    }
+
+    /**
+     * @Route("/withdrawrealization/{id}", name="withdrawRealization", requirements={"id": "\d+"})
+     */
+    public function withdrawRealizationAction(Request $request, $id = null){
+        if($id == null || !is_numeric($id)){
+            throw new \Exception('Expanse id is null or not numeric.');
+        }
+        //Informacja o pomyślen wypłacie i link do wygenerowania umowy o dzielo.
+
+
+        return null;
+    }
+
+    /**
+     * @Route("/contract/{id}", name="contract", requirements={"id": "\d+"})
+     */
+    public function contractAction($id = null){
+        if($id == null || !is_numeric($id)){
+            throw new \Exception('Expanse id is null or not numeric.');
+        }
+
+        return null;
     }
 
     /**

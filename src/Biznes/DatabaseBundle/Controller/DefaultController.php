@@ -499,8 +499,7 @@ class DefaultController extends Controller {
 
                         $form->handleRequest($request);
                         if ($form->isSubmitted() && $form->isValid()) {
-                            $encoderService = $this->get('security.password_encoder');
-
+                                $encoderService = $this->get('security.password_encoder');
                                 $plainNewPass = $form['plainNewPassword']->getData();
 
                                 //$encoder = $this->get('security.password_encoder');

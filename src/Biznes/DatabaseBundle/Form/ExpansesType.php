@@ -18,6 +18,8 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\ButtonType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+
 
 /**
  * Description of ExpanseType
@@ -37,14 +39,20 @@ class ExpansesType extends AbstractType{
                'placeholder' => 'Wpisz kwotę'
                ),
         ))
-        ->add('makeWithdraw', ButtonType::class, array(
-            'label' => 'Zleć wypłate',
-            'attr' => array(
-                'class' => 'btn btn-primary btn-lg btn-block',
-                'data-toggle' => 'modal',
-                'data-target' => '#confirmNewWithdraw',
+            ->add('password',PasswordType::class, array(
+                'label' => 'Hasło potwierdzające:',
+                'attr' => array(
+                    'class' => 'form-control',
                 ),
-        ));
+            ))
+            ->add('makeWithdraw', ButtonType::class, array(
+                'label' => 'Zleć wypłate',
+                'attr' => array(
+                    'class' => 'btn btn-primary btn-lg btn-block',
+                    'data-toggle' => 'modal',
+                    'data-target' => '#confirmNewWithdraw',
+                    ),
+            ));
     }
     
     public function configureOptions(OptionsResolver $resolver){
