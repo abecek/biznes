@@ -21,9 +21,9 @@ class Expanses
 
     /**
      * @var string
-     * 1 - waiting
-     * 2 - realised
-     * 3 - completed
+     * 1 - oczekuje
+     * 2 - w realizacji
+     * 3 - zakonczono
      */
     private $state;
 
@@ -42,6 +42,36 @@ class Expanses
      * Password for confirming new withdraw
      */
     private $password;
+
+
+    /**
+     * @var string
+     */
+    private $contractNumber;
+
+    /**
+     * @return mixed
+     */
+    public function getContractNumber()
+    {
+        if($this->contractNumber === null && $this->idExpanse !== null){
+            $this->setContractNumber($this->idExpanse);
+        }
+        return $this->contractNumber;
+    }
+
+    /**
+     * @param integer $idExpanse
+     */
+    public function setContractNumber($idExpanse)
+    {
+        $contractNumber = $this->dateExpanse->format('Y/m/d') . '/' . strval($idExpanse);
+        $this->contractNumber = $contractNumber;
+
+        return $this;
+    }
+
+
 
     /**
      * @return string

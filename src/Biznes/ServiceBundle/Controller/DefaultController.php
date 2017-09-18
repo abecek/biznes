@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
@@ -52,11 +53,16 @@ class DefaultController extends Controller {
         $user = $this->getUser();
         $idUser = null;
         $data = null;
+        $availableMoney = null;
+
         if($user !== null){
             $data = $this->getTicketsAndNotes($user);
             $idUser = $user->getIdUser();
+            $em = $this->getDoctrine()->getManager();
+            $wm = new WalletManager($em);
+            $wm->countMoneyInWallet($user);
+            $availableMoney = $wm->getMoneyInWallet();
         }
-        
 
         return $this->render('BiznesServiceBundle:Default:index.html.twig', array(
                     'ticketsCount' => $data['ticketsCount'],
@@ -65,6 +71,8 @@ class DefaultController extends Controller {
                     'tickets' => $data['tickets'],
             
                     'idUser' => $idUser,
+                    'username' => $user->getUsername(),
+                    'moneyInWallet' => $availableMoney,
         ));
     }
 
@@ -215,7 +223,7 @@ class DefaultController extends Controller {
         if ($request->getMethod() == 'POST') {
             $form->handleRequest($request);
 
-            if($form->get('value')->getData() > 30){
+            if($form->get('value')->getData() > 1){
                 $encoderService = $this->get('security.password_encoder');
 
                 $password = $form->get('password')->getData();
@@ -224,7 +232,7 @@ class DefaultController extends Controller {
                 if($match) {
                     $expanse = $wm->addWithdraw($this->getUser(), $form, new \DateTime);
                     if ($expanse != null) {
-                        return $this->redirectToRoute('withdrawRealization', array('id' => $expanse->getIdExpanse()));
+                        return $this->redirectToRoute('withdrawRealized', array('id' => $expanse->getIdExpanse()));
                     }
                     else {
                         $msg = 'Wprowadzone dane były błedne lub nie posiadasz wystarczającej ilości pieniędzy.';
@@ -261,16 +269,34 @@ class DefaultController extends Controller {
     }
 
     /**
-     * @Route("/withdrawrealization/{id}", name="withdrawRealization", requirements={"id": "\d+"})
+     * @Route("/withdrawrealized/{id}", name="withdrawRealized", requirements={"id": "\d+"})
      */
     public function withdrawRealizationAction(Request $request, $id = null){
         if($id == null || !is_numeric($id)){
             throw new \Exception('Expanse id is null or not numeric.');
         }
-        //Informacja o pomyślen wypłacie i link do wygenerowania umowy o dzielo.
+        $user = $this->getUser();
+        $data = $this->getTicketsAndNotes($user);
+
+        $em = $this->getDoctrine()->getManager();
+        $expanse = $em->getRepository('BiznesDatabaseBundle:Expanses')
+            ->findOneBy(array(
+                'idExpanse' => $id,
+            ));
+
+        $idUser = $expanse->getIdUser()->getIdUser();
+        if($expanse == null || $idUser != $user->getIdUser()){
+            throw new \Exception('There is no expanse with that id or you have not permission to see this.');
+        }
 
 
-        return null;
+        return $this->render('BiznesServiceBundle:Default:withdrawRealized.html.twig', array(
+            'expanse' => $expanse,
+            'ticketsCount' => $data['ticketsCount'],
+            'notificationCount' => $data['notificationCount'],
+            'notes' => $data['notes'],
+            'tickets' => $data['tickets'],
+        ));
     }
 
     /**
@@ -281,7 +307,43 @@ class DefaultController extends Controller {
             throw new \Exception('Expanse id is null or not numeric.');
         }
 
-        return null;
+        $em = $this->getDoctrine()->getManager();
+        $expanse = $em->getRepository('BiznesDatabaseBundle:Expanses')
+            ->findOneBy(array(
+                'idExpanse' => $id,
+            ));
+
+        $user = $this->getUser();
+        if($user == null){
+            throw new \Exception('User cant be null.');
+        }
+
+        $um = $this->get('userManager');
+        $um->loadDataFromUser($user);
+        $userData = $um->getUserData();
+        $userAddress = $um->getUserAddress();
+
+        $date = new \DateTime();
+        $dateExecution = date_add($date, date_interval_create_from_date_string('1 days'));
+
+        $snappy = $this->get('knp_snappy.pdf');
+        $filename = $expanse->getContractNumber();
+
+        $html = $this->renderView('BiznesServiceBundle:Default:contract.html.twig', array(
+            'expanse' => $expanse,
+            'user' => $user,
+            'userData' => $userData,
+            'userAddress' => $userAddress,
+            'dateExecution' => $dateExecution,
+            'contractNumber' => $filename,
+        ));
+
+        return new Response(
+            $snappy->getOutputFromHtml($html), 200, array(
+                'Content-Type' => 'application/pdf',
+                'Content-Disposition' => 'inline; filename="UMOWA/' . $filename . '.pdf"'
+            )
+        );
     }
 
     /**

@@ -19,7 +19,7 @@
                     <th>
                         Wartość:
                     </th>
-                    <th>
+                    <th colspan="2">
                         Status:
                     </th>
                 </tr>
@@ -43,6 +43,13 @@
                             </td>
                             <td>
                                 {{ expanse.state }}
+                            </td>
+                            <td>
+                                {% if expanse.state == "oczekuje" %}
+                                    <a href="{{ path('contract', {'id' : expanse.idExpanse}) }}" target="_blank" style="text-decoration: none;">
+                                        Generuj umowę
+                                    </a>
+                                {% endif %}
                             </td>
                         </tr>
                     {% endfor %}
