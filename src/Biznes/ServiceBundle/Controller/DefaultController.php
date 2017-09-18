@@ -54,6 +54,7 @@ class DefaultController extends Controller {
         $idUser = null;
         $data = null;
         $availableMoney = null;
+        $username = null;
 
         if($user !== null){
             $data = $this->getTicketsAndNotes($user);
@@ -62,6 +63,7 @@ class DefaultController extends Controller {
             $wm = new WalletManager($em);
             $wm->countMoneyInWallet($user);
             $availableMoney = $wm->getMoneyInWallet();
+            $username = $user->getUsername();
         }
 
         return $this->render('BiznesServiceBundle:Default:index.html.twig', array(
@@ -71,7 +73,7 @@ class DefaultController extends Controller {
                     'tickets' => $data['tickets'],
             
                     'idUser' => $idUser,
-                    'username' => $user->getUsername(),
+                    'username' => $username,
                     'moneyInWallet' => $availableMoney,
         ));
     }
