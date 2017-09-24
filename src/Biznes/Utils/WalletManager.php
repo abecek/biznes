@@ -14,7 +14,7 @@ use Biznes\DatabaseBundle\Entity\Users;
 use Biznes\DatabaseBundle\Entity\Products;
 use Biznes\DatabaseBundle\Entity\Orders;
 use Biznes\DatabaseBundle\Entity\Incomes;
-use Biznes\DatabaseBundle\Entity\Expanses;
+use Biznes\DatabaseBundle\Entity\Withdraws;
 
 /**
  * Description of WalletManager
@@ -27,7 +27,7 @@ class WalletManager extends Controller{
     protected $commissionValue = 0.2;
     
     protected $incomes;
-    protected $expanses;
+    protected $withdraws;
     protected $partners;
     
     protected $moneyInWallet = 0;
@@ -90,17 +90,18 @@ class WalletManager extends Controller{
                 $moneyAfterWithdraw = ($this->getMoneyInWallet() - floatval($val));
                 
                 if($val != null && $moneyAfterWithdraw >= 0){ 
-                    $expanse = new Expanses();
-                    $expanse->setValue($val);
-                    $expanse->setIdUser($user);
-                    $expanse->setDateExpanse(new \DateTime);
-                    $expanse->setState('oczekuje');
+                    $withdraw = new Withdraws();
+                    $withdraw->setValue($val);
+                    $withdraw->setIdUser($user);
+                    $withdraw->setDateWithdraw(new \DateTime);
+                    $withdraw->setState('oczekuje');
 
-                    $this->em->persist($expanse);
+                    $this->em->persist($withdraw);
                     $this->em->flush();
-                    return $expanse;
+                    return $withdraw;
                 }
             }
+            //Else Redirect?
         }
         else{
             throw new Exception('Wallet Manager: EntityManager cant be null.');
@@ -108,29 +109,7 @@ class WalletManager extends Controller{
         
         return null;
     }
-    
-    public function addExpanse(Users $user, $value, \DateTime $date = null){
-        if($this->em != null){
-            if($date === null) $date = new \DateTime;
-            if($user === null) throw new Exception('User could not be null.');
-                
-            $expanse = new Expanses();
-            $expanse->setDateExpanse($date);
-            $expanse->setIdUser($user);
-            $expanse->setState('oczekuje');
-            $value = floatval($value);
-            $value = round($value, 2);
-            $expanse->setValue($value);
-            
-            $this->em->persist($expanse);
-            $this->em->flush();
-            $this->em->clear();
-        }
-        else{
-            throw new Exception('Wallet Manager: EntityManager cant be null.');
-        }
-        
-    }
+
     
     protected function loadIncomesFromDB(Users $user){
         if($this->em != null){
@@ -148,13 +127,13 @@ class WalletManager extends Controller{
         return $this;
     }
     
-    protected function loadExpansesFromDB(Users $user){
+    protected function loadWithdrawsFromDB(Users $user){
         if($this->em != null){
-            $this->expanses = $this->em->getRepository('BiznesDatabaseBundle:Expanses')
+            $this->withdraws = $this->em->getRepository('BiznesDatabaseBundle:Withdraws')
                     ->findBy(array(
                         'idUser' => $user
                     ), array(
-                        'dateExpanse' => 'ASC',
+                        'dateWithdraw' => 'ASC',
                     ));
         }
         else{
@@ -179,7 +158,7 @@ class WalletManager extends Controller{
     public function loadWalletManagerFromDB(Users $user){
         if($this->em != null){
             $this->loadIncomesFromDB($user);
-            $this->loadExpansesFromDB($user);
+            $this->loadWithdrawsFromDB($user);
             $this->loadPartnersFromDB($user);
         }
         else{
@@ -194,23 +173,23 @@ class WalletManager extends Controller{
      */
     public function countMoneyInWallet(Users $user){
         $this->loadIncomesFromDB($user);
-        $this->loadExpansesFromDB($user);
+        $this->loadWithdrawsFromDB($user);
         
         $incomesOverall = 0;
         foreach($this->incomes as $income){
-            if($income->getState() == 'zaakceptowano'){
+            if($income->getState() == 1){
                 $value = $income->getValue();
                 $incomesOverall += floatval($value);
             }
         }
         
-        $expansesOverall = 0;
-        foreach($this->expanses as $expanse){
-            $value = $expanse->getValue();
-            $expansesOverall += floatval($value);
+        $withdrawsOverall = 0;
+        foreach($this->withdraws as $withdraw){
+            $value = $withdraw->getValue();
+            $withdrawsOverall += floatval($value);
         }
         
-        $this->moneyInWallet = round(($incomesOverall - $expansesOverall), 2);
+        $this->moneyInWallet = round(($incomesOverall - $withdrawsOverall), 2);
         
         return $this;
     }
@@ -254,7 +233,7 @@ class WalletManager extends Controller{
         $count = 0;
         $value = 0;
         foreach($this->incomes as $income){
-            if($income->getState() == 'zaakceptowano'){
+            if($income->getState() == 1){
                 $count += 1;
                 $value += floatval($income->getValue());
             }
@@ -275,9 +254,9 @@ class WalletManager extends Controller{
     public function getCountedWithdrawsAsArray(){
         $count = 0;
         $value = 0;
-        foreach($this->expanses as $expanse){
+        foreach($this->withdraws as $withdraw){
             $count += 1;
-            $value += floatval($expanse->getValue());
+            $value += floatval($withdraw->getValue());
         }
         
         return array(
@@ -295,10 +274,10 @@ class WalletManager extends Controller{
     public function getCountedCompletedWithdrawsAsArray(){
         $count = 0;
         $value = 0;
-        foreach($this->expanses as $expanse){
-            if($expanse->getState() == 'zrealizowano'){
+        foreach($this->withdraws as $withdraw){
+            if($withdraw->getState() == 'zrealizowano'){
                 $count += 1;
-                $value += floatval($expanse->getValue());
+                $value += floatval($withdraw->getValue());
             }
         }
         
@@ -308,8 +287,8 @@ class WalletManager extends Controller{
         );
     }
     
-    public function getCountExpanses(){
-        return count($this->expanses);
+    public function getCountWithdraws(){
+        return count($this->withdraws);
     }
     
     public function getCountPartners(){
@@ -330,8 +309,8 @@ class WalletManager extends Controller{
         return $this->incomes;
     }
 
-    public function getExpanses() {
-        return $this->expanses;
+    public function getWithdraws() {
+        return $this->withdraws;
     }
     
     public function getPartners(){

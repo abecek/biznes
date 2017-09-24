@@ -24,8 +24,7 @@ class Products implements \Serializable
      * @var string
      */
     private $price;
-    
-    
+
     private $priceBrutto;
     
     private $vatValue = 0.23;

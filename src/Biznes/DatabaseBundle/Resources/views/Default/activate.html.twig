@@ -1,48 +1,109 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<!--
+ Michał Błaszczyk
+-->
+<html>
 <head>
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, shrink-to-fit=no, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Shop Homepage - Start Bootstrap Template</title>
+    <title>{{ title | default('Service') }}</title>
 
-    <!-- Bootstrap Core CSS -->
-    <link href="{{ asset('bundles/biznesshop/css/bootstrap.min.css') }}" rel="stylesheet">
-	
-    <!-- Custom CSS -->
-    <link href="{{ asset('bundles/biznesshop/css/simple-sidebar.css') }}" rel="stylesheet">
+    {% block assets %}
+        <!-- Bootstrap Core CSS -->
+        <link href="{{ asset('bundles/biznesdatabase/css/bootstrap.min.css') }}" rel="stylesheet">
+        <!-- Custom fonts for this template -->
+        <link href="{{ asset('bundles/biznesdatabase/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
 
+    {% endblock %}
 
 </head>
 
-<body>
-    <div class="row">
-        <div class="col-md-12">
-            <h3>Dziękujemy za rejestracje w naszym systemie!</h3><br>
-            Twoje konto jest teraz aktywne, możesz spróbować się zalogować.<br><br>
+{% block body %}
+    <body class="fixed-nav sticky-footer bg-dark" id="page-top" style="
+            background: url({{ asset('bundles/biznesdatabase/images/pexels-photo-bg.jpeg') }})
+            no-repeat fixed;
+            background-size: cover;
+    ">
+    {% block nav %}
+        <!-- Navigation -->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top bg-primary" id="mainNav">
+
+            <div class="text-center" style="padding-left: 45px;">
+                <a class="navbar-brand float-left" href="{{ path('homepage') }}">
+                    <i class="fa fa-arrow-left" aria-hidden="true"></i>
+                    Serwis partnerski
+
+                </a>
+            </div>
+
+            <ul class="navbar-nav ml-auto" style="padding-right: 45px;">
+                <a class="navbar-brand float-right" href="{{ path('shop') }}">
+                    Sklep
+                    <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                </a>
+            </ul>
+        </nav>
+    {% endblock %}
+
+
+    <div class="content-wrapper">
+        <div class="container-fluid">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-3"></div>
+                        <div class="col-md-6">
+                            <div class="card text-center" style="
+                                        margin-top: 150px;
+                                        min-height: 300px;
+                                        ">
+                                    <div class="card-header">
+                                        <h2 style="text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6);
+                               color: #007bff;
+                               text-decoration: none;
+                               ">
+                                            Dziękujemy za pomyślną aktywację konta w naszym serwisie!
+                                        </h2>
+                                    </div>
+                                    <div class="card-body">
+                                        Twoje konto jest już aktywne, możesz się pomyślnie zalogować.<br><br>
+                                        Na górze strony znajdują się link prowadzące do sklepu i części serwisu partnerskiego.
+                                    </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3"></div>
+                    </div>
+                </div>
         </div>
+        <!-- /.container-fluid -->
     </div>
-    <div class="row">
-        <div class="col-md-6">
-            <a href="{{ url('shop') }}">Przejdź do sklepu!</a>
-        </div>
-        <div class="col-md-6">
-            <a href="{{ url('homepage') }}">Przejdź do serwisu partnerskiego!</a>
-        </div>
-    </div>
-    
-    
-    <!-- jQuery -->
-    <script src="{{ asset('bundles/biznesshop/js/jquery.js') }}"></script>
+    <!-- /.content-wrapper -->
 
-    <!-- Bootstrap Core JavaScript -->
-    <script src="{{ asset('bundles/biznesshop/js/bootstrap.min.js') }}"></script>
 
-</body>
 
+    <!-- Footer -->
+    {% block footer %}
+        <footer class="sticky-footer bg-dark fixed-bottom" style="min-width: 100%;">
+            <div class="container">
+                <div class="text-center">
+                    <small style="color: white;">Copyright &copy; Your Website 2017</small>
+                </div>
+            </div>
+        </footer>
+    {% endblock %}
+
+
+    {% block javascripts %}
+        <!-- Bootstrap core JavaScript -->
+        <script src="{{ asset('bundles/biznesdatabase/js/jquery.min.js') }}"></script>
+        <script src="{{ asset('bundles/biznesdatabase/js/popper.min.js') }}"></script>
+        <script src="{{ asset('bundles/biznesdatabase/js/bootstrap.min.js') }}"></script>
+
+    {% endblock %}
+
+    </body>
+{% endblock %}
 </html>

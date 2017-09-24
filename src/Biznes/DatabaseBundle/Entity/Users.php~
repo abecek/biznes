@@ -386,7 +386,7 @@ class Users implements AdvancedUserInterface, \Serializable
     
     public function isEnabled()
     {   
-        $val;
+        $val = null;
         $this->isActive == 1 ?  $val = true : $val = false;
         return $val;
     }
@@ -468,7 +468,7 @@ class Users implements AdvancedUserInterface, \Serializable
      */
     public function getCanChangeEmail()
     {
-        if($canChangeEmail == 1){
+        if($this->canChangeEmail == 1){
             return true;
         }
 

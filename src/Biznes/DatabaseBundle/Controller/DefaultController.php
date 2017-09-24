@@ -93,7 +93,7 @@ class DefaultController extends Controller {
             $uniqueHashForUser = $user->getEmail() . 'activation';
             $uniqueHashForUser = sha1($uniqueHashForUser);
 
-            if ($user->getIsActive() == 1) {
+            if ($user->getIsActive() == 0) {
                 throw $this->createNotFoundException('Your account has been already activated.');
             } else {
                 if ($hash == $uniqueHashForUser) {
@@ -357,11 +357,13 @@ class DefaultController extends Controller {
         //if ($dataToEdit == 'personal') {
         $form1 = $this->createForm(UsersDataType::class, $userData, array(
             'userData' => $userData,
-            'attr' => array('class' => 'form'),
+            'attr' => array(
+                'class' => 'form',
+                'id' => 'userDataForm',
+            ),
         ));
         // 2) handle the submit (will only happen on POST)
         $form1->handleRequest($request);
-
         if ($this->addPersonalData($userData, $form1)) {
             if ($source == null) {
                 return $this->redirectToRoute('shopPersonalDataInfo');
@@ -376,6 +378,10 @@ class DefaultController extends Controller {
         //if ($dataToEdit == 'address') {
         $form2 = $this->createForm(UsersAddressType::class, $userAddress, array(
             'userAddress' => $userAddress,
+            'attr' => array(
+                'class' => 'form',
+                'id' => 'userAddressForm',
+            ),
         ));
         $form2->handleRequest($request);
 

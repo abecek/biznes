@@ -45,13 +45,15 @@
                                 {{ income.idUserfrom.idUser }}
                             </td>
                             <td>
-                                {{ income.idProduct.name }}
+                                <a style="text-decoration: none;" target="_blank" href="{{ path('product', {'id' :  income.idProduct.idProduct }) }}">
+                                    {{ income.idProduct.name }}
+                                </a>
                             </td>
                             <td>
                                 {{ income.value }}
                             </td>
                             <td>
-                                {{ income.state }}
+                                {{ income.getStateAsString }}
                             </td>
                         </tr>
                     {% endfor %}

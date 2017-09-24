@@ -4,7 +4,6 @@
     <indexes>
       <index name="incomes_id_user_fk1" columns="id_sponsor"/>
       <index name="incomes_id_userFrom_fk1" columns="id_userFrom"/>
-      <index name="incomes_id_product_fk1" columns="id_product"/>
       <index name="incomes_id_orders_fk1" columns="id_order"/>
     </indexes>
     <id name="idIncome" type="integer" column="id_income">
@@ -12,22 +11,13 @@
     </id>
     <field name="dateIncome" type="datetime" column="date_income" nullable="false"/>
     <field name="value" type="decimal" column="value" precision="6" scale="2" nullable="false"/>
-    <field name="state" type="string" column="state" length="20" nullable="false">
-      <options>
-        <option name="fixed"/>
-      </options>
-    </field>
-    
+    <field name="state" type="integer" column="state" nullable="false"/>
+
     <field name="idSponsor" type="integer" column="id_sponsor" nullable="false"/>
-    
+
     <many-to-one field="idOrder" target-entity="Orders" fetch="LAZY">
       <join-columns>
         <join-column name="id_order" referenced-column-name="id_order"/>
-      </join-columns>
-    </many-to-one>
-    <many-to-one field="idProduct" target-entity="Products" fetch="LAZY">
-      <join-columns>
-        <join-column name="id_product" referenced-column-name="id_product"/>
       </join-columns>
     </many-to-one>
     <many-to-one field="idUserfrom" target-entity="Users" fetch="LAZY">

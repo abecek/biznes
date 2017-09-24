@@ -23,30 +23,30 @@
                         Status:
                     </th>
                 </tr>
-                {% if expanses is empty %}
+                {% if withdraws is empty %}
                     <tr>
                         <td colspan="4">
                             <h4>Brak wypłat</h4>
                         </td>
                     </tr>
                 {% else %}
-                    {% for expanse in expanses %}
+                    {% for withdraw in withdraws %}
                         <tr>
                             <td>
-                                {{ expanse.dateExpanse|date('Y-m-d H:m:s') }}
+                                {{ withdraw.dateWithdraw|date('Y-m-d H:m:s') }}
                             </td>
                             <td>
-                                {{ expanse.idExpanse }}
+                                {{ withdraw.idWithdraw }}
                             </td>
                             <td>
-                                {{ expanse.value }}
+                                {{ withdraw.value }}
                             </td>
                             <td>
-                                {{ expanse.state }}
+                                {{ withdraw.getStateAsString }}
                             </td>
                             <td>
-                                {% if expanse.state == "oczekuje" %}
-                                    <a href="{{ path('contract', {'id' : expanse.idExpanse}) }}" target="_blank" style="text-decoration: none;">
+                                {% if withdraw.state == "oczekuje" %}
+                                    <a href="{{ path('contract', {'id' : withdraw.idWithdraw}) }}" target="_blank" style="text-decoration: none;">
                                         Generuj umowę
                                     </a>
                                 {% endif %}

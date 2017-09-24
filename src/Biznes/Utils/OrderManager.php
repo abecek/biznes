@@ -77,7 +77,8 @@ class OrderManager extends Controller {
                 )
                 ->setVatValue(
                         round($this->order->getPriceBrutto() * $this->vatValue, 2)
-        );
+                );
+
 
         return $this->order;
     }
@@ -95,10 +96,10 @@ class OrderManager extends Controller {
     }
 
     public function prepareIncomes($productsInCart, Users $sponsor, Users $user) {
-        foreach ($productsInCart as $product) {
-            if ($sponsor != null) {
-                $income = new Incomes(); 
-                
+        if ($sponsor != null) {
+            foreach($productsInCart as $product){
+                $income = new Incomes();
+
                 $income->setIdSponsor($sponsor->getIdUser());
                 $income->setIdUserfrom($user);
 
@@ -106,14 +107,13 @@ class OrderManager extends Controller {
                 $income->setIdProduct($product);
 
                 $income->setDateIncome($this->order->getDateOrder());
-                $income->setState("do zaakceptowania");
+                $income->setState(0);
 
                 $value = (intval($product->getPrice()) * $this->commissionValue);
                 $value = round($value, 2);
                 $value = strval($value);
 
                 $income->setValue($value);
-
                 $this->incomes[] = $income;
             }
         }
@@ -124,9 +124,10 @@ class OrderManager extends Controller {
         $invoice = new Invoices();
         $invoice->setIdOrder($this->order);
 
-        $date = $this->order->getDateOrder();
-        $invoice->setDateExposure($date)
-                ->setDateSale($date)
+
+        $date = clone $this->order->getDateOrder();
+        $invoice->setDateExposure($this->order->getDateOrder())
+                ->setDateSale($this->order->getDateOrder())
                 ->setDatePayment(
                         $date
                         ->add(date_interval_create_from_date_string('14 days'))
@@ -135,6 +136,7 @@ class OrderManager extends Controller {
 
         $this->invoice = $invoice;
 
+        return $this->invoice;
     }
     
     

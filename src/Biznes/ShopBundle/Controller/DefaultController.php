@@ -180,7 +180,7 @@ class DefaultController extends Controller {
         $cart = $this->get('cartManager');
         $cart->loadFromSession();
 
-        return $this->render('BiznesShopBundle:Default:registerCreated.html.twig', array(
+        return $this->render('BiznesShopBundle:Default:accountCreated.html.twig', array(
                     'cart' => $cart,
         ));
     }

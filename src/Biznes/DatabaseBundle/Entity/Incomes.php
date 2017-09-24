@@ -18,11 +18,11 @@ class Incomes
     private $value;
 
     /**
-     * @var string
-     * 1 - to accept
-     * 2 - accepted
+     * @var integer
+     * 0 - to accept / do zaakceptowania
+     * 1 - accepted / zaakceptowano
      */
-    private $state;
+    private $state = 0;
 
     /**
      * @var integer
@@ -37,6 +37,7 @@ class Incomes
     /**
      * @var \Biznes\DatabaseBundle\Entity\Products
      */
+
     private $idProduct;
 
     /**
@@ -107,7 +108,12 @@ class Incomes
      */
     public function setState($state)
     {
-        $this->state = $state;
+        if($state == 0 || $state == "do zaakceptowania" || $state == "to accept"){
+            $this->state = 0;
+        }
+        elseif($state == 1 || $state == "zaakceptowano" || $state == "accepted"){
+            $this->state = 1;
+        }
 
         return $this;
     }
@@ -115,11 +121,28 @@ class Incomes
     /**
      * Get state
      *
-     * @return string
+     * @return integer
      */
     public function getState()
     {
         return $this->state;
+    }
+
+    /**
+     * Get state
+     *
+     * @return string
+     */
+    public function getStateAsString()
+    {
+        $string = "";
+        if($this->state == 0){
+            $string = "do zaakceptowania";
+        }
+        elseif($this->state == 1){
+            $string = "zaakceptowano";
+        }
+        return $string;
     }
 
     /**
@@ -154,30 +177,6 @@ class Incomes
     public function getIdOrder()
     {
         return $this->idOrder;
-    }
-
-    /**
-     * Set idProduct
-     *
-     * @param \Biznes\DatabaseBundle\Entity\Products $idProduct
-     *
-     * @return Incomes
-     */
-    public function setIdProduct(\Biznes\DatabaseBundle\Entity\Products $idProduct = null)
-    {
-        $this->idProduct = $idProduct;
-
-        return $this;
-    }
-
-    /**
-     * Get idProduct
-     *
-     * @return \Biznes\DatabaseBundle\Entity\Products
-     */
-    public function getIdProduct()
-    {
-        return $this->idProduct;
     }
 
     /**
@@ -226,5 +225,29 @@ class Incomes
     public function getIdSponsor()
     {
         return $this->idSponsor;
+    }
+
+    /**
+     * Set idProduct
+     *
+     * @param \Biznes\DatabaseBundle\Entity\Products $idProduct
+     *
+     * @return Incomes
+     */
+    public function setIdProduct(\Biznes\DatabaseBundle\Entity\Products $idProduct = null)
+    {
+        $this->idProduct = $idProduct;
+
+        return $this;
+    }
+
+    /**
+     * Get idProduct
+     *
+     * @return \Biznes\DatabaseBundle\Entity\Products
+     */
+    public function getIdProduct()
+    {
+        return $this->idProduct;
     }
 }

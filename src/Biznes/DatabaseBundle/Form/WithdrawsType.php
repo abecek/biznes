@@ -8,7 +8,7 @@
 
 namespace Biznes\DatabaseBundle\Form;
 
-use Biznes\DatabaseBundle\Entity\Expanses;
+use Biznes\DatabaseBundle\Entity\Withdraws;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -22,11 +22,11 @@ use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 
 
 /**
- * Description of ExpanseType
+ * Description of WithdrawType
  *
  * @author Michal
  */
-class ExpansesType extends AbstractType{
+class WithdrawsType extends AbstractType{
     //put your code here
     
     public function buildForm(\Symfony\Component\Form\FormBuilderInterface $builder, array $options) {
@@ -57,7 +57,7 @@ class ExpansesType extends AbstractType{
     
     public function configureOptions(OptionsResolver $resolver){
         $resolver->setDefaults(array(
-            'data_class' => Expanses::class,
+            'data_class' => Withdraws::class,
         ));
     }
 }

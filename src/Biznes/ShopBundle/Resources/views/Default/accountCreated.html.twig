@@ -1,0 +1,44 @@
+{% extends "BiznesShopBundle::base.html.twig" %}
+{% set title = 'Zarejestrowano' %}
+{% block carousel %}
+
+{% endblock %}
+
+
+{% block container %}
+
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <div class="card text-center" style="
+                                        margin-top: 150px;
+                                        min-height: 300px;
+                                        ">
+                    <div class="card-header">
+                        <h2 style="text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6);
+                               color: #007bff;
+                               text-decoration: none;
+                               ">
+                            Twoje konto zostało pomyślnie zarejestrowane!
+                        </h2>
+                    </div>
+                    <div class="card-body">
+                        <h4>Sprawdź swoją skrzynkę mailową!</h4><br><br>
+                        Na twój adres email została wysłana wiadomość z linkiem aktywującym konto.<br>
+                        Aktywacja konta jest <u>niezbędna</u>, do zalogowania się w serwisie.
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3"></div>
+        </div>
+
+{% endblock %}
+
+{% block footer %}
+    <footer class="py-3 bg-dark fixed-bottom">
+        <div class="container">
+            <p class="m-0 text-center text-white">Copyright &copy; Your Website 2017</p>
+        </div>
+    </footer>
+{% endblock %}

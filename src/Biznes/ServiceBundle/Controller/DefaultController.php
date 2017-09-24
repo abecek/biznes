@@ -10,8 +10,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
-use Biznes\DatabaseBundle\Entity\Expanses;
-use Biznes\DatabaseBundle\Form\ExpansesType;
+use Biznes\DatabaseBundle\Entity\Withdraws;
+use Biznes\DatabaseBundle\Form\WithdrawsType;
 use Biznes\DatabaseBundle\Entity\Users;
 use Biznes\Utils\WalletManager;
 
@@ -21,6 +21,8 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class DefaultController extends Controller {
+
+    private $minimalMoneyValueToWithdraw = 1;
     
     public function getTicketsAndNotes(Users $user){
         $data = array();
@@ -84,7 +86,7 @@ class DefaultController extends Controller {
     public function createdAction() {
 
         
-        return $this->render('BiznesServiceBundle:Default:registerCreated.html.twig', array(
+        return $this->render('BiznesServiceBundle:Default:accountCreated.html.twig', array(
             
         ));
     }
@@ -109,7 +111,7 @@ class DefaultController extends Controller {
             $wm->countMoneyInWallet($user);
             $moneyInWallet = $wm->getMoneyInWallet();
             $incomesCount = $wm->getCountIncomes();
-            $withdrawsCount = $wm->getCountExpanses();
+            $withdrawsCount = $wm->getCountWithdraws();
 
 
             $form = $this->createFormBuilder(null, array())
@@ -168,23 +170,23 @@ class DefaultController extends Controller {
     /**
      * @Route("/withdraws", name="withdraws")
      */
-    public function expansesAction() {
+    public function withdrawsAction() {
         if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
             throw $this->createAccessDeniedException('You have to be fully authenticated user.');
         }
 
-        $expanses = null;
+        $withdraws = null;
         $user = $this->getUser();
         $data = $this->getTicketsAndNotes($user);
         
         if ($user != null) {
             $wm = $this->get('walletManager');
-            $expanses = $wm->loadWalletManagerFromDB($user)->getExpanses();
+            $withdraws = $wm->loadWalletManagerFromDB($user)->getWithdraws();
 
         }
 
-        return $this->render('BiznesServiceBundle:Default:expanses.html.twig', array(
-                    'expanses' => $expanses,
+        return $this->render('BiznesServiceBundle:Default:withdraws.html.twig', array(
+                    'withdraws' => $withdraws,
             
                     'ticketsCount' => $data['ticketsCount'],
                     'notificationCount' => $data['notificationCount'],
@@ -194,7 +196,7 @@ class DefaultController extends Controller {
     }
 
     /**
-     * @Route("/newWithdraw", name="newWithdraw")
+     * @Route("/withdraw/new", name="newWithdraw")
      */
     public function newWithdrawAction(Request $request) {
         if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
@@ -215,7 +217,7 @@ class DefaultController extends Controller {
             $availableMoney = $wm->getMoneyInWallet();
         }
 
-        $form = $this->createForm(ExpansesType::class, null, array(
+        $form = $this->createForm(WithdrawsType::class, null, array(
             'attr' => array(
                 'id' => 'withdrawForm',
                 'class' => 'form',
@@ -225,16 +227,16 @@ class DefaultController extends Controller {
         if ($request->getMethod() == 'POST') {
             $form->handleRequest($request);
 
-            if($form->get('value')->getData() > 1){
+            if($form->get('value')->getData() > $this->minimalMoneyValueToWithdraw){
                 $encoderService = $this->get('security.password_encoder');
 
                 $password = $form->get('password')->getData();
                 $match = $encoderService->isPasswordValid($user, $password);
 
                 if($match) {
-                    $expanse = $wm->addWithdraw($this->getUser(), $form, new \DateTime);
-                    if ($expanse != null) {
-                        return $this->redirectToRoute('withdrawRealized', array('id' => $expanse->getIdExpanse()));
+                    $withdraw = $wm->addWithdraw($this->getUser(), $form, new \DateTime);
+                    if ($withdraw != null) {
+                        return $this->redirectToRoute('withdrawRealized', array('id' => $withdraw->getIdWithdraw()));
                     }
                     else {
                         $msg = 'Wprowadzone dane były błedne lub nie posiadasz wystarczającej ilości pieniędzy.';
@@ -249,7 +251,7 @@ class DefaultController extends Controller {
             }
 
 
-            $form = $this->createForm(ExpansesType::class, null, array(
+            $form = $this->createForm(WithdrawsType::class, null, array(
                 'attr' => array(
                     'id' => 'withdrawForm',
                     'class' => 'form',
@@ -275,25 +277,25 @@ class DefaultController extends Controller {
      */
     public function withdrawRealizationAction(Request $request, $id = null){
         if($id == null || !is_numeric($id)){
-            throw new \Exception('Expanse id is null or not numeric.');
+            throw new \Exception('Withdraw id is null or not numeric.');
         }
         $user = $this->getUser();
         $data = $this->getTicketsAndNotes($user);
 
         $em = $this->getDoctrine()->getManager();
-        $expanse = $em->getRepository('BiznesDatabaseBundle:Expanses')
+        $withdraw = $em->getRepository('BiznesDatabaseBundle:Withdraws')
             ->findOneBy(array(
-                'idExpanse' => $id,
+                'idWithdraw' => $id,
             ));
 
-        $idUser = $expanse->getIdUser()->getIdUser();
-        if($expanse == null || $idUser != $user->getIdUser()){
-            throw new \Exception('There is no expanse with that id or you have not permission to see this.');
+        $idUser = $withdraw->getIdUser()->getIdUser();
+        if($withdraw == null || $idUser != $user->getIdUser()){
+            throw new \Exception('There is no withdraw with that id or you have not permission to see this.');
         }
 
 
         return $this->render('BiznesServiceBundle:Default:withdrawRealized.html.twig', array(
-            'expanse' => $expanse,
+            'withdraw' => $withdraw,
             'ticketsCount' => $data['ticketsCount'],
             'notificationCount' => $data['notificationCount'],
             'notes' => $data['notes'],
@@ -306,13 +308,13 @@ class DefaultController extends Controller {
      */
     public function contractAction($id = null){
         if($id == null || !is_numeric($id)){
-            throw new \Exception('Expanse id is null or not numeric.');
+            throw new \Exception('Withdraw id is null or not numeric.');
         }
 
         $em = $this->getDoctrine()->getManager();
-        $expanse = $em->getRepository('BiznesDatabaseBundle:Expanses')
+        $withdraw = $em->getRepository('BiznesDatabaseBundle:Withdraws')
             ->findOneBy(array(
-                'idExpanse' => $id,
+                'idWithdraw' => $id,
             ));
 
         $user = $this->getUser();
@@ -329,10 +331,10 @@ class DefaultController extends Controller {
         $dateExecution = date_add($date, date_interval_create_from_date_string('1 days'));
 
         $snappy = $this->get('knp_snappy.pdf');
-        $filename = $expanse->getContractNumber();
+        $filename = $withdraw->getContractNumber();
 
         $html = $this->renderView('BiznesServiceBundle:Default:contract.html.twig', array(
-            'expanse' => $expanse,
+            'withdraw' => $withdraw,
             'user' => $user,
             'userData' => $userData,
             'userAddress' => $userAddress,
@@ -527,7 +529,7 @@ class DefaultController extends Controller {
             //$user = $this->getUser();
             $idUser = $request->request->get('idUser');
             $em = $this->getDoctrine()->getManager();
-            $user = null;
+            $user = $this->getUser();
             if (is_numeric($idUser)) {
                 $user = $em->getRepository('BiznesDatabaseBundle:Users')
                         ->findOneBy(array('idUser' => $idUser));
@@ -542,7 +544,7 @@ class DefaultController extends Controller {
             $incomes = $wm->getIncomes();
             foreach ($incomes as $income) {
                 $date = $income->getDateIncome();
-                $month = $date->format('F');
+                $month = $date->format('Y-F');
                 $month = strval($month);
 
                 if (!isset($incomesByMonths[$month])) {

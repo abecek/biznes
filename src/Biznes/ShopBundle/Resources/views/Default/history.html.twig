@@ -94,6 +94,13 @@
                                 
                             </tr>
                         {% endfor %}
+                        {% if orders is empty %}
+                            <tr>
+                                <td colspan="7">
+                                    <h4 class="text-center">Jeszcze nie zakupiłeś żadnego naszego produktu!</h4>
+                                </td>
+                            </tr>
+                        {% endif %}
                     </tbody>
                 </table>
             </div>

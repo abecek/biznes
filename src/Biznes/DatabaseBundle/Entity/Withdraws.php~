@@ -1,18 +1,16 @@
 <?php
 
 namespace Biznes\DatabaseBundle\Entity;
-use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Expanses
- * @ORM\Entity(repositoryClass="Biznes\DatabaseBundle\Repository\ExpansesRepository")
+ * Withdraws
  */
-class Expanses
+class Withdraws
 {
     /**
      * @var \DateTime
      */
-    private $dateExpanse;
+    private $dateWithdraw;
 
     /**
      * @var string
@@ -20,17 +18,17 @@ class Expanses
     private $value;
 
     /**
-     * @var string
-     * 1 - oczekuje
-     * 2 - w realizacji
-     * 3 - zakonczono
+     * @var integer
+     * 0 - awaiting / oczekuje
+     * 1-  at realization / w realizacji
+     * 2 - realized / zrealizowano
      */
-    private $state;
+    private $state = 0;
 
     /**
      * @var integer
      */
-    private $idExpanse;
+    private $idWithdraw;
 
     /**
      * @var \Biznes\DatabaseBundle\Entity\Users
@@ -42,8 +40,6 @@ class Expanses
      * Password for confirming new withdraw
      */
     private $password;
-
-
     /**
      * @var string
      */
@@ -54,24 +50,21 @@ class Expanses
      */
     public function getContractNumber()
     {
-        if($this->contractNumber === null && $this->idExpanse !== null){
-            $this->setContractNumber($this->idExpanse);
+        if($this->contractNumber === null && $this->idWithdraw !== null){
+            $this->setContractNumber($this->idWithdraw);
         }
         return $this->contractNumber;
     }
 
     /**
-     * @param integer $idExpanse
+     * @param integer $idWithdraw
      */
-    public function setContractNumber($idExpanse)
+    public function setContractNumber($idWithdraw)
     {
-        $contractNumber = $this->dateExpanse->format('Y/m/d') . '/' . strval($idExpanse);
+        $contractNumber = $this->dateWithdraw->format('Y/m/d') . '/' . strval($idWithdraw);
         $this->contractNumber = $contractNumber;
-
         return $this;
     }
-
-
 
     /**
      * @return string
@@ -80,7 +73,6 @@ class Expanses
     {
         return $this->password;
     }
-
     /**
      * @param string $password
      */
@@ -89,30 +81,28 @@ class Expanses
         $this->password = $password;
     }
 
-
-
     /**
-     * Set dateExpanse
+     * Set dateWithdraw
      *
-     * @param \DateTime $dateExpanse
+     * @param \DateTime $dateWithdraw
      *
-     * @return Expanses
+     * @return Withdraws
      */
-    public function setDateExpanse($dateExpanse)
+    public function setDateWithdraw($dateWithdraw)
     {
-        $this->dateExpanse = $dateExpanse;
+        $this->dateWithdraw = $dateWithdraw;
 
         return $this;
     }
 
     /**
-     * Get dateExpanse
+     * Get dateWithdraw
      *
      * @return \DateTime
      */
-    public function getDateExpanse()
+    public function getDateWithdraw()
     {
-        return $this->dateExpanse;
+        return $this->dateWithdraw;
     }
 
     /**
@@ -120,7 +110,7 @@ class Expanses
      *
      * @param string $value
      *
-     * @return Expanses
+     * @return Withdraws
      */
     public function setValue($value)
     {
@@ -142,13 +132,21 @@ class Expanses
     /**
      * Set state
      *
-     * @param string $state
+     * @param integer $state
      *
-     * @return Expanses
+     * @return Withdraws
      */
     public function setState($state)
     {
-        $this->state = $state;
+        if($state == 0 || $state == "awaiting" || $state == "oczekuje"){
+            $this->state = 0;
+        }
+        elseif($state == 1 || $state == "at realization" || $state == "w realizacji"){
+            $this->state = 1;
+        }
+        elseif($state == 2 || $state == "realized" || $state == "zrealizowano"){
+            $this->state = 2;
+        }
 
         return $this;
     }
@@ -156,7 +154,7 @@ class Expanses
     /**
      * Get state
      *
-     * @return string
+     * @return integer
      */
     public function getState()
     {
@@ -164,13 +162,34 @@ class Expanses
     }
 
     /**
-     * Get idExpanse
+     * Get state
+     *
+     * @return string
+     */
+    public function getStateAsString()
+    {
+        $string = "";
+        if($this->state == 0){
+            $string = "oczekuje";
+        }
+        elseif($this->state == 1){
+            $string = "w realizacji";
+        }
+        elseif($this->state == 2){
+            $string = "zrealizowano";
+        }
+
+        return $string;
+    }
+
+    /**
+     * Get idWithdraw
      *
      * @return integer
      */
-    public function getIdExpanse()
+    public function getIdWithdraw()
     {
-        return $this->idExpanse;
+        return $this->idWithdraw;
     }
 
     /**
@@ -178,7 +197,7 @@ class Expanses
      *
      * @param \Biznes\DatabaseBundle\Entity\Users $idUser
      *
-     * @return Expanses
+     * @return Withdraws
      */
     public function setIdUser(\Biznes\DatabaseBundle\Entity\Users $idUser = null)
     {
@@ -197,3 +216,4 @@ class Expanses
         return $this->idUser;
     }
 }
+

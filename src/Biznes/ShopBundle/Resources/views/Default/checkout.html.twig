@@ -20,10 +20,12 @@
 
         {% if not is_granted('ROLE_USER') %}
             <div class="row">
-                <div class="col-md-12 text-center">
+                <div class="col-md-3"></div>
+                <div class="col-md-6 text-center">
                     {% if error %}
                         <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
                     {% endif %}
+
                     <form action="{{ path('login') }}" method="post" class="form">
                         <label for="username">Login:</label>
                         <input type="text" id="username" name="_username" value="" class="form-control"/>
@@ -40,6 +42,7 @@
                         <a href="{{ path('registerShop', {'referer': '0', 'source': 'checkout'}) }}">Jeśli nie masz konta zarejestruj się!</a>
                     </div>
                 </div>
+                <div class="col-md-3"></div>
             </div>
         {% else %}
 
@@ -258,7 +261,7 @@
                             {% endif %}
                         </div>
                     {% else %}
-                        <h4>Koszyk jest pusty!</h4><br>
+                        <h4 class="text-center">Koszyk jest pusty!</h4><br>
                     {% endif %}  
                     </div>
                     

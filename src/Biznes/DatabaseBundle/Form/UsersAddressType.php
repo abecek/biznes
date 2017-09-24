@@ -51,7 +51,9 @@ class UsersAddressType extends AbstractType{
                     'label' => 'Numer mieszkania(opcjonalne)'
                 ))  
                 ->add('save', SubmitType::class, array(
-                    'attr' => array('class' => 'btn btn-primary btn-block'),
+                    'attr' => array(
+                            'class' => 'btn btn-primary btn-block',
+                        ),
                     'label' => 'Zapisz dane adresowe'
                 ));
     }
