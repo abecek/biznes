@@ -52,7 +52,8 @@ class OrderManager extends Controller {
      * return object of Orders class
      */
 
-    public function prepareOrder(Users $user, $priceNettoOverAll, PaymentMethods $paymentMethod, RealizationMethods $realizationMethod, States $state) {
+    public function prepareOrder(Users $user, $priceNettoOverAll, PaymentMethods $paymentMethod,
+                                 RealizationMethods $realizationMethod, States $state) {
         $sponsor = $user->getIdSponsor();
         $idSponsor = null;
         if ($sponsor != null) {
