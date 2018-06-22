@@ -1,0 +1,88 @@
+{% extends "BiznesServiceBundle::base.html.twig" %}
+
+{% block tickestAndMessages %}
+
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col">
+            <div class="card card-login mx-auto mt-5">
+                <div class="card-header">
+                    <h6>Co chcesz zrobić?</h6>
+                </div>
+                <div class="card-body">
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <a data-toggle="modal" data-target="#areYouSureModal">
+                                <button class="btn btn-primary btn-block">Chce zmienić hasło</h4> </button>
+                            </a>
+                        </li>
+                        <li class="list-group-item">
+                            <a data-toggle="modal" data-target="#changeEmailRequest">
+                                <button class="btn btn-primary btn-block">Chce zmienić adres email</h4> </button>
+                            </a>
+                        </li>
+                        
+                    </ul>
+                </div>
+                    
+            </div>
+        </div>
+    </div>  
+
+    <!-- areYouSureModal -->
+    <div class="modal fade" id="areYouSureModal" tabindex="-1" role="dialog" aria-labelledby="areYouSureLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="areYouSureLabel">Potwierdzenie</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <h6>Czy na pewno chcesz zmienić hasło?</h6><br>
+                    Naciśnięcie przycisku "Tak" spowoduję, że zostanie wysłana Ci wiadomość email z linkiem prowadzącym do forumlarza, który pozwoli Ci zmienić hasło.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Anuluj</button>
+                    
+                    <form action="{{ path('requestNewPassword') }}" method="post" class="form">
+                        <input type="hidden" name="type" id="type" value="password"/>
+                        <input type="submit" class="btn btn-primary" value="Tak"/>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+                    
+    <!-- areYouSureModal -->
+    <div class="modal fade" id="changeEmailRequest" tabindex="-1" role="dialog" aria-labelledby="changeEmailRequestLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="changeEmailRequestLabeL">Potwierdzenie</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <h6>Czy na pewno chcesz zmienić adres email?</h6><br>
+                    Twoja prośba zostanie skierowana do administracji serwisu i rozpatrzona.<br>
+                    Ze wzgledów bezpieczeństwa proces ten trwa kilka dni. <br><br>
+                    Zostaniesz poinformowany o możliwości zmiany email poprzez wiadomość, bądź telefonicznie(sms).
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Anuluj</button>
+                    
+                    <form action="{{ path('requestNewEmail') }}" method="post" class="form">
+                        <input type="hidden" name="type" id="type" value="email"/>
+                        <input type="submit" class="btn btn-primary" value="Tak"/>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+                    
+{% endblock %}

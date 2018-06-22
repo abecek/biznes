@@ -1,0 +1,95 @@
+{% extends "BiznesShopBundle::base.html.twig" %}
+{% set title = 'Koszyk' %}
+
+{% block header %}
+        <!-- Header -->
+        <header class="business-header" style="margin-top: 120px;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="display-3 text-center text-white mt-4 text-bordered">Zawartość koszyka</h1>
+                    </div>
+                </div>
+            </div>
+        </header>   
+{% endblock %}
+
+{% block container %}
+    <div class="content">
+        {% if cart is defined %}
+            <div class="row justify-content-md-center cart-menu">
+                {% if cart.products %}
+                    <div class="btn-group col-lg-12">
+                        <div class="col-lg-6">
+                            <h3>Cena całkowita: {{ cart.priceOverall }} zł</h3>
+                        </div>
+
+                        <div class="col-lg-3">
+                            <form id="clearCart" class="form" action="{{ path('cartDelete') }}" method="POST">
+                                <input type="hidden" name="all" value="true"/>
+                            </form>
+                            <a href="javascript:{}" class="btn btn-primary btn-lg"
+                               onclick="document.getElementById('clearCart').submit();
+                                       return false;">Wyczyść koszyk
+                            </a>  
+                        </div>
+
+                        <div class="col-lg-3">
+                            <a class="btn btn-primary btn-lg" href="{{ path('checkout') }}">Realizacja zamówienia!</a>
+                        </div>
+                    </div>
+                {% else %}
+                    <div class="col">
+                        <h4>Koszyk jest pusty!</h4>
+                    </div>
+                {% endif %}
+            </div>
+
+            <div class="row">
+                {% for product in cart.products %}
+                    <div class="itemInCart">
+                        <div class="col-lg-8 col-md-12 float-left">
+                            <a href="{{ path('product', {'id': product.idProduct}) }}">
+                                <img class="img-fluid rounded mb-3 mb-md-0" style="float:right; width: 650px; height: 250px;" src="{{ asset('bundles/biznesshop/products/img/' ~ product.filename ~ '/bg700x400.jpg') }}" alt="">
+                            </a>
+                        </div>
+                        <div class="col-lg-4 col-md-12 float-right" style="min-height: 250px;">
+                            <a href="{{ path('product', {'id': product.idProduct}) }}">
+                                <h3>{{ product.name }}</h3>
+                            </a>
+                            <h4>Cena netto: {{ product.price }} zł</h4>
+                            <p>
+                                {{ product.description }}
+                            </p>
+                            <form id="deletItemFromCart" class="form" action="{{ path('cartDelete') }}" method="POST">
+                                <input type="hidden" name="idProduct" value="{{ product.idProduct }}"/>
+                            </form>
+
+                            <a href="javascript:{}" class="btn btn-primary cart-item-nav"
+                               onclick="document.getElementById('deletItemFromCart').submit();
+                                       return false;">Usuń z koszyka
+                            </a>  
+                            <a class="btn btn-primary cart-item-nav" href="{{ path('product', {'id': product.idProduct}) }}">Obejrzyj produkt</a>
+
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <!-- /.row -->
+
+        {% endif %}
+
+        {# dump(cart) #}
+
+    </div>
+
+{% endblock %}
+
+{% block footer %}
+    <footer style="" class="py-3 bg-dark fixed-bottom">
+        <div class="container">
+            <p class="m-0 text-center text-white">Copyright &copy; Your Website 2017</p>
+        </div>
+        <!-- /.container -->
+    </footer>
+{% endblock %}

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>{{ title }}</title>
+
+        <!-- Bootstrap Core CSS -->
+        <link href="{{ asset('bundles/biznesshop/css/bootstrap.min.css') }}" rel="stylesheet">
+        <!-- Custom fonts for this template -->
+        <link href="{{ asset('bundles/biznesservice/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
+        <!-- Custom CSS -->
+        <link href="{{ asset('bundles/biznesshop/css/style.css') }}" rel="stylesheet">
+
+
+    </head>
+
+    <body>
+
+        <!-- Navigation -->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+            <div class="container">
+                <a class="navbar-brand" data-toggle="tooltip" data-placement="bottom" title="Strona główna" href="{{ path('shop') }}">
+                    <i><strong>Affiliations<font color="#0074f1">TOOLS</font></strong></i>
+                </a>
+                
+                <a class="navbar-brand" href="{{ path('homepage') }}">
+                    <i class="fa fa-arrow-left"></i>
+                    Serwis partnerski 
+                </a>
+                
+
+                <a class="navbar-brand" href="{{ path('cart') }}">
+                    W koszyku : {{ cart.count }} <i class="fa fa-shopping-cart"></i>
+                </a>
+
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ml-auto">
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Kontakt
+                                <span class="sr-only">(current)</span>
+                            </a>
+                        </li>
+                        
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('checkout') }}">Zamówienie</a>
+                        </li>
+
+                        {% if is_granted('ROLE_USER') %}
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" id="dropdownYourAccount" 
+                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                                   href="#"> Twoje konto
+                                </a>
+                                
+                                <div class="dropdown-menu" aria-labelledby="dropdownYourAccount">
+                                    <a class="dropdown-item" href="{{ path('personalDataShop') }}">
+                                        <i class="fa fa-address-card-o"></i>
+                                         Twoje dane
+                                    </a>
+                                    <a class="dropdown-item" href="{{ path('history') }}">
+                                        <i class="fa fa-history"></i>
+                                         Historia zakupów
+                                    </a>
+                                </div>
+                            </li>
+                            
+                            
+                            
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ path('logout') }}"> 
+                                    Wyloguj
+                                    <i class="fa fa-fw fa-sign-out"></i>
+                                </a>
+                            </li>
+                        {% else %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ path('loginShop') }}"> 
+                                    Logowanie
+                                    <i class="fa fa-fw fa-sign-in"></i>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ path('registerShop') }}"> 
+                                    Rejestracja
+                                    <i class="fa fa-fw fa-registered"></i>
+                                </a>
+                            </li>
+                        {% endif %}
+
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- /.nav -->
+        
+        <!-- Header -->
+        {% block header %}
+            
+        {% endblock %}
+
+        
+        <!-- Page Content -->
+        <div class="container">
+            <div class="container-fluid">
+            {% block container %}
+
+            {% endblock %}
+            </div>
+        </div>
+        <!-- /.container -->
+
+        <!-- Footer -->
+        {% block footer %}
+            <footer class="py-3 bg-dark">
+                <div class="container">
+                    <p class="m-0 text-center text-white">Copyright &copy; Your Website 2017</p>
+                </div>
+                <!-- /.container -->
+            </footer>
+        {% endblock %}
+
+        <!-- jQuery -->
+        <script src="{{ asset('bundles/biznesshop/js/jquery.min.js') }}"></script>
+        
+        <!-- Bootstrap && Propel JavaScript -->
+        <script src="{{ asset('bundles/biznesshop/js/popper.min.js') }}"></script>
+        <script src="{{ asset('bundles/biznesshop/js/bootstrap.min.js') }}"></script>
+        
+        <!-- Plugin JavaScript -->
+        <script src="{{ asset('bundles/biznesshop/js/jquery.easing.min.js') }}"></script>
+        
+        <!-- Custom scripts for this template -->
+        <script src="{{ asset('bundles/biznesservice/js/main.js') }}"></script>
+
+    </body>
+
+</html>

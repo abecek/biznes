@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Biznes\DatabaseBundle\Entity\Invoices" table="invoices">
+    <indexes>
+      <index name="invoices_id_order_fk1" columns="id_order"/>
+    </indexes>
+    <id name="idInvoice" type="integer" column="id_invoice">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="dateExposure" type="datetime" column="date_exposure" nullable="false"/>
+    <field name="dateSale" type="datetime" column="date_sale" nullable="false"/>
+    <field name="datePayment" type="datetime" column="date_payment" nullable="false"/>
+    <field name="type" type="string" column="type" length="8" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="isPaid" type="integer" column="is_paid" nullable="false"/>
+    <many-to-one field="idOrder" target-entity="Orders" fetch="LAZY">
+      <join-columns>
+        <join-column name="id_order" referenced-column-name="id_order"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

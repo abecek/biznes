@@ -1,0 +1,167 @@
+/*!
+ * Start Bootstrap - Shop Homepage (http://startbootstrap.com/template-overviews/shop-homepage)
+ * Copyright 2013-2017 Start Bootstrap
+ * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-shop-homepage/blob/master/LICENSE)
+ */
+
+html {
+    min-height: 100%;
+}
+
+body {
+    min-height: 100%;
+    background: url("../images/pexels-photo.jpg") no-repeat center center fixed;
+    background-size: cover;
+    padding-top: 54px; 
+}
+
+.navbar-sidenav-tooltip.show {
+  display: none; 
+}
+
+body.sidenav-toggled .navbar-sidenav-tooltip.show {
+  display: flex; 
+}
+
+.card-login {
+  max-width: 25rem; }
+
+.card-register {
+  max-width: 40rem; }
+
+.text-bordered {
+    text-shadow: -1px 0 #343a40, 0 1px #343a40, 1px 0 #343a40, 0 -1px #343a40;
+}
+
+.well {
+    width: 85%;
+    margin: 50px auto 50px;
+    padding: 35px 35px;
+
+    min-height: 550px;
+    background-color: white;
+    border: 0px solid white;
+    border-radius: 20px;
+}
+
+.well-div div{
+    background-color: whitesmoke;
+    padding: 10px;
+}
+
+.content {
+    width: 100%;
+    float: left;
+    margin: 60px auto 150px;
+    
+    padding: 15px;
+
+    background-color: white;
+    border: 1px solid whitesmoke;
+    border-radius: 20px;
+}
+
+.content-no-bg {
+    width: 100%;
+    float: left;
+    margin: 60px auto 150px;
+    
+    padding: 15px;
+    
+    border-radius: 20px;
+}
+
+.cart-menu{
+    margin: 10px;
+}
+
+.cart-menu h3{
+    margin-top: 10px;
+}
+
+.itemInCart {
+    height: auto;
+    padding: 10px;
+}
+
+.itemsInCartLink{
+    color: white;
+    text-decoration: none;
+    margin-left: 80px; 
+    margin-right: 20px;
+    white-space: nowrap;
+}
+
+.itemsInCartLink:hover{
+    font-size: 1.1em;
+    color: white;
+    text-decoration: none;
+    margin-left: 80px;
+    margin-right: 20px;
+    white-space: nowrap;
+}
+
+.cart-item-nav {
+    margin: 5px;
+}
+
+.back-link {
+    margin-top: 1.5rem!important;
+}
+
+.back-link:hover{
+    font-size: 1.1rem;
+}
+
+.foot {
+    width: 100%;
+    bottom: 0px;
+}
+
+.business-header {
+    margin-top: 0px;
+}
+
+@media (min-width: 992px) {
+    body {
+        min-height: 100%;
+        background: url("../images/pexels-photo.jpg") no-repeat center center fixed;
+        background-size: cover;
+        padding-top: 56px;
+    }       
+}
+
+@media (max-width: 765px) {
+    .business-header {
+        margin-top: 100px;
+    }
+    
+    .content {
+        width: 100%;
+        float: left;
+        margin: 70px auto 150px;
+
+        padding: 15px;
+
+        background-color: white;
+        border: 1px solid whitesmoke;
+        border-radius: 20px;
+    }
+
+    .content-no-bg {
+        width: 100%;
+        float: left;
+        margin: 40px auto 150px;
+
+        padding: 15px;
+
+        border-radius: 20px;
+    }
+    
+    
+    .cart-menu div{
+        display: inline-block;
+        margin: 5px;
+    }
+    
+}

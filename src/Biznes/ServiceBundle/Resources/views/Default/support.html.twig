@@ -1,0 +1,59 @@
+{% extends "BiznesServiceBundle::base.html.twig" %}
+
+    {% set title = 'Strona główna' %}
+
+
+    {% block container %}
+        <div id="wrapper">
+            <!-- Sidebar -->
+            <div id="sidebar-wrapper">
+                <ul class="sidebar-nav">
+                    {#
+                        <li class="sidebar-brand">
+                            <a href="#">
+                                Start Bootstrap
+                            </a>
+                        </li>
+                    #}
+                    <li>
+                        <a href="{{ path('dashboard') }}">Panel główny</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('personalData') }}">Twoje konto</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('incomes') }}">Naliczenia</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('withdraws') }}">Wypłaty</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('newWithdraw') }}">Nowa wypłata</a>
+                    </li>
+                    <li>
+                        <a href="#">Pomoc supportu</a>
+                    </li>
+                    <li>
+                        <a href="#menu-toggle2" id="menu-toggle2">Zwiń menu boczne</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /#sidebar-wrapper -->
+        </div>
+        <!-- /#wrapper -->
+
+<!-- Page Content -->
+<div id="page-content-wrapper">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                {% block content %}
+
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /#page-content-wrapper --
+
+    {% endblock %}

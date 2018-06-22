@@ -1,0 +1,22 @@
+biznes_database:
+    resource: "@BiznesDatabaseBundle/Controller/"
+    type:     annotation
+    prefix:   /
+    
+biznes_shop:
+    resource: "@BiznesShopBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+biznes_service:
+    resource: "@BiznesServiceBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+biznes_landing_page:
+    resource: "@BiznesLandingPageBundle/Controller/"
+    type:     annotation
+    prefix:   /
+    
+logout:
+    path: /logout

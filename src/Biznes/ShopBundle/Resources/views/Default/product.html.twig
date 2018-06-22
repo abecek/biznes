@@ -1,0 +1,130 @@
+{% extends "BiznesShopBundle::base.html.twig" %}
+
+{% set title = 'Produkt' %}
+
+{% block container %}
+    <div class="content-no-bg">
+        <div class="row">
+
+            <div class="col-lg-3">
+                <a href="{{ path('shop') }}" class="list-group-item active back-link">
+                    <i class="fa fa-undo"></i>
+                    Powrót do produktów
+                </a>
+
+                {% if not isInCart %}
+                    <form id="addItemToCart" class="form" method="POST" action="{{ path('cartAdd') }}">
+                        <input type="hidden" name="idProduct" value="{{ product.idProduct }}"/>
+                        <a href="javascript:{}" class="list-group-item active back-link"
+                           onclick="document.getElementById('addItemToCart').submit();
+                               return false;"> 
+                            <i class="fa fa-cart-arrow-down"></i>
+                            Dodaj do koszyka
+                        </a>                
+                    </form>
+                {% else %}
+                    <form id="deleteItemToCart" class="form" method="POST" action="{{ path('cartDelete') }}">
+                        <input type="hidden" name="idProduct" value="{{ product.idProduct }}"/>
+                        <a href="javascript:{}" class="list-group-item active back-link"
+                           onclick="document.getElementById('deleteItemToCart').submit();
+                               return false;"> 
+                            <i class="fa fa-trash-o"></i>
+                            Usuń z koszyka
+                        </a>                
+                    </form>
+                {% endif %}
+
+                <a href="{{ path('preview', {'id': product.idProduct}) }}" class="list-group-item active back-link">
+                    <i class="fa fa-eye"></i>
+                    Wersja demo
+                </a>
+
+                <a href="{{ path('cart') }}" class="list-group-item active back-link">
+                    <i class="fa fa-shopping-cart"></i>
+                    Przejdź do koszyka
+                </a>
+
+            </div>
+            <!-- /.col-lg-3 -->
+
+            <div class="col-lg-9">
+                <div class="card mt-4">
+                    <div class="card-header">
+                        <div class="float-left">
+                            <h3 class="card-title">{{ product.name }}</h3>
+                        </div>
+                        <div class="float-right">
+                            <h4>Cena: {{ product.price }} zł</h4>
+                        </div>
+                    </div>
+                    <img class="card-img-top img-fluid" src="{{ asset('bundles/biznesshop/products/img/'~ product.filename ~'/bg900x600.jpg') }}" alt="">
+                    <div class="card-body">
+                        <h4 class="card-title">Opis:</h4>
+
+                        <p class="card-text">{{ product.description }}
+                        </p>
+
+                        Ocena: {{ productRate }}
+                        <span class="text-warning">
+                            {% for i in 1..starsOn %}
+                                &#9733;
+                            {% endfor %}
+                            {% if starsOff is not null %}
+                                {% for i in 1..starsOff %}
+                                    &#9734;
+                                {% endfor %}
+                            {% endif %}
+                        </span>
+
+                    </div>
+                </div>
+                <!-- /.card -->
+
+                <div class="card card-outline-secondary my-4">
+                    <div class="card-header">
+                        Opinie o produkcie:
+                    </div>
+                    <div class="card-body">
+                        {% if rates is not empty %}
+                            {% for rate in rates %}
+                                <p>{{ rate.text }}</p>
+                                <small class="text-muted">Opublikowano przez {{ rate.idUser.username }} on {{ rate.dateRating|date('Y-m-d H:m:s') }}</small>
+                                <hr>
+                            {% endfor %}
+                        {% else %}
+                            Brak opini o produkcie
+                        {% endif %}
+
+                        {% if is_granted('ROLE_USER') %}
+                            {% if userCanGiveRating %}
+                                {{ form_start(ratingForm) }}
+                                {{ form_widget(ratingForm) }}
+                                {{ form_end(ratingForm) }}
+                            {% else %}
+                                <div class="alert alert-primary">
+                                    Oceniłeś już ten produkt. 
+                                    Jeśli twoja ocena nie wyświetla sie powyżej to oznacza, że oczekuje na zaakceptowanie przez administracje.
+                                </div>
+                            {% endif %}
+                        {% endif %}
+                    </div>
+                </div>
+                <!-- /.card -->
+
+            </div>
+            <!-- /.col-lg-10 -->
+
+        </div>
+        <!-- /.row -->
+
+    </div>
+
+{% endblock %}
+
+{% block footer %}
+    <footer class="py-3 bg-dark fixed-bottom">
+        <div class="container">
+            <p class="m-0 text-center text-white">Copyright &copy; Your Website 2017</p>
+        </div>
+    </footer>
+{% endblock %}

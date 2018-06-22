@@ -1,0 +1,279 @@
+{% extends "BiznesShopBundle::base.html.twig" %}
+{% set title = 'Zamówienie' %}
+
+
+{% block header %}
+    <header class="business-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="display-3 text-center text-white mt-4 text-bordered">Zamówienie</h1>
+                </div>
+            </div>
+        </div>
+    </header>
+{% endblock %}
+
+
+{% block container %}
+    <div class="content"> 
+
+        {% if not is_granted('ROLE_USER') %}
+            <div class="row">
+                <div class="col-md-3"></div>
+                <div class="col-md-6 text-center">
+                    {% if error %}
+                        <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                    {% endif %}
+
+                    <form action="{{ path('login') }}" method="post" class="form">
+                        <label for="username">Login:</label>
+                        <input type="text" id="username" name="_username" value="" class="form-control"/>
+                        <label for="password">Hasło:</label>
+                        <input type="password" id="password" name="_password" class="form-control"/>
+
+                        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                        <input type="hidden" name="_target_path" value="checkout" />
+                        <input type="hidden" name="_failure_path" value="checkout" />
+                        <button class="btn btn-primary btn-block btn-lg" type="submit">Login</button>
+                    </form>
+                    <br>
+                    <div class="alert alert-info">
+                        <a href="{{ path('registerShop', {'referer': '0', 'source': 'checkout'}) }}">Jeśli nie masz konta zarejestruj się!</a>
+                    </div>
+                </div>
+                <div class="col-md-3"></div>
+            </div>
+        {% else %}
+
+            <div class="row">
+                <div class="col-md-6"
+                     style="
+                     overflow: auto;
+                     ">
+                    <h4>Dane personalne</h4><br>
+                    {% if userData is not null %}
+                        <table class="table table-striped">
+                            <tr>
+                                <td>
+                                    Pierwsze imie: 
+                                </td>
+                                <td>
+                                    {{ userData.name1 }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Drugie imie(opcjonalnie): 
+                                </td>
+                                <td>
+                                    {{ userData.name2 }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Nazwisko: 
+                                </td>
+                                <td>
+                                    {{ userData.surname }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Numer pesel(opcjonalnie): 
+                                </td>
+                                <td>
+                                    {{ userData.identityNumber }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Numer telefonu: 
+                                </td>
+                                <td>
+                                    {{ userData.telephone }}
+                                </td>
+                            </tr>
+                        </table>
+                    {% else %}
+                        <div class="alert alert-warning">
+                            <a href="{{ path('personalDataShop', {'source': 'checkout', 'dataToEdit' : 'personal'}) }}">Wypełnij swoje dane personalne!</a>
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="col-md-6" style="
+                     overflow: auto;
+                     ">
+                    <h4>Dane adresowe</h4><br>
+                    {% if userAddress is not null %}
+                        <table class="table table-striped">
+                            <tr>
+                                <td>
+                                    Kraj: 
+                                </td>
+                                <td>
+                                    {{ userAddress.country }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Miasto: 
+                                </td>
+                                <td>
+                                    {{ userAddress.city }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Kod pocztowy: 
+                                </td>
+                                <td>
+                                    {{ userAddress.postCode }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Ulica: 
+                                </td>
+                                <td>
+                                    {{ userAddress.street }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Numer budynku: 
+                                </td>
+                                <td>
+                                    {{ userAddress.nrHouse }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Numer mieszkania(opcjonalnie): 
+                                </td>
+                                <td>
+                                    {{ userAddress.nrFlat }}
+                                </td>
+                            </tr>
+                        </table>
+                        {#     
+                        <div class="alert alert-info">
+                            <a href="{{ path('personalData_shop', {'source': 'checkout'}) }}">Edytuj dane adresowe</a>
+                        </div>
+                        #}
+                    {% else %}
+                        <div class="alert alert-warning">
+                            <a href="{{ path('personalDataShop', {'source': 'checkout', 'dataToEdit' : 'address'}) }}">
+                                Wypełnij swoje dane adresowe!
+                            </a>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        {% endif %}
+
+        {% if cart is defined %}
+            <div class="row">
+                <div class="col-md-12">
+                    
+                    {% if cart.products is not empty %}
+                        <h4>Produkty w koszyku:</h4><br>
+                        <form action="{{ path('order_confirm') }}" method="POST">
+                            <div style="overflow: auto;">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th class="">
+                                                Nazwa produktu
+                                            </th>
+                                            <th class="">
+                                                Opis
+                                            </th>
+                                            <th class="">
+                                                Cena netto
+                                            </th>
+                                            <th class="">
+                                                Cena brutto
+                                            </th>
+                                        </tr>
+                                    <thead>
+                                    <tbody>
+                                    {% for product in cart.products %}
+                                        <tr>
+                                            <td>
+                                                <a href="{{ path('product', {'id': product.idProduct}) }}">
+                                                {{ product.name }}
+                                                </a>
+                                            </td>
+                                            <td>
+                                                {{ product.description }}
+                                            </td>
+                                            <td>
+                                                {{ product.price }} zł
+                                            </td>
+                                            <td>
+                                                {{ product.priceBrutto }} zł
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                    <tbody>
+                                </table>
+                            </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12" style="
+                     overflow: auto;
+                     ">
+                        <hr>
+                        <div style="width: 245px;">
+                            <label for="payment"><h4>Wybierz sposób realizacji dostarczenia produktów: </h4></label>
+                            <select id="realization" name="realizationMethod" class="form-control">
+                                {% for realMethod in realizationMethods %}
+                                    <option value="{{ realMethod.idRealizationMethod }}"> {{ realMethod.name }} </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div style="width: 245px;">
+                            <label for="payment"><h4>Wybierz sposób płatności: </h4></label>
+                            <select id="payment" name="paymentMethod" class="form-control">
+                                {% for payment in paymentMethods %}
+                                    <option value="{{ payment.idPaymentMethod }}"> {{ payment.name }} </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <div class="float-right">
+                            <h3>Do zapłaty: {{ toPay }} zł</h3><br>
+                            {% if is_granted('ROLE_USER') %}
+                                {% if (userData is empty) or (userAddress is empty) %}
+                                    <div class="alert alert-warning">
+                                        Aby móc zrealizować transakcje, wszystkie twoje dane muszą być wypełnione!
+                                    </div>
+                                {% else %}
+                                    <button class="btn btn-lg btn-primary btn-block" type="submit">Przejdź do potwierdzenia!</button>
+                                {% endif %}
+                            {% else %}
+                                <div class="alert alert-warning">
+                                    <h5>Musisz być zalogowany, by móc zrealizować transakcje.<h5>
+                                </div>
+                            {% endif %}
+                        </div>
+                    {% else %}
+                        <h4 class="text-center">Koszyk jest pusty!</h4><br>
+                    {% endif %}  
+                    </div>
+                    
+                </div>
+            {% endif %}        
+     </div>
+{% endblock %}
+
+{% block footer %}
+    <footer class="py-3 bg-dark fixed-bottom">
+        <div class="container">
+            <p class="m-0 text-center text-white">Copyright &copy; Your Website 2017</p>
+        </div>
+    </footer>
+{% endblock %}

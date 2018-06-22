@@ -1,0 +1,120 @@
+{% extends "BiznesServiceBundle::base.html.twig" %}
+
+{% set title = 'Twoje wątki' %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="float-left">
+                <h1>Tytuł: {{ ticket.title }}</h1>
+            </div>
+            <div class="float-right">
+                {% if ticket.dateClose is null %}
+                    <span class="badge badge-success float-right" style="margin:10px;">Otwarty</span>
+                {% else %}
+                    <span class="badge badge-default float-right" style="margin:10px;">Zamknięty</span>
+                {% endif %}
+            </div>
+        </div>
+        <div class="col-lg-12">
+            <div class="panel-body">
+                <ul class="chat">
+                    <li class="left clearfix message-box" style="
+                        background-color: whitesmoke;
+                        padding-bottom: 30px;
+                        border: 1px solid #212529;
+                        ">
+                        <div style="width:100%">
+                            <h5>Wiadomość otwierająca wątek</h5>
+                        </div>
+                        <span class="chat-img pull-left">
+                            <img src="http://placehold.it/50/55C1E7/fff&text=U" alt="User Avatar" class="img-circle" />
+                        </span>
+                        <div class="chat-body clearfix">
+                            <div class="header">
+                                <strong class="primary-font">
+                                    {{ ticket.idUser.username }}
+                                </strong> 
+                                <small class="pull-right text-muted">
+                                    <span class="fa fa-clock-o"></span>
+                                    {{ ticket.dateOpen|date('Y-m-d H:m:s') }}
+                                </small>
+                            </div>
+                            <p>
+                                {{ ticket.text }}
+                            </p>
+                        </div>     
+                    </li>
+
+
+                    {% for message in messages %}
+                        {% if message.idUser.rank == 0 %}
+                            <li class="left clearfix message-box" style="background-color: whitesmoke; margin-bottom: 10px;">
+                                <span class="chat-img pull-left">
+                                    <img src="http://placehold.it/50/55C1E7/fff&text=U" alt="User Avatar" class="img-circle" />
+                                </span>
+                                <div class="chat-body clearfix">
+                                    <div class="header">
+                                        <strong class="primary-font">
+                                            {{ message.idUser.username }}
+                                        </strong> 
+                                        <small class="pull-right text-muted">
+                                            <span class="fa fa-clock-o"></span>
+                                            {{ message.dateMessage|date('Y-m-d H:m:s') }}
+                                        </small>
+                                    </div>
+                                    <p>
+                                        {{ message.text }}
+                                    </p>
+                                </div>
+                            </li>
+                        {% elseif message.idUser.rank == 1 %}
+                            <li class="right clearfix message-box">
+                                <span class="chat-img pull-right">
+                                    <img src="http://placehold.it/50/FA6F57/fff&text=ME" alt="User Avatar" class="img-circle" />
+                                </span>
+                                <div class="chat-body clearfix">
+                                    <div class="header">
+                                        <small class=" text-muted">
+                                            <span class="fa fa-clock-o"></span>
+                                            {{ message.dateMessage|date('Y-m-d H:m:s') }}
+                                        </small>
+                                        <strong class="pull-right primary-font">
+                                            Support
+                                        </strong>
+                                    </div>
+                                    <p>
+                                        {{ message.text }}
+                                    </p>
+                                </div>
+                            </li>
+                        {% endif%}
+                    {% endfor%}
+
+                </ul>     
+            </div>
+
+        </div> 
+    </div>
+    {% if ticket.dateClose is null %}             
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel-newMessage">
+                    {{ form_start(messageForm) }}
+                    <div class="form-group">
+                        {{ form_row(messageForm.text) }}
+                    </div>
+                    {{ form_row(messageForm.sendMessage) }}
+                    {{ form_end(messageForm) }}
+                </div>
+            </div> 
+        </div>
+    {% else %}
+        <div class="row">
+            <div class="col-lg-12" align="center">
+                Wątek został zamknięty przez administracje.
+            </div> 
+        </div>
+    {% endif %}
+
+{% endblock %}

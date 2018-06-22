@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Biznes\DatabaseBundle\Entity\Orders" table="orders">
+    <indexes>
+      <index name="orders_id_user_fk1" columns="id_user"/>
+      <index name="orders_id_state_fk1" columns="id_state"/>
+      <index name="orders_id_payment_fk1" columns="id_payment_method"/>
+      <index name="id_realization_method_fk1" columns="id_realization_method"/>
+    </indexes>
+    <id name="idOrder" type="integer" column="id_order">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="dateOrder" type="datetime" column="date_order" nullable="false"/>
+    <field name="priceNetto" type="decimal" column="price_netto" precision="6" scale="2" nullable="false"/>
+    <field name="priceBrutto" type="decimal" column="price_brutto" precision="6" scale="2" nullable="false"/>
+    <field name="idSponsor" type="integer" column="id_sponsor" nullable="true">
+      <options>
+        <option name="unsigned">1</option>
+      </options>
+    </field>
+    <many-to-one field="idRealizationMethod" target-entity="RealizationMethods" fetch="LAZY">
+      <join-columns>
+        <join-column name="id_realization_method" referenced-column-name="id_realization_method"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="idPaymentMethod" target-entity="PaymentMethods" fetch="LAZY">
+      <join-columns>
+        <join-column name="id_payment_method" referenced-column-name="id_payment_method"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="idState" target-entity="States" fetch="LAZY">
+      <join-columns>
+        <join-column name="id_state" referenced-column-name="id_state"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="idUser" target-entity="Users" fetch="LAZY">
+      <join-columns>
+        <join-column name="id_user" referenced-column-name="id_user"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>
