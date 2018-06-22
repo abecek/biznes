@@ -15,7 +15,8 @@
 /vendor/
 /web/bundles/
 /layout/vendor/
-/nbproject/*
+/nbproject/
+/.idea/
 /src/Biznes/ShopBundle/Resources/views/Products/*
 /src/Biznes/ShopBundle/Resources/*.pdf
 /src/Biznes/LandingPageBundle/*
