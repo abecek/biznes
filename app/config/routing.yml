@@ -13,10 +13,10 @@ biznes_service:
     type:     annotation
     prefix:   /
 
-biznes_landing_page:
-    resource: "@BiznesLandingPageBundle/Controller/"
-    type:     annotation
-    prefix:   /
+#biznes_landing_page:
+#    resource: "@BiznesLandingPageBundle/Controller/"
+#    type:     annotation
+#    prefix:   /
     
 logout:
     path: /logout

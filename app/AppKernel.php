@@ -22,6 +22,7 @@ class AppKernel extends Kernel
             new Biznes\DatabaseBundle\BiznesDatabaseBundle(),  
             
             new Knp\Bundle\SnappyBundle\KnpSnappyBundle(),
+            new Symfony\Bundle\AsseticBundle\AsseticBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {
