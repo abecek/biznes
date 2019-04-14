@@ -3,14 +3,10 @@
 namespace Biznes\ServiceBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
-use Biznes\DatabaseBundle\Entity\Withdraws;
 use Biznes\DatabaseBundle\Form\WithdrawsType;
 use Biznes\DatabaseBundle\Entity\Users;
 use Biznes\Utils\WalletManager;
@@ -22,7 +18,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class DefaultController extends Controller {
 
-    private $minimalMoneyValueToWithdraw = 1;
+    private $minimalMoneyValueToWithdraw = 30;
     
     public function getTicketsAndNotes(Users $user){
         $data = array();
@@ -442,7 +438,7 @@ class DefaultController extends Controller {
             throw $this->createAccessDeniedException('You have to be fully authenticated user.');
         }
         if ($id === null) {
-            throw new Exception('There is no ticket with this id.');
+            throw new \Exception('There is no ticket with this id.');
         }
 
         $ticket = null;
@@ -576,7 +572,7 @@ class DefaultController extends Controller {
             'incomesByMonths' => $incomesByMonths,
         );
 
-        $objJson = new \Symfony\Component\HttpFoundation\JsonResponse($data, 200);
+        $objJson = new JsonResponse($data, 200);
         return $objJson;
     }
 

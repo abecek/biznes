@@ -17,6 +17,5 @@
 /layout/vendor/
 /nbproject/
 /.idea/
-/src/Biznes/ShopBundle/Resources/views/Default/Products/*
 /src/Biznes/ShopBundle/Resources/*.pdf
 /src/Biznes/LandingPageBundle/*

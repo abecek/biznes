@@ -147,7 +147,7 @@
 
             $.ajax({
                 type: 'POST',
-                url: 'http://localhost/biznes/web/app_dev.php/chart',
+                url: '{{ url('getChart') }}',
                 data: {'idUser': {{ idUser }} },
                 success: function (data) {
                     console.log(data);

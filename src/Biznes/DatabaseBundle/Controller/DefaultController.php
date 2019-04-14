@@ -3,9 +3,7 @@
 namespace Biznes\DatabaseBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
 use Biznes\DatabaseBundle\Entity\Users;
 use Biznes\DatabaseBundle\Form\UsersType;
@@ -19,11 +17,9 @@ use Biznes\DatabaseBundle\Form\UsersAddressType;
 use Biznes\DatabaseBundle\Form\RemindPassType;
 use Biznes\DatabaseBundle\Form\ResendActivLinkType;
 
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
-use Symfony\Component\Form\Extension\Core\Type\EmailType;
 
 class DefaultController extends Controller {
 
@@ -93,7 +89,7 @@ class DefaultController extends Controller {
             $uniqueHashForUser = $user->getEmail() . 'activation';
             $uniqueHashForUser = sha1($uniqueHashForUser);
 
-            if ($user->getIsActive() == 0) {
+            if ($user->getIsActive() == 1) {
                 throw $this->createNotFoundException('Your account has been already activated.');
             } else {
                 if ($hash == $uniqueHashForUser) {
